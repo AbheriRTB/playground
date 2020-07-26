@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:isScrollContainer="true"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <EditText
+        android:id="@+id/etName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginRight="50dp"
+        android:ems="10"
+        android:hint="@string/name"
+        android:inputType="textPersonName"
+        android:textSize="22sp"
+        tools:layout_editor_absoluteX="93dp"
+        tools:layout_editor_absoluteY="108dp" />
+
+    <EditText
+        android:id="@+id/etLink"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="50dp"
+        android:ems="10"
+        android:hint="@string/link_paste"
+        android:inputType="textPersonName"
+        android:textSize="22sp"
+        tools:layout_editor_absoluteX="93dp"
+        tools:layout_editor_absoluteY="108dp" />
+
+    <Button
+        android:id="@+id/btnZoom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginRight="100dp"
+        android:background="@drawable/custom_btn_zoom"
+        android:text="@string/zoom"
+        android:textColor="#FFFFFF" />
+
+    <Button
+        android:id="@+id/btnWebex"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="100dp"
+        android:background="@drawable/custom_btn_webex"
+        android:text="@string/webex"
+        android:textColor="#F4FFE7" />
+
+    <Button
+        android:id="@+id/btnGMeet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="100dp"
+        android:background="@drawable/custom_btn_google"
+        android:text="@string/google_meet"
+        android:textColor="#FFFFFF" />
+
+</LinearLayout>
