@@ -1,9 +1,12 @@
 package cricketish.co.joinmeeting;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,7 +22,27 @@ public class MainActivity extends AppCompatActivity {
     Button btnZoom, btnWebex, btnGMeet, save;
     EditText etName, etLink;
     String meet, name, link;
-    ArrayList <List> events;
+    ArrayList<List> events;
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.btnList:
+                Intent intent = new Intent(getApplicationContext(), cricketish.co.joinmeeting.ListView.class);
+                startActivity(intent);
+
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
         btnWebex = findViewById(R.id.btnWebex);
         etName = findViewById(R.id.etName);
         etLink = findViewById(R.id.etLink);
+
 
         if (etName != null & etLink != null) {
             btnZoom.setOnClickListener(new View.OnClickListener() {
@@ -84,8 +108,10 @@ public class MainActivity extends AppCompatActivity {
         }
         else {
             Toast.makeText(this, "Enter all fields", Toast.LENGTH_SHORT).show();
+
         }
     }
+
 
     String getName(){
         final String name = etName.getText().toString().trim();

@@ -42,6 +42,7 @@ public class ListAdaptor extends RecyclerView.Adapter<ListAdaptor.ViewHolder> {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    String link = String.valueOf(tvLink.getText());
                     Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
                             Uri.parse(link));
                     itemView.getContext().startActivity(intent);
