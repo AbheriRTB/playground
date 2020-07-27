@@ -43,7 +43,7 @@ public class ListAdaptor extends RecyclerView.Adapter<ListAdaptor.ViewHolder> {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
-                            Uri.parse("http://google.com"));
+                            Uri.parse(link));
                     itemView.getContext().startActivity(intent);
                     Toast.makeText(v.getContext(), "Worked", Toast.LENGTH_SHORT).show();
 
@@ -63,6 +63,7 @@ public class ListAdaptor extends RecyclerView.Adapter<ListAdaptor.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int i) {
+        String link = events.get(i).getLink();
         holder.itemView.setTag(events.get(i));
         holder.tvName.setText(events.get(i).getName());
         holder.tvLink.setText(events.get(i).getLink());
