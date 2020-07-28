@@ -70,12 +70,15 @@ public class ListAdaptor extends RecyclerView.Adapter<ListAdaptor.ViewHolder> {
         holder.tvLink.setText(events.get(i).getLink());
 
         if (events.get(i).getMeet().equalsIgnoreCase("zoom")) {
-            holder.ivMeet.setImageResource(R.drawable.zoom);
+            holder.ivMeet.setImageResource(R.mipmap.zoom);
         } else if (events.get(i).getMeet().equalsIgnoreCase("webex")) {
-            holder.ivMeet.setImageResource(R.drawable.webex);
-        }   else if (events.get(i).getMeet().equalsIgnoreCase("google")) {
-            holder.ivMeet.setImageResource(R.drawable.google);
-
+            holder.ivMeet.setImageResource(R.mipmap.webex);
+        } else if (events.get(i).getMeet().equalsIgnoreCase("google")) {
+            holder.ivMeet.setImageResource(R.mipmap.google);
+        } else if (events.get(i).getMeet().equalsIgnoreCase("jiomeet")) {
+            holder.ivMeet.setImageResource(R.mipmap.jio);
+        } else if (events.get(i).getMeet().equalsIgnoreCase("other")) {
+            holder.ivMeet.setImageResource(R.mipmap.other);
         }
     }
 
@@ -83,11 +86,12 @@ public class ListAdaptor extends RecyclerView.Adapter<ListAdaptor.ViewHolder> {
     public int getItemCount() {
         return events.size();
     }
+
     private void setTextToTextView() {
         String text = "";
 
         for (int i = 0; i < events.size(); ++i) {
-            text = text + events.get(i).getName() + " " + events.get(i).getLink() +events.get(i).getMeet() +"\n";
+            text = text + events.get(i).getName() + " " + events.get(i).getLink() + events.get(i).getMeet() + "\n";
         }
     }
 

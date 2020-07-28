@@ -1,10 +1,15 @@
 <resources>
     <string name="app_name">Join</string>
     <string name="name">Enter the Name</string>
-    <string name="link_paste">Paste the link here</string>
+    <string name="link_paste">Click here to paste the link here</string>
     <string name="zoom">zoom</string>
     <string name="webex">webex</string>
     <string name="google_meet">Google Meet</string>
     <string name="list">LIST</string>
     <string name="add">Add</string>
+    <string name="jio_meet">Jio Meet</string>
+    <string name="google_meet2">Google Meet</string>
+    <string name="webex_name">Webex</string>
+    <string name="zoom_name">Zoom</string>
+    <string name="other">Other</string>
 </resources>
