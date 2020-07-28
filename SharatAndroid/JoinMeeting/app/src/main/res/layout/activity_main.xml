@@ -3,10 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:isScrollContainer="true"
     android:layout_height="match_parent"
+    android:isScrollContainer="true"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="#FFFFFF"
+    android:nestedScrollingEnabled="true">
 
     <EditText
         android:id="@+id/etName"
@@ -56,8 +58,6 @@
         android:layout_marginRight="50dp"
         android:background="@drawable/custom_btn_paste"
         android:fontFamily="monospace"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
         android:text="@string/link_paste"
         android:textAllCaps="false"
         android:textColor="#D0292929"
@@ -78,8 +78,8 @@
             android:layout_weight="1"
             android:clickable="true"
             android:contentDescription="@string/jio_meet"
-            app:srcCompat="@mipmap/jio"
-            android:focusable="true" />
+            android:focusable="true"
+            app:srcCompat="@mipmap/jio" />
 
         <ImageView
             android:id="@+id/btnGMeet"
@@ -88,9 +88,9 @@
             android:layout_weight="1"
             android:background="#00FFFFFF"
             android:clickable="true"
-            app:srcCompat="@mipmap/google"
+            android:contentDescription="@string/google_meet"
             android:focusable="true"
-            android:contentDescription="@string/google_meet" />
+            app:srcCompat="@mipmap/google" />
 
         <ImageView
             android:id="@+id/btnWebex"
@@ -98,9 +98,9 @@
             android:layout_height="50dp"
             android:layout_weight="1"
             android:clickable="true"
-            app:srcCompat="@mipmap/webex"
+            android:contentDescription="@string/webex_name"
             android:focusable="true"
-            android:contentDescription="@string/webex_name" />
+            app:srcCompat="@mipmap/webex" />
 
         <ImageView
             android:id="@+id/btnZoom"

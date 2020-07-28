@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity implements PopupDialog.Popup
     ImageView btnZoom, btnWebex, btnGMeet, btnJioMeet;
     Button btnPaste, btnOther;
     EditText etName, etLink;
-    String meet, name, link, message;
+    String meet = "other", name, link;
     ArrayList<List> events;
     PopupDialog dialog;
     ClipboardManager clipboardManager;
@@ -58,23 +58,26 @@ public class MainActivity extends AppCompatActivity implements PopupDialog.Popup
         btnGMeet = findViewById(R.id.btnGMeet);
         btnOther = findViewById(R.id.btnOther);
         btnWebex = findViewById(R.id.btnWebex);
-        btnPaste = findViewById(R.id.btnPaste);
+        //btnPaste = findViewById(R.id.btnPaste);
         btnJioMeet = findViewById(R.id.btnJioMeet);
         etName = findViewById(R.id.etName);
         etLink = findViewById(R.id.etLink);
         dialog = new PopupDialog();
         clipboardManager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
 
-        btnPaste.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ClipData clipData = clipboardManager.getPrimaryClip();
-                ClipData.Item item = clipData.getItemAt(0);
 
-                link = item.toString();
-            }
-        });
         if (!etName.equals("") & !etLink.equals("")) {
+            //btnPaste.setVisibility(View.INVISIBLE);
+            /*btnPaste.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ClipData clipData = clipboardManager.getPrimaryClip();
+                    ClipData.Item item = clipData.getItemAt(0);
+
+                    link = item.toString();
+                }
+
+            });*/
             btnZoom.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -103,7 +106,7 @@ public class MainActivity extends AppCompatActivity implements PopupDialog.Popup
                 public void onClick(View view) {
                     meet = "webex";
                     name = getName();
-                    link = getLink();
+                    //link = getLink();
                     if (link.contains("webex")) {
                         saveData(name, link, meet);
                         Intent intent = new Intent(getApplicationContext(), cricketish.co.joinmeeting.ListView.class);

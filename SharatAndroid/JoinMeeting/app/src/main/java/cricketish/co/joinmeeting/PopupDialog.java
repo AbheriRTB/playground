@@ -23,23 +23,10 @@ public class PopupDialog extends AppCompatDialogFragment {
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         dialog = new MainActivity();
         dialog.setMessage(meet);
-        switch (meet) {
-            case "zoom":
-                message = "This is not a Zoom link, check the link again \n" +
-                        "If you you want to continue, press ignore!";
-            case "webex":
-                message = "This is not a Webex link, check the link again \n" +
-                        "If you you want to continue, press ignore!";
-            case "google":
-                message = "This is not a Google Meet link, check the link again \n" +
-                        "If you you want to continue, press ignore!";
-            case "jiomeet":
-                message = "This is not a Jio Meet link, check the link again \n" +
-                        "If you you want to continue, press ignore!";
-        }
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("Warning!")
-                .setMessage(message)
+                .setMessage("This is not a " + meet + " link, check the link again \n" +
+                        "If you you want to continue, press ignore!")
                 .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
