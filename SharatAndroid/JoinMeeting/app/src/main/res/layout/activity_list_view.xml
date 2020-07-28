@@ -11,6 +11,7 @@
         android:id="@+id/list"
         android:layout_width="409dp"
         android:layout_height="601dp"
+        android:layout_marginTop="5dp"
         android:isScrollContainer="true"
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="1dp" />

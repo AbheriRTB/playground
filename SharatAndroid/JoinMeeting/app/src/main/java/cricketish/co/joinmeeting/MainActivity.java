@@ -19,7 +19,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button btnZoom, btnWebex, btnGMeet, save;
+    Button btnZoom, btnWebex, btnGMeet, btnJMeet;
     EditText etName, etLink;
     String meet, name, link;
     ArrayList<List> events;
@@ -103,7 +103,22 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(intent);
 
                 }
-            });
+            });/*btnJMeet.setOnClickListener(new View.OnClickListener() {
+                @Override
+
+                public void onClick(View view) {
+                    meet = "jiomeet";
+                    name = getName();
+                    link = getLink();
+                    saveData(name, link, meet);
+                    Intent intent = new Intent(getApplicationContext(), cricketish.co.joinmeeting.ListView.class);
+                    intent.putExtra("meet", meet);
+                    intent.putExtra("name", name);
+                    intent.putExtra("link", link);
+                    startActivity(intent);
+
+                }
+            });*/
 
         }
         else {

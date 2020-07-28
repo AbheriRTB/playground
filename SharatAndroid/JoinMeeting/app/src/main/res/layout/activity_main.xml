@@ -10,6 +10,7 @@
 
     <EditText
         android:id="@+id/etName"
+        style="@style/Widget.AppCompat.EditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="50dp"
@@ -18,12 +19,14 @@
         android:ems="10"
         android:hint="@string/name"
         android:inputType="textPersonName"
+        android:textColor="#292929"
         android:textSize="22sp"
         tools:layout_editor_absoluteX="93dp"
         tools:layout_editor_absoluteY="108dp" />
 
     <EditText
         android:id="@+id/etLink"
+        style="@style/Widget.AppCompat.EditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="50dp"
@@ -32,6 +35,7 @@
         android:ems="10"
         android:hint="@string/link_paste"
         android:inputType="textPersonName"
+        android:textColor="#292929"
         android:textSize="22sp"
         tools:layout_editor_absoluteX="93dp"
         tools:layout_editor_absoluteY="108dp" />
