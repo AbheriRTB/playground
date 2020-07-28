@@ -22,8 +22,8 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements PopupDialog.PopupListner {
 
-    ImageView btnZoom, btnWebex, btnGMeet, btnJioMeet, btnOther;
-    Button btnPaste;
+    ImageView btnZoom, btnWebex, btnGMeet, btnJioMeet;
+    Button btnPaste, btnOther;
     EditText etName, etLink;
     String meet, name, link, message;
     ArrayList<List> events;
@@ -87,11 +87,13 @@ public class MainActivity extends AppCompatActivity implements PopupDialog.Popup
                         intent.putExtra("meet", meet);
                         intent.putExtra("name", name);
                         intent.putExtra("link", link);
+                        Intent intentToPopup = new Intent(getApplicationContext(), cricketish.co.joinmeeting.PopupDialog.class);
+                        intentToPopup.putExtra("meet", meet);
+                        startActivity(intentToPopup);
                         startActivity(intent);
                     } else {
                         openDialog();
-                        message = "You given a different link instead of Zoom, try different platform \n" +
-                                "Click continue to proceed";
+
                     }
 
                 }
@@ -109,10 +111,11 @@ public class MainActivity extends AppCompatActivity implements PopupDialog.Popup
                         intent.putExtra("name", name);
                         intent.putExtra("link", link);
                         startActivity(intent);
+                        Intent intentToPopup = new Intent(getApplicationContext(), cricketish.co.joinmeeting.PopupDialog.class);
+                        intentToPopup.putExtra("meet", meet);
+                        startActivity(intentToPopup);
                     } else {
                         openDialog();
-                        message = "You given a different link instead of Webex, try different platform \n" +
-                                "Click continue to proceed";
                     }
 
 
@@ -132,10 +135,12 @@ public class MainActivity extends AppCompatActivity implements PopupDialog.Popup
                         intent.putExtra("name", name);
                         intent.putExtra("link", link);
                         startActivity(intent);
+                        Intent intentToPopup = new Intent(getApplicationContext(), cricketish.co.joinmeeting.PopupDialog.class);
+                        intentToPopup.putExtra("meet", meet);
+                        startActivity(intentToPopup);
                     } else {
                         openDialog();
-                        message = "You given a different link instead of Google Meet, try different platform \n" +
-                                "Click continue to proceed";
+
                     }
 
                 }
@@ -154,10 +159,12 @@ public class MainActivity extends AppCompatActivity implements PopupDialog.Popup
                         intent.putExtra("name", name);
                         intent.putExtra("link", link);
                         startActivity(intent);
+                        Intent intentToPopup = new Intent(getApplicationContext(), cricketish.co.joinmeeting.PopupDialog.class);
+                        intentToPopup.putExtra("meet", meet);
+                        startActivity(intentToPopup);
                     } else {
                         openDialog();
-                        message = "You given a different link instead of Jio Meet, try different platform \n" +
-                                "Click continue to proceed";
+
                     }
 
                 }
@@ -175,6 +182,10 @@ public class MainActivity extends AppCompatActivity implements PopupDialog.Popup
                     intent.putExtra("name", name);
                     intent.putExtra("link", link);
                     startActivity(intent);
+                    Intent intentToPopup = new Intent(getApplicationContext(), cricketish.co.joinmeeting.PopupDialog.class);
+                    intentToPopup.putExtra("meet", meet);
+                    startActivity(intentToPopup);
+
 
                 }
             });
@@ -206,7 +217,6 @@ public class MainActivity extends AppCompatActivity implements PopupDialog.Popup
             outputFile.write(name + "," + link + "," + meet + "\n");
             outputFile.close();
             Toast.makeText(MainActivity.this, "Successfully Saved", Toast.LENGTH_SHORT).show();
-            dialog.setMessage(message);
         } catch (IOException e) {
             Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
         }
@@ -229,6 +239,10 @@ public class MainActivity extends AppCompatActivity implements PopupDialog.Popup
         intentTwo.putExtra("name", name);
         intentTwo.putExtra("link", link);
         startActivity(intentTwo);
+    }
+
+    public void setMessage(String meet) {
+        meet = this.meet;
     }
 
 

@@ -16,15 +16,16 @@
         android:layout_marginLeft="25dp"
         android:layout_marginTop="100dp"
         android:layout_marginRight="25dp"
+        android:autofillHints=""
         android:clickable="false"
         android:ems="10"
+        android:fontFamily="monospace"
         android:hint="@string/name"
         android:inputType="textPersonName"
         android:textColor="#292929"
         android:textSize="22sp"
         tools:layout_editor_absoluteX="93dp"
-        tools:layout_editor_absoluteY="108dp"
-        android:autofillHints="" />
+        tools:layout_editor_absoluteY="108dp" />
 
     <EditText
         android:id="@+id/etLink"
@@ -34,31 +35,33 @@
         android:layout_marginLeft="25dp"
         android:layout_marginTop="10dp"
         android:layout_marginRight="25dp"
+        android:autofillHints=""
         android:clickable="false"
         android:ems="10"
+        android:fontFamily="monospace"
         android:hint="@string/link_paste"
         android:inputType="textPersonName"
         android:textColor="#292929"
         android:textSize="22sp"
         tools:layout_editor_absoluteX="93dp"
-        tools:layout_editor_absoluteY="108dp"
-        android:autofillHints="" />
+        tools:layout_editor_absoluteY="108dp" />
 
     <Button
         android:id="@+id/btnPaste"
-        android:layout_width="wrap_content"
+        android:layout_width="351dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginLeft="50dp"
         android:layout_marginTop="20dp"
         android:layout_marginRight="50dp"
         android:background="@drawable/custom_btn_paste"
+        android:fontFamily="monospace"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:text="@string/link_paste"
         android:textAllCaps="false"
         android:textColor="#D0292929"
-        android:textSize="18sp" />
+        android:textSize="15sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -99,36 +102,50 @@
             android:focusable="true"
             android:contentDescription="@string/webex_name" />
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="80dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginRight="80dp"
-        android:orientation="horizontal">
-
         <ImageView
             android:id="@+id/btnZoom"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_weight="1"
             android:clickable="true"
-            app:srcCompat="@mipmap/zoom"
             android:contentDescription="@string/zoom_name"
-            android:focusable="true" />
-
-        <ImageView
-            android:id="@+id/btnOther"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20dp"
-            android:layout_weight="1"
-            app:srcCompat="@mipmap/other"
-            android:contentDescription="@string/other" />
+            android:focusable="true"
+            app:srcCompat="@mipmap/zoom" />
 
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="80dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnOther"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="@drawable/custom_btn_other"
+            android:fontFamily="monospace"
+            android:text="@string/other"
+            android:textAllCaps="false"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
+        android:fontFamily="monospace"
+        android:gravity="center"
+        android:text="© Cricketish 2020" />
 
 </LinearLayout>

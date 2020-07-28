@@ -53,7 +53,6 @@ public class ListView extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_view);
-
         String meet = getIntent().getStringExtra("meet");
         String name = getIntent().getStringExtra("name");
         String link = getIntent().getStringExtra("link");
