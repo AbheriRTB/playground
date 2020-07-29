@@ -5,7 +5,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,18 +13,17 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 public class PopupDialog extends AppCompatDialogFragment {
 
     private PopupListner listner;
-    String message, meet;
     MainActivity dialog;
 
 
+    //  Popup dialog
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         dialog = new MainActivity();
-        dialog.setMessage(meet);
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("Warning!")
-                .setMessage("This is not a " + meet + " link, check the link again \n" +
+                .setMessage("This is not a valid app link, check the link again \n" +
                         "If you you want to continue, press ignore!")
                 .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
                     @Override
@@ -36,17 +34,21 @@ public class PopupDialog extends AppCompatDialogFragment {
                 .setPositiveButton("ignore", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        listner.onYesClicked();
+                        listner.onIgnoreClicked();
                     }
                 });
         return builder.create();
 
     }
 
+
+    //  If ignore clicked (Continues on the context)
     public interface PopupListner {
-        void onYesClicked();
+        void onIgnoreClicked();
     }
 
+
+    //  Attaches the popup to the context
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);

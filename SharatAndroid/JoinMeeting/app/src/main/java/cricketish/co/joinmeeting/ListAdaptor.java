@@ -24,10 +24,13 @@ public class ListAdaptor extends RecyclerView.Adapter<ListAdaptor.ViewHolder> {
 
     private ArrayList<List> events;
 
+
     public ListAdaptor(Context context, ArrayList<List> list) {
         events = list;
     }
 
+
+    // Class for the View Holder
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView ivMeet;
         TextView tvName, tvLink;
@@ -54,6 +57,7 @@ public class ListAdaptor extends RecyclerView.Adapter<ListAdaptor.ViewHolder> {
         }
     }
 
+
     @NonNull
     @Override
     public ListAdaptor.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -62,6 +66,8 @@ public class ListAdaptor extends RecyclerView.Adapter<ListAdaptor.ViewHolder> {
         return new ViewHolder(v);
     }
 
+
+    //  Here we declare the values (eg ivMeet, tvName, etc)
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int i) {
         String link = events.get(i).getLink();
@@ -82,11 +88,15 @@ public class ListAdaptor extends RecyclerView.Adapter<ListAdaptor.ViewHolder> {
         }
     }
 
+
+    //  Get the size of the adaptor?
     @Override
     public int getItemCount() {
         return events.size();
     }
 
+
+    // Sets the list properly
     private void setTextToTextView() {
         String text = "";
 
@@ -94,6 +104,5 @@ public class ListAdaptor extends RecyclerView.Adapter<ListAdaptor.ViewHolder> {
             text = text + events.get(i).getName() + " " + events.get(i).getLink() + events.get(i).getMeet() + "\n";
         }
     }
-
 }
 

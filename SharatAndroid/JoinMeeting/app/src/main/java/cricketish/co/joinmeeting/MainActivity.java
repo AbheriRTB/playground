@@ -22,14 +22,17 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements PopupDialog.PopupListner {
 
+
     ImageView btnZoom, btnWebex, btnGMeet, btnJioMeet;
     Button btnPaste, btnOther;
-    EditText etName, etLink;
-    String meet = "other", name, link;
+    EditText etName = null, etLink = null;
+    String meet, name, link;
     ArrayList<List> events;
     PopupDialog dialog;
     ClipboardManager clipboardManager;
 
+
+    // This function is to bring the button on the Action Bar (Till 56)
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -44,12 +47,17 @@ public class MainActivity extends AppCompatActivity implements PopupDialog.Popup
             case R.id.btnList:
                 Intent intent = new Intent(getApplicationContext(), cricketish.co.joinmeeting.ListView.class);
                 startActivity(intent);
+            case R.id.btnHelp:
+                intent = new Intent(getApplicationContext(), cricketish.co.joinmeeting.HelpActivity.class);
+                startActivity(intent);
 
         }
 
         return super.onOptionsItemSelected(item);
     }
 
+
+    //  App is created here
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,12 +79,16 @@ public class MainActivity extends AppCompatActivity implements PopupDialog.Popup
             public void onClick(View view) {
                 ClipData clipData = clipboardManager.getPrimaryClip();
                 ClipData.Item item = clipData.getItemAt(0);
+                link = item.toString().trim();
+                Toast.makeText(MainActivity.this, "Pasted" + link, Toast.LENGTH_LONG).show();
 
-                link = item.toString();
             }
 
         });
-        if (!etName.equals("") & !etLink.equals("")) {
+        if (etName == null || etLink == null) {
+            Toast.makeText(this, "", Toast.LENGTH_SHORT).show();
+
+        } else {
 
             btnZoom.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -193,24 +205,24 @@ public class MainActivity extends AppCompatActivity implements PopupDialog.Popup
                 }
             });
 
-        } else {
-            Toast.makeText(this, "Enter all fields", Toast.LENGTH_SHORT).show();
-
         }
 
     }
 
 
+    //  Name is extracted here from etName
     String getName() {
         final String name = etName.getText().toString().trim();
         return name;
     }
 
+    //  Name is extracted here from etName
     String getLink() {
         final String link = etLink.getText().toString().trim();
         return link;
     }
 
+    //  This is the method to save the data in the .txt file
     void saveData(String name, String link, String meet) {
 
         try {
@@ -226,14 +238,17 @@ public class MainActivity extends AppCompatActivity implements PopupDialog.Popup
 
     }
 
+
+    //This is the popup-dialog
     public void openDialog() {
         PopupDialog dialog = new PopupDialog();
         dialog.show(getSupportFragmentManager(), "example.dialog");
 
     }
 
+    //If the user clicks ignore & proceeds to the list
     @Override
-    public void onYesClicked() {
+    public void onIgnoreClicked() {
         name = getName();
         link = getLink();
         saveData(name, link, meet);
@@ -243,10 +258,5 @@ public class MainActivity extends AppCompatActivity implements PopupDialog.Popup
         intentTwo.putExtra("link", link);
         startActivity(intentTwo);
     }
-
-    public void setMessage(String meet) {
-        meet = this.meet;
-    }
-
 
 }

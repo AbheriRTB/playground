@@ -53,6 +53,6 @@
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginRight="10dp"
-        android:background="@color/colorAccent" />
+        android:background="#AE404040" />
 
 </LinearLayout>

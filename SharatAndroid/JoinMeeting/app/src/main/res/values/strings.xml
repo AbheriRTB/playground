@@ -12,4 +12,6 @@
     <string name="webex_name">Webex</string>
     <string name="zoom_name">Zoom</string>
     <string name="other">Other</string>
+    <string name="noActivityText">No meetings sheduled yet \nclick add button on the top bar</string>
+    <string name="help">Help</string>
 </resources>

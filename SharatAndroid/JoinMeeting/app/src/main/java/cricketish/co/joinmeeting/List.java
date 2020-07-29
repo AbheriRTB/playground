@@ -4,12 +4,15 @@ public class List {
     private String name, link, meet;
 
 
+    //  Constructor
     public List(String name, String link, String meet) {
         this.name = name;
         this.link = link;
         this.meet = meet;
     }
 
+
+    // Getter and Setters
     public String getName() {
         return name;
     }

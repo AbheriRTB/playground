@@ -8,4 +8,10 @@
         android:orderInCategory="10"
         android:title="@string/list"
         app:showAsAction="always" />
+    <item
+        android:id="@+id/btnHelp"
+        android:icon="@drawable/help"
+        android:orderInCategory="11"
+        android:title="@string/help"
+        app:showAsAction="ifRoom" />
 </menu>
