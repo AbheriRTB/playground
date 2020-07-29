@@ -2,6 +2,7 @@ package cricketish.co.joinmeeting;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,8 +27,14 @@ public class ListView extends AppCompatActivity {
     RecyclerView.Adapter myAdaptor;
     RecyclerView.LayoutManager layoutManager;
     Button btnAdd;
+    String deleatedMovie = null;
 
     ArrayList<List> lists;
+
+    public ListView() {
+        itemTouchHelper = new ItemTouchHelper(simpleCallback);
+        itemTouchHelper.attachToRecyclerView(recyclerView);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -93,5 +100,27 @@ public class ListView extends AppCompatActivity {
 
         return retArrayList;
     }
+
+    ItemTouchHelper itemTouchHelper;
+
+    ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+        @Override
+        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+            return false;
+        }
+
+        @Override
+        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+            int position = viewHolder.getAdapterPosition();
+            switch (direction) {
+                case ItemTouchHelper.LEFT:
+                    deleatedMovie = lists.get(position).toString();
+                    lists.remove(position);
+                    myAdaptor.notifyItemRemoved(position);
+                    break;
+            }
+
+        }
+    };
 
 }

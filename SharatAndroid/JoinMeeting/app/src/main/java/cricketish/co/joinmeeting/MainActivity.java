@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements PopupDialog.Popup
         btnGMeet = findViewById(R.id.btnGMeet);
         btnOther = findViewById(R.id.btnOther);
         btnWebex = findViewById(R.id.btnWebex);
-        //btnPaste = findViewById(R.id.btnPaste);
+        btnPaste = findViewById(R.id.btnPaste);
         btnJioMeet = findViewById(R.id.btnJioMeet);
         etName = findViewById(R.id.etName);
         etLink = findViewById(R.id.etLink);
@@ -66,18 +66,18 @@ public class MainActivity extends AppCompatActivity implements PopupDialog.Popup
         clipboardManager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
 
 
+        btnPaste.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ClipData clipData = clipboardManager.getPrimaryClip();
+                ClipData.Item item = clipData.getItemAt(0);
+
+                link = item.toString();
+            }
+
+        });
         if (!etName.equals("") & !etLink.equals("")) {
-            //btnPaste.setVisibility(View.INVISIBLE);
-            /*btnPaste.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    ClipData clipData = clipboardManager.getPrimaryClip();
-                    ClipData.Item item = clipData.getItemAt(0);
 
-                    link = item.toString();
-                }
-
-            });*/
             btnZoom.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
