@@ -10,13 +10,25 @@
     android:background="#FFFFFF"
     android:nestedScrollingEnabled="true">
 
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginRight="80dp"
+        android:fontFamily="monospace"
+        android:gravity="center"
+        android:text="@string/add"
+        android:textSize="60sp" />
+
     <EditText
         android:id="@+id/etName"
         style="@style/Widget.AppCompat.EditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="25dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="50dp"
         android:layout_marginRight="25dp"
         android:autofillHints=""
         android:clickable="false"
@@ -29,39 +41,40 @@
         tools:layout_editor_absoluteX="93dp"
         tools:layout_editor_absoluteY="108dp" />
 
-    <EditText
-        android:id="@+id/etLink"
-        style="@style/Widget.AppCompat.EditText"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="25dp"
         android:layout_marginTop="10dp"
         android:layout_marginRight="25dp"
-        android:autofillHints=""
-        android:clickable="false"
-        android:ems="10"
-        android:fontFamily="monospace"
-        android:hint="@string/link_paste"
-        android:inputType="textPersonName"
-        android:textColor="#292929"
-        android:textSize="22sp"
-        tools:layout_editor_absoluteX="93dp"
-        tools:layout_editor_absoluteY="108dp" />
+        android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/btnPaste"
-        android:layout_width="351dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="50dp"
-        android:background="@drawable/custom_btn_paste"
-        android:fontFamily="monospace"
-        android:text="@string/link_paste"
-        android:textAllCaps="false"
-        android:textColor="#D0292929"
-        android:textSize="15sp" />
+        <EditText
+            android:id="@+id/etLink"
+            style="@style/Widget.AppCompat.EditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="10"
+            android:autofillHints=""
+            android:clickable="false"
+            android:ems="10"
+            android:fontFamily="monospace"
+            android:hint="@string/link_paste"
+            android:inputType="textPersonName"
+            android:textColor="#292929"
+            android:textSize="22sp"
+            tools:layout_editor_absoluteX="93dp"
+            tools:layout_editor_absoluteY="108dp" />
+
+        <ImageView
+            android:id="@+id/btnPaste"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center"
+            android:layout_weight="0"
+            app:srcCompat="@drawable/paste" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

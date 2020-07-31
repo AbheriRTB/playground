@@ -1,7 +1,9 @@
 package cricketish.co.joinmeeting;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -23,13 +25,14 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity implements PopupDialog.PopupListner {
 
 
-    ImageView btnZoom, btnWebex, btnGMeet, btnJioMeet;
-    Button btnPaste, btnOther;
+    ImageView btnZoom, btnWebex, btnGMeet, btnJioMeet, btnPaste;
+    Button btnOther;
     EditText etName = null, etLink = null;
     String meet, name, link;
     ArrayList<List> events;
     PopupDialog dialog;
     ClipboardManager clipboardManager;
+    boolean allDataGiven = false;
 
 
     // This function is to bring the button on the Action Bar (Till 56)
@@ -47,9 +50,13 @@ public class MainActivity extends AppCompatActivity implements PopupDialog.Popup
             case R.id.btnList:
                 Intent intent = new Intent(getApplicationContext(), cricketish.co.joinmeeting.ListView.class);
                 startActivity(intent);
+                overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
+                break;
             case R.id.btnHelp:
-                intent = new Intent(getApplicationContext(), cricketish.co.joinmeeting.HelpActivity.class);
+                intent = new Intent(getApplicationContext(), AboutActivity.class);
                 startActivity(intent);
+                overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
+                break;
 
         }
 
@@ -74,123 +81,95 @@ public class MainActivity extends AppCompatActivity implements PopupDialog.Popup
         clipboardManager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
 
 
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle("Add");
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
+
         btnPaste.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ClipData clipData = clipboardManager.getPrimaryClip();
                 ClipData.Item item = clipData.getItemAt(0);
-                link = item.toString().trim();
-                Toast.makeText(MainActivity.this, "Pasted" + link, Toast.LENGTH_LONG).show();
+                etLink.setText(item.getText());
+                etLink.setTextColor(ContextCompat.getColor(MainActivity.this, R.color.color3rd));
+                Toast.makeText(MainActivity.this, "Pasted", Toast.LENGTH_LONG).show();
 
             }
 
         });
-        if (etName == null || etLink == null) {
-            Toast.makeText(this, "", Toast.LENGTH_SHORT).show();
+        if ((etName.getText() != null && etName.getText().toString().length() > 0) &&
+                (etLink.getText() == null && etLink.getText().toString().length() > 0)) {
+            allDataGiven = true;
+        }
 
-        } else {
 
-            btnZoom.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    meet = "zoom";
-                    name = getName();
-                    link = getLink();
-                    if (link.contains("zoom")) {
-                        saveData(name, link, meet);
-                        Intent intent = new Intent(getApplicationContext(), cricketish.co.joinmeeting.ListView.class);
-                        intent.putExtra("meet", meet);
-                        intent.putExtra("name", name);
-                        intent.putExtra("link", link);
-                        Intent intentToPopup = new Intent(getApplicationContext(), cricketish.co.joinmeeting.PopupDialog.class);
-                        intentToPopup.putExtra("meet", meet);
+        btnZoom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                meet = "zoom";
+                name = getName();
+                link = getLink();
+                if (link.contains("zoom")) {
+                    saveData(name, link, meet);
+                    Intent intent = new Intent(getApplicationContext(), cricketish.co.joinmeeting.ListView.class);
+                    intent.putExtra("meet", meet);
+                    intent.putExtra("name", name);
+                    intent.putExtra("link", link);
+                    Intent intentToPopup = new Intent(getApplicationContext(), cricketish.co.joinmeeting.PopupDialog.class);
+                    intentToPopup.putExtra("meet", meet);
+                    if (allDataGiven) {
                         startActivity(intentToPopup);
                         startActivity(intent);
-                    } else {
-                        openDialog();
-
+                        overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
                     }
+                    else {
+                        Toast.makeText(MainActivity.this, "Please enter all fields", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    openDialog();
 
                 }
-            });
-            btnWebex.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    meet = "webex";
-                    name = getName();
-                    //link = getLink();
-                    if (link.contains("webex")) {
-                        saveData(name, link, meet);
-                        Intent intent = new Intent(getApplicationContext(), cricketish.co.joinmeeting.ListView.class);
-                        intent.putExtra("meet", meet);
-                        intent.putExtra("name", name);
-                        intent.putExtra("link", link);
-                        startActivity(intent);
-                        Intent intentToPopup = new Intent(getApplicationContext(), cricketish.co.joinmeeting.PopupDialog.class);
-                        intentToPopup.putExtra("meet", meet);
+
+            }
+        });
+        btnWebex.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                meet = "webex";
+                name = getName();
+                link = getLink();
+                if (link.contains("webex")) {
+                    saveData(name, link, meet);
+                    Intent intent = new Intent(getApplicationContext(), cricketish.co.joinmeeting.ListView.class);
+                    intent.putExtra("meet", meet);
+                    intent.putExtra("name", name);
+                    intent.putExtra("link", link);
+                    Intent intentToPopup = new Intent(getApplicationContext(), cricketish.co.joinmeeting.PopupDialog.class);
+                    intentToPopup.putExtra("meet", meet);
+                    if (allDataGiven) {
                         startActivity(intentToPopup);
-                    } else {
-                        openDialog();
-                    }
-
-
-                }
-            });
-            btnGMeet.setOnClickListener(new View.OnClickListener() {
-                @Override
-
-                public void onClick(View view) {
-                    meet = "google";
-                    name = getName();
-                    link = getLink();
-                    if (link.contains("meet.google")) {
-                        saveData(name, link, meet);
-                        Intent intent = new Intent(getApplicationContext(), cricketish.co.joinmeeting.ListView.class);
-                        intent.putExtra("meet", meet);
-                        intent.putExtra("name", name);
-                        intent.putExtra("link", link);
                         startActivity(intent);
-                        Intent intentToPopup = new Intent(getApplicationContext(), cricketish.co.joinmeeting.PopupDialog.class);
-                        intentToPopup.putExtra("meet", meet);
-                        startActivity(intentToPopup);
-                    } else {
-                        openDialog();
-
+                        overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
                     }
+                    else {
+                        Toast.makeText(MainActivity.this, "Please enter all fields", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    openDialog();
 
                 }
-            });
-            btnJioMeet.setOnClickListener(new View.OnClickListener() {
-                @Override
 
-                public void onClick(View view) {
-                    meet = "jiomeet";
-                    name = getName();
-                    link = getLink();
-                    if (link.contains("jio")) {
-                        saveData(name, link, meet);
-                        Intent intent = new Intent(getApplicationContext(), cricketish.co.joinmeeting.ListView.class);
-                        intent.putExtra("meet", meet);
-                        intent.putExtra("name", name);
-                        intent.putExtra("link", link);
-                        startActivity(intent);
-                        Intent intentToPopup = new Intent(getApplicationContext(), cricketish.co.joinmeeting.PopupDialog.class);
-                        intentToPopup.putExtra("meet", meet);
-                        startActivity(intentToPopup);
-                    } else {
-                        openDialog();
+            }
+        });
+        btnGMeet.setOnClickListener(new View.OnClickListener() {
+            @Override
 
-                    }
-
-                }
-            });
-            btnOther.setOnClickListener(new View.OnClickListener() {
-                @Override
-
-                public void onClick(View view) {
-                    meet = "other";
-                    name = getName();
-                    link = getLink();
+            public void onClick(View view) {
+                meet = "google";
+                name = getName();
+                link = getLink();
+                if (link.contains("meet.google")) {
                     saveData(name, link, meet);
                     Intent intent = new Intent(getApplicationContext(), cricketish.co.joinmeeting.ListView.class);
                     intent.putExtra("meet", meet);
@@ -199,13 +178,78 @@ public class MainActivity extends AppCompatActivity implements PopupDialog.Popup
                     startActivity(intent);
                     Intent intentToPopup = new Intent(getApplicationContext(), cricketish.co.joinmeeting.PopupDialog.class);
                     intentToPopup.putExtra("meet", meet);
-                    startActivity(intentToPopup);
+                    if (allDataGiven) {
+                        startActivity(intentToPopup);
+                        startActivity(intent);
+                        overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
+                    }
+                    else {
+                        Toast.makeText(MainActivity.this, "Please enter all fields", Toast.LENGTH_SHORT).show();
+                    }
 
+                } else {
+                    openDialog();
 
                 }
-            });
 
-        }
+            }
+        });
+        btnJioMeet.setOnClickListener(new View.OnClickListener() {
+            @Override
+
+            public void onClick(View view) {
+                meet = "jiomeet";
+                name = getName();
+                link = getLink();
+                if (link.contains("jio")) {
+                    saveData(name, link, meet);
+                    Intent intent = new Intent(getApplicationContext(), cricketish.co.joinmeeting.ListView.class);
+                    intent.putExtra("meet", meet);
+                    intent.putExtra("name", name);
+                    intent.putExtra("link", link);
+                    startActivity(intent);
+                    Intent intentToPopup = new Intent(getApplicationContext(), cricketish.co.joinmeeting.PopupDialog.class);
+                    intentToPopup.putExtra("meet", meet);
+                    if (allDataGiven) {
+                        startActivity(intentToPopup);
+                        startActivity(intent);
+                        overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
+                    }
+                    else {
+                        Toast.makeText(MainActivity.this, "Please enter all fields", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    openDialog();
+                }
+
+            }
+        });
+        btnOther.setOnClickListener(new View.OnClickListener() {
+            @Override
+
+            public void onClick(View view) {
+                meet = "other";
+                name = getName();
+                link = getLink();
+                saveData(name, link, meet);
+                Intent intent = new Intent(getApplicationContext(), cricketish.co.joinmeeting.ListView.class);
+                intent.putExtra("meet", meet);
+                intent.putExtra("name", name);
+                intent.putExtra("link", link);
+                startActivity(intent);
+                Intent intentToPopup = new Intent(getApplicationContext(), cricketish.co.joinmeeting.PopupDialog.class);
+                intentToPopup.putExtra("meet", meet);
+                if (allDataGiven) {
+                    startActivity(intentToPopup);
+                    startActivity(intent);
+                    overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
+                }
+                else {
+                    Toast.makeText(MainActivity.this, "Please enter all fields", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
 
     }
 

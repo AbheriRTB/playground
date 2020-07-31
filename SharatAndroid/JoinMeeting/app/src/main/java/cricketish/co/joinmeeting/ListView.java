@@ -21,6 +21,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -33,18 +34,15 @@ public class ListView extends AppCompatActivity {
     RecyclerView recyclerView;
     RecyclerView.Adapter myAdaptor;
     RecyclerView.LayoutManager layoutManager;
+    ItemTouchHelper itemTouchHelper;
     Button btnAdd;
     ArrayList<List> lists;
     ConstraintLayout layout;
+    Boolean Deleted;
+
 
     //For the function when  Undo clicked
     List deletedMovie = null;
-
-
-    public ListView() {
-        itemTouchHelper = new ItemTouchHelper(simpleCallback);
-        itemTouchHelper.attachToRecyclerView(recyclerView);
-    }
 
 
     //  This function is to bring the button on the Action Bar (From Here)
@@ -62,9 +60,11 @@ public class ListView extends AppCompatActivity {
             case R.id.btnAdd:
                 Intent intent = new Intent(getApplicationContext(), cricketish.co.joinmeeting.MainActivity.class);
                 startActivity(intent);
+                break;
             case R.id.btnHelp:
-                intent = new Intent(getApplicationContext(), cricketish.co.joinmeeting.HelpActivity.class);
+                intent = new Intent(getApplicationContext(), AboutActivity.class);
                 startActivity(intent);
+                break;
 
         }
 
@@ -94,6 +94,8 @@ public class ListView extends AppCompatActivity {
         lists = loadData();
         myAdaptor = new ListAdaptor(this, lists);
         recyclerView.setAdapter(myAdaptor);
+        itemTouchHelper = new ItemTouchHelper(simpleCallback);
+        itemTouchHelper.attachToRecyclerView(recyclerView);
 
         if (lists.size() == 0) {
             layout.setVisibility(View.VISIBLE);
@@ -112,8 +114,18 @@ public class ListView extends AppCompatActivity {
                 BufferedReader reader = new BufferedReader(new InputStreamReader(openFileInput("cricketish.data.txt")));
                 while ((lineFromFile = reader.readLine()) != null) {
                     StringTokenizer tokens = new StringTokenizer(lineFromFile, ",");
-                    List list = new List(tokens.nextToken(), tokens.nextToken(), tokens.nextToken());
+
+                    String lname = "noname", llink = "nolink", lmeet = "nomeet";
+                    if (tokens.hasMoreElements())
+                        lname = tokens.nextToken();
+                    if (tokens.hasMoreElements())
+                        llink = tokens.nextToken();
+                    if (tokens.hasMoreElements())
+                        lmeet = tokens.nextToken();
+
+                    List list = new List(lname, llink, lmeet);
                     retArrayList.add(list);
+
                 }
 
                 reader.close();
@@ -128,11 +140,19 @@ public class ListView extends AppCompatActivity {
 
     // This is the Swipe to delete functionality (Till 162)
     //  TODO Fix the problem(Swipe function not working)
-    ItemTouchHelper itemTouchHelper;
+
     ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
         @Override
         public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
             return false;
+        }
+
+        @Override
+        public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+
+            return makeMovementFlags(0, ItemTouchHelper.LEFT);
+
+
         }
 
         @Override
@@ -148,10 +168,14 @@ public class ListView extends AppCompatActivity {
                         public void onClick(View view) {
                             lists.add(position, deletedMovie);
                             myAdaptor.notifyItemInserted(position);
+                            Deleted = false;
                         }
-                    }).show();
+                    }).setText("Deleted a meeting").show();
+                    Deleted = true;
                     break;
+
             }
+
 
         }
 
@@ -161,9 +185,13 @@ public class ListView extends AppCompatActivity {
                     .addSwipeLeftBackgroundColor(ContextCompat.getColor(ListView.this, R.color.Bin))
                     .addSwipeLeftActionIcon(R.drawable.bin)
                     .addSwipeLeftLabel("Delete")
+                    .setSwipeLeftLabelColor(ContextCompat.getColor(ListView.this, R.color.White))
                     .create()
                     .decorate();
             super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
         }
     };
+
+    {
+    }
 }

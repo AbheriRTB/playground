@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Join</string>
     <string name="name">Enter the Name</string>
-    <string name="link_paste">Click here to paste the link here</string>
+    <string name="link_paste">Paste the link here</string>
     <string name="zoom">zoom</string>
     <string name="webex">webex</string>
     <string name="google_meet">Google Meet</string>
@@ -12,6 +12,12 @@
     <string name="webex_name">Webex</string>
     <string name="zoom_name">Zoom</string>
     <string name="other">Other</string>
-    <string name="noActivityText">No meetings sheduled yet \nclick add button on the top bar</string>
+    <string name="noActivityText">No meetings sheduled yet \nClick add button on the top bar</string>
     <string name="help">Help</string>
+    <string name="tvAboutDiscript">This is an app developed by me with the help of my father. This app is made for fun and
+    not for making any money. If found any problems or suggestions please email to sharatchandrats@gmail.com\nThankyou!</string>
+    <string name="play">Play</string>
+    <string name="mail">Mail</string>
+    <string name="about">About</string>
+    <string name="version">v1.02.2 Beta</string>
 </resources>
