@@ -22,8 +22,10 @@ import com.google.android.material.snackbar.Snackbar;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
@@ -38,7 +40,8 @@ public class ListView extends AppCompatActivity {
     Button btnAdd;
     ArrayList<List> lists;
     ConstraintLayout layout;
-    Boolean Deleted;
+    boolean yesClick;
+    private PopupDialog_Delete.PopupListner listner;
 
 
     //For the function when  Undo clicked
@@ -139,8 +142,6 @@ public class ListView extends AppCompatActivity {
 
 
     // This is the Swipe to delete functionality (Till 162)
-    //  TODO Fix the problem(Swipe function not working)
-
     ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
         @Override
         public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
@@ -162,17 +163,17 @@ public class ListView extends AppCompatActivity {
                 case ItemTouchHelper.LEFT:
                     deletedMovie = lists.get(position);
                     lists.remove(position);
+                    listner.onYesClicked();
                     myAdaptor.notifyItemRemoved(position);
+                    if (yesClick){
                     Snackbar.make(recyclerView, deletedMovie.toString(), Snackbar.LENGTH_LONG).setAction("UNDO", new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
                             lists.add(position, deletedMovie);
                             myAdaptor.notifyItemInserted(position);
-                            Deleted = false;
                         }
                     }).setText("Deleted a meeting").show();
-                    Deleted = true;
-                    break;
+                    break;}
 
             }
 
@@ -192,6 +193,39 @@ public class ListView extends AppCompatActivity {
         }
     };
 
-    {
+
+    @Override
+    protected void onStop(){
+        super.onStop();
+        saveAllData();
+
+    }
+
+    //  This is the method to save the data in the .txt file
+    void saveAllData() {
+
+        try {
+            FileOutputStream file = openFileOutput("cricketish.data.txt", MODE_PRIVATE);
+            OutputStreamWriter outputFile = new OutputStreamWriter(file);
+            for(int i=0; i<lists.size(); ++i) {
+                outputFile.write(lists.get(i).getName() + "," + lists.get(i).getLink() + "," + lists.get(i).getMeet() + "\n");
+            }
+            outputFile.close();
+            //Toast.makeText(ListView.this, "Successfully Saved", Toast.LENGTH_SHORT).show();
+        } catch (IOException e) {
+            Toast.makeText(ListView.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    public void openDialog() {
+        PopupDialog dialog = new PopupDialog();
+        dialog.show(getSupportFragmentManager(), "example.dialog.2");
+
+    }
+
+    //If the user clicks ignore & proceeds to the list
+    public void onYesClicked() {
+        yesClick = true;
     }
 }

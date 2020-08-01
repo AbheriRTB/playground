@@ -2,6 +2,7 @@ package cricketish.co.joinmeeting;
 
 public class List {
     private String name, link, meet;
+    private boolean markForDelete;
 
 
     //  Constructor
@@ -11,6 +12,12 @@ public class List {
         this.meet = meet;
     }
 
+    public List(String name, String link, String meet, boolean markForDelete) {
+        this.name = name;
+        this.link = link;
+        this.meet = meet;
+        this.markForDelete = markForDelete;
+    }
 
     // Getter and Setters
     public String getName() {
@@ -35,5 +42,13 @@ public class List {
 
     public void setMeet(String meet) {
         this.meet = meet;
+    }
+
+    public boolean isMarkForDelete() {
+        return markForDelete;
+    }
+
+    public void setMarkForDelete(boolean markForDelete) {
+        this.markForDelete = markForDelete;
     }
 }
