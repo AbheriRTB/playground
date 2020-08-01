@@ -33,13 +33,15 @@ public class ListAdaptor extends RecyclerView.Adapter<ListAdaptor.ViewHolder> {
     // Class for the View Holder
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView ivMeet;
-        TextView tvName, tvLink;
+        TextView tvName, tvLink, tvDate, tvMonth;
 
         public ViewHolder(@NonNull final View itemView) {
             super(itemView);
 
             tvName = itemView.findViewById(R.id.tvName);
             tvLink = itemView.findViewById(R.id.tvLink);
+            tvDate = itemView.findViewById(R.id.tvDate);
+            tvMonth = itemView.findViewById(R.id.tvMonth);
             ivMeet = itemView.findViewById(R.id.ivMeet);
 
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -74,6 +76,8 @@ public class ListAdaptor extends RecyclerView.Adapter<ListAdaptor.ViewHolder> {
         holder.itemView.setTag(events.get(i));
         holder.tvName.setText(events.get(i).getName());
         holder.tvLink.setText(events.get(i).getLink());
+        holder.tvDate.setText(events.get(i).getDate());
+        holder.tvMonth.setText(events.get(i).getMonth());
 
         if (events.get(i).getMeet().equalsIgnoreCase("zoom")) {
             holder.ivMeet.setImageResource(R.mipmap.zoom);

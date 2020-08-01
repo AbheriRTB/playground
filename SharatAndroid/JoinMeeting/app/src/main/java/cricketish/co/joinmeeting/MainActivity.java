@@ -35,12 +35,12 @@ public class MainActivity extends AppCompatActivity implements PopupDialog.Popup
     ImageView btnZoom, btnWebex, btnGMeet, btnJioMeet, btnPaste;
     Button btnOther, btnTime;
     EditText etName = null, etLink = null;
-    String meet, name, link, dateAndTime, strMonth;
+    String meet, name, link, dateAndTime, strMonth, strMonth2;
     ArrayList<List> events;
     PopupDialog dialog;
     ClipboardManager clipboardManager;
     boolean allDataGiven = false;
-    int year, month, day, hour, minutes;
+    int year, day, hour, minutes;
 
 
     // This function is to bring the button on the Action Bar (Till 56)
@@ -159,6 +159,8 @@ public class MainActivity extends AppCompatActivity implements PopupDialog.Popup
                         }
                         String date = dateThis + "th " + strMonth + " " + year + " ";
                         dateAndTime = date;
+                        strMonth2 = strMonth;
+                        day = dateThis;
                         String total = dateAndTime + hour + ":" + minutes;
                         btnTime.setText(total);
 
@@ -290,6 +292,8 @@ public class MainActivity extends AppCompatActivity implements PopupDialog.Popup
                         intent.putExtra("meet", meet);
                         intent.putExtra("name", name);
                         intent.putExtra("link", link);
+                        intent.putExtra("date", day);
+                        intent.putExtra("month", strMonth2);
                         Intent intentToPopup = new Intent(getApplicationContext(), cricketish.co.joinmeeting.PopupDialog.class);
                         intentToPopup.putExtra("meet", meet);
                         startActivity(intentToPopup);
@@ -323,6 +327,8 @@ public class MainActivity extends AppCompatActivity implements PopupDialog.Popup
                     intent.putExtra("meet", meet);
                     intent.putExtra("name", name);
                     intent.putExtra("link", link);
+                    intent.putExtra("date", day);
+                    intent.putExtra("month", strMonth2);
                     Intent intentToPopup = new Intent(getApplicationContext(), cricketish.co.joinmeeting.PopupDialog.class);
                     intentToPopup.putExtra("meet", meet);
                     startActivity(intentToPopup);
