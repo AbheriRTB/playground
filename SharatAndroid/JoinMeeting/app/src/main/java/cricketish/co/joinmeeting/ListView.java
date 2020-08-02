@@ -141,7 +141,7 @@ public class ListView extends AppCompatActivity {
                     if (tokens.hasMoreElements())
                         lminute = tokens.nextToken();
 
-                    List list = new List(lname, llink, lmeet, lDate, lMonth);
+                    List list = new List(lname, llink, lmeet, lDate, lMonth, lyear,lhour,lminute);
                     retArrayList.add(list);
 
                 }
@@ -178,7 +178,6 @@ public class ListView extends AppCompatActivity {
                 case ItemTouchHelper.LEFT:
                     deletedMovie = lists.get(position);
                     lists.remove(position);
-                    listner.onYesClicked();
                     myAdaptor.notifyItemRemoved(position);
                     Snackbar.make(recyclerView, deletedMovie.toString(), Snackbar.LENGTH_LONG).setAction("UNDO", new View.OnClickListener() {
                         @Override
@@ -186,7 +185,7 @@ public class ListView extends AppCompatActivity {
                             lists.add(position, deletedMovie);
                             myAdaptor.notifyItemInserted(position);
                         }
-                    }).setText("Deleted a meeting").show();
+                    }).show();
                     break;
 
             }
@@ -206,13 +205,10 @@ public class ListView extends AppCompatActivity {
             super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
         }
     };
-    public void onYesClicked() {
-        yesClick = true;
-    }
 
 
     @Override
-    protected void onStop(){
+    protected void onStop() {
         super.onStop();
         saveAllData();
 
@@ -224,9 +220,9 @@ public class ListView extends AppCompatActivity {
         try {
             FileOutputStream file = openFileOutput("cricketish.data.txt", MODE_PRIVATE);
             OutputStreamWriter outputFile = new OutputStreamWriter(file);
-            for(int i=0; i<lists.size(); ++i) {
-                outputFile.write(lists.get(i).getName() + "," + lists.get(i).getLink() + "," + lists.get(i).getMeet()
-                        + lists.get(i).getDate() + lists.get(i).getMonth()+ "\n");
+            for (int i = 0; i < lists.size(); ++i) {
+                outputFile.write(lists.get(i).getName() + "," + lists.get(i).getLink() + "," + lists.get(i).getMeet() +
+                        "," + lists.get(i).getDate() + "," + lists.get(i).getMonth() + "\n");
             }
             outputFile.close();
             //Toast.makeText(ListView.this, "Successfully Saved", Toast.LENGTH_SHORT).show();
@@ -235,13 +231,5 @@ public class ListView extends AppCompatActivity {
         }
 
     }
-
-    public void openDialog() {
-        PopupDialog_Delete dialog = new PopupDialog_Delete();
-        dialog.show(getSupportFragmentManager(), "example.dialog.2");
-
-    }
-
-    //If the user clicks ignore & proceeds to the list
 
 }

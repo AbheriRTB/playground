@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -19,12 +20,13 @@
             android:layout_width="55dp"
             android:layout_height="55dp"
             android:layout_weight="1"
-            app:srcCompat="@mipmap/other" />
+            app:srcCompat="@mipmap/other"
+            android:contentDescription="@string/meeting_logo" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
+            android:layout_marginStart="15dp"
             android:layout_weight="50"
             android:orientation="vertical">
 
@@ -33,7 +35,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fontFamily="monospace"
-                android:text="Name"
+                android:text="@string/nameMeet"
                 android:textColor="#3A3A3A"
                 android:textSize="24sp" />
 
@@ -42,7 +44,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fontFamily="monospace"
-                android:text="Link" />
+                android:text="@string/linkMeet" />
 
         </LinearLayout>
 
@@ -51,14 +53,15 @@
             android:layout_height="match_parent"
             android:layout_weight="3"
             android:orientation="vertical"
-            android:paddingEnd="5dp">
+            android:paddingEnd="5dp"
+            tools:ignore="RtlSymmetry">
 
             <TextView
                 android:id="@+id/tvMonth"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="FEB" />
+                android:text="@string/monthMeet" />
 
             <TextView
                 android:id="@+id/tvDate"
@@ -67,8 +70,8 @@
                 android:layout_gravity="center"
                 android:fontFamily="monospace"
                 android:gravity="center"
-                android:text="15"
-                android:textSize="28sp" />
+                android:text="@string/_15"
+                android:textSize="24sp" />
         </LinearLayout>
     </LinearLayout>
 

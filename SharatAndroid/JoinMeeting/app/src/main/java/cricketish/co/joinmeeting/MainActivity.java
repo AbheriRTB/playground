@@ -30,14 +30,14 @@ import java.util.Calendar;
 public class MainActivity extends AppCompatActivity implements PopupDialog.PopupListner {
 
 
+    boolean allDataGiven = false;
+    int year, day, hour, minutes;
     ImageView btnZoom, btnWebex, btnGMeet, btnJioMeet, btnPaste;
     Button btnOther, btnTime;
     EditText etName = null, etLink = null;
-    String meet, name, link, dateAndTime, strMonth, strMonth2;
+    String meet, name, link, dateAndTime, strMonth, strMonth2, timeOfDay;
     PopupDialog dialog;
     ClipboardManager clipboardManager;
-    boolean allDataGiven = false;
-    int year, day, hour, minutes;
 
 
     // This function is to bring the button on the Action Bar (Till 56)
@@ -130,29 +130,80 @@ public class MainActivity extends AppCompatActivity implements PopupDialog.Popup
                         switch (month) {
                             case 0:
                                 strMonth = "Jan";
+                                break;
                             case 1:
                                 strMonth = "Feb";
+                                break;
                             case 2:
                                 strMonth = "Mar";
+                                break;
                             case 3:
                                 strMonth = "Apr";
+                                break;
                             case 4:
                                 strMonth = "May";
+                                break;
                             case 5:
                                 strMonth = "Jun";
+                                break;
                             case 6:
                                 strMonth = "Jul";
+                                break;
                             case 7:
                                 strMonth = "Aug";
+                                break;
                             case 8:
                                 strMonth = "Sep";
+                                break;
                             case 9:
                                 strMonth = "Oct";
+                                break;
                             case 10:
                                 strMonth = "Nov";
+                                break;
                             case 11:
                                 strMonth = "Dec";
-
+                                break;
+                        }
+                        switch (hour){
+                            case 13:
+                                hour = 1;
+                                timeOfDay = "PM";
+                            case 14:
+                                hour = 2;
+                                timeOfDay = "PM";
+                            case 15:
+                                hour = 3;
+                                timeOfDay = "PM";
+                            case 16:
+                                hour = 4;
+                                timeOfDay = "PM";
+                            case 17:
+                                hour = 5;
+                                timeOfDay = "PM";
+                            case 18:
+                                hour = 6;
+                                timeOfDay = "PM";
+                            case 19:
+                                hour = 7;
+                                timeOfDay = "PM";
+                            case 20:
+                                hour = 8;
+                                timeOfDay = "PM";
+                            case 21:
+                                hour = 9;
+                                timeOfDay = "PM";
+                            case 22:
+                                hour = 10;
+                                timeOfDay = "PM";
+                            case 23:
+                                hour = 11;
+                                timeOfDay = "PM";
+                            case 24:
+                                hour = 11;
+                                timeOfDay = "PM";
+                            default:
+                                timeOfDay = "AM";
                         }
                         String date = dateThis + "th " + strMonth + " " + year + " ";
                         dateAndTime = date;

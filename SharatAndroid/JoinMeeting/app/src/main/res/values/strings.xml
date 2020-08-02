@@ -28,4 +28,9 @@
     <string name="date">DATE</string>
     <string name="linkpop">link</string>
     <string name="Titlepop">TITLE</string>
+    <string name="meeting_logo">Meeting Logo</string>
+    <string name="nameMeet">Name</string>
+    <string name="linkMeet">Link</string>
+    <string name="monthMeet">FEB</string>
+    <string name="_15">15</string>
 </resources>
