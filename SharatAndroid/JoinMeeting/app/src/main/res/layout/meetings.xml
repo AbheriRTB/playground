@@ -31,7 +31,7 @@
             <TextView
                 android:id="@+id/tvName"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:fontFamily="monospace"
                 android:text="Name"
                 android:textColor="#3A3A3A"
@@ -40,7 +40,7 @@
             <TextView
                 android:id="@+id/tvLink"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:fontFamily="monospace"
                 android:text="Link" />
 

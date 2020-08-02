@@ -84,6 +84,11 @@ public class ListView extends AppCompatActivity {
         String meet = getIntent().getStringExtra("meet");
         String name = getIntent().getStringExtra("name");
         String link = getIntent().getStringExtra("link");
+        String month = getIntent().getStringExtra("month");
+        String day = getIntent().getStringExtra("day");
+        String year = getIntent().getStringExtra("year");
+        String hour = getIntent().getStringExtra("hour");
+        String minutes = getIntent().getStringExtra("minutes");
 
         layout = findViewById(R.id.layot);
         layout.setVisibility(View.INVISIBLE);
@@ -118,7 +123,7 @@ public class ListView extends AppCompatActivity {
                 while ((lineFromFile = reader.readLine()) != null) {
                     StringTokenizer tokens = new StringTokenizer(lineFromFile, ",");
 
-                    String lname = "noname", llink = "nolink", lmeet = "nomeet", lMonth = "JAN", lDate = "1";
+                    String lname = "noname", llink = "nolink", lmeet = "nomeet", lMonth = "JAN", lDate = "1", lyear = "2020", lhour = "1", lminute = "1";
                     if (tokens.hasMoreElements())
                         lname = tokens.nextToken();
                     if (tokens.hasMoreElements())
@@ -129,6 +134,12 @@ public class ListView extends AppCompatActivity {
                         lDate = tokens.nextToken();
                     if (tokens.hasMoreElements())
                         lMonth = tokens.nextToken();
+                    if (tokens.hasMoreElements())
+                        lhour = tokens.nextToken();
+                    if (tokens.hasMoreElements())
+                        lhour = tokens.nextToken();
+                    if (tokens.hasMoreElements())
+                        lminute = tokens.nextToken();
 
                     List list = new List(lname, llink, lmeet, lDate, lMonth);
                     retArrayList.add(list);
@@ -169,8 +180,6 @@ public class ListView extends AppCompatActivity {
                     lists.remove(position);
                     listner.onYesClicked();
                     myAdaptor.notifyItemRemoved(position);
-                    openDialog();
-                    if (yesClick){
                     Snackbar.make(recyclerView, deletedMovie.toString(), Snackbar.LENGTH_LONG).setAction("UNDO", new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
@@ -178,7 +187,7 @@ public class ListView extends AppCompatActivity {
                             myAdaptor.notifyItemInserted(position);
                         }
                     }).setText("Deleted a meeting").show();
-                    break;}
+                    break;
 
             }
 

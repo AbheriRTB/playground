@@ -22,4 +22,10 @@
     <string name="mail">Mail</string>
     <string name="about">About</string>
     <string name="version">v1.02.2 Beta</string>
+    <string name="join">Join</string>
+    <string name="cancel">Cancel</string>
+    <string name="meet">Meet</string>
+    <string name="date">DATE</string>
+    <string name="linkpop">link</string>
+    <string name="Titlepop">TITLE</string>
 </resources>

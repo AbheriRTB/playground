@@ -1,17 +1,11 @@
 package cricketish.co.joinmeeting;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Intent;
-import android.icu.text.DateFormat;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,10 +17,14 @@ import android.widget.ImageView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
-import java.util.ArrayList;
 import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity implements PopupDialog.PopupListner {
@@ -36,7 +34,6 @@ public class MainActivity extends AppCompatActivity implements PopupDialog.Popup
     Button btnOther, btnTime;
     EditText etName = null, etLink = null;
     String meet, name, link, dateAndTime, strMonth, strMonth2;
-    ArrayList<List> events;
     PopupDialog dialog;
     ClipboardManager clipboardManager;
     boolean allDataGiven = false;
@@ -186,11 +183,16 @@ public class MainActivity extends AppCompatActivity implements PopupDialog.Popup
                 }
                 if (allDataGiven) {
                     if (link.contains("zoom")) {
-                        saveData(name, link, meet);
+                        saveData(name, link, meet, day, strMonth2, year, hour,minutes);
                         Intent intent = new Intent(getApplicationContext(), cricketish.co.joinmeeting.ListView.class);
                         intent.putExtra("meet", meet);
                         intent.putExtra("name", name);
                         intent.putExtra("link", link);
+                        intent.putExtra("date", day);
+                        intent.putExtra("month", strMonth2);
+                        intent.putExtra("year", year);
+                        intent.putExtra("hour", hour);
+                        intent.putExtra("minutes", minutes);
                         Intent intentToPopup = new Intent(getApplicationContext(), cricketish.co.joinmeeting.PopupDialog.class);
                         intentToPopup.putExtra("meet", meet);
                         startActivity(intentToPopup);
@@ -219,11 +221,16 @@ public class MainActivity extends AppCompatActivity implements PopupDialog.Popup
                 }
                 if (allDataGiven) {
                     if (link.contains("webex")) {
-                        saveData(name, link, meet);
+                        saveData(name, link, meet, day, strMonth2, year, hour,minutes);
                         Intent intent = new Intent(getApplicationContext(), cricketish.co.joinmeeting.ListView.class);
                         intent.putExtra("meet", meet);
                         intent.putExtra("name", name);
                         intent.putExtra("link", link);
+                        intent.putExtra("date", day);
+                        intent.putExtra("month", strMonth2);
+                        intent.putExtra("year", year);
+                        intent.putExtra("hour", hour);
+                        intent.putExtra("minutes", minutes);
                         Intent intentToPopup = new Intent(getApplicationContext(), cricketish.co.joinmeeting.PopupDialog.class);
                         intentToPopup.putExtra("meet", meet);
                         startActivity(intentToPopup);
@@ -253,11 +260,16 @@ public class MainActivity extends AppCompatActivity implements PopupDialog.Popup
                 }
                 if (allDataGiven) {
                     if (link.contains("meeting.google")) {
-                        saveData(name, link, meet);
+                        saveData(name, link, meet, day, strMonth2, year, hour,minutes);
                         Intent intent = new Intent(getApplicationContext(), cricketish.co.joinmeeting.ListView.class);
                         intent.putExtra("meet", meet);
                         intent.putExtra("name", name);
                         intent.putExtra("link", link);
+                        intent.putExtra("date", day);
+                        intent.putExtra("month", strMonth2);
+                        intent.putExtra("year", year);
+                        intent.putExtra("hour", hour);
+                        intent.putExtra("minutes", minutes);
                         Intent intentToPopup = new Intent(getApplicationContext(), cricketish.co.joinmeeting.PopupDialog.class);
                         intentToPopup.putExtra("meet", meet);
                         startActivity(intentToPopup);
@@ -287,13 +299,16 @@ public class MainActivity extends AppCompatActivity implements PopupDialog.Popup
                 }
                 if (allDataGiven) {
                     if (link.contains("jio")) {
-                        saveData(name, link, meet);
+                        saveData(name, link, meet, day, strMonth2, year, hour,minutes);
                         Intent intent = new Intent(getApplicationContext(), cricketish.co.joinmeeting.ListView.class);
                         intent.putExtra("meet", meet);
                         intent.putExtra("name", name);
                         intent.putExtra("link", link);
                         intent.putExtra("date", day);
                         intent.putExtra("month", strMonth2);
+                        intent.putExtra("year", year);
+                        intent.putExtra("hour", hour);
+                        intent.putExtra("minutes", minutes);
                         Intent intentToPopup = new Intent(getApplicationContext(), cricketish.co.joinmeeting.PopupDialog.class);
                         intentToPopup.putExtra("meet", meet);
                         startActivity(intentToPopup);
@@ -322,13 +337,16 @@ public class MainActivity extends AppCompatActivity implements PopupDialog.Popup
                     allDataGiven = true;
                 }
                 if (allDataGiven) {
-                    saveData(name, link, meet);
+                    saveData(name, link, meet, day, strMonth2, year, hour,minutes);
                     Intent intent = new Intent(getApplicationContext(), cricketish.co.joinmeeting.ListView.class);
                     intent.putExtra("meet", meet);
                     intent.putExtra("name", name);
                     intent.putExtra("link", link);
                     intent.putExtra("date", day);
                     intent.putExtra("month", strMonth2);
+                    intent.putExtra("year", year);
+                    intent.putExtra("hour", hour);
+                    intent.putExtra("minutes", minutes);
                     Intent intentToPopup = new Intent(getApplicationContext(), cricketish.co.joinmeeting.PopupDialog.class);
                     intentToPopup.putExtra("meet", meet);
                     startActivity(intentToPopup);
@@ -357,13 +375,13 @@ public class MainActivity extends AppCompatActivity implements PopupDialog.Popup
     }
 
     //  This is the method to save the data in the .txt file
-    void saveData(String name, String link, String meet) {
+    void saveData(String name, String link, String meet, int day, String strMonth2, int year, int hour, int minutes) {
 
         try {
             FileOutputStream file = openFileOutput("cricketish.data.txt", MODE_PRIVATE | MODE_APPEND);
             OutputStreamWriter outputFile = new OutputStreamWriter(file);
 
-            outputFile.write(name + "," + link + "," + meet + "\n");
+            outputFile.write(name + "," + link + "," + meet + "," + day + "," + strMonth2 +"," + year +"," + hour +"," + minutes + "\n");
             outputFile.close();
             Toast.makeText(MainActivity.this, "Successfully Saved", Toast.LENGTH_SHORT).show();
         } catch (IOException e) {
@@ -385,11 +403,16 @@ public class MainActivity extends AppCompatActivity implements PopupDialog.Popup
     public void onIgnoreClicked() {
         name = getName();
         link = getLink();
-        saveData(name, link, meet);
+        saveData(name, link, meet, day, strMonth2, year, hour, minutes);
         Intent intentTwo = new Intent(getApplicationContext(), cricketish.co.joinmeeting.ListView.class);
         intentTwo.putExtra("meet", meet);
         intentTwo.putExtra("name", name);
         intentTwo.putExtra("link", link);
+        intentTwo.putExtra("date", day);
+        intentTwo.putExtra("month", strMonth2);
+        intentTwo.putExtra("year", year);
+        intentTwo.putExtra("hour", hour);
+        intentTwo.putExtra("minutes", minutes);
         startActivity(intentTwo);
     }
 

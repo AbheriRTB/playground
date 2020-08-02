@@ -99,14 +99,5 @@ public class ListAdaptor extends RecyclerView.Adapter<ListAdaptor.ViewHolder> {
         return events.size();
     }
 
-
-    // Sets the list properly
-    private void setTextToTextView() {
-        String text = "";
-
-        for (int i = 0; i < events.size(); ++i) {
-            text = text + events.get(i).getName() + " " + events.get(i).getLink() + events.get(i).getMeet() + "\n";
-        }
-    }
 }
 
