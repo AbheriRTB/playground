@@ -106,17 +106,6 @@ public class ListAdaptor extends RecyclerView.Adapter<ListAdaptor.ViewHolder> {
             strMeet = "Custom";
         }
 
-        /*if (events.get(i).getMeet().equalsIgnoreCase("zoom")) {
-            ivMeet2.setImageResource(R.mipmap.zoom);
-        } else if (events.get(i).getMeet().equalsIgnoreCase("webex")) {
-            ivMeet2.setImageResource(R.mipmap.webex);
-        } else if (events.get(i).getMeet().equalsIgnoreCase("google")) {
-            ivMeet2.setImageResource(R.mipmap.google);
-        } else if (events.get(i).getMeet().equalsIgnoreCase("jiomeet")) {
-            ivMeet2.setImageResource(R.mipmap.jio);
-        } else if (events.get(i).getMeet().equalsIgnoreCase("other")) {
-            ivMeet2.setImageResource(R.mipmap.other);
-        }*/
     }
 
 
@@ -137,6 +126,18 @@ public class ListAdaptor extends RecyclerView.Adapter<ListAdaptor.ViewHolder> {
         tvDate2 = infoDialog.findViewById(R.id.tvDate2);
         ivMeet2 = infoDialog.findViewById(R.id.ivMeet2);
         tvMeet2 = infoDialog.findViewById(R.id.tvMeet2);
+
+        if (strMeet.equalsIgnoreCase("Zoom")) {
+            ivMeet2.setImageResource(R.mipmap.zoom);
+        } else if (strMeet.equalsIgnoreCase("WebEx")) {
+            ivMeet2.setImageResource(R.mipmap.webex);
+        } else if (strMeet.equalsIgnoreCase("Google Meet")) {
+            ivMeet2.setImageResource(R.mipmap.google);
+        } else if (strMeet.equalsIgnoreCase("Jio Meet")) {
+            ivMeet2.setImageResource(R.mipmap.jio);
+        } else {
+            ivMeet2.setImageResource(R.mipmap.other);
+        }
 
         tvMeet2.setText(strMeet);
         tvTitle2.setText(tvTitle.getText());

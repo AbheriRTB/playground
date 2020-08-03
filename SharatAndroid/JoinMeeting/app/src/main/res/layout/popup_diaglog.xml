@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/pop_dialog2"
-    android:layout_width="340dp"
-    android:layout_height="280dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:layout_marginLeft="40dp"
     android:layout_marginTop="160dp"
     android:layout_marginRight="40dp"
@@ -25,10 +25,12 @@
 
             <TextView
                 android:id="@+id/tvTitle2"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="40dp"
                 android:layout_marginTop="30dp"
+                android:layout_marginRight="40dp"
                 android:fontFamily="monospace"
                 android:gravity="center"
                 android:text="@string/Titlepop"
@@ -36,10 +38,12 @@
 
             <TextView
                 android:id="@+id/tvLink2"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="20dp"
                 android:layout_marginTop="5dp"
+                android:layout_marginRight="20dp"
                 android:gravity="center"
                 android:text="@string/linkpop"
                 android:textSize="16sp" />
@@ -66,11 +70,11 @@
 
                 <ImageView
                     android:id="@+id/ivMeet2"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
                     android:layout_weight="1"
                     android:contentDescription="@string/meet"
-                    app:srcCompat="@mipmap/google" />
+                    app:srcCompat="@mipmap/other" />
 
                 <TextView
                     android:id="@+id/tvMeet2"
@@ -83,6 +87,7 @@
                     android:text="@string/meet"
                     android:textSize="18sp"
                     tools:ignore="RtlSymmetry" />
+
             </LinearLayout>
 
             <View
