@@ -33,4 +33,6 @@
     <string name="linkMeet">Link</string>
     <string name="monthMeet">FEB</string>
     <string name="_15">15</string>
+    <string name="swipe">Swipe</string>
+    <string name="joinSplash">Join</string>
 </resources>

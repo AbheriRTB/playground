@@ -18,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class ListAdaptor extends RecyclerView.Adapter<ListAdaptor.ViewHolder> {
 
@@ -26,7 +27,7 @@ public class ListAdaptor extends RecyclerView.Adapter<ListAdaptor.ViewHolder> {
     Dialog infoDialog;
     Button btnJoin, btnCancel;
     ImageView ivMeet2;
-    boolean join;
+    boolean join = false;
     TextView tvLink2, tvDate2, tvMeet2, tvTitle2;
 
 
@@ -53,15 +54,8 @@ public class ListAdaptor extends RecyclerView.Adapter<ListAdaptor.ViewHolder> {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ShowPopupInfo(tvLink, tvDate, tvMeet, tvName, ivMeet);
-                    if (join) {
-                        String link = String.valueOf(tvLink.getText());
-                        Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
-                                Uri.parse(link));
-                        itemView.getContext().startActivity(intent);
-                        Toast.makeText(v.getContext(), "Worked", Toast.LENGTH_SHORT).show();
-                    }
-
+                    ShowPopupInfo(itemView, v, tvLink, tvDate, tvMeet, tvName, ivMeet);
+                    join = true;
                 }
             });
 
@@ -116,8 +110,11 @@ public class ListAdaptor extends RecyclerView.Adapter<ListAdaptor.ViewHolder> {
     }
 
 
-    public void ShowPopupInfo(TextView tvLink, TextView tvDate,
+    public void ShowPopupInfo(final View ItemView, final View v, TextView tvLink, TextView tvDate,
                               TextView tvMeet, TextView tvTitle, ImageView ivMeet) {
+        
+        LayoutInflater inflatr = (LayoutInflater) this.getSystemService(v.getContext().LAYOUT_INFLATER_SERVICE);
+
         infoDialog.setContentView(R.layout.popup_diaglog);
         btnJoin = infoDialog.findViewById(R.id.btnJoin);
         btnCancel = infoDialog.findViewById(R.id.btnCancel);
@@ -127,28 +124,33 @@ public class ListAdaptor extends RecyclerView.Adapter<ListAdaptor.ViewHolder> {
         ivMeet2 = infoDialog.findViewById(R.id.ivMeet2);
         tvMeet2 = infoDialog.findViewById(R.id.tvMeet2);
 
+        tvMeet2.setText(strMeet);
+        tvTitle2.setText(tvTitle.getText());
+        tvDate2.setText(tvDate.getText());
+        tvLink2.setText(tvLink.getText());
+
         if (strMeet.equalsIgnoreCase("Zoom")) {
             ivMeet2.setImageResource(R.mipmap.zoom);
         } else if (strMeet.equalsIgnoreCase("WebEx")) {
             ivMeet2.setImageResource(R.mipmap.webex);
         } else if (strMeet.equalsIgnoreCase("Google Meet")) {
             ivMeet2.setImageResource(R.mipmap.google);
-        } else if (strMeet.equalsIgnoreCase("Jio Meet")) {
+        } else if (tvMeet.getText().equals("Jio Meet")) {
             ivMeet2.setImageResource(R.mipmap.jio);
         } else {
             ivMeet2.setImageResource(R.mipmap.other);
         }
 
-        tvMeet2.setText(strMeet);
-        tvTitle2.setText(tvTitle.getText());
-        tvDate.setText(tvDate.getText());
-        tvLink.setText(tvLink.getText());
-        tvTitle2.setText(tvTitle.getText());
-        tvTitle2.setText(tvTitle.getText());
         btnJoin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                join = true;
+                if (join) {
+                    String link = String.valueOf(tvLink2.getText());
+                    Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+                            Uri.parse(link));
+                    ItemView.getContext().startActivity(intent);
+                    Toast.makeText(v.getContext(), "Worked", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         btnCancel.setOnClickListener(new View.OnClickListener() {
@@ -157,7 +159,7 @@ public class ListAdaptor extends RecyclerView.Adapter<ListAdaptor.ViewHolder> {
                 ListAdaptor.this.infoDialog.dismiss();
             }
         });
-        this.infoDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        Objects.requireNonNull(this.infoDialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         this.infoDialog.show();
 
 

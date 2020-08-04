@@ -20,31 +20,37 @@
             android:layout_width="55dp"
             android:layout_height="55dp"
             android:layout_weight="1"
-            app:srcCompat="@mipmap/other"
-            android:contentDescription="@string/meeting_logo" />
+            android:contentDescription="@string/meeting_logo"
+            app:srcCompat="@mipmap/other" />
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginStart="15dp"
             android:layout_weight="50"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tvName"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:fontFamily="monospace"
-                android:text="@string/nameMeet"
-                android:textColor="#3A3A3A"
-                android:textSize="24sp" />
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tvLink"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fontFamily="monospace"
-                android:text="@string/linkMeet" />
+                <TextView
+                    android:id="@+id/tvName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="monospace"
+                    android:text="@string/nameMeet"
+                    android:textColor="#3A3A3A"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:id="@+id/tvLink"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="monospace"
+                    android:text="@string/linkMeet" />
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -53,20 +59,24 @@
             android:layout_height="match_parent"
             android:layout_weight="3"
             android:orientation="vertical"
+            android:paddingLeft="5dp"
             android:paddingEnd="5dp"
+            android:paddingRight="5dp"
             tools:ignore="RtlSymmetry">
 
             <TextView
                 android:id="@+id/tvMonth"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@string/monthMeet" />
+                android:text="@string/monthMeet"
+                android:textAlignment="center"
+                android:textAllCaps="true" />
 
             <TextView
                 android:id="@+id/tvDate"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:fontFamily="monospace"
                 android:gravity="center"

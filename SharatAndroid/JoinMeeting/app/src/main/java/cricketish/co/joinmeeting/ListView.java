@@ -185,7 +185,7 @@ public class ListView extends AppCompatActivity {
                             lists.add(position, deletedMovie);
                             myAdaptor.notifyItemInserted(position);
                         }
-                    }).show();
+                    }).setText("Deleted a Meet").show();
                     break;
 
             }
