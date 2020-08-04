@@ -6,4 +6,5 @@
     <color name="color3rd">#404040</color>
     <color name="Bin">#FF4A4A</color>
     <color name="White">#FFFFFF</color>
+    <color name="colorTransperent">#00FFFFFF</color>
 </resources>

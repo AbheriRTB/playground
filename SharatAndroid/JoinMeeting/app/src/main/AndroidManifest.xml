@@ -9,6 +9,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".SplashActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".AboutActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -19,13 +27,16 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ListView" />
         </activity>
-        <activity android:name=".SettingsActivity"/>
+        <activity android:name=".SettingsActivity" />
         <activity android:name=".ListView">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

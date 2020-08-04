@@ -14,6 +14,7 @@ public class AboutActivity extends AppCompatActivity {
 
 
     ImageView ivMail, ivPlay;
+    String to, subject, message;
 
 
     // App is created here
@@ -28,6 +29,9 @@ public class AboutActivity extends AppCompatActivity {
 
         ivMail = findViewById(R.id.ivMail);
         ivPlay = findViewById(R.id.ivPlay);
+        to = "www.sharatchandrats@gmail.com";
+        subject = "Feedback on Join app";
+        message = "This is a feedback on my experience on Join v1.02.2.2 Beta";
 
         ivPlay.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -35,15 +39,21 @@ public class AboutActivity extends AppCompatActivity {
                 Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
                         Uri.parse("https://www.youtube.com"));
                 AboutActivity.this.startActivity(intent);
+
             }
         });
 
         ivMail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
-                        Uri.parse("https://www.gmail.com"));
-                AboutActivity.this.startActivity(intent);
+                Intent email = new Intent(Intent.ACTION_SEND);
+                email.putExtra(Intent.EXTRA_EMAIL, new String[]{to});
+                email.putExtra(Intent.EXTRA_SUBJECT, subject);
+                email.putExtra(Intent.EXTRA_TEXT, message);
+
+                email.setType("message/rfc822");
+
+                startActivity(Intent.createChooser(email, "Choose an Email client :"));
             }
         });
 
