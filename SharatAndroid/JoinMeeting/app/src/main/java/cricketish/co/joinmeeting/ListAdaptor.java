@@ -54,8 +54,13 @@ public class ListAdaptor extends RecyclerView.Adapter<ListAdaptor.ViewHolder> {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ShowPopupInfo(itemView, v, tvLink, tvDate, tvMeet, tvName, ivMeet);
-                    join = true;
+                    //ShowPopupInfo(itemView, v, tvLink, tvDate, tvMeet, tvName, ivMeet);
+                    //join = true;
+                    String link = String.valueOf(tvLink2.getText());
+                    Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+                            Uri.parse(link));
+                    itemView.getContext().startActivity(intent);
+                    Toast.makeText(v.getContext(), "Worked", Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -70,7 +75,6 @@ public class ListAdaptor extends RecyclerView.Adapter<ListAdaptor.ViewHolder> {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.meetings, parent, false);
         return new ViewHolder(v);
     }
-
 
     //  Here we declare the values (eg ivMeet, tvName, etc)
     @Override
@@ -110,7 +114,7 @@ public class ListAdaptor extends RecyclerView.Adapter<ListAdaptor.ViewHolder> {
     }
 
 
-    public void ShowPopupInfo(final View ItemView, final View v, TextView tvLink, TextView tvDate,
+    /*public void ShowPopupInfo(final View ItemView, final View v, TextView tvLink, TextView tvDate,
                               TextView tvMeet, TextView tvTitle, ImageView ivMeet) {
         
         LayoutInflater inflatr = (LayoutInflater) this.getSystemService(v.getContext().LAYOUT_INFLATER_SERVICE);
@@ -163,7 +167,7 @@ public class ListAdaptor extends RecyclerView.Adapter<ListAdaptor.ViewHolder> {
         this.infoDialog.show();
 
 
-    }
+    }*/
 
 }
 

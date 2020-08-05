@@ -2,6 +2,7 @@ package cricketish.co.joinmeeting;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
+import android.app.Notification;
 import android.app.TimePickerDialog;
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -20,11 +21,14 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity implements PopupDialog.PopupListner {
@@ -38,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements PopupDialog.Popup
     String meet, name, link, dateAndTime, strMonth, strMonth2, timeOfDay;
     PopupDialog dialog;
     ClipboardManager clipboardManager;
+    private NotificationManagerCompat notificationManager;
 
 
     // This function is to bring the button on the Action Bar (Till 56)
@@ -85,6 +90,16 @@ public class MainActivity extends AppCompatActivity implements PopupDialog.Popup
         etLink = findViewById(R.id.etLink);
         dialog = new PopupDialog();
         clipboardManager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+        notificationManager = NotificationManagerCompat.from(this);Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-mm-yyyy");
+        SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("hh:mm");
+        String date = simpleDateFormat.format(calendar.getTime());
+        String time = simpleDateFormat2.format(calendar.getTime());
+        String date2 = day+"-"+strMonth+"-"+year;
+        String time2 = hour+":"+minutes;
+
+
+
 
 
         ActionBar actionBar = getSupportActionBar();
@@ -435,6 +450,8 @@ public class MainActivity extends AppCompatActivity implements PopupDialog.Popup
             outputFile.write(name + "," + link + "," + meet + "," + day + "," + strMonth2 +"," + year +"," + hour +"," + minutes + "\n");
             outputFile.close();
             Toast.makeText(MainActivity.this, "Successfully Saved", Toast.LENGTH_SHORT).show();
+            sendOnChannel1();
+
         } catch (IOException e) {
             Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
         }
@@ -465,6 +482,17 @@ public class MainActivity extends AppCompatActivity implements PopupDialog.Popup
         intentTwo.putExtra("hour", hour);
         intentTwo.putExtra("minutes", minutes);
         startActivity(intentTwo);
+    }
+
+    public void sendOnChannel1() {
+        Notification notification = new NotificationCompat.Builder(this, AppNotification.CHANNEL_1_ID)
+                .setSmallIcon(R.mipmap.ic_launcher_foreground)
+                .setContentTitle("Something")
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setCategory(NotificationCompat.CATEGORY_ALARM)
+                .build();
+
+        notificationManager.notify(1,notification);
     }
 
 }

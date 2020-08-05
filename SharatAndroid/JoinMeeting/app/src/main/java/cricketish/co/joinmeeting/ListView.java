@@ -3,11 +3,15 @@ package cricketish.co.joinmeeting;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Application;
+import android.app.Notification;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.os.Bundle;
@@ -21,12 +25,13 @@ import com.google.android.material.snackbar.Snackbar;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.StringTokenizer;
 
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
@@ -37,11 +42,15 @@ public class ListView extends AppCompatActivity {
     RecyclerView.Adapter myAdaptor;
     RecyclerView.LayoutManager layoutManager;
     ItemTouchHelper itemTouchHelper;
+    String date;
     Button btnAdd;
     ArrayList<List> lists;
     ConstraintLayout layout;
     boolean yesClick;
-    private PopupDialog_Delete.PopupListner listner;
+    Button btnClick;
+    List list;
+
+    //private PopupDialog_Delete.PopupListner listner;
 
 
     //For the function when  Undo clicked
@@ -89,6 +98,18 @@ public class ListView extends AppCompatActivity {
         String year = getIntent().getStringExtra("year");
         String hour = getIntent().getStringExtra("hour");
         String minutes = getIntent().getStringExtra("minutes");
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-mm-yyyy");
+        SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("hh:mm");
+        date = simpleDateFormat.format(calendar.getTime());
+        String time = simpleDateFormat2.format(calendar.getTime());
+
+        /*if (date.equalsIgnoreCase(date2)){
+            if (time.equalsIgnoreCase(time2)){
+                sendOnChannel1();
+            }
+        }*/
+
 
         layout = findViewById(R.id.layot);
         layout.setVisibility(View.INVISIBLE);
@@ -141,7 +162,7 @@ public class ListView extends AppCompatActivity {
                     if (tokens.hasMoreElements())
                         lminute = tokens.nextToken();
 
-                    List list = new List(lname, llink, lmeet, lDate, lMonth, lyear,lhour,lminute);
+                    list = new List(lname, llink, lmeet, lDate, lMonth, lyear,lhour,lminute);
                     retArrayList.add(list);
 
                 }
@@ -231,5 +252,7 @@ public class ListView extends AppCompatActivity {
         }
 
     }
+
+
 
 }
