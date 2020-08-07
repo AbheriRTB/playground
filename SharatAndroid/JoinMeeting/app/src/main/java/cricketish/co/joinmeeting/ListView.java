@@ -1,6 +1,7 @@
 package cricketish.co.joinmeeting;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
@@ -8,7 +9,9 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Canvas;
 import android.os.Bundle;
 import android.view.Menu;
@@ -37,12 +40,9 @@ public class ListView extends AppCompatActivity {
     RecyclerView.Adapter myAdaptor;
     RecyclerView.LayoutManager layoutManager;
     ItemTouchHelper itemTouchHelper;
-    Button btnAdd;
     ArrayList<List> lists;
     ConstraintLayout layout;
-    boolean yesClick;
-    private PopupDialog_Delete.PopupListner listner;
-
+    AlertDialog.Builder dialog;
 
     //For the function when  Undo clicked
     List deletedMovie = null;
@@ -76,6 +76,7 @@ public class ListView extends AppCompatActivity {
     //  (Till Here)
 
 
+
     //  Finally the app starts here
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,6 +90,7 @@ public class ListView extends AppCompatActivity {
         String year = getIntent().getStringExtra("year");
         String hour = getIntent().getStringExtra("hour");
         String minutes = getIntent().getStringExtra("minutes");
+        openBetaDialog();
 
         layout = findViewById(R.id.layot);
         layout.setVisibility(View.INVISIBLE);
@@ -109,6 +111,7 @@ public class ListView extends AppCompatActivity {
             layout.setVisibility(View.VISIBLE);
         }
     }
+
 
     //  This function wraps up the data for the list from the .txt file
     ArrayList<List> loadData() {
@@ -141,7 +144,7 @@ public class ListView extends AppCompatActivity {
                     if (tokens.hasMoreElements())
                         lminute = tokens.nextToken();
 
-                    List list = new List(lname, llink, lmeet, lDate, lMonth, lyear,lhour,lminute);
+                    List list = new List(lname, llink, lmeet, lDate, lMonth, lyear, lhour, lminute);
                     retArrayList.add(list);
 
                 }
@@ -177,15 +180,34 @@ public class ListView extends AppCompatActivity {
             switch (direction) {
                 case ItemTouchHelper.LEFT:
                     deletedMovie = lists.get(position);
-                    lists.remove(position);
-                    myAdaptor.notifyItemRemoved(position);
-                    Snackbar.make(recyclerView, deletedMovie.toString(), Snackbar.LENGTH_LONG).setAction("UNDO", new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            lists.add(position, deletedMovie);
-                            myAdaptor.notifyItemInserted(position);
-                        }
-                    }).setText("Deleted a Meet").show();
+                    dialog = new AlertDialog.Builder(ListView.this);
+                    dialog
+                            .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    lists.remove(position);
+
+                                    myAdaptor.notifyItemRemoved(position);
+                                    Snackbar.make(recyclerView, deletedMovie.toString(), Snackbar.LENGTH_LONG)
+                                            .setAction("UNDO", new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            lists.add(position, deletedMovie);
+                                            myAdaptor.notifyItemInserted(position);
+                                        }
+                                    }).setText("Deleted a Meet").show();
+                                }
+                            })
+
+                            .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    myAdaptor.notifyItemChanged(position);
+                                }
+                            })
+                            .setTitle("Alert")
+                            .setMessage("Do you want to really delete this meet?")
+                            .show();
                     break;
 
             }
@@ -229,6 +251,21 @@ public class ListView extends AppCompatActivity {
         } catch (IOException e) {
             Toast.makeText(ListView.this, e.getMessage(), Toast.LENGTH_SHORT).show();
         }
+
+    }
+
+    public void openBetaDialog() {
+        final AlertDialog.Builder betaDialog = new AlertDialog.Builder(ListView.this);
+        betaDialog.setTitle("Warning!")
+                .setMessage("This app is still in Beta stages, if found any error please report it" +
+                        "to our email (mentioned in our about page)")
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                })
+                .show();
 
     }
 

@@ -12,7 +12,7 @@
     <string name="webex_name">Webex</string>
     <string name="zoom_name">Zoom</string>
     <string name="other">Other</string>
-    <string name="noActivityText">No meetings sheduled yet \nClick add button on the top bar</string>
+    <string name="noActivityText">No meetings sheduled yet \nClick + button on the top bar</string>
     <string name="help">Help</string>
     <string name="tvAboutDiscriptOld">This is an app developed by me with the help of my father. This app is made for fun and
     not for making any money. If found any problems or suggestions please email to sharatchandrats@gmail.com\nThankyou!</string>
@@ -35,4 +35,7 @@
     <string name="_15">15</string>
     <string name="swipe">Swipe</string>
     <string name="joinSplash">Join</string>
+    <string name="copyright">© Cricketish 2020</string>
+    <string name="date_amp_time"><![CDATA[Date & Time]]></string>
+    <string name="paste_btn">Paste</string>
 </resources>

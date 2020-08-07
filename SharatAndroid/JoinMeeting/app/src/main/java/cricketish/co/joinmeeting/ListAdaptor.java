@@ -1,15 +1,13 @@
 package cricketish.co.joinmeeting;
 
-import android.app.Dialog;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,32 +16,33 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class ListAdaptor extends RecyclerView.Adapter<ListAdaptor.ViewHolder> {
 
     private ArrayList<List> events;
-    String strMeet;
-    Dialog infoDialog;
-    Button btnJoin, btnCancel;
-    ImageView ivMeet2;
-    boolean join = false;
-    TextView tvLink2, tvDate2, tvMeet2, tvTitle2;
+    String strMeet, hour, minute, year, date, month, amORpm, link;
+    AlertDialog.Builder dialog;
+    int codeIv;
 
 
     public ListAdaptor(Context context, ArrayList<List> list) {
         events = list;
-        infoDialog = new Dialog(context);
+        //infoDialog = new Dialog(context);
+        dialog = new AlertDialog.Builder(context);
+        MainActivity amORpm1 = new MainActivity();
+        amORpm1.getAmORpm(amORpm);
+
     }
 
 
     // Class for the View Holder
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView ivMeet;
-        TextView tvName, tvLink, tvDate, tvMonth, tvMeet;
+        TextView tvName, tvLink, tvDate, tvMonth;
 
         public ViewHolder(@NonNull final View itemView) {
             super(itemView);
+
 
             tvName = itemView.findViewById(R.id.tvName);
             tvLink = itemView.findViewById(R.id.tvLink);
@@ -54,8 +53,8 @@ public class ListAdaptor extends RecyclerView.Adapter<ListAdaptor.ViewHolder> {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ShowPopupInfo(itemView, v, tvLink, tvDate, tvMeet, tvName, ivMeet);
-                    join = true;
+                    openDialog(itemView, v);
+
                 }
             });
 
@@ -75,31 +74,40 @@ public class ListAdaptor extends RecyclerView.Adapter<ListAdaptor.ViewHolder> {
     //  Here we declare the values (eg ivMeet, tvName, etc)
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int i) {
-        String link = events.get(i).getLink();
+        link = events.get(i).getLink();
         holder.itemView.setTag(events.get(i));
         holder.tvName.setText(events.get(i).getName());
         holder.tvLink.setText(events.get(i).getLink());
         holder.tvDate.setText(events.get(i).getDate());
         holder.tvMonth.setText(events.get(i).getMonth());
+        month = events.get(i).getMonth();
+        date = events.get(i).getDate();
+        hour = events.get(i).getHour();
+        minute = events.get(i).getMinutes();
+        year = events.get(i).getYear();
 
 
         if (events.get(i).getMeet().equalsIgnoreCase("zoom")) {
             holder.ivMeet.setImageResource(R.mipmap.zoom);
             strMeet = "Zoom";
+            codeIv = 1;
         } else if (events.get(i).getMeet().equalsIgnoreCase("webex")) {
             holder.ivMeet.setImageResource(R.mipmap.webex);
             strMeet = "WebEx";
+            codeIv = 2;
         } else if (events.get(i).getMeet().equalsIgnoreCase("google")) {
             holder.ivMeet.setImageResource(R.mipmap.google);
             strMeet = "Google Meet";
+            codeIv = 3;
         } else if (events.get(i).getMeet().equalsIgnoreCase("jiomeet")) {
             holder.ivMeet.setImageResource(R.mipmap.jio);
             strMeet = "Jio Meet";
+            codeIv = 4;
         } else if (events.get(i).getMeet().equalsIgnoreCase("other")) {
             holder.ivMeet.setImageResource(R.mipmap.other);
             strMeet = "Custom";
+            codeIv = 5;
         }
-
     }
 
 
@@ -109,61 +117,45 @@ public class ListAdaptor extends RecyclerView.Adapter<ListAdaptor.ViewHolder> {
         return events.size();
     }
 
+    //For dialog to popup on an meeting clicked
+    public void openDialog(final View itemView, final View v) {
 
-    public void ShowPopupInfo(final View ItemView, final View v, TextView tvLink, TextView tvDate,
-                              TextView tvMeet, TextView tvTitle, ImageView ivMeet) {
-        
-        LayoutInflater inflatr = (LayoutInflater) this.getSystemService(v.getContext().LAYOUT_INFLATER_SERVICE);
-
-        infoDialog.setContentView(R.layout.popup_diaglog);
-        btnJoin = infoDialog.findViewById(R.id.btnJoin);
-        btnCancel = infoDialog.findViewById(R.id.btnCancel);
-        tvTitle2 = infoDialog.findViewById(R.id.tvTitle2);
-        tvLink2 = infoDialog.findViewById(R.id.tvLink2);
-        tvDate2 = infoDialog.findViewById(R.id.tvDate2);
-        ivMeet2 = infoDialog.findViewById(R.id.ivMeet2);
-        tvMeet2 = infoDialog.findViewById(R.id.tvMeet2);
-
-        tvMeet2.setText(strMeet);
-        tvTitle2.setText(tvTitle.getText());
-        tvDate2.setText(tvDate.getText());
-        tvLink2.setText(tvLink.getText());
-
-        if (strMeet.equalsIgnoreCase("Zoom")) {
-            ivMeet2.setImageResource(R.mipmap.zoom);
-        } else if (strMeet.equalsIgnoreCase("WebEx")) {
-            ivMeet2.setImageResource(R.mipmap.webex);
-        } else if (strMeet.equalsIgnoreCase("Google Meet")) {
-            ivMeet2.setImageResource(R.mipmap.google);
-        } else if (tvMeet.getText().equals("Jio Meet")) {
-            ivMeet2.setImageResource(R.mipmap.jio);
-        } else {
-            ivMeet2.setImageResource(R.mipmap.other);
+        if (minute.length() == 1) {
+            minute = "0" + minute;
         }
+        final String time = date + "th " + month + " at " +
+                hour + ":" + minute;
+        dialog.setTitle("Join a Meeting?")
+                .setMessage("Do you want to join a meeting scheduled to " + time +
+                        " now?")
+                .setPositiveButton("Join", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+                                Uri.parse(link));
+                        itemView.getContext().startActivity(intent);
+                        Toast.makeText(v.getContext(), "Worked", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
 
-        btnJoin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (join) {
-                    String link = String.valueOf(tvLink2.getText());
-                    Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
-                            Uri.parse(link));
-                    ItemView.getContext().startActivity(intent);
-                    Toast.makeText(v.getContext(), "Worked", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-        btnCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ListAdaptor.this.infoDialog.dismiss();
-            }
-        });
-        Objects.requireNonNull(this.infoDialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        this.infoDialog.show();
+                    }
+                });
 
-
+        if (codeIv == 1) {
+            dialog.setIcon(R.mipmap.zoom);
+        } else if (codeIv == 2) {
+            dialog.setIcon(R.mipmap.webex);
+        } else if (codeIv == 3) {
+            dialog.setIcon(R.mipmap.google);
+        } else if (codeIv == 4) {
+            dialog.setIcon(R.mipmap.jio);
+        } else if (codeIv == 5) {
+            dialog.setIcon(R.mipmap.other);
+        }
+        dialog.show();
     }
-
 }
 
