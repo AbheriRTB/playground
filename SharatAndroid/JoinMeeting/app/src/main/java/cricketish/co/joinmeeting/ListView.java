@@ -126,7 +126,8 @@ public class ListView extends AppCompatActivity {
                 while ((lineFromFile = reader.readLine()) != null) {
                     StringTokenizer tokens = new StringTokenizer(lineFromFile, ",");
 
-                    String lname = "noname", llink = "nolink", lmeet = "nomeet", lMonth = "JAN", lDate = "1", lyear = "2020", lhour = "1", lminute = "1";
+                    String lname = "noname", llink = "nolink", lmeet = "nomeet", lMonth = "JAN", lDate = "1", lyear = "2020", lminute = "1";
+                    int lhour = 1;
                     if (tokens.hasMoreElements())
                         lname = tokens.nextToken();
                     if (tokens.hasMoreElements())
@@ -138,9 +139,9 @@ public class ListView extends AppCompatActivity {
                     if (tokens.hasMoreElements())
                         lMonth = tokens.nextToken();
                     if (tokens.hasMoreElements())
-                        lhour = tokens.nextToken();
+                        lhour = Integer.parseInt(tokens.nextToken());
                     if (tokens.hasMoreElements())
-                        lhour = tokens.nextToken();
+                        lyear = tokens.nextToken();
                     if (tokens.hasMoreElements())
                         lminute = tokens.nextToken();
 

@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements PopupDialog.Popup
             public void onClick(View view) {
                 ClipData clipData = clipboardManager.getPrimaryClip();
                 ClipData.Item item = clipData.getItemAt(0);
-                if (item.getText() == null) {
+                if ((item.getText() == null) && (item.getText().length() > 0)) {
                     etLink.setText(item.getText());
                     etLink.setTextColor(ContextCompat.getColor(MainActivity.this, R.color.color3rd));
                     Toast.makeText(MainActivity.this, "Pasted", Toast.LENGTH_LONG).show();
@@ -169,46 +169,7 @@ public class MainActivity extends AppCompatActivity implements PopupDialog.Popup
                                 strMonth = "Dec";
                                 break;
                         }
-                        switch (hour) {
-                            case 13:
-                                hour = 1;
-                                timeOfDay = "PM";
-                            case 14:
-                                hour = 2;
-                                timeOfDay = "PM";
-                            case 15:
-                                hour = 3;
-                                timeOfDay = "PM";
-                            case 16:
-                                hour = 4;
-                                timeOfDay = "PM";
-                            case 17:
-                                hour = 5;
-                                timeOfDay = "PM";
-                            case 18:
-                                hour = 6;
-                                timeOfDay = "PM";
-                            case 19:
-                                hour = 7;
-                                timeOfDay = "PM";
-                            case 20:
-                                hour = 8;
-                                timeOfDay = "PM";
-                            case 21:
-                                hour = 9;
-                                timeOfDay = "PM";
-                            case 22:
-                                hour = 10;
-                                timeOfDay = "PM";
-                            case 23:
-                                hour = 11;
-                                timeOfDay = "PM";
-                            case 24:
-                                hour = 11;
-                                timeOfDay = "PM";
-                            default:
-                                timeOfDay = "AM";
-                        }
+
                         String date = dateThis + "th " + strMonth + " " + year + " ";
                         dateAndTime = date;
                         strMonth2 = strMonth;

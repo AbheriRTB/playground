@@ -20,7 +20,15 @@ import java.util.ArrayList;
 public class ListAdaptor extends RecyclerView.Adapter<ListAdaptor.ViewHolder> {
 
     private ArrayList<List> events;
-    String strMeet, hour, minute, year, date, month, amORpm, link;
+    String strMeet;
+    int hour;
+    String minute;
+    String year;
+    String date;
+    String month;
+    String amORpm;
+    String link;
+    String timeOfDay;
     AlertDialog.Builder dialog;
     int codeIv;
 
@@ -120,11 +128,52 @@ public class ListAdaptor extends RecyclerView.Adapter<ListAdaptor.ViewHolder> {
     //For dialog to popup on an meeting clicked
     public void openDialog(final View itemView, final View v) {
 
+        switch (hour) {
+            case 13:
+                hour = 1;
+                timeOfDay = "PM";
+            case 14:
+                hour = 2;
+                timeOfDay = "PM";
+            case 15:
+                hour = 3;
+                timeOfDay = "PM";
+            case 16:
+                hour = 4;
+                timeOfDay = "PM";
+            case 17:
+                hour = 5;
+                timeOfDay = "PM";
+            case 18:
+                hour = 6;
+                timeOfDay = "PM";
+            case 19:
+                hour = 7;
+                timeOfDay = "PM";
+            case 20:
+                hour = 8;
+                timeOfDay = "PM";
+            case 21:
+                hour = 9;
+                timeOfDay = "PM";
+            case 22:
+                hour = 10;
+                timeOfDay = "PM";
+            case 23:
+                hour = 11;
+                timeOfDay = "PM";
+            case 24:
+
+                hour = 11;
+                timeOfDay = "PM";
+            default:
+                timeOfDay = "AM";
+        }
         if (minute.length() == 1) {
             minute = "0" + minute;
         }
         final String time = date + "th " + month + " at " +
-                hour + ":" + minute;
+                hour + ":" + minute + timeOfDay;
         dialog.setTitle("Join a Meeting?")
                 .setMessage("Do you want to join a meeting scheduled to " + time +
                         " now?")
