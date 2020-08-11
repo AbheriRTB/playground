@@ -76,7 +76,6 @@ public class ListView extends AppCompatActivity {
     //  (Till Here)
 
 
-
     //  Finally the app starts here
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,7 +89,12 @@ public class ListView extends AppCompatActivity {
         String year = getIntent().getStringExtra("year");
         String hour = getIntent().getStringExtra("hour");
         String minutes = getIntent().getStringExtra("minutes");
-        openBetaDialog();
+
+        SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
+        boolean firstTime = prefs.getBoolean("firstTime", true);
+
+        if (firstTime)
+            openBetaDialog();
 
         layout = findViewById(R.id.layot);
         layout.setVisibility(View.INVISIBLE);
@@ -191,12 +195,12 @@ public class ListView extends AppCompatActivity {
                                     myAdaptor.notifyItemRemoved(position);
                                     Snackbar.make(recyclerView, deletedMovie.toString(), Snackbar.LENGTH_LONG)
                                             .setAction("UNDO", new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View view) {
-                                            lists.add(position, deletedMovie);
-                                            myAdaptor.notifyItemInserted(position);
-                                        }
-                                    }).setText("Deleted a Meet").show();
+                                                @Override
+                                                public void onClick(View view) {
+                                                    lists.add(position, deletedMovie);
+                                                    myAdaptor.notifyItemInserted(position);
+                                                }
+                                            }).setText("Deleted a Meet").show();
                                 }
                             })
 
@@ -266,7 +270,16 @@ public class ListView extends AppCompatActivity {
 
                     }
                 })
-                .show();
+                .setNeutralButton("Never Show Again", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = prefs.edit();
+                        editor.putBoolean("firstTime", false);
+                        editor.apply();
+                    }
+                })
+                .create().show();
 
     }
 

@@ -6,6 +6,7 @@ import android.app.TimePickerDialog;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -87,6 +88,8 @@ public class MainActivity extends AppCompatActivity implements PopupDialog.Popup
         clipboardManager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
         btnTime.setText(null);
 
+        SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
+        boolean firstTime = prefs.getBoolean("firstStart", true);
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Add");

@@ -11,7 +11,6 @@
         android:id="@+id/margin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
         android:orientation="horizontal"
         android:padding="5dp">
 
@@ -47,8 +46,7 @@
             android:layout_weight="1"
             android:ems="10"
             android:hint="Enter the Name"
-            android:inputType="textPersonName"
-            android:text="Name" />
+            android:inputType="textPersonName" />
 
         <EditText
             android:id="@+id/etWeight2"
@@ -73,8 +71,7 @@
             android:layout_weight="1"
             android:ems="10"
             android:hint="Enter the Name"
-            android:inputType="textPersonName"
-            android:text="Name" />
+            android:inputType="textPersonName" />
 
         <EditText
             android:id="@+id/etWeight3"
@@ -99,8 +96,7 @@
             android:layout_weight="1"
             android:ems="10"
             android:hint="Enter the Name"
-            android:inputType="textPersonName"
-            android:text="Name" />
+            android:inputType="textPersonName" />
 
         <EditText
             android:id="@+id/etWeight4"
@@ -125,8 +121,7 @@
             android:layout_weight="1"
             android:ems="10"
             android:hint="Enter the Name"
-            android:inputType="textPersonName"
-            android:text="Name" />
+            android:inputType="textPersonName" />
 
         <EditText
             android:id="@+id/etWeight5"
@@ -151,8 +146,7 @@
             android:layout_weight="1"
             android:ems="10"
             android:hint="Enter the Name"
-            android:inputType="textPersonName"
-            android:text="Name" />
+            android:inputType="textPersonName" />
 
         <EditText
             android:id="@+id/etWeight6"
