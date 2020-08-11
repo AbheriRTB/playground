@@ -29,7 +29,7 @@ public class AboutActivity extends AppCompatActivity {
 
         ivMail = findViewById(R.id.ivMail);
         ivPlay = findViewById(R.id.ivPlay);
-        to = "www.sharatchandrats@gmail.com";
+        to = "sharatchandrats@gmail.com";
         subject = "Feedback on Join app";
         message = "This is a feedback on my experience on Join v1.02.2.2 Beta";
 
