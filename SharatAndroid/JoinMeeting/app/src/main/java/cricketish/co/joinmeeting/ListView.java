@@ -18,6 +18,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -42,6 +43,7 @@ public class ListView extends AppCompatActivity {
     ItemTouchHelper itemTouchHelper;
     ArrayList<List> lists;
     ConstraintLayout layout;
+    TextView tvMeeting;
     AlertDialog.Builder dialog;
 
     //For the function when  Undo clicked
@@ -92,12 +94,15 @@ public class ListView extends AppCompatActivity {
 
         SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
         boolean firstTime = prefs.getBoolean("firstTime", true);
+        RecyclerView rv = findViewById(R.id.list);
 
         if (firstTime)
             openBetaDialog();
 
         layout = findViewById(R.id.layot);
         layout.setVisibility(View.INVISIBLE);
+        tvMeeting = findViewById(R.id.tvMeeting);
+        tvMeeting.setVisibility(View.VISIBLE);
 
         recyclerView = findViewById(R.id.list);
         recyclerView.setHasFixedSize(true);
@@ -106,13 +111,14 @@ public class ListView extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         lists = new ArrayList<List>();
         lists = loadData();
-        myAdaptor = new ListAdaptor(this, lists);
+        myAdaptor = new ListAdaptor(this, lists, rv);
         recyclerView.setAdapter(myAdaptor);
         itemTouchHelper = new ItemTouchHelper(simpleCallback);
         itemTouchHelper.attachToRecyclerView(recyclerView);
 
         if (lists.size() == 0) {
             layout.setVisibility(View.VISIBLE);
+            tvMeeting.setVisibility(View.GONE);
         }
     }
 
@@ -126,12 +132,13 @@ public class ListView extends AppCompatActivity {
 
         if (file.exists()) {
             try {
+                lineFromFile = "";
                 BufferedReader reader = new BufferedReader(new InputStreamReader(openFileInput("cricketish.data.txt")));
                 while ((lineFromFile = reader.readLine()) != null) {
                     StringTokenizer tokens = new StringTokenizer(lineFromFile, ",");
 
-                    String lname = "noname", llink = "nolink", lmeet = "nomeet", lMonth = "JAN", lDate = "1", lyear = "2020", lminute = "1";
-                    int lhour = 1;
+                    String lname = "noname", llink = "nolink", lmeet = "nomeet", lDate = "1", lyear = "2020", lminute = "1";
+                    int lhour = 1, lMonth = 1;
                     if (tokens.hasMoreElements())
                         lname = tokens.nextToken();
                     if (tokens.hasMoreElements())
@@ -141,7 +148,7 @@ public class ListView extends AppCompatActivity {
                     if (tokens.hasMoreElements())
                         lDate = tokens.nextToken();
                     if (tokens.hasMoreElements())
-                        lMonth = tokens.nextToken();
+                        lMonth = Integer.parseInt(tokens.nextToken());
                     if (tokens.hasMoreElements())
                         lhour = Integer.parseInt(tokens.nextToken());
                     if (tokens.hasMoreElements())

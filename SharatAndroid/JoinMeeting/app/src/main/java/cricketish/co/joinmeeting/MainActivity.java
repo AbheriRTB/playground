@@ -36,7 +36,13 @@ public class MainActivity extends AppCompatActivity implements PopupDialog.Popup
     ImageView btnZoom, btnWebex, btnGMeet, btnJioMeet, btnPaste;
     Button btnOther, btnTime;
     EditText etName = null, etLink = null;
-    String meet, name, link, dateAndTime, strMonth, strMonth2, timeOfDay;
+    String meet;
+    String name;
+    String link;
+    String dateAndTime;
+    String strMonth;
+    int monthTwo;
+    String timeOfDay;
     PopupDialog dialog;
     ClipboardManager clipboardManager;
 
@@ -101,13 +107,9 @@ public class MainActivity extends AppCompatActivity implements PopupDialog.Popup
             public void onClick(View view) {
                 ClipData clipData = clipboardManager.getPrimaryClip();
                 ClipData.Item item = clipData.getItemAt(0);
-                if ((item.getText() == null) && (item.getText().length() > 0)) {
-                    etLink.setText(item.getText());
-                    etLink.setTextColor(ContextCompat.getColor(MainActivity.this, R.color.color3rd));
-                    Toast.makeText(MainActivity.this, "Pasted", Toast.LENGTH_LONG).show();
-                } else {
-                    Toast.makeText(MainActivity.this, "No link to paste", Toast.LENGTH_SHORT).show();
-                }
+                etLink.setText(item.getText());
+                etLink.setTextColor(ContextCompat.getColor(MainActivity.this, R.color.color3rd));
+                Toast.makeText(MainActivity.this, "Pasted", Toast.LENGTH_LONG).show();
             }
 
         });
@@ -119,72 +121,41 @@ public class MainActivity extends AppCompatActivity implements PopupDialog.Popup
                 int YEAR = calendar.get(Calendar.YEAR);
                 int MONTH = calendar.get(Calendar.MONTH);
                 int DATE = calendar.get(Calendar.DATE);
+                int HOUR = calendar.get(Calendar.HOUR_OF_DAY);
+                int MINUTE = calendar.get(Calendar.MINUTE);
 
                 TimePickerDialog timePickerDialog = new TimePickerDialog(MainActivity.this, new TimePickerDialog.OnTimeSetListener() {
                     @SuppressLint("SetTextI18n")
                     @Override
                     public void onTimeSet(TimePicker timePicker, int hourThis, int minutesThis) {
+
                         hour = hourThis;
                         minutes = minutesThis;
 
                     }
-                }, 12, 0, false);
+                }, HOUR, MINUTE, false);
                 timePickerDialog.updateTime(hour, minutes);
 
                 DatePickerDialog datePickerDialog = new DatePickerDialog(MainActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int year, int month, int dateThis) {
-                        switch (month) {
-                            case 0:
-                                strMonth = "Jan";
-                                break;
-                            case 1:
-                                strMonth = "Feb";
-                                break;
-                            case 2:
-                                strMonth = "Mar";
-                                break;
-                            case 3:
-                                strMonth = "Apr";
-                                break;
-                            case 4:
-                                strMonth = "May";
-                                break;
-                            case 5:
-                                strMonth = "Jun";
-                                break;
-                            case 6:
-                                strMonth = "Jul";
-                                break;
-                            case 7:
-                                strMonth = "Aug";
-                                break;
-                            case 8:
-                                strMonth = "Sep";
-                                break;
-                            case 9:
-                                strMonth = "Oct";
-                                break;
-                            case 10:
-                                strMonth = "Nov";
-                                break;
-                            case 11:
-                                strMonth = "Dec";
-                                break;
-                        }
 
+                        setMonth(month);
                         String date = dateThis + "th " + strMonth + " " + year + " ";
                         dateAndTime = date;
-                        strMonth2 = strMonth;
+                        monthTwo = month;
                         day = dateThis;
-                        String total = dateAndTime + hour + ":" + minutes;
+                        String strMinutes = "00";
+                        if (minutes == 1) {
+                            strMinutes = "0" + minutes;
+                        }
+                        String total = dateAndTime + hour + ":" + strMinutes;
                         btnTime.setText(total);
 
                     }
                 }, YEAR, MONTH, DATE);
                 datePickerDialog.show();
                 timePickerDialog.show();
-
 
             }
         });
@@ -203,13 +174,13 @@ public class MainActivity extends AppCompatActivity implements PopupDialog.Popup
                 }
                 if (allDataGiven) {
                     if (link.contains("zoom")) {
-                        saveData(name, link, meet, day, strMonth2, year, hour, minutes);
+                        saveData(name, link, meet, day, monthTwo, year, hour, minutes);
                         Intent intent = new Intent(getApplicationContext(), cricketish.co.joinmeeting.ListView.class);
                         intent.putExtra("meet", meet);
                         intent.putExtra("name", name);
                         intent.putExtra("link", link);
                         intent.putExtra("date", day);
-                        intent.putExtra("month", strMonth2);
+                        intent.putExtra("month", monthTwo);
                         intent.putExtra("year", year);
                         intent.putExtra("hour", hour);
                         intent.putExtra("minutes", minutes);
@@ -242,13 +213,13 @@ public class MainActivity extends AppCompatActivity implements PopupDialog.Popup
                 }
                 if (allDataGiven) {
                     if (link.contains("webex")) {
-                        saveData(name, link, meet, day, strMonth2, year, hour, minutes);
+                        saveData(name, link, meet, day, monthTwo, year, hour, minutes);
                         Intent intent = new Intent(getApplicationContext(), cricketish.co.joinmeeting.ListView.class);
                         intent.putExtra("meet", meet);
                         intent.putExtra("name", name);
                         intent.putExtra("link", link);
                         intent.putExtra("date", day);
-                        intent.putExtra("month", strMonth2);
+                        intent.putExtra("month", monthTwo);
                         intent.putExtra("year", year);
                         intent.putExtra("hour", hour);
                         intent.putExtra("minutes", minutes);
@@ -282,13 +253,13 @@ public class MainActivity extends AppCompatActivity implements PopupDialog.Popup
                 }
                 if (allDataGiven) {
                     if (link.contains("meeting.google")) {
-                        saveData(name, link, meet, day, strMonth2, year, hour, minutes);
+                        saveData(name, link, meet, day, monthTwo, year, hour, minutes);
                         Intent intent = new Intent(getApplicationContext(), cricketish.co.joinmeeting.ListView.class);
                         intent.putExtra("meet", meet);
                         intent.putExtra("name", name);
                         intent.putExtra("link", link);
                         intent.putExtra("date", day);
-                        intent.putExtra("month", strMonth2);
+                        intent.putExtra("month", monthTwo);
                         intent.putExtra("year", year);
                         intent.putExtra("hour", hour);
                         intent.putExtra("minutes", minutes);
@@ -322,13 +293,13 @@ public class MainActivity extends AppCompatActivity implements PopupDialog.Popup
                 }
                 if (allDataGiven) {
                     if (link.contains("jio")) {
-                        saveData(name, link, meet, day, strMonth2, year, hour, minutes);
+                        saveData(name, link, meet, day, monthTwo, year, hour, minutes);
                         Intent intent = new Intent(getApplicationContext(), cricketish.co.joinmeeting.ListView.class);
                         intent.putExtra("meet", meet);
                         intent.putExtra("name", name);
                         intent.putExtra("link", link);
                         intent.putExtra("date", day);
-                        intent.putExtra("month", strMonth2);
+                        intent.putExtra("month", monthTwo);
                         intent.putExtra("year", year);
                         intent.putExtra("hour", hour);
                         intent.putExtra("minutes", minutes);
@@ -361,13 +332,13 @@ public class MainActivity extends AppCompatActivity implements PopupDialog.Popup
                     allDataGiven = true;
                 }
                 if (allDataGiven) {
-                    saveData(name, link, meet, day, strMonth2, year, hour, minutes);
+                    saveData(name, link, meet, day, monthTwo, year, hour, minutes);
                     Intent intent = new Intent(getApplicationContext(), cricketish.co.joinmeeting.ListView.class);
                     intent.putExtra("meet", meet);
                     intent.putExtra("name", name);
                     intent.putExtra("link", link);
                     intent.putExtra("date", day);
-                    intent.putExtra("month", strMonth2);
+                    intent.putExtra("month", monthTwo);
                     intent.putExtra("year", year);
                     intent.putExtra("hour", hour);
                     intent.putExtra("minutes", minutes);
@@ -399,13 +370,13 @@ public class MainActivity extends AppCompatActivity implements PopupDialog.Popup
     }
 
     //  This is the method to save the data in the .txt file
-    void saveData(String name, String link, String meet, int day, String strMonth2, int year, int hour, int minutes) {
+    void saveData(String name, String link, String meet, int day, int month, int year, int hour, int minutes) {
 
         try {
             FileOutputStream file = openFileOutput("cricketish.data.txt", MODE_PRIVATE | MODE_APPEND);
             OutputStreamWriter outputFile = new OutputStreamWriter(file);
 
-            outputFile.write(name + "," + link + "," + meet + "," + day + "," + strMonth2 + "," + year + "," + hour + "," + minutes + "\n");
+            outputFile.write(name + "," + link + "," + meet + "," + day + "," + month + "," + year + "," + hour + "," + minutes + "\n");
             outputFile.close();
             Toast.makeText(MainActivity.this, "Successfully Saved", Toast.LENGTH_SHORT).show();
         } catch (IOException e) {
@@ -429,24 +400,58 @@ public class MainActivity extends AppCompatActivity implements PopupDialog.Popup
     public void onIgnoreClicked() {
         name = getName();
         link = getLink();
-        saveData(name, link, meet, day, strMonth2, year, hour, minutes);
+        saveData(name, link, meet, day, monthTwo, year, hour, minutes);
         Intent intentTwo = new Intent(getApplicationContext(), cricketish.co.joinmeeting.ListView.class);
         intentTwo.putExtra("meet", meet);
         intentTwo.putExtra("name", name);
         intentTwo.putExtra("link", link);
         intentTwo.putExtra("date", day);
-        intentTwo.putExtra("month", strMonth2);
+        intentTwo.putExtra("month", monthTwo);
         intentTwo.putExtra("year", year);
         intentTwo.putExtra("hour", hour);
         intentTwo.putExtra("minutes", minutes);
         startActivity(intentTwo);
     }
 
-
-    public String getAmORpm(String amOrpm) {
-        amOrpm = timeOfDay;
-        return amOrpm;
-
+    public void setMonth(int month) {
+        switch (month) {
+            case 0:
+                strMonth = "Jan";
+                break;
+            case 1:
+                strMonth = "Feb";
+                break;
+            case 2:
+                strMonth = "Mar";
+                break;
+            case 3:
+                strMonth = "Apr";
+                break;
+            case 4:
+                strMonth = "May";
+                break;
+            case 5:
+                strMonth = "Jun";
+                break;
+            case 6:
+                strMonth = "Jul";
+                break;
+            case 7:
+                strMonth = "Aug";
+                break;
+            case 8:
+                strMonth = "Sep";
+                break;
+            case 9:
+                strMonth = "Oct";
+                break;
+            case 10:
+                strMonth = "Nov";
+                break;
+            case 11:
+                strMonth = "Dec";
+                break;
+        }
     }
 
 }
