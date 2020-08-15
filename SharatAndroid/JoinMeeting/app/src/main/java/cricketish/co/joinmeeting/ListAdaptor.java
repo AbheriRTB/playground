@@ -21,15 +21,13 @@ import java.util.ArrayList;
 public class ListAdaptor extends RecyclerView.Adapter<ListAdaptor.ViewHolder> {
 
     private ArrayList<List> events;
-    int hour, codeIv, month;
+    int hour, month;
     String minute, year, date, link, timeOfDay, strMonth, strMeet, time;
-    AlertDialog.Builder dialog, joinDialog;
+    AlertDialog.Builder joinDialog;
     RecyclerView recyclerView;
 
     public ListAdaptor(Context context, ArrayList<List> list, RecyclerView rv) {
         events = list;
-        //infoDialog = new Dialog(context);
-        dialog = new AlertDialog.Builder(context);
         joinDialog = new AlertDialog.Builder(context);
         recyclerView = rv;
 
@@ -44,7 +42,6 @@ public class ListAdaptor extends RecyclerView.Adapter<ListAdaptor.ViewHolder> {
         public ViewHolder(@NonNull final View itemView) {
             super(itemView);
 
-
             tvName = itemView.findViewById(R.id.tvName);
             tvLink = itemView.findViewById(R.id.tvLink);
             tvDate = itemView.findViewById(R.id.tvDate);
@@ -54,202 +51,59 @@ public class ListAdaptor extends RecyclerView.Adapter<ListAdaptor.ViewHolder> {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(final View v) {
-                    //openDialog(itemView, v);
-                    //joinDialog.setNegativeButton("no", new DialogInterface.OnClickListener() {
-                    //@Override
-                    //public void onClick(DialogInterface dialogInterface, int i) {
 
-                    //}
-                    //})
-                    //.setPositiveButton("Join", new DialogInterface.OnClickListener() {
-                    //@Override
-                    //public void onClick(DialogInterface dialogInterface, int i) {
                     final int i = recyclerView.getChildLayoutPosition(v);
-                    switch (events.get(i).getHour()) {
-                        case 13:
-                            hour = 1;
-                            timeOfDay = "PM";
-                            break;
-                        case 14:
-                            hour = 2;
-                            timeOfDay = "PM";
-                            break;
-                        case 15:
-                            hour = 3;
-                            timeOfDay = "PM";
-                            break;
-                        case 16:
-                            hour = 4;
-                            timeOfDay = "PM";
-                            break;
-                        case 17:
-                            hour = 5;
-                            timeOfDay = "PM";
-                            break;
-                        case 18:
-                            hour = 6;
-                            timeOfDay = "PM";
-                            break;
-                        case 19:
-                            hour = 7;
-                            timeOfDay = "PM";
-                            break;
-                        case 20:
-                            hour = 8;
-                            timeOfDay = "PM";
-                            break;
-                        case 21:
-                            hour = 9;
-                            timeOfDay = "PM";
-                            break;
-                        case 22:
-                            hour = 10;
-                            timeOfDay = "PM";
-                            break;
-                        case 23:
-                            hour = 11;
-                            timeOfDay = "PM";
-                            break;
-                        case 24:
-                            hour = 12;
-                            timeOfDay = "PM";
-                            break;
-                        case 0:
-                            hour = 12;
-                            timeOfDay = "AM";
-                            break;
-                        case 1:
-                            hour = 1;
-                            timeOfDay = "AM";
-                            break;
-                        case 2:
-                            hour = 2;
-                            timeOfDay = "AM";
-                            break;
-                        case 3:
-                            hour = 3;
-                            timeOfDay = "AM";
-                            break;
-                        case 4:
-                            hour = 4;
-                            timeOfDay = "AM";
-                            break;
-                        case 5:
-                            hour = 5;
-                            timeOfDay = "AM";
-                            break;
-                        case 6:
-                            hour = 6;
-                            timeOfDay = "AM";
-                            break;
-                        case 7:
-                            hour = 7;
-                            timeOfDay = "AM";
-                            break;
-                        case 8:
-                            hour = 8;
-                            timeOfDay = "AM";
-                            break;
-                        case 9:
-                            hour = 9;
-                            timeOfDay = "AM";
-                            break;
-                        case 10:
-                            hour = 10;
-                            timeOfDay = "AM";
-                            break;
-                        case 11:
-                            hour = 11;
-                            timeOfDay = "AM";
-                            break;
-                        case 12:
-                            hour = 12;
-                            timeOfDay = "AM";
-                            break;
-                        default:
-                            timeOfDay = "AM";
+                    final String openLink = events.get(i).getLink();
+                    getHour(i);
+                    getMonths(i);
+                    joinDialog.setTitle("Join Meeting " + events.get(i).getName());
+                    if (events.get(i).getMinutes().length() == 2) {
+                        time = events.get(i).getDate() + "th " + strMonth + " at " + hour + ":"
+                                + events.get(i).getMinutes() + timeOfDay + " now?";
+                    } else if (events.get(i).getMinutes().length() == 1) {
+                        time = events.get(i).getDate() + "th " + strMonth + " at " + hour + ":0"
+                                + events.get(i).getMinutes() + timeOfDay + " now?";
                     }
-                            switch (events.get(i).getMonth()) {
-                                case 0:
-                                    strMonth = "Jan";
-                                    break;
-                                case 1:
-                                    strMonth = "Feb";
-                                    break;
-                                case 2:
-                                    strMonth = "Mar";
-                                    break;
-                                case 3:
-                                    strMonth = "Apr";
-                                    break;
-                                case 4:
-                                    strMonth = "May";
-                                    break;
-                                case 5:
-                                    strMonth = "Jun";
-                                    break;
-                                case 6:
-                                    strMonth = "Jul";
-                                    break;
-                                case 7:
-                                    strMonth = "Aug";
-                                    break;
-                                case 8:
-                                    strMonth = "Sep";
-                                    break;
-                                case 9:
-                                    strMonth = "Oct";
-                                    break;
-                                case 10:
-                                    strMonth = "Nov";
-                                    break;
-                                case 11:
-                                    strMonth = "Dec";
-                                    break;
-                            }
+                    if (events.get(i).getMeet().equalsIgnoreCase("zoom")) {
+                        joinDialog.setIcon(R.mipmap.zoom)
+                                .setMessage("Do you want to join a Zoom Meeting scheduled " +
+                                        "on " + time);
+                    } else if (events.get(i).getMeet().equalsIgnoreCase("webex")) {
+                        joinDialog.setIcon(R.mipmap.webex)
+                                .setMessage("Do you want to join a WebEx Meeting scheduled " +
+                                        "on " + time);
+                    } else if (events.get(i).getMeet().equalsIgnoreCase("google")) {
+                        joinDialog.setIcon(R.mipmap.google)
+                                .setMessage("Do you want to join a Google Meet scheduled " +
+                                        "on " + time);
+                    } else if (events.get(i).getMeet().equalsIgnoreCase("jiomeet")) {
+                        joinDialog.setIcon(R.mipmap.jio)
+                                .setMessage("Do you want to join a Jio Meet scheduled " +
+                                        "on " + time);
+                    } else if (events.get(i).getMeet().equalsIgnoreCase("other")) {
+                        joinDialog.setIcon(R.mipmap.other)
+                                .setMessage("Do you want to join a Meeting scheduled " +
+                                        "on " + time);
+                    }
 
-                            time = events.get(i).getDate() + "th " + strMonth + " at " + events.get(i).getHour() + ":"
-                                    + minute + timeOfDay + " now?";
-                            if (events.get(i).getMeet().equalsIgnoreCase("zoom")) {
-                                joinDialog.setIcon(R.mipmap.zoom)
-                                        .setMessage("Do you want to join a Zoom Meeting scheduled " +
-                                                "on " + time);
-                            } else if (events.get(i).getMeet().equalsIgnoreCase("webex")) {
-                                joinDialog.setIcon(R.mipmap.webex)
-                                        .setMessage("Do you want to join a WebEx Meeting scheduled " +
-                                                "on " + time);
-                            } else if (events.get(i).getMeet().equalsIgnoreCase("google")) {
-                                joinDialog.setIcon(R.mipmap.google)
-                                        .setMessage("Do you want to join a Google Meet scheduled " +
-                                                "on " + time);
-                            } else if (events.get(i).getMeet().equalsIgnoreCase("jiomeet")) {
-                                joinDialog.setIcon(R.mipmap.jio)
-                                        .setMessage("Do you want to join a Jio Meet scheduled " +
-                                                "on " + time);
-                            } else if (events.get(i).getMeet().equalsIgnoreCase("other")) {
-                                joinDialog.setIcon(R.mipmap.other)
-                                        .setMessage("Do you want to join a Meeting scheduled " +
-                                                "on " + time);
-                            }
+                    joinDialog.setPositiveButton("Join", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+                                    Uri.parse(openLink));
+                            itemView.getContext().startActivity(intent);
+                            Toast.makeText(v.getContext(), "Joining", Toast.LENGTH_SHORT).show();
+                        }
+                    });
 
-                            joinDialog.setPositiveButton("Join", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
-                                            Uri.parse(events.get(i).getLink()));
-                                    itemView.getContext().startActivity(intent);
-                                    Toast.makeText(v.getContext(), "Joining", Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                            joinDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
 
-                                }
-                            }).create().show();
+                    joinDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                        }
+                    })
 
-                    //})
-                    //.create().show();
+                            .create().show();
                 }
             });
 
@@ -283,44 +137,21 @@ public class ListAdaptor extends RecyclerView.Adapter<ListAdaptor.ViewHolder> {
         minute = events.get(i).getMinutes();
         year = events.get(i).getYear();
 
-
-        joinDialog.setTitle("Join Meeting");
-
         if (events.get(i).getMeet().equalsIgnoreCase("zoom")) {
             holder.ivMeet.setImageResource(R.mipmap.zoom);
             strMeet = "Zoom";
-            codeIv = 1;
-            //joinDialog.setIcon(R.mipmap.zoom)
-            //      .setMessage("Do you want to join a Zoom Meeting scheduled " +
-            //               "on " + time);
         } else if (events.get(i).getMeet().equalsIgnoreCase("webex")) {
             holder.ivMeet.setImageResource(R.mipmap.webex);
             strMeet = "WebEx";
-            codeIv = 2;
-            /*joinDialog.setIcon(R.mipmap.webex)
-                    .setMessage("Do you want to join a WebEx Meeting scheduled " +
-                            "on " + time);*/
         } else if (events.get(i).getMeet().equalsIgnoreCase("google")) {
             holder.ivMeet.setImageResource(R.mipmap.google);
             strMeet = "Google Meet";
-            codeIv = 3;
-            /*joinDialog.setIcon(R.mipmap.google)
-                    .setMessage("Do you want to join a Google Meet scheduled " +
-                            "on " + time);*/
         } else if (events.get(i).getMeet().equalsIgnoreCase("jiomeet")) {
             holder.ivMeet.setImageResource(R.mipmap.jio);
             strMeet = "Jio Meet";
-            codeIv = 4;
-            //joinDialog.setIcon(R.mipmap.jio)
-            //      .setMessage("Do you want to join a Jio Meet scheduled " +
-            //            "on " + time);
         } else if (events.get(i).getMeet().equalsIgnoreCase("other")) {
             holder.ivMeet.setImageResource(R.mipmap.other);
             strMeet = "Custom";
-            codeIv = 5;
-            //joinDialog.setIcon(R.mipmap.other)
-            //      .setMessage("Do you want to join a Custom Meeting scheduled " +
-            //            "on " + time);
         }
     }
 
@@ -331,46 +162,153 @@ public class ListAdaptor extends RecyclerView.Adapter<ListAdaptor.ViewHolder> {
         return events.size();
     }
 
-    //For dialog to popup on an meeting clicked
-    /*public void openDialog(final View itemView, final View v) {
-
-
-        if (minute.length() == 1) {
-            minute = "0" + minute;
+    public void getMonths(int i) {
+        switch (events.get(i).getMonth()) {
+            case 0:
+                strMonth = "Jan";
+                break;
+            case 1:
+                strMonth = "Feb";
+                break;
+            case 2:
+                strMonth = "Mar";
+                break;
+            case 3:
+                strMonth = "Apr";
+                break;
+            case 4:
+                strMonth = "May";
+                break;
+            case 5:
+                strMonth = "Jun";
+                break;
+            case 6:
+                strMonth = "Jul";
+                break;
+            case 7:
+                strMonth = "Aug";
+                break;
+            case 8:
+                strMonth = "Sep";
+                break;
+            case 9:
+                strMonth = "Oct";
+                break;
+            case 10:
+                strMonth = "Nov";
+                break;
+            case 11:
+                strMonth = "Dec";
+                break;
         }
-        final String time = date + "th " + month + " at " +
-                hour + ":" + minute + timeOfDay;
-        dialog.setTitle("Join a Meeting?")
-                .setMessage("Do you want to join a meeting scheduled to " + time +
-                        " now?")
-                .setPositiveButton("Join", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
-                                Uri.parse(link));
-                        itemView.getContext().startActivity(intent);
-                        Toast.makeText(v.getContext(), "Worked", Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
+    }
 
-                    }
-                });
-
-        if (codeIv == 1) {
-            dialog.setIcon(R.mipmap.zoom);
-        } else if (codeIv == 2) {
-            dialog.setIcon(R.mipmap.webex);
-        } else if (codeIv == 3) {
-            dialog.setIcon(R.mipmap.google);
-        } else if (codeIv == 4) {
-            dialog.setIcon(R.mipmap.jio);
-        } else if (codeIv == 5) {
-            dialog.setIcon(R.mipmap.other);
+    private void getHour(int i) {
+        switch (events.get(i).getHour()) {
+            case 13:
+                hour = 1;
+                timeOfDay = "PM";
+                break;
+            case 14:
+                hour = 2;
+                timeOfDay = "PM";
+                break;
+            case 15:
+                hour = 3;
+                timeOfDay = "PM";
+                break;
+            case 16:
+                hour = 4;
+                timeOfDay = "PM";
+                break;
+            case 17:
+                hour = 5;
+                timeOfDay = "PM";
+                break;
+            case 18:
+                hour = 6;
+                timeOfDay = "PM";
+                break;
+            case 19:
+                hour = 7;
+                timeOfDay = "PM";
+                break;
+            case 20:
+                hour = 8;
+                timeOfDay = "PM";
+                break;
+            case 21:
+                hour = 9;
+                timeOfDay = "PM";
+                break;
+            case 22:
+                hour = 10;
+                timeOfDay = "PM";
+                break;
+            case 23:
+                hour = 11;
+                timeOfDay = "PM";
+                break;
+            case 24:
+                hour = 12;
+                timeOfDay = "PM";
+                break;
+            case 0:
+                hour = 12;
+                timeOfDay = "AM";
+                break;
+            case 1:
+                hour = 1;
+                timeOfDay = "AM";
+                break;
+            case 2:
+                hour = 2;
+                timeOfDay = "AM";
+                break;
+            case 3:
+                hour = 3;
+                timeOfDay = "AM";
+                break;
+            case 4:
+                hour = 4;
+                timeOfDay = "AM";
+                break;
+            case 5:
+                hour = 5;
+                timeOfDay = "AM";
+                break;
+            case 6:
+                hour = 6;
+                timeOfDay = "AM";
+                break;
+            case 7:
+                hour = 7;
+                timeOfDay = "AM";
+                break;
+            case 8:
+                hour = 8;
+                timeOfDay = "AM";
+                break;
+            case 9:
+                hour = 9;
+                timeOfDay = "AM";
+                break;
+            case 10:
+                hour = 10;
+                timeOfDay = "AM";
+                break;
+            case 11:
+                hour = 11;
+                timeOfDay = "AM";
+                break;
+            case 12:
+                hour = 12;
+                timeOfDay = "AM";
+                break;
+            default:
+                timeOfDay = "AM";
         }
-        dialog.show();
-    }*/
+    }
+
 }
 

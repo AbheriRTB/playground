@@ -50,10 +50,8 @@ public class AboutActivity extends AppCompatActivity {
                 email.putExtra(Intent.EXTRA_EMAIL, new String[]{to});
                 email.putExtra(Intent.EXTRA_SUBJECT, subject);
                 email.putExtra(Intent.EXTRA_TEXT, message);
+                startActivity(email);
 
-                email.setType("message/rfc822");
-
-                startActivity(Intent.createChooser(email, "Choose an Email client :"));
             }
         });
 

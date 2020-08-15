@@ -14,14 +14,14 @@
     <string name="other">Other</string>
     <string name="noActivityText">No meetings sheduled yet \nClick + button on the top bar</string>
     <string name="help">Help</string>
-    <string name="tvAboutDiscriptOld">This is an app developed by me with the help of my father. This app is made for fun and
-    not for making any money. If found any problems or suggestions please email to sharatchandrats@gmail.com\nThankyou!</string>
+    <!--<string name="tvAboutDiscriptOld">This is an app developed by me with the help of my father. This app is made for fun and
+    not for making any money. If found any problems or suggestions please email to sharatchandrats@gmail.com\nThankyou!</string>-->
     <string name="tvAboutDiscript">This is my maiden app developed with the help of my father. This app is made for fun and
     with an intention that this will be an useful tool. Please report any problems or suggestions to sharatchandrats@gmail.com\n\n\nThankyou!</string>
     <string name="play">Play</string>
     <string name="mail">Mail</string>
     <string name="about">About</string>
-    <string name="version">v1.02.2 Beta</string>
+    <string name="version">v1.02.3 Beta</string>
     <string name="join">Join</string>
     <string name="cancel">Cancel</string>
     <string name="meet">Meet</string>

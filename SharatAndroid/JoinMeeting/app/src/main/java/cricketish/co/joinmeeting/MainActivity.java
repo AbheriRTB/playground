@@ -1,10 +1,12 @@
 package cricketish.co.joinmeeting;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.ClipData;
 import android.content.ClipboardManager;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -28,22 +30,13 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.Calendar;
 
-public class MainActivity extends AppCompatActivity implements PopupDialog.PopupListner {
+public class MainActivity extends AppCompatActivity {
 
-
-    boolean allDataGiven = false;
-    int year, day, hour, minutes;
+    int year, day, hour, minutes, monthTwo;
+    String meet, meetLink, name, link, dateAndTime, strMonth, timeOfDay;
     ImageView btnZoom, btnWebex, btnGMeet, btnJioMeet, btnPaste;
     Button btnOther, btnTime;
     EditText etName = null, etLink = null;
-    String meet;
-    String name;
-    String link;
-    String dateAndTime;
-    String strMonth;
-    int monthTwo;
-    String timeOfDay;
-    PopupDialog dialog;
     ClipboardManager clipboardManager;
 
 
@@ -90,7 +83,6 @@ public class MainActivity extends AppCompatActivity implements PopupDialog.Popup
         btnTime = findViewById(R.id.btnTime);
         etName = findViewById(R.id.etName);
         etLink = findViewById(R.id.etLink);
-        dialog = new PopupDialog();
         clipboardManager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
         btnTime.setText(null);
 
@@ -105,11 +97,7 @@ public class MainActivity extends AppCompatActivity implements PopupDialog.Popup
         btnPaste.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ClipData clipData = clipboardManager.getPrimaryClip();
-                ClipData.Item item = clipData.getItemAt(0);
-                etLink.setText(item.getText());
-                etLink.setTextColor(ContextCompat.getColor(MainActivity.this, R.color.color3rd));
-                Toast.makeText(MainActivity.this, "Pasted", Toast.LENGTH_LONG).show();
+                clipData();
             }
 
         });
@@ -117,46 +105,7 @@ public class MainActivity extends AppCompatActivity implements PopupDialog.Popup
         btnTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final Calendar calendar = Calendar.getInstance();
-                int YEAR = calendar.get(Calendar.YEAR);
-                int MONTH = calendar.get(Calendar.MONTH);
-                int DATE = calendar.get(Calendar.DATE);
-                int HOUR = calendar.get(Calendar.HOUR_OF_DAY);
-                int MINUTE = calendar.get(Calendar.MINUTE);
-
-                TimePickerDialog timePickerDialog = new TimePickerDialog(MainActivity.this, new TimePickerDialog.OnTimeSetListener() {
-                    @SuppressLint("SetTextI18n")
-                    @Override
-                    public void onTimeSet(TimePicker timePicker, int hourThis, int minutesThis) {
-
-                        hour = hourThis;
-                        minutes = minutesThis;
-
-                    }
-                }, HOUR, MINUTE, false);
-                timePickerDialog.updateTime(hour, minutes);
-
-                DatePickerDialog datePickerDialog = new DatePickerDialog(MainActivity.this, new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker datePicker, int year, int month, int dateThis) {
-
-                        setMonth(month);
-                        String date = dateThis + "th " + strMonth + " " + year + " ";
-                        dateAndTime = date;
-                        monthTwo = month;
-                        day = dateThis;
-                        String strMinutes = "00";
-                        if (minutes == 1) {
-                            strMinutes = "0" + minutes;
-                        }
-                        String total = dateAndTime + hour + ":" + strMinutes;
-                        btnTime.setText(total);
-
-                    }
-                }, YEAR, MONTH, DATE);
-                datePickerDialog.show();
-                timePickerDialog.show();
-
+                setDateAndTime();
             }
         });
 
@@ -164,193 +113,61 @@ public class MainActivity extends AppCompatActivity implements PopupDialog.Popup
             @Override
             public void onClick(View view) {
                 meet = "zoom";
-                name = getName();
-                link = getLink();
-                allDataGiven = false;
-                if ((etName.getText() != null && etName.getText().toString().length() > 0) &&
-                        (etLink.getText() != null && etLink.getText().toString().length() > 0) &&
-                        (btnTime.getText() != null && btnTime.getText().toString().length() > 0)) {
-                    allDataGiven = true;
-                }
-                if (allDataGiven) {
-                    if (link.contains("zoom")) {
-                        saveData(name, link, meet, day, monthTwo, year, hour, minutes);
-                        Intent intent = new Intent(getApplicationContext(), cricketish.co.joinmeeting.ListView.class);
-                        intent.putExtra("meet", meet);
-                        intent.putExtra("name", name);
-                        intent.putExtra("link", link);
-                        intent.putExtra("date", day);
-                        intent.putExtra("month", monthTwo);
-                        intent.putExtra("year", year);
-                        intent.putExtra("hour", hour);
-                        intent.putExtra("minutes", minutes);
-                        Intent intentToPopup = new Intent(getApplicationContext(), cricketish.co.joinmeeting.PopupDialog.class);
-                        intentToPopup.putExtra("meet", meet);
-                        startActivity(intentToPopup);
-                        startActivity(intent);
-                        overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
-
-                    } else {
-                        openDialog();
-                    }
-                } else {
-                    Toast.makeText(MainActivity.this, "Please enter all fields", Toast.LENGTH_SHORT).show();
-                }
-
+                meetLink = "zoom";
+                btnPackage(meet, meetLink);
             }
         });
+
+
         btnWebex.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 meet = "webex";
-                name = getName();
-                link = getLink();
-                allDataGiven = false;
-                if ((etName.getText() != null && etName.getText().toString().length() > 0) &&
-                        (etLink.getText() != null && etLink.getText().toString().length() > 0) &&
-                        (btnTime.getText() != null && btnTime.getText().toString().length() > 0)) {
-                    allDataGiven = true;
-                }
-                if (allDataGiven) {
-                    if (link.contains("webex")) {
-                        saveData(name, link, meet, day, monthTwo, year, hour, minutes);
-                        Intent intent = new Intent(getApplicationContext(), cricketish.co.joinmeeting.ListView.class);
-                        intent.putExtra("meet", meet);
-                        intent.putExtra("name", name);
-                        intent.putExtra("link", link);
-                        intent.putExtra("date", day);
-                        intent.putExtra("month", monthTwo);
-                        intent.putExtra("year", year);
-                        intent.putExtra("hour", hour);
-                        intent.putExtra("minutes", minutes);
-                        Intent intentToPopup = new Intent(getApplicationContext(), cricketish.co.joinmeeting.PopupDialog.class);
-                        intentToPopup.putExtra("meet", meet);
-                        startActivity(intentToPopup);
-                        startActivity(intent);
-                        overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
-
-                    } else {
-                        openDialog();
-                    }
-                } else {
-                    Toast.makeText(MainActivity.this, "Please enter all fields", Toast.LENGTH_SHORT).show();
-                }
-
+                meetLink = "webex";
+                btnPackage(meet, meetLink);
             }
         });
+
+
         btnGMeet.setOnClickListener(new View.OnClickListener() {
             @Override
-
             public void onClick(View view) {
                 meet = "google";
-                name = getName();
-                link = getLink();
-                allDataGiven = false;
-                if ((etName.getText() != null && etName.getText().toString().length() > 0) &&
-                        (etLink.getText() != null && etLink.getText().toString().length() > 0) &&
-                        (btnTime.getText() != null && btnTime.getText().toString().length() > 0)) {
-                    allDataGiven = true;
-                }
-                if (allDataGiven) {
-                    if (link.contains("meeting.google")) {
-                        saveData(name, link, meet, day, monthTwo, year, hour, minutes);
-                        Intent intent = new Intent(getApplicationContext(), cricketish.co.joinmeeting.ListView.class);
-                        intent.putExtra("meet", meet);
-                        intent.putExtra("name", name);
-                        intent.putExtra("link", link);
-                        intent.putExtra("date", day);
-                        intent.putExtra("month", monthTwo);
-                        intent.putExtra("year", year);
-                        intent.putExtra("hour", hour);
-                        intent.putExtra("minutes", minutes);
-                        Intent intentToPopup = new Intent(getApplicationContext(), cricketish.co.joinmeeting.PopupDialog.class);
-                        intentToPopup.putExtra("meet", meet);
-                        startActivity(intentToPopup);
-                        startActivity(intent);
-                        overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
-
-                    } else {
-                        openDialog();
-                    }
-                } else {
-                    Toast.makeText(MainActivity.this, "Please enter all fields", Toast.LENGTH_SHORT).show();
-                }
-
+                meetLink = "meet.google";
+                btnPackage(meet, meetLink);
             }
         });
+
+
         btnJioMeet.setOnClickListener(new View.OnClickListener() {
             @Override
-
             public void onClick(View view) {
                 meet = "jiomeet";
-                name = getName();
-                link = getLink();
-                allDataGiven = false;
-                if ((etName.getText() != null && etName.getText().toString().length() > 0) &&
-                        (etLink.getText() != null && etLink.getText().toString().length() > 0) &&
-                        (btnTime.getText() != null && btnTime.getText().toString().length() > 0)) {
-                    allDataGiven = true;
-                }
-                if (allDataGiven) {
-                    if (link.contains("jio")) {
-                        saveData(name, link, meet, day, monthTwo, year, hour, minutes);
-                        Intent intent = new Intent(getApplicationContext(), cricketish.co.joinmeeting.ListView.class);
-                        intent.putExtra("meet", meet);
-                        intent.putExtra("name", name);
-                        intent.putExtra("link", link);
-                        intent.putExtra("date", day);
-                        intent.putExtra("month", monthTwo);
-                        intent.putExtra("year", year);
-                        intent.putExtra("hour", hour);
-                        intent.putExtra("minutes", minutes);
-                        Intent intentToPopup = new Intent(getApplicationContext(), cricketish.co.joinmeeting.PopupDialog.class);
-                        intentToPopup.putExtra("meet", meet);
-                        startActivity(intentToPopup);
-                        startActivity(intent);
-                        overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
-
-                    } else {
-                        openDialog();
-                    }
-                } else {
-                    Toast.makeText(MainActivity.this, "Please enter all fields", Toast.LENGTH_SHORT).show();
-                }
-
+                meetLink = "jio";
+                btnPackage(meet, meetLink);
             }
         });
+
+
         btnOther.setOnClickListener(new View.OnClickListener() {
             @Override
-
             public void onClick(View view) {
                 meet = "other";
                 name = getName();
                 link = getLink();
-                allDataGiven = false;
-                if ((etName.getText() != null && etName.getText().toString().length() > 0) &&
-                        (etLink.getText() != null && etLink.getText().toString().length() > 0) &&
-                        (btnTime.getText() != null && btnTime.getText().toString().length() > 0)) {
-                    allDataGiven = true;
-                }
-                if (allDataGiven) {
+                if (isValidInput()) {
                     saveData(name, link, meet, day, monthTwo, year, hour, minutes);
-                    Intent intent = new Intent(getApplicationContext(), cricketish.co.joinmeeting.ListView.class);
-                    intent.putExtra("meet", meet);
-                    intent.putExtra("name", name);
-                    intent.putExtra("link", link);
-                    intent.putExtra("date", day);
-                    intent.putExtra("month", monthTwo);
-                    intent.putExtra("year", year);
-                    intent.putExtra("hour", hour);
-                    intent.putExtra("minutes", minutes);
-                    Intent intentToPopup = new Intent(getApplicationContext(), cricketish.co.joinmeeting.PopupDialog.class);
-                    intentToPopup.putExtra("meet", meet);
-                    startActivity(intentToPopup);
-                    startActivity(intent);
-                    overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+                    passIntent();
                 } else {
                     Toast.makeText(MainActivity.this, "Please enter all fields", Toast.LENGTH_SHORT).show();
-                }
-
+                }                /*name = getName();
+                link = getLink();
+                if (isValidInput()) {
+                    saveData(name, link, meet, day, monthTwo, year, hour, minutes);
+                    passIntent();
+                } else {
+                    Toast.makeText(MainActivity.this, "Please enter all fields", Toast.LENGTH_SHORT).show();
+                }*/
             }
         });
 
@@ -370,7 +187,8 @@ public class MainActivity extends AppCompatActivity implements PopupDialog.Popup
     }
 
     //  This is the method to save the data in the .txt file
-    void saveData(String name, String link, String meet, int day, int month, int year, int hour, int minutes) {
+    void saveData(String name, String link, String meet,
+                  int day, int month, int year, int hour, int minutes) {
 
         try {
             FileOutputStream file = openFileOutput("cricketish.data.txt", MODE_PRIVATE | MODE_APPEND);
@@ -390,30 +208,43 @@ public class MainActivity extends AppCompatActivity implements PopupDialog.Popup
 
     //This is the popup-dialog
     public void openDialog() {
-        PopupDialog dialog = new PopupDialog();
-        dialog.show(getSupportFragmentManager(), "example.dialog");
+        AlertDialog.Builder linkDialog = new AlertDialog.Builder(MainActivity.this);
+        linkDialog.setTitle("Warning!")
+                .setMessage("This might not be a valid app link, check the link again. " +
+                        "If this is an error please click ignore to continue")
+
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                    }
+                })
+
+                .setPositiveButton("Ignore", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        name = getName();
+                        link = getLink();
+                        saveData(name, link, meet, day, monthTwo, year, hour, minutes);
+                        Intent intentTwo = new Intent(getApplicationContext(), cricketish.co.joinmeeting.ListView.class);
+                        intentTwo.putExtra("meet", meet);
+                        intentTwo.putExtra("name", name);
+                        intentTwo.putExtra("link", link);
+                        intentTwo.putExtra("date", day);
+                        intentTwo.putExtra("month", monthTwo);
+                        intentTwo.putExtra("year", year);
+                        intentTwo.putExtra("hour", hour);
+                        intentTwo.putExtra("minutes", minutes);
+                        startActivity(intentTwo);
+                    }
+                })
+
+                .create().show();
 
     }
 
-    //If the user clicks ignore & proceeds to the list
-    @Override
-    public void onIgnoreClicked() {
-        name = getName();
-        link = getLink();
-        saveData(name, link, meet, day, monthTwo, year, hour, minutes);
-        Intent intentTwo = new Intent(getApplicationContext(), cricketish.co.joinmeeting.ListView.class);
-        intentTwo.putExtra("meet", meet);
-        intentTwo.putExtra("name", name);
-        intentTwo.putExtra("link", link);
-        intentTwo.putExtra("date", day);
-        intentTwo.putExtra("month", monthTwo);
-        intentTwo.putExtra("year", year);
-        intentTwo.putExtra("hour", hour);
-        intentTwo.putExtra("minutes", minutes);
-        startActivity(intentTwo);
-    }
 
-    public void setMonth(int month) {
+    // Method for converting month value to a printable format (eg 0 - Jan, 1 - Feb...)
+    private void setMonth(int month) {
         switch (month) {
             case 0:
                 strMonth = "Jan";
@@ -452,6 +283,107 @@ public class MainActivity extends AppCompatActivity implements PopupDialog.Popup
                 strMonth = "Dec";
                 break;
         }
+    }
+
+    // This is the date and time picker dialog
+    private void setDateAndTime() {
+        final Calendar calendar = Calendar.getInstance();
+        int YEAR = calendar.get(Calendar.YEAR);
+        int MONTH = calendar.get(Calendar.MONTH);
+        int DATE = calendar.get(Calendar.DATE);
+        int HOUR = calendar.get(Calendar.HOUR_OF_DAY);
+        int MINUTE = calendar.get(Calendar.MINUTE);
+
+        TimePickerDialog timePickerDialog = new TimePickerDialog(MainActivity.this, new TimePickerDialog.OnTimeSetListener() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onTimeSet(TimePicker timePicker, int hourThis, int minutesThis) {
+
+                hour = hourThis;
+                minutes = minutesThis;
+
+            }
+        }, HOUR, MINUTE, false);
+        timePickerDialog.updateTime(hour, minutes);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(MainActivity.this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int dateThis) {
+
+                setMonth(month);
+                String date = dateThis + "th " + strMonth + " " + year + " ";
+                dateAndTime = date;
+                monthTwo = month;
+                day = dateThis;
+                String strMinutes = "00";
+                if (minutes == 1) {
+                    strMinutes = "0" + minutes;
+                }
+                String total = dateAndTime + hour + ":" + strMinutes;
+                btnTime.setText(total);
+
+            }
+        }, YEAR, MONTH, DATE);
+        datePickerDialog.show();
+        timePickerDialog.show();
+    }
+
+    // This method passes Intent values from this activity to the Adaptor
+    private void passIntent() {
+        Intent intent = new Intent(getApplicationContext(), cricketish.co.joinmeeting.ListView.class);
+        intent.putExtra("meet", meet);
+        intent.putExtra("name", name);
+        intent.putExtra("link", link);
+        intent.putExtra("date", day);
+        intent.putExtra("month", monthTwo);
+        intent.putExtra("year", year);
+        intent.putExtra("hour", hour);
+        intent.putExtra("minutes", minutes);
+        /*Intent intentToPopup = new Intent(getApplicationContext(), cricketish.co.joinmeeting.PopupDialog.class);
+        intentToPopup.putExtra("meet", meet);
+        startActivity(intentToPopup);*/
+        startActivity(intent);
+        overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+    }
+
+    // Checks if all the fields are complete
+    private boolean isValidInput() {
+        return (etName.getText() != null && etName.getText().toString().length() > 0) &&
+                (etLink.getText() != null && etLink.getText().toString().length() > 0) &&
+                (btnTime.getText() != null && btnTime.getText().toString().length() > 0);
+    }
+
+    // This method passes the intent, saves the data and moves to the List View
+    private void btnPackage(String meet, String meetLink) {
+        name = getName();
+        link = getLink();
+        if (isValidInput()) {
+            if (link.contains(meetLink)) {
+                saveData(name, link, meet, day, monthTwo, year, hour, minutes);
+                passIntent();
+
+            } else {
+                openDialog();
+            }
+
+        } else {
+            Toast.makeText(MainActivity.this, "Please enter all fields", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    // This is the clipboard Data
+    private void clipData() {
+        ClipData clipData = clipboardManager.getPrimaryClip();
+        ClipData.Item item = null;
+        if (clipData != null) {
+            item = clipData.getItemAt(0);
+        } else {
+            Toast.makeText(this, "No link to paste!", Toast.LENGTH_SHORT).show();
+        }
+        etLink.setText(item.getText());
+        etLink.setTextColor(ContextCompat.getColor(MainActivity.this, R.color.color3rd));
+        Toast.makeText(MainActivity.this, "Pasted", Toast.LENGTH_LONG).show();
+
     }
 
 }

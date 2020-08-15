@@ -132,35 +132,36 @@ public class ListView extends AppCompatActivity {
 
         if (file.exists()) {
             try {
-                lineFromFile = "";
                 BufferedReader reader = new BufferedReader(new InputStreamReader(openFileInput("cricketish.data.txt")));
                 while ((lineFromFile = reader.readLine()) != null) {
                     StringTokenizer tokens = new StringTokenizer(lineFromFile, ",");
 
-                    String lname = "noname", llink = "nolink", lmeet = "nomeet", lDate = "1", lyear = "2020", lminute = "1";
-                    int lhour = 1, lMonth = 1;
-                    if (tokens.hasMoreElements())
-                        lname = tokens.nextToken();
-                    if (tokens.hasMoreElements())
-                        llink = tokens.nextToken();
-                    if (tokens.hasMoreElements())
-                        lmeet = tokens.nextToken();
-                    if (tokens.hasMoreElements())
-                        lDate = tokens.nextToken();
-                    if (tokens.hasMoreElements())
-                        lMonth = Integer.parseInt(tokens.nextToken());
-                    if (tokens.hasMoreElements())
-                        lhour = Integer.parseInt(tokens.nextToken());
-                    if (tokens.hasMoreElements())
-                        lyear = tokens.nextToken();
-                    if (tokens.hasMoreElements())
-                        lminute = tokens.nextToken();
+                    String tokenName = "noname", tokenLink = "nolink", tokenMeet = "nomeet",
+                            tokenDate = "1", tokenYear = "2020", tokenMinute = "1";
+                    int tokenHour = 1, tokenMonth = 1;
 
-                    List list = new List(lname, llink, lmeet, lDate, lMonth, lyear, lhour, lminute);
-                    retArrayList.add(list);
+                    if (tokens.hasMoreElements())
+                        tokenName = tokens.nextToken();
+                    if (tokens.hasMoreElements())
+                        tokenLink = tokens.nextToken();
+                    if (tokens.hasMoreElements())
+                        tokenMeet = tokens.nextToken();
+                    if (tokens.hasMoreElements())
+                        tokenDate = tokens.nextToken();
+                    if (tokens.hasMoreElements())
+                        tokenMonth = Integer.parseInt(tokens.nextToken());
+                    if (tokens.hasMoreElements())
+                        tokenHour = Integer.parseInt(tokens.nextToken());
+                    if (tokens.hasMoreElements())
+                        tokenYear = tokens.nextToken();
+                    if (tokens.hasMoreElements())
+                        tokenMinute = tokens.nextToken();
+
+                    List list2 = new List(tokenName, tokenLink, tokenMeet, tokenDate,
+                            tokenMonth, tokenYear, tokenHour, tokenMinute);
+                    retArrayList.add(list2);
 
                 }
-
                 reader.close();
 
             } catch (IOException e) {
@@ -169,7 +170,6 @@ public class ListView extends AppCompatActivity {
         }
         return retArrayList;
     }
-
 
     // This is the Swipe to delete functionality (Till 162)
     ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
@@ -259,24 +259,27 @@ public class ListView extends AppCompatActivity {
                         "," + lists.get(i).getDate() + "," + lists.get(i).getMonth() + "\n");
             }
             outputFile.close();
-            //Toast.makeText(ListView.this, "Successfully Saved", Toast.LENGTH_SHORT).show();
+
         } catch (IOException e) {
             Toast.makeText(ListView.this, e.getMessage(), Toast.LENGTH_SHORT).show();
         }
 
     }
 
+    //  The beta dialog creator which appears on the start off the activity
     public void openBetaDialog() {
         final AlertDialog.Builder betaDialog = new AlertDialog.Builder(ListView.this);
         betaDialog.setTitle("Warning!")
-                .setMessage("This app is still in Beta stages, if found any error please report it" +
+
+                .setMessage("This app is still in Beta stages, if found any error please report it " +
                         "to our email (mentioned in our about page)")
+
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-
                     }
                 })
+
                 .setNeutralButton("Never Show Again", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -286,6 +289,7 @@ public class ListView extends AppCompatActivity {
                         editor.apply();
                     }
                 })
+
                 .create().show();
 
     }
