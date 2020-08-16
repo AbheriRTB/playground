@@ -45,6 +45,7 @@ public class ListView extends AppCompatActivity {
     ConstraintLayout layout;
     TextView tvMeeting;
     AlertDialog.Builder dialog;
+    boolean activityIntent;
 
     //For the function when  Undo clicked
     List deletedMovie = null;
@@ -54,7 +55,7 @@ public class ListView extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
-        getMenuInflater().inflate(R.menu.list, menu);
+        getMenuInflater().inflate(R.menu.main, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -68,6 +69,12 @@ public class ListView extends AppCompatActivity {
                 break;
             case R.id.btnHelp:
                 intent = new Intent(getApplicationContext(), AboutActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.btnThemeAction:
+                intent = new Intent(getApplicationContext(), ThemeActivity.class);
+                activityIntent = true;
+                intent.putExtra("activity", activityIntent);
                 startActivity(intent);
                 break;
 

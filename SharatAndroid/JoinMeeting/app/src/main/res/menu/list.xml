@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
     <item
         android:id="@+id/btnAdd"
         android:icon="@drawable/add"
         android:orderInCategory="10"
         android:title="@string/add"
         app:showAsAction="always" />
-
+    <item
+        android:id="@+id/btnThemeAction"
+        android:icon="@drawable/theme"
+        android:orderInCategory="12"
+        android:title="@string/theme"
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/btnHelp"
         android:icon="@drawable/help"
