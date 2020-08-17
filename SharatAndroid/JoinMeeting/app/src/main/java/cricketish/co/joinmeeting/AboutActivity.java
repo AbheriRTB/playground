@@ -37,7 +37,6 @@ public class AboutActivity extends AppCompatActivity {
                 menueIntent.putExtra("activity", menueIntent);
                 startActivity(menueIntent);
                 break;
-
         }
 
         return super.onOptionsItemSelected(item);
@@ -64,10 +63,9 @@ public class AboutActivity extends AppCompatActivity {
         ivPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
-                //      Uri.parse("https://www.youtube.com"));
-                //AboutActivity.this.startActivity(intent);
-                Toast.makeText(AboutActivity.this, "The video is not yet uploaded, Soon after it is uploaded you can view it!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+                        Uri.parse("https://sites.google.com/view/downloadjoin/home"));
+                AboutActivity.this.startActivity(intent);
             }
         });
 
