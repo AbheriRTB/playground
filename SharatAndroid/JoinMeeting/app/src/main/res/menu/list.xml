@@ -8,12 +8,6 @@
         android:title="@string/add"
         app:showAsAction="always" />
     <item
-        android:id="@+id/btnThemeAction"
-        android:icon="@drawable/theme"
-        android:orderInCategory="12"
-        android:title="@string/theme"
-        app:showAsAction="ifRoom" />
-    <item
         android:id="@+id/btnHelp"
         android:icon="@drawable/help"
         android:orderInCategory="11"

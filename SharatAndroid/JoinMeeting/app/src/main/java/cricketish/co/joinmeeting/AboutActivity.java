@@ -19,7 +19,6 @@ public class AboutActivity extends AppCompatActivity {
 
     ImageView ivMail, ivPlay;
     String to, subject, message;
-    boolean activityIntent;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -32,10 +31,8 @@ public class AboutActivity extends AppCompatActivity {
 
         switch (item.getItemId()) {
             case R.id.btnThemeAction:
-                Intent menueIntent = new Intent(getApplicationContext(), ThemeActivity.class);
-                activityIntent = false;
-                menueIntent.putExtra("activity", menueIntent);
-                startActivity(menueIntent);
+                Intent intent = new Intent(getApplicationContext(), ThemeActivity.class);
+                startActivity(intent);
                 break;
         }
 

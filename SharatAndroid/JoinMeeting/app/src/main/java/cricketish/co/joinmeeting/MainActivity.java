@@ -375,10 +375,11 @@ public class MainActivity extends AppCompatActivity {
     private void clipData() {
         ClipData clipData = clipboardManager.getPrimaryClip();
         ClipData.Item item = null;
-        if (clipData != null) {
+        try {
             item = clipData.getItemAt(0);
-        } else {
-            Toast.makeText(this, "No link to paste!", Toast.LENGTH_SHORT).show();
+        }
+        catch (NullPointerException e){
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
         }
         etLink.setText(item.getText());
         etLink.setTextColor(ContextCompat.getColor(MainActivity.this, R.color.color3rd));

@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,8 +20,8 @@ import java.util.ArrayList;
 public class ListAdaptor extends RecyclerView.Adapter<ListAdaptor.ViewHolder> {
 
     private ArrayList<List> events;
-    int hour, month;
-    String minute, year, date, link, timeOfDay, strMonth, strMeet, time;
+    int hour, hourForTime, month;
+    String minute, year, date, link, timeOfDay, strMonth, strMeet, time, timeSuffix;
     AlertDialog.Builder joinDialog;
     RecyclerView recyclerView;
 
@@ -57,13 +56,24 @@ public class ListAdaptor extends RecyclerView.Adapter<ListAdaptor.ViewHolder> {
                     getHour(i);
                     getMonths(i);
                     joinDialog.setTitle("Join Meeting " + events.get(i).getName());
-                    if (events.get(i).getMinutes().length() == 2) {
-                        time = events.get(i).getDate() + "th " + strMonth + " at " + hour + ":"
-                                + events.get(i).getMinutes() + timeOfDay + " now?";
-                    } else if (events.get(i).getMinutes().length() == 1) {
-                        time = events.get(i).getDate() + "th " + strMonth + " at " + hour + ":0"
+
+                    if (events.get(i).getDate().equals("1"))
+                        timeSuffix = "st ";
+                    else if (events.get(i).getDate().equals("2"))
+                        timeSuffix = "nd ";
+                    else if (events.get(i).getDate().equals("3"))
+                        timeSuffix = "rd ";
+                    else
+                        timeSuffix = "st ";
+
+                    if (hourForTime > 9) {
+                        time = events.get(i).getDate() + timeSuffix + strMonth + " at " + events.get(i).getHour() + ":"
+                                + hourForTime + timeOfDay + " now?";
+                    } else {
+                        time = events.get(i).getDate() + "th " + strMonth + " at " + hourForTime + ":0"
                                 + events.get(i).getMinutes() + timeOfDay + " now?";
                     }
+
                     if (events.get(i).getMeet().equalsIgnoreCase("zoom")) {
                         joinDialog.setIcon(R.mipmap.zoom)
                                 .setMessage("Do you want to join a Zoom Meeting scheduled " +
@@ -85,7 +95,6 @@ public class ListAdaptor extends RecyclerView.Adapter<ListAdaptor.ViewHolder> {
                                 .setMessage("Do you want to join a Meeting scheduled " +
                                         "on " + time);
                     }
-
                     joinDialog.setPositiveButton("Join", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
@@ -206,104 +215,52 @@ public class ListAdaptor extends RecyclerView.Adapter<ListAdaptor.ViewHolder> {
     private void getHour(int i) {
         switch (events.get(i).getHour()) {
             case 13:
-                hour = 1;
+                hourForTime = 1;
                 timeOfDay = "PM";
                 break;
             case 14:
-                hour = 2;
+                hourForTime = 2;
                 timeOfDay = "PM";
                 break;
             case 15:
-                hour = 3;
+                hourForTime = 3;
                 timeOfDay = "PM";
                 break;
             case 16:
-                hour = 4;
+                hourForTime = 4;
                 timeOfDay = "PM";
                 break;
             case 17:
-                hour = 5;
+                hourForTime = 5;
                 timeOfDay = "PM";
                 break;
             case 18:
-                hour = 6;
+                hourForTime = 6;
                 timeOfDay = "PM";
                 break;
             case 19:
-                hour = 7;
+                hourForTime = 7;
                 timeOfDay = "PM";
                 break;
             case 20:
-                hour = 8;
+                hourForTime = 8;
                 timeOfDay = "PM";
                 break;
             case 21:
-                hour = 9;
+                hourForTime = 9;
                 timeOfDay = "PM";
                 break;
             case 22:
-                hour = 10;
+                hourForTime = 10;
                 timeOfDay = "PM";
                 break;
             case 23:
-                hour = 11;
+                hourForTime = 11;
                 timeOfDay = "PM";
                 break;
             case 24:
-                hour = 12;
+                hourForTime = 12;
                 timeOfDay = "PM";
-                break;
-            case 0:
-                hour = 12;
-                timeOfDay = "AM";
-                break;
-            case 1:
-                hour = 1;
-                timeOfDay = "AM";
-                break;
-            case 2:
-                hour = 2;
-                timeOfDay = "AM";
-                break;
-            case 3:
-                hour = 3;
-                timeOfDay = "AM";
-                break;
-            case 4:
-                hour = 4;
-                timeOfDay = "AM";
-                break;
-            case 5:
-                hour = 5;
-                timeOfDay = "AM";
-                break;
-            case 6:
-                hour = 6;
-                timeOfDay = "AM";
-                break;
-            case 7:
-                hour = 7;
-                timeOfDay = "AM";
-                break;
-            case 8:
-                hour = 8;
-                timeOfDay = "AM";
-                break;
-            case 9:
-                hour = 9;
-                timeOfDay = "AM";
-                break;
-            case 10:
-                hour = 10;
-                timeOfDay = "AM";
-                break;
-            case 11:
-                hour = 11;
-                timeOfDay = "AM";
-                break;
-            case 12:
-                hour = 12;
-                timeOfDay = "AM";
                 break;
             default:
                 timeOfDay = "AM";
