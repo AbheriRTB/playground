@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:isScrollContainer="true"
     android:orientation="vertical"
-    tools:context=".MainActivity"
+    tools:context=".AddActivity"
     android:background="#FFFFFF"
     android:nestedScrollingEnabled="true">
 

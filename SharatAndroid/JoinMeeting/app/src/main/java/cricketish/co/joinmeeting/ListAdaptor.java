@@ -25,6 +25,7 @@ public class ListAdaptor extends RecyclerView.Adapter<ListAdaptor.ViewHolder> {
     AlertDialog.Builder joinDialog;
     RecyclerView recyclerView;
 
+
     public ListAdaptor(Context context, ArrayList<List> list, RecyclerView rv) {
         events = list;
         joinDialog = new AlertDialog.Builder(context);
@@ -57,22 +58,23 @@ public class ListAdaptor extends RecyclerView.Adapter<ListAdaptor.ViewHolder> {
                     getMonths(i);
                     joinDialog.setTitle("Join Meeting " + events.get(i).getName());
 
-                    if (events.get(i).getDate().equals("1"))
+                    if (events.get(i).getDate().equals("1") || events.get(i).getDate().equals("21"))
                         timeSuffix = "st ";
-                    else if (events.get(i).getDate().equals("2"))
+                    else if (events.get(i).getDate().equals("2") || events.get(i).getDate().equals("22"))
                         timeSuffix = "nd ";
-                    else if (events.get(i).getDate().equals("3"))
+                    else if (events.get(i).getDate().equals("3") || events.get(i).getDate().equals("23"))
                         timeSuffix = "rd ";
                     else
                         timeSuffix = "st ";
 
                     if (hourForTime > 9) {
-                        time = events.get(i).getDate() + timeSuffix + strMonth + " at " + events.get(i).getHour() + ":"
-                                + hourForTime + timeOfDay + " now?";
+                        time = events.get(i).getDate() + timeSuffix + strMonth + " at " + hourForTime + ":"
+                                + events.get(i).getMinutes() + " now?";
                     } else {
-                        time = events.get(i).getDate() + "th " + strMonth + " at " + hourForTime + ":0"
+                        time = events.get(i).getDate() + timeSuffix + strMonth + " at " + hourForTime + ":0"
                                 + events.get(i).getMinutes() + timeOfDay + " now?";
                     }
+
 
                     if (events.get(i).getMeet().equalsIgnoreCase("zoom")) {
                         joinDialog.setIcon(R.mipmap.zoom)
@@ -268,4 +270,5 @@ public class ListAdaptor extends RecyclerView.Adapter<ListAdaptor.ViewHolder> {
     }
 
 }
+
 

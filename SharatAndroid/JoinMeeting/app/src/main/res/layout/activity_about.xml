@@ -48,6 +48,7 @@
         app:layout_constraintVertical_bias="0.25" />
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -63,9 +64,9 @@
             android:layout_height="40dp"
             android:layout_gravity="center"
             android:clickable="true"
-            app:srcCompat="@drawable/email"
+            android:contentDescription="@string/mail"
             android:focusable="true"
-            android:contentDescription="@string/mail" />
+            app:srcCompat="@drawable/email" />
 
         <ImageView
             android:id="@+id/ivPlay"
@@ -73,9 +74,9 @@
             android:layout_height="50dp"
             android:layout_marginStart="10dp"
             android:clickable="true"
-            app:srcCompat="@drawable/play"
+            android:contentDescription="@string/play"
             android:focusable="true"
-            android:contentDescription="@string/play" />
+            app:srcCompat="@drawable/play" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

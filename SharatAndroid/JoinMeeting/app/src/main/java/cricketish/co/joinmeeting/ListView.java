@@ -17,7 +17,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,7 +24,6 @@ import com.google.android.material.snackbar.Snackbar;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -63,11 +61,15 @@ public class ListView extends AppCompatActivity {
 
         switch (item.getItemId()) {
             case R.id.btnAdd:
-                Intent intent = new Intent(getApplicationContext(), cricketish.co.joinmeeting.MainActivity.class);
+                Intent intent = new Intent(getApplicationContext(), AddActivity.class);
                 startActivity(intent);
                 break;
             case R.id.btnHelp:
                 intent = new Intent(getApplicationContext(), AboutActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.btnSettings:
+                intent = new Intent(getApplicationContext(), SettingsActivity.class);
                 startActivity(intent);
                 break;
 
@@ -151,9 +153,9 @@ public class ListView extends AppCompatActivity {
                     if (tokens.hasMoreElements())
                         tokenMonth = Integer.parseInt(tokens.nextToken());
                     if (tokens.hasMoreElements())
-                        tokenHour = Integer.parseInt(tokens.nextToken());
-                    if (tokens.hasMoreElements())
                         tokenYear = tokens.nextToken();
+                    if (tokens.hasMoreElements())
+                        tokenHour = Integer.parseInt(tokens.nextToken());
                     if (tokens.hasMoreElements())
                         tokenMinute = tokens.nextToken();
 

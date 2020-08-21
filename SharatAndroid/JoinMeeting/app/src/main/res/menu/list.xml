@@ -13,4 +13,10 @@
         android:orderInCategory="11"
         android:title="@string/help"
         app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/btnSettings"
+        android:icon="@drawable/settings"
+        android:orderInCategory="11"
+        android:title="@string/settings"
+        app:showAsAction="ifRoom" />
 </menu>

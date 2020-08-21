@@ -10,4 +10,6 @@
     <color name="White2">#F2F2F2</color>
     <color name="Orange">#FF7209</color>
     <color name="colorTransperent">#00FFFFFF</color>
+    <color name="colorNavigationBar">#BF2B2B2B</color>
+    <color name="colorNavigationBarForSplash">@color/colorPrimaryDark</color>
 </resources>
