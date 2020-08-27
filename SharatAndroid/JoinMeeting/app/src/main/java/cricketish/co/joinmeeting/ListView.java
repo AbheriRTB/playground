@@ -99,10 +99,10 @@ public class ListView extends AppCompatActivity {
         String hour = getIntent().getStringExtra("hour");
         String minutes = getIntent().getStringExtra("minutes");
         Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-mm-yyyy");
-        SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("hh:mm");
-        date = simpleDateFormat.format(calendar.getTime());
-        String time = simpleDateFormat2.format(calendar.getTime());
+        //SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-mm-yyyy");
+        //SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("hh:mm");
+        //date = simpleDateFormat.format(calendar.getTime());
+        //String time = simpleDateFormat2.format(calendar.getTime());
 
         /*if (date.equalsIgnoreCase(date2)){
             if (time.equalsIgnoreCase(time2)){
