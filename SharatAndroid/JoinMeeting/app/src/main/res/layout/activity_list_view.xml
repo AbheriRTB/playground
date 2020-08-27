@@ -8,6 +8,19 @@
     android:orientation="vertical"
     tools:context=".ListView">
 
+    <TextView
+        android:id="@+id/tvMeeting"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="60dp"
+        android:fontFamily="@font/pt_mono"
+        android:text="Meetings"
+        android:textAlignment="center"
+        android:textColor="#813A3A3A"
+        android:textSize="60sp"
+        android:visibility="gone" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list"
         android:layout_width="match_parent"

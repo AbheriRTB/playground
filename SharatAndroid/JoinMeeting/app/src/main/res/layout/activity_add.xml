@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:isScrollContainer="true"
     android:orientation="vertical"
-    tools:context=".MainActivity"
+    tools:context=".AddActivity"
     android:background="#FFFFFF"
     android:nestedScrollingEnabled="true">
 
@@ -72,7 +72,8 @@
             android:layout_height="35dp"
             android:layout_gravity="center"
             android:layout_weight="0"
-            app:srcCompat="@drawable/paste" />
+            app:srcCompat="@drawable/paste"
+            android:contentDescription="@string/paste_btn" />
 
     </LinearLayout>
 
@@ -90,7 +91,7 @@
             android:layout_gravity="center"
             android:background="#00808080"
             android:fontFamily="monospace"
-            android:hint="Date &amp; Time"
+            android:hint="@string/date_amp_time"
             android:textColor="#92000000"
             android:textSize="20sp" />
     </LinearLayout>
@@ -159,8 +160,7 @@
         <Button
             android:id="@+id/btnOther"
             android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
             android:background="@drawable/custom_btn_other"
             android:fontFamily="monospace"
             android:text="@string/other"
@@ -177,6 +177,6 @@
         android:layout_marginRight="20dp"
         android:fontFamily="monospace"
         android:gravity="center"
-        android:text="© Cricketish 2020" />
+        android:text="@string/copyright" />
 
 </LinearLayout>

@@ -1,30 +1,43 @@
 package cricketish.co.joinmeeting;
 
-import android.app.Application;
+import android.annotation.TargetApi;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.content.Context;
+import android.content.ContextWrapper;
 import android.os.Build;
 
-public class AppNotification extends Application {
-    public static final String CHANNEL_1_ID = "channel1";
+import androidx.core.app.NotificationCompat;
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
+public class AppNotification extends ContextWrapper {
+    public static final String channelID = "channelID";
+    public static final String channelName = "Channel Name";
+    private NotificationManager mManager;
 
-        createNotificationChannels();
+    public AppNotification(Context base) {
+        super(base);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            createChannel();
+        }
     }
 
-    private void createNotificationChannels() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-            NotificationChannel channel1 = new NotificationChannel(CHANNEL_1_ID,
-                    "Channel 1", NotificationManager.IMPORTANCE_HIGH);
-            channel1.setDescription("You have a meeting to join");
-            channel1.enableLights(true);
-            channel1.setLightColor(R.color.colorPrimary);
+    @TargetApi(Build.VERSION_CODES.O)
+    private void createChannel() {
+        NotificationChannel channel = new NotificationChannel(channelID, channelName, NotificationManager.IMPORTANCE_HIGH);
+        getManager().createNotificationChannel(channel);
+    }
 
-            NotificationManager manager = getSystemService(NotificationManager.class);
-            manager.createNotificationChannel(channel1);
+    public NotificationManager getManager() {
+        if (mManager == null) {
+            mManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         }
+        return mManager;
+    }
+
+    public NotificationCompat.Builder getChannelNotification() {
+        return new NotificationCompat.Builder(getApplicationContext(), channelID)
+                .setContentTitle("Alarm!")
+                .setContentText("Your AlarmManager is working.");
+        //.setSmallIcon(R.drawable.ic_android);
     }
 }

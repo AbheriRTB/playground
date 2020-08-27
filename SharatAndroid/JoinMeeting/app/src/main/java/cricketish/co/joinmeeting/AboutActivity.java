@@ -1,14 +1,18 @@
 package cricketish.co.joinmeeting;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 public class AboutActivity extends AppCompatActivity {
 
@@ -16,12 +20,32 @@ public class AboutActivity extends AppCompatActivity {
     ImageView ivMail, ivPlay;
     String to, subject, message;
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.about, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.btnThemeAction:
+                Intent intent = new Intent(getApplicationContext(), ThemeActivity.class);
+                startActivity(intent);
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 
     // App is created here
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
+
+
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("About");
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -37,9 +61,8 @@ public class AboutActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
-                        Uri.parse("https://www.youtube.com"));
+                        Uri.parse("https://sites.google.com/view/downloadjoin/home"));
                 AboutActivity.this.startActivity(intent);
-
             }
         });
 
@@ -47,13 +70,11 @@ public class AboutActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent email = new Intent(Intent.ACTION_SEND);
+                email.setType("plain/text");
                 email.putExtra(Intent.EXTRA_EMAIL, new String[]{to});
                 email.putExtra(Intent.EXTRA_SUBJECT, subject);
                 email.putExtra(Intent.EXTRA_TEXT, message);
-
-                email.setType("message/rfc822");
-
-                startActivity(Intent.createChooser(email, "Choose an Email client :"));
+                startActivity(Intent.createChooser(email, ""));
             }
         });
 

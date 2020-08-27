@@ -12,10 +12,10 @@
     <string name="webex_name">Webex</string>
     <string name="zoom_name">Zoom</string>
     <string name="other">Other</string>
-    <string name="noActivityText">No meetings sheduled yet \nClick add button on the top bar</string>
+    <string name="noActivityText">No meetings sheduled yet \nClick + button on the top bar</string>
     <string name="help">Help</string>
-    <string name="tvAboutDiscriptOld">This is an app developed by me with the help of my father. This app is made for fun and
-    not for making any money. If found any problems or suggestions please email to sharatchandrats@gmail.com\nThankyou!</string>
+    <!--<string name="tvAboutDiscriptOld">This is an app developed by me with the help of my father. This app is made for fun and
+    not for making any money. If found any problems or suggestions please email to sharatchandrats@gmail.com\nThankyou!</string>-->
     <string name="tvAboutDiscript">This is my maiden app developed with the help of my father. This app is made for fun and
     with an intention that this will be an useful tool. Please report any problems or suggestions to sharatchandrats@gmail.com\n\n\nThankyou!</string>
     <string name="play">Play</string>
@@ -35,4 +35,12 @@
     <string name="_15">15</string>
     <string name="swipe">Swipe</string>
     <string name="joinSplash">Join</string>
+    <string name="copyright">© Cricketish 2020</string>
+    <string name="date_amp_time"><![CDATA[Date & Time]]></string>
+    <string name="paste_btn">Paste</string>
+    <string name="theme">Theme</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+    <string name="settings">Settings</string>
+    <string name="home">Home</string>
 </resources>

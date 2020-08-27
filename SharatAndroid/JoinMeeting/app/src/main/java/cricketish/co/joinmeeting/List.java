@@ -1,12 +1,14 @@
 package cricketish.co.joinmeeting;
 
 public class List {
-    private String name, link, meet, date, month,year,hour,minutes;
+    private String name, link, meet, date, year, minutes;
     private boolean markForDelete;
+    private int hour, month;
 
 
     //  Constructor
-    public List(String name, String link, String meet, String date, String month, String year, String hour, String minutes) {
+    public List(String name, String link, String meet, String date,
+                int month, String year, int hour, String minutes) {
         this.name = name;
         this.link = link;
         this.meet = meet;
@@ -58,11 +60,11 @@ public class List {
         this.date = date;
     }
 
-    public String getMonth() {
+    public int getMonth() {
         return month;
     }
 
-    public void setMonth(String month) {
+    public void setMonth(int month) {
         this.month = month;
     }
 
@@ -78,11 +80,11 @@ public class List {
         this.year = year;
     }
 
-    public String getHour() {
+    public int getHour() {
         return hour;
     }
 
-    public void setHour(String hour) {
+    public void setHour(int hour) {
         this.hour = hour;
     }
 

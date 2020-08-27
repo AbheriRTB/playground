@@ -30,27 +30,21 @@
             android:layout_weight="50"
             android:orientation="vertical">
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="monospace"
+                android:text="@string/nameMeet"
+                android:textColor="#3A3A3A"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/tvLink"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/tvName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="monospace"
-                    android:text="@string/nameMeet"
-                    android:textColor="#3A3A3A"
-                    android:textSize="24sp" />
-
-                <TextView
-                    android:id="@+id/tvLink"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:fontFamily="monospace"
-                    android:text="@string/linkMeet" />
-            </LinearLayout>
+                android:fontFamily="monospace"
+                android:text="@string/linkMeet" />
 
         </LinearLayout>
 
