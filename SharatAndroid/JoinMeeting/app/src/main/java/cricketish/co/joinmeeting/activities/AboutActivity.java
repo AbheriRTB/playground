@@ -1,4 +1,4 @@
-package cricketish.co.joinmeeting;
+package cricketish.co.joinmeeting.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -10,9 +10,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
+
+import cricketish.co.joinmeeting.R;
 
 public class AboutActivity extends AppCompatActivity {
 

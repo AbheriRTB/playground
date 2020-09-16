@@ -1,4 +1,4 @@
-package cricketish.co.joinmeeting;
+package cricketish.co.joinmeeting.utils;
 
 import android.annotation.TargetApi;
 import android.app.NotificationChannel;
@@ -8,6 +8,8 @@ import android.content.ContextWrapper;
 import android.os.Build;
 
 import androidx.core.app.NotificationCompat;
+
+import cricketish.co.joinmeeting.R;
 
 public class AppNotification extends ContextWrapper {
     public static final String channelID = "channelID";
@@ -36,8 +38,8 @@ public class AppNotification extends ContextWrapper {
 
     public NotificationCompat.Builder getChannelNotification() {
         return new NotificationCompat.Builder(getApplicationContext(), channelID)
-                .setContentTitle("Alarm!")
-                .setContentText("Your AlarmManager is working.");
-        //.setSmallIcon(R.drawable.ic_android);
+                .setContentTitle("Join!!")
+                .setContentText("Your Meet is going to start in a few moments.")
+        .setSmallIcon(R.mipmap.ic_launcher);
     }
 }

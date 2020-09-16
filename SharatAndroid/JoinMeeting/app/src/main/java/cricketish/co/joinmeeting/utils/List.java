@@ -1,4 +1,4 @@
-package cricketish.co.joinmeeting;
+package cricketish.co.joinmeeting.utils;
 
 public class List {
     private String name, link, meet, date, year, minutes;

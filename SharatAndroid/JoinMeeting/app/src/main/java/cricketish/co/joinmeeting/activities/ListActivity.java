@@ -1,4 +1,4 @@
-package cricketish.co.joinmeeting;
+package cricketish.co.joinmeeting.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -13,6 +13,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Canvas;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -29,11 +30,15 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.StringTokenizer;
 
+import cricketish.co.joinmeeting.R;
+import cricketish.co.joinmeeting.utils.List;
+import cricketish.co.joinmeeting.utils.ListAdaptor;
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
 
-public class ListView extends AppCompatActivity {
+public class ListActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
     RecyclerView.Adapter myAdaptor;
@@ -43,6 +48,7 @@ public class ListView extends AppCompatActivity {
     ConstraintLayout layout;
     TextView tvMeeting;
     AlertDialog.Builder dialog;
+    Calendar calendar;
 
     //For the function when  Undo clicked
     List deletedMovie = null;
@@ -70,7 +76,8 @@ public class ListView extends AppCompatActivity {
                 break;
             case R.id.btnSettings:
                 intent = new Intent(getApplicationContext(), SettingsActivity.class);
-                startActivity(intent);
+                openSettingsDialog();
+                //startActivity(intent);
                 break;
 
         }
@@ -85,6 +92,7 @@ public class ListView extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_view);
+
         String meet = getIntent().getStringExtra("meet");
         String name = getIntent().getStringExtra("name");
         String link = getIntent().getStringExtra("link");
@@ -194,7 +202,7 @@ public class ListView extends AppCompatActivity {
             switch (direction) {
                 case ItemTouchHelper.LEFT:
                     deletedMovie = lists.get(position);
-                    dialog = new AlertDialog.Builder(ListView.this);
+                    dialog = new AlertDialog.Builder(ListActivity.this);
                     dialog
                             .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
                                 @Override
@@ -232,10 +240,10 @@ public class ListView extends AppCompatActivity {
         @Override
         public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
             new RecyclerViewSwipeDecorator.Builder(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
-                    .addSwipeLeftBackgroundColor(ContextCompat.getColor(ListView.this, R.color.Bin))
+                    .addSwipeLeftBackgroundColor(ContextCompat.getColor(ListActivity.this, R.color.Bin))
                     .addSwipeLeftActionIcon(R.drawable.bin)
                     .addSwipeLeftLabel("Delete")
-                    .setSwipeLeftLabelColor(ContextCompat.getColor(ListView.this, R.color.White))
+                    .setSwipeLeftLabelColor(ContextCompat.getColor(ListActivity.this, R.color.White))
                     .create()
                     .decorate();
             super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
@@ -263,14 +271,14 @@ public class ListView extends AppCompatActivity {
             outputFile.close();
 
         } catch (IOException e) {
-            Toast.makeText(ListView.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(ListActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
         }
 
     }
 
     //  The beta dialog creator which appears on the start off the activity
     public void openBetaDialog() {
-        final AlertDialog.Builder betaDialog = new AlertDialog.Builder(ListView.this);
+        final AlertDialog.Builder betaDialog = new AlertDialog.Builder(ListActivity.this);
         betaDialog.setTitle("Warning!")
 
                 .setMessage("This app is still in Beta stages, if found any error please report it " +
@@ -295,5 +303,32 @@ public class ListView extends AppCompatActivity {
                 .create().show();
 
     }
+
+    private void openSettingsDialog(){
+        final String formsLink = "https://forms.gle/8QbJZHrGxQMNHFnX9";
+
+        final AlertDialog.Builder settingsDialog = new AlertDialog.Builder(ListActivity.this);
+        settingsDialog.setTitle("Work in progress")
+                .setMessage("The Settings page is still in the making," +
+                        " you can have a review or just ignore")
+                .setNeutralButton("Review", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Intent forms = new Intent(android.content.Intent.ACTION_VIEW,
+                                Uri.parse(formsLink));
+                        ListActivity.this.startActivity(forms);
+                    }
+                })
+                .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                    }
+                })
+                .create().show();
+
+
+    }
+
+
 
 }

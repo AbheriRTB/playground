@@ -1,4 +1,4 @@
-package cricketish.co.joinmeeting;
+package cricketish.co.joinmeeting.utils;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -17,11 +17,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+import cricketish.co.joinmeeting.R;
+
 public class ListAdaptor extends RecyclerView.Adapter<ListAdaptor.ViewHolder> {
 
     private ArrayList<List> events;
     int hour, hourForTime, month;
-    String minute, year, date, link, timeOfDay, strMonth, strMeet, time, timeSuffix;
+    String minute, year, date, link, timeOfDay, strMonth, strMeet, time,
+            timeSuffix, minuteForTime;
     AlertDialog.Builder joinDialog;
     RecyclerView recyclerView;
 
@@ -56,6 +59,7 @@ public class ListAdaptor extends RecyclerView.Adapter<ListAdaptor.ViewHolder> {
                     final String openLink = events.get(i).getLink();
                     getHour(i);
                     getMonths(i);
+                    getMinute(i);
                     joinDialog.setTitle("Join Meeting " + events.get(i).getName());
 
                     if (events.get(i).getDate().equals("1") || events.get(i).getDate().equals("21"))
@@ -67,14 +71,8 @@ public class ListAdaptor extends RecyclerView.Adapter<ListAdaptor.ViewHolder> {
                     else
                         timeSuffix = "st ";
 
-                    if (hourForTime > 9) {
-                        time = events.get(i).getDate() + timeSuffix + strMonth + " at " + hourForTime + ":"
-                                + events.get(i).getMinutes() + " now?";
-                    } else {
-                        time = events.get(i).getDate() + timeSuffix + strMonth + " at " + hourForTime + ":0"
-                                + events.get(i).getMinutes() + timeOfDay + " now?";
-                    }
-
+                    time = events.get(i).getDate() + timeSuffix + strMonth + " at " + hourForTime + ":"
+                            + minuteForTime + " now?";
 
                     if (events.get(i).getMeet().equalsIgnoreCase("zoom")) {
                         joinDialog.setIcon(R.mipmap.zoom)
@@ -97,6 +95,7 @@ public class ListAdaptor extends RecyclerView.Adapter<ListAdaptor.ViewHolder> {
                                 .setMessage("Do you want to join a Meeting scheduled " +
                                         "on " + time);
                     }
+
                     joinDialog.setPositiveButton("Join", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
@@ -112,9 +111,8 @@ public class ListAdaptor extends RecyclerView.Adapter<ListAdaptor.ViewHolder> {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                         }
-                    })
+                    }).create().show();
 
-                            .create().show();
                 }
             });
 
@@ -266,6 +264,38 @@ public class ListAdaptor extends RecyclerView.Adapter<ListAdaptor.ViewHolder> {
                 break;
             default:
                 timeOfDay = "AM";
+        }
+    }
+
+    private void getMinute(int i) {
+        switch (events.get(i).getMinutes()) {
+            case "1":
+                minuteForTime = "01";
+                break;
+            case "2":
+                minuteForTime = "02";
+                break;
+            case "3":
+                minuteForTime = "03";
+                break;
+            case "4":
+                minuteForTime = "04";
+                break;
+            case "5":
+                minuteForTime = "05";
+                break;
+            case "6":
+                minuteForTime = "06";
+                break;
+            case "7":
+                minuteForTime = "07";
+                break;
+            case "8":
+                minuteForTime = "08";
+                break;
+            case "9":
+                minuteForTime = "09";
+                break;
         }
     }
 

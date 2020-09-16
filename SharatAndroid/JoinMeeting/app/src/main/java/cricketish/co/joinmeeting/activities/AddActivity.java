@@ -1,4 +1,4 @@
-package cricketish.co.joinmeeting;
+package cricketish.co.joinmeeting.activities;
 
 import android.app.AlarmManager;
 import android.app.AlertDialog;
@@ -33,6 +33,10 @@ import java.io.OutputStreamWriter;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+import cricketish.co.joinmeeting.R;
+import cricketish.co.joinmeeting.utils.AlertReceiver;
+import cricketish.co.joinmeeting.utils.ListAdaptor;
+
 public class AddActivity extends AppCompatActivity {
 
     int years, day, hour, minutes, month, amOrPm;
@@ -42,7 +46,7 @@ public class AddActivity extends AppCompatActivity {
     Button btnOther, btnTime;
     EditText etName = null, etLink = null;
     ClipboardManager clipboardManager;
-    final Calendar calendar = Calendar.getInstance();
+    Calendar calendar2 = Calendar.getInstance();
 
 
     // This function is to bring the button on the Action Bar (Till 56)
@@ -58,7 +62,7 @@ public class AddActivity extends AppCompatActivity {
 
         switch (item.getItemId()) {
             case R.id.btnList:
-                Intent intent = new Intent(getApplicationContext(), cricketish.co.joinmeeting.ListView.class);
+                Intent intent = new Intent(getApplicationContext(), ListActivity.class);
                 startActivity(intent);
                 overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
                 break;
@@ -113,9 +117,10 @@ public class AddActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 setDateAndTime();
-                btnTime.setText(finalTime);
             }
         });
+        btnTime.setText(finalTime);
+
 
         btnZoom.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -217,7 +222,7 @@ public class AddActivity extends AppCompatActivity {
                         name = getName();
                         link = getLink();
                         saveData(name, link, meet, day, month, years, hour, minutes);
-                        Intent intentTwo = new Intent(getApplicationContext(), cricketish.co.joinmeeting.ListView.class);
+                        Intent intentTwo = new Intent(getApplicationContext(), ListActivity.class);
                         intentTwo.putExtra("meet", meet);
                         intentTwo.putExtra("name", name);
                         intentTwo.putExtra("link", link);
@@ -321,6 +326,7 @@ public class AddActivity extends AppCompatActivity {
 
     // This is the date and time picker dialog
     private void setDateAndTime() {
+        final Calendar calendar = Calendar.getInstance();
         DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int ThisMonth, int dayOfMonth) {
@@ -328,6 +334,7 @@ public class AddActivity extends AppCompatActivity {
                 years = year;
                 setMonth(ThisMonth);
                 month = ThisMonth;
+                calendar2 = calendar;
 
                 calendar.set(Calendar.YEAR, year);
                 calendar.set(Calendar.MONTH, ThisMonth);
@@ -362,7 +369,7 @@ public class AddActivity extends AppCompatActivity {
 
     // This method passes Intent values from this activity to the Adaptor
     private void passIntent() {
-        Intent intent = new Intent(getApplicationContext(), cricketish.co.joinmeeting.ListView.class);
+        Intent intent = new Intent(getApplicationContext(), ListActivity.class);
         intent.putExtra("meet", meet);
         intent.putExtra("name", name);
         intent.putExtra("link", link);
@@ -409,9 +416,9 @@ public class AddActivity extends AppCompatActivity {
         if (isValidInput()) {
             saveData(name, link, meet, day, month, years, hour, minutes);
             passIntent();
-            if (notify) {
-                startAlarm(calendar);
-            }
+            Intent intent3 = new Intent(AddActivity.this, ListActivity.class);
+            startAlarm(calendar2);
+
         } else {
             Toast.makeText(AddActivity.this, "Please enter all fields", Toast.LENGTH_SHORT).show();
         }

@@ -1,16 +1,17 @@
-package cricketish.co.joinmeeting;
+package cricketish.co.joinmeeting.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
+
+import cricketish.co.joinmeeting.R;
 
 public class ThemeActivity extends AppCompatActivity {
 
-    ImageView btnBack, ivLogoTheme;
+    ImageView btnBack;
     boolean activityBoolean;
 
     @Override
@@ -19,14 +20,13 @@ public class ThemeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_theme);
 
         btnBack = findViewById(R.id.btnBack);
-        ivLogoTheme = findViewById(R.id.ivLogoTheme);
 
         activityBoolean = getIntent().getBooleanExtra("activity", true);
         if (activityBoolean) {
             btnBack.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent backIntent = new Intent(getApplicationContext(), ListView.class);
+                    Intent backIntent = new Intent(getApplicationContext(), ListActivity.class);
                     startActivity(backIntent);
                 }
             });

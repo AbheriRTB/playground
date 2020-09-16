@@ -36,6 +36,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="monospace"
                 android:text="@string/nameMeet"
+                android:maxLength="15"
                 android:textColor="#3A3A3A"
                 android:textSize="24sp" />
 
@@ -44,6 +45,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fontFamily="monospace"
+                android:maxLength="25"
                 android:text="@string/linkMeet" />
 
         </LinearLayout>

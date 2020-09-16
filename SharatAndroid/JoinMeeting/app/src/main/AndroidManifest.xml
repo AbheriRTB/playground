@@ -10,21 +10,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <receiver android:name=".JoinWidget">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/join_widget_info" />
-        </receiver>
 
         <activity
-            android:name=".ThemeActivity"
+            android:name=".activities.ThemeActivity"
             android:theme="@style/AppTheme_Theme" />
         <activity
-            android:name=".SplashActivity"
+            android:name=".activities.SplashActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,18 +23,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AboutActivity">
+        <activity android:name=".activities.AboutActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ListView" />
+                android:value=".activities.ListActivity" />
         </activity>
-        <activity android:name=".AddActivity">
+        <activity android:name=".activities.AddActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ListView" />
+                android:value=".activities.ListActivity" />
         </activity>
-        <activity android:name=".SettingsActivity" />
-        <activity android:name=".ListView">
+        <activity android:name=".activities.SettingsActivity" />
+        <activity android:name=".activities.ListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
@@ -52,7 +43,7 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
-        <receiver android:name=".AlertReceiver"/>
+        <receiver android:name=".utils.AlertReceiver"/>
     </application>
 
 </manifest>

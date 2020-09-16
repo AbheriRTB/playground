@@ -1,4 +1,4 @@
-package cricketish.co.joinmeeting;
+package cricketish.co.joinmeeting.utils;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

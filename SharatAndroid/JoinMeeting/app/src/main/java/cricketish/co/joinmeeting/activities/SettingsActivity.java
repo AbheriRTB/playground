@@ -1,9 +1,8 @@
-package cricketish.co.joinmeeting;
+package cricketish.co.joinmeeting.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.ListActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -13,6 +12,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
+
+import cricketish.co.joinmeeting.R;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -36,7 +37,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         switch (item.getItemId()) {
             case R.id.btnHome:
-                Intent intent = new Intent(getApplicationContext(), ListView.class);
+                Intent intent = new Intent(getApplicationContext(), ListActivity.class);
                 startActivity(intent);
                 break;
 
@@ -49,7 +50,7 @@ public class SettingsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
-        final Intent toListIntent = new Intent(SettingsActivity.this, ListView.class);
+        final Intent toListIntent = new Intent(SettingsActivity.this, ListActivity.class);
 
         switchNotify = findViewById(R.id.swichNotify);
         btnApply = findViewById(R.id.btnApply);
@@ -76,7 +77,7 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     private void saveAndLoadData() {
-        final Intent settingsIntent = new Intent(SettingsActivity.this, ListView.class);
+        final Intent settingsIntent = new Intent(SettingsActivity.this, ListActivity.class);
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean(SWITCH1, switchNotify.isChecked());
