@@ -37,7 +37,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         switch (item.getItemId()) {
             case R.id.btnHome:
-                Intent intent = new Intent(getApplicationContext(), ListActivity.class);
+                Intent intent = new Intent(getApplicationContext(), ListViewActivity.class);
                 startActivity(intent);
                 break;
 
@@ -50,7 +50,7 @@ public class SettingsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
-        final Intent toListIntent = new Intent(SettingsActivity.this, ListActivity.class);
+        final Intent toListIntent = new Intent(SettingsActivity.this, ListViewActivity.class);
 
         switchNotify = findViewById(R.id.swichNotify);
         btnApply = findViewById(R.id.btnApply);
@@ -77,7 +77,7 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     private void saveAndLoadData() {
-        final Intent settingsIntent = new Intent(SettingsActivity.this, ListActivity.class);
+        final Intent settingsIntent = new Intent(SettingsActivity.this, ListViewActivity.class);
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean(SWITCH1, switchNotify.isChecked());

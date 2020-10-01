@@ -10,7 +10,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity
             android:name=".activities.ThemeActivity"
             android:theme="@style/AppTheme_Theme" />
@@ -22,19 +21,23 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+            <meta-data
+                android:name="android.app.shortcuts"
+                android:resource="@xml/shortcuts" />
         </activity>
         <activity android:name=".activities.AboutActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activities.ListActivity" />
+                android:value=".activities.ListViewActivity" />
         </activity>
         <activity android:name=".activities.AddActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activities.ListActivity" />
+                android:value=".activities.ListViewActivity" />
         </activity>
         <activity android:name=".activities.SettingsActivity" />
-        <activity android:name=".activities.ListActivity">
+        <activity android:name=".activities.ListViewActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
@@ -43,7 +46,8 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
-        <receiver android:name=".utils.AlertReceiver"/>
+
+        <receiver android:name=".utils.AlertReceiver" />
     </application>
 
 </manifest>

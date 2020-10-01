@@ -3,6 +3,7 @@ package cricketish.co.joinmeeting.activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -16,11 +17,14 @@ import android.graphics.Canvas;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.io.BufferedReader;
@@ -38,7 +42,7 @@ import cricketish.co.joinmeeting.utils.List;
 import cricketish.co.joinmeeting.utils.ListAdaptor;
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
 
-public class ListActivity extends AppCompatActivity {
+public class ListViewActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
     RecyclerView.Adapter myAdaptor;
@@ -46,9 +50,12 @@ public class ListActivity extends AppCompatActivity {
     ItemTouchHelper itemTouchHelper;
     ArrayList<List> lists;
     ConstraintLayout layout;
-    TextView tvMeeting;
+    TextView tvMeeting, tvFirst;
     AlertDialog.Builder dialog;
     Calendar calendar;
+    ImageView ivRight, ivLeft;
+    FloatingActionButton btnAdd2;
+    Toolbar toolbar;
 
     //For the function when  Undo clicked
     List deletedMovie = null;
@@ -57,8 +64,10 @@ public class ListActivity extends AppCompatActivity {
     //  This function is to bring the button on the Action Bar (From Here)
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-
-        getMenuInflater().inflate(R.menu.list, menu);
+        MenuInflater inflater = getMenuInflater();
+        //inflater.inflate(R.menu.lists, menu);
+        //return true;
+        getMenuInflater().inflate(R.menu.lists, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -66,7 +75,7 @@ public class ListActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
         switch (item.getItemId()) {
-            case R.id.btnAdd:
+            /*case R.id.btnAdd:
                 Intent intent = new Intent(getApplicationContext(), AddActivity.class);
                 startActivity(intent);
                 break;
@@ -75,6 +84,17 @@ public class ListActivity extends AppCompatActivity {
                 startActivity(intent);
                 break;
             case R.id.btnSettings:
+                intent = new Intent(getApplicationContext(), SettingsActivity.class);
+                openSettingsDialog();
+                //startActivity(intent);
+                break;*/
+            case R.id.menuAbout:
+                Intent intent;
+                intent = new Intent(getApplicationContext(), AboutActivity.class);
+                //openSettingsDialog();
+                startActivity(intent);
+                break;
+            case R.id.menuSettings:
                 intent = new Intent(getApplicationContext(), SettingsActivity.class);
                 openSettingsDialog();
                 //startActivity(intent);
@@ -93,14 +113,14 @@ public class ListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_view);
 
-        String meet = getIntent().getStringExtra("meet");
+        /*String meet = getIntent().getStringExtra("meet");
         String name = getIntent().getStringExtra("name");
         String link = getIntent().getStringExtra("link");
         String month = getIntent().getStringExtra("month");
         String day = getIntent().getStringExtra("day");
         String year = getIntent().getStringExtra("year");
         String hour = getIntent().getStringExtra("hour");
-        String minutes = getIntent().getStringExtra("minutes");
+        String minutes = getIntent().getStringExtra("minutes");*/
 
         SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
         boolean firstTime = prefs.getBoolean("firstTime", true);
@@ -109,10 +129,18 @@ public class ListActivity extends AppCompatActivity {
         if (firstTime)
             openBetaDialog();
 
-        layout = findViewById(R.id.layot);
-        layout.setVisibility(View.INVISIBLE);
+        tvFirst = findViewById(R.id.tvFirst);
+        tvFirst.setVisibility(View.INVISIBLE);
         tvMeeting = findViewById(R.id.tvMeeting);
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        ivRight = findViewById(R.id.ivTopRightAdd);
+        ivLeft = findViewById(R.id.ivTopLeftAdd);
+        tvMeeting = findViewById(R.id.tvMeeting);
+        btnAdd2 = findViewById(R.id.btnAdd2);
         tvMeeting.setVisibility(View.VISIBLE);
+        ivLeft.setVisibility(View.VISIBLE);
+        ivRight.setVisibility(View.VISIBLE);
 
         recyclerView = findViewById(R.id.list);
         recyclerView.setHasFixedSize(true);
@@ -126,9 +154,19 @@ public class ListActivity extends AppCompatActivity {
         itemTouchHelper = new ItemTouchHelper(simpleCallback);
         itemTouchHelper.attachToRecyclerView(recyclerView);
 
+        final Intent intent = new Intent(ListViewActivity.this, AddActivity.class);
+        btnAdd2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(intent);
+            }
+        });
+
         if (lists.size() == 0) {
-            layout.setVisibility(View.VISIBLE);
+            tvFirst.setVisibility(View.VISIBLE);
             tvMeeting.setVisibility(View.GONE);
+            ivLeft.setVisibility(View.GONE);
+            ivLeft.setVisibility(View.GONE);
         }
     }
 
@@ -136,18 +174,18 @@ public class ListActivity extends AppCompatActivity {
     //  This function wraps up the data for the list from the .txt file
     ArrayList<List> loadData() {
 
-        File file = getApplicationContext().getFileStreamPath("cricketish.data.txt");
+        File file = getApplicationContext().getFileStreamPath("join.meeting.data.txt");
         String lineFromFile;
         ArrayList<List> retArrayList = new ArrayList<List>();
 
         if (file.exists()) {
             try {
-                BufferedReader reader = new BufferedReader(new InputStreamReader(openFileInput("cricketish.data.txt")));
+                BufferedReader reader = new BufferedReader(new InputStreamReader(openFileInput("join.meeting.data.txt")));
                 while ((lineFromFile = reader.readLine()) != null) {
                     StringTokenizer tokens = new StringTokenizer(lineFromFile, ",");
 
                     String tokenName = "noname", tokenLink = "nolink", tokenMeet = "nomeet",
-                            tokenDate = "1", tokenYear = "2020", tokenMinute = "1";
+                            tokenDate = "1", tokenYear = "2020", tokenMinute = "05";
                     int tokenHour = 1, tokenMonth = 1;
 
                     if (tokens.hasMoreElements())
@@ -202,7 +240,7 @@ public class ListActivity extends AppCompatActivity {
             switch (direction) {
                 case ItemTouchHelper.LEFT:
                     deletedMovie = lists.get(position);
-                    dialog = new AlertDialog.Builder(ListActivity.this);
+                    dialog = new AlertDialog.Builder(ListViewActivity.this);
                     dialog
                             .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
                                 @Override
@@ -240,10 +278,10 @@ public class ListActivity extends AppCompatActivity {
         @Override
         public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
             new RecyclerViewSwipeDecorator.Builder(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
-                    .addSwipeLeftBackgroundColor(ContextCompat.getColor(ListActivity.this, R.color.Bin))
+                    .addSwipeLeftBackgroundColor(ContextCompat.getColor(ListViewActivity.this, R.color.Bin))
                     .addSwipeLeftActionIcon(R.drawable.bin)
                     .addSwipeLeftLabel("Delete")
-                    .setSwipeLeftLabelColor(ContextCompat.getColor(ListActivity.this, R.color.White))
+                    .setSwipeLeftLabelColor(ContextCompat.getColor(ListViewActivity.this, R.color.White))
                     .create()
                     .decorate();
             super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
@@ -262,7 +300,7 @@ public class ListActivity extends AppCompatActivity {
     void saveAllData() {
 
         try {
-            FileOutputStream file = openFileOutput("cricketish.data.txt", MODE_PRIVATE);
+            FileOutputStream file = openFileOutput("join.meeting.data.txt", MODE_PRIVATE);
             OutputStreamWriter outputFile = new OutputStreamWriter(file);
             for (int i = 0; i < lists.size(); ++i) {
                 outputFile.write(lists.get(i).getName() + "," + lists.get(i).getLink() + "," + lists.get(i).getMeet() +
@@ -271,14 +309,14 @@ public class ListActivity extends AppCompatActivity {
             outputFile.close();
 
         } catch (IOException e) {
-            Toast.makeText(ListActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(ListViewActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
         }
 
     }
 
     //  The beta dialog creator which appears on the start off the activity
     public void openBetaDialog() {
-        final AlertDialog.Builder betaDialog = new AlertDialog.Builder(ListActivity.this);
+        final AlertDialog.Builder betaDialog = new AlertDialog.Builder(ListViewActivity.this);
         betaDialog.setTitle("Warning!")
 
                 .setMessage("This app is still in Beta stages, if found any error please report it " +
@@ -304,10 +342,11 @@ public class ListActivity extends AppCompatActivity {
 
     }
 
-    private void openSettingsDialog(){
+    // Settings dialog
+    private void openSettingsDialog() {
         final String formsLink = "https://forms.gle/8QbJZHrGxQMNHFnX9";
 
-        final AlertDialog.Builder settingsDialog = new AlertDialog.Builder(ListActivity.this);
+        final AlertDialog.Builder settingsDialog = new AlertDialog.Builder(ListViewActivity.this);
         settingsDialog.setTitle("Work in progress")
                 .setMessage("The Settings page is still in the making," +
                         " you can have a review or just ignore")
@@ -316,7 +355,7 @@ public class ListActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         Intent forms = new Intent(android.content.Intent.ACTION_VIEW,
                                 Uri.parse(formsLink));
-                        ListActivity.this.startActivity(forms);
+                        ListViewActivity.this.startActivity(forms);
                     }
                 })
                 .setPositiveButton("ok", new DialogInterface.OnClickListener() {
@@ -328,7 +367,6 @@ public class ListActivity extends AppCompatActivity {
 
 
     }
-
 
 
 }

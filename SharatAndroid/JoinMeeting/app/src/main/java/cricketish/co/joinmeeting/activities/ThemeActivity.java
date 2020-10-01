@@ -26,7 +26,7 @@ public class ThemeActivity extends AppCompatActivity {
             btnBack.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent backIntent = new Intent(getApplicationContext(), ListActivity.class);
+                    Intent backIntent = new Intent(getApplicationContext(), ListViewActivity.class);
                     startActivity(backIntent);
                 }
             });

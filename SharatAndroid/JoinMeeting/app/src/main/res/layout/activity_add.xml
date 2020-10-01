@@ -1,60 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/btnTime2"
+    <ImageView
+        android:id="@+id/imageView3"
         android:layout_width="wrap_content"
-        android:layout_height="38dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:background="@color/colorTransperent"
-        android:fontFamily="monospace"
-        android:hint="@string/date_amp_time"
-        android:textColor="#92000000"
-        android:textSize="20sp"
-        android:elevation="0dp"
-        app:layout_constraintStart_toStartOf="@+id/linearLayout2"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+        android:layout_height="wrap_content"
+        android:translationX="-66dp"
+        android:translationY="-43dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_toprightadd" />
 
-    <TextView
-    android:id="@+id/textView9"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="24dp"
-    android:layout_marginTop="50dp"
-    android:layout_marginEnd="24dp"
-    android:fontFamily="monospace"
-    android:gravity="center"
-    android:text="@string/add"
-    android:textSize="80sp"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent" />
+    <!--<ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_topleft" />-->
 
-<EditText
-    android:id="@+id/etName"
-    style="@style/Widget.AppCompat.EditText"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="25dp"
-    android:layout_marginTop="50dp"
-    android:layout_marginEnd="25dp"
-    android:autofillHints=""
-    android:clickable="false"
-    android:ems="10"
-    android:fontFamily="monospace"
-    android:hint="@string/name"
-    android:inputType="textPersonName"
-    android:maxLength="20"
-    android:textColor="#292929"
-    android:textSize="22sp"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/textView9" />
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:translationX="130dp"
+        android:translationY="-30dp"
+        app:srcCompat="@drawable/top_left_add" />
+
+    <!--<ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_topright2" />-->
 
     <LinearLayout
         android:id="@+id/linearLayout2"
@@ -64,12 +49,13 @@ android:layout_height="match_parent">
         android:layout_marginTop="10dp"
         android:layout_marginEnd="25dp"
         android:orientation="horizontal"
+        android:background="@drawable/custom_layout_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etName">
 
         <EditText
-            android:id="@+id/etLink2"
+            android:id="@+id/etLink"
             style="@style/Widget.AppCompat.EditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -77,64 +63,72 @@ android:layout_height="match_parent">
             android:autofillHints=""
             android:clickable="false"
             android:ems="10"
+            android:padding="12dp"
             android:fontFamily="monospace"
             android:hint="@string/link_paste"
+            android:background="@drawable/custom_input2"
             android:inputType="textPersonName"
-            android:textColor="#292929"
+            android:textColor="@color/color3rd"
             android:textSize="22sp" />
 
         <ImageView
-            android:id="@+id/btnPaste2"
+            android:id="@+id/btnPaste"
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_gravity="center"
-            android:layout_weight="0"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
             android:contentDescription="@string/paste_btn"
             app:srcCompat="@drawable/paste" />
 
     </LinearLayout>
 
-<com.google.android.material.floatingactionbutton.FloatingActionButton
-    android:id="@+id/floatingActionButton"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginEnd="24dp"
-    android:layout_marginBottom="24dp"
-    android:backgroundTint="@color/colorPrimary"
-    android:clickable="true"
-    android:focusable="true"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:srcCompat="@drawable/add" />
+    <EditText
+        android:id="@+id/etName"
+        style="@style/Widget.AppCompat.EditText"
+        android:layout_width="match_parent"
+        android:padding="12dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="25dp"
+        android:autofillHints=""
+        android:clickable="false"
+        android:ems="10"
+        android:fontFamily="monospace"
+        android:hint="@string/name"
+        android:inputType="textPersonName"
+        android:maxLength="20"
+        android:background="@drawable/custom_input"
+        android:textColor="@color/color3rd"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
-    <TextView
-        android:id="@+id/textView10"
+    <Button
+        android:id="@+id/btnTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginBottom="34dp"
-        android:fontFamily="@font/jetbrains_extralight"
-        android:text="@string/copyright"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/textView13"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:fontFamily="@font/jetbrains_extralight"
-        android:text="is a Zoom meeting"
-        app:layout_constraintStart_toStartOf="@+id/btnTime2"
-        app:layout_constraintTop_toBottomOf="@+id/btnTime2" />
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:background="@color/colorTransperent"
+        android:elevation="0dp"
+        android:fontFamily="monospace"
+        android:hint="@string/date_amp_time"
+        android:textColor="#92000000"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/tvAutoIndicate"
+        app:layout_constraintTop_toBottomOf="@+id/tvAutoIndicate" />
 
     <LinearLayout
+        android:id="@+id/linearLayout3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="24dp"
         android:orientation="horizontal"
-        app:layout_constraintStart_toStartOf="@+id/textView13"
-        app:layout_constraintTop_toBottomOf="@+id/textView13">
+        app:layout_constraintStart_toStartOf="@+id/btnTime"
+        app:layout_constraintTop_toBottomOf="@+id/btnTime">
 
         <ImageView
             android:id="@+id/btnGMeet"
@@ -164,11 +158,70 @@ android:layout_height="match_parent">
             app:srcCompat="@mipmap/zoom" />
 
         <ImageView
-            android:id="@+id/imageView5"
+            android:id="@+id/btnOther"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginStart="10dp"
             app:srcCompat="@mipmap/other" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="60dp"
+        android:fontFamily="monospace"
+        android:gravity="center"
+        android:text="@string/add"
+        android:textColor="#E6FFFFFF"
+        android:textSize="85sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/jetbrains_extralight"
+        android:text="@string/copyright"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout3"
+        app:layout_constraintTop_toTopOf="@+id/btnAdd" />
+
+    <TextView
+        android:id="@+id/tvAutoIndicate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/jetbrains_extralight"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout2"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/add" />
+
+    <ImageView
+        android:id="@+id/btnBack"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="4dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/back" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

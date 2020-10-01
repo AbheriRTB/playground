@@ -46,7 +46,7 @@ public class SplashActivity extends AppCompatActivity {
 
 
                 Intent myIntent;
-                myIntent = new Intent(self, ListActivity.class);
+                myIntent = new Intent(self, ListViewActivity.class);
 
                 // Close SplashScreenActivity.class
                 finish();

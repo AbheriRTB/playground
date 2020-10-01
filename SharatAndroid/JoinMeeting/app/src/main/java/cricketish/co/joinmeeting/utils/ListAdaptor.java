@@ -59,7 +59,7 @@ public class ListAdaptor extends RecyclerView.Adapter<ListAdaptor.ViewHolder> {
                     final String openLink = events.get(i).getLink();
                     getHour(i);
                     getMonths(i);
-                    getMinute(i);
+                    //getMinute(i);
                     joinDialog.setTitle("Join Meeting " + events.get(i).getName());
 
                     if (events.get(i).getDate().equals("1") || events.get(i).getDate().equals("21"))
@@ -69,10 +69,10 @@ public class ListAdaptor extends RecyclerView.Adapter<ListAdaptor.ViewHolder> {
                     else if (events.get(i).getDate().equals("3") || events.get(i).getDate().equals("23"))
                         timeSuffix = "rd ";
                     else
-                        timeSuffix = "st ";
+                        timeSuffix = "th ";
 
-                    time = events.get(i).getDate() + timeSuffix + strMonth + " at " + hourForTime + ":"
-                            + minuteForTime + " now?";
+                    time = events.get(i).getDate() + timeSuffix + strMonth + /*" at " + events.get(i).getHour() + ":"
+                            + events.get(i).getMinutes() + */" now?";
 
                     if (events.get(i).getMeet().equalsIgnoreCase("zoom")) {
                         joinDialog.setIcon(R.mipmap.zoom)
@@ -267,7 +267,7 @@ public class ListAdaptor extends RecyclerView.Adapter<ListAdaptor.ViewHolder> {
         }
     }
 
-    private void getMinute(int i) {
+    /*private void getMinute(int i) {
         switch (events.get(i).getMinutes()) {
             case "1":
                 minuteForTime = "01";
@@ -297,7 +297,7 @@ public class ListAdaptor extends RecyclerView.Adapter<ListAdaptor.ViewHolder> {
                 minuteForTime = "09";
                 break;
         }
-    }
+    }*/
 
 }
 

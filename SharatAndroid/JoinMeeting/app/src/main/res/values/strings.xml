@@ -43,4 +43,7 @@
     <string name="add_widget">Add widget</string>
     <string name="settings">Settings</string>
     <string name="home">Home</string>
+    <string name="shortcut_label_short">Add</string>
+    <string name="shortcut_label_long">Add a Meeting</string>
+    <string name="shortcut_disabled_short">Disabled</string>
 </resources>
