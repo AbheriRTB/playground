@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".SettingsActivity">
+
+    <TextView
+        android:id="@+id/tvSettings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:fontFamily="monospace"
+        android:text="@string/settings"
+        android:textColor="#51252525"
+        android:textSize="70sp" />
+
+    <Button
+        android:id="@+id/btnMeasurement"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="monospace"
+        android:layout_gravity="center"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/custom_btn_weight"
+        android:paddingRight="15dp"
+        android:paddingLeft="15dp"
+        android:text="@string/measurement"
+        android:textSize="18sp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp">
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_gravity="center"
+            android:text="@string/number_of_items"
+            android:layout_weight="5"
+            android:textSize="20sp"/>
+
+        <EditText
+            android:id="@+id/editTextNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:weight="3"
+            android:textSize="20sp"
+            android:ems="10"
+            android:text="@string/_6"
+            android:hint="@string/max_6"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"
+            android:inputType="number" />
+    </LinearLayout>
+
+</LinearLayout>

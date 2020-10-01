@@ -166,7 +166,9 @@
         android:layout_marginTop="10dp"
         android:layout_marginRight="15dp"
         android:background="@drawable/custom_btn"
-        android:text="Send"
-        android:textColor="#FFFFFF" />
+        android:fontFamily="monospace"
+        android:text="Submit"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp" />
 
 </LinearLayout>

@@ -14,7 +14,8 @@ import cricketish.co.joinmeeting.R;
 
 public class SplashActivity extends AppCompatActivity {
 
-
+    ImageView ivSplash;
+    Animation animation;
     public static Context c;
     Activity self;
     long Delay = 3000;
@@ -22,7 +23,16 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        View decorView = getWindow().getDecorView();
+
+        int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
+        decorView.setSystemUiVisibility(uiOptions);
+
         setContentView(R.layout.activity_splash);
+
+
 
 
         //Intent intent = new Intent(this, ListView.class);
@@ -54,7 +64,7 @@ public class SplashActivity extends AppCompatActivity {
 
                 // Start MainActivity.class
                 startActivity(myIntent);
-                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
 
             }
         };
@@ -63,7 +73,8 @@ public class SplashActivity extends AppCompatActivity {
         RunSplash.schedule(ShowSplash, Delay);
     }
 
-    public static Context getAppContext() {
+    public static Context getAppContext()
+    {
         return c;
     }
 
