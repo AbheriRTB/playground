@@ -71,8 +71,8 @@ public class ListAdaptor extends RecyclerView.Adapter<ListAdaptor.ViewHolder> {
                     else
                         timeSuffix = "th ";
 
-                    time = events.get(i).getDate() + timeSuffix + strMonth + /*" at " + events.get(i).getHour() + ":"
-                            + events.get(i).getMinutes() + */" now?";
+                    time = events.get(i).getDate() + timeSuffix + strMonth + " at " + hourForTime + ":"
+                            + events.get(i).getMinutes() + timeOfDay + " now?";
 
                     if (events.get(i).getMeet().equalsIgnoreCase("zoom")) {
                         joinDialog.setIcon(R.mipmap.zoom)

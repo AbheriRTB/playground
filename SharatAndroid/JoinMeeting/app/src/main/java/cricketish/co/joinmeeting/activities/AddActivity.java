@@ -137,12 +137,12 @@ public class AddActivity extends AppCompatActivity {
             public void onClick(View view) {
                 setDateAndTime();
                 String meeting;
-                if (isValidInput()){
+                if (isValidInput()) {
                     meeting = "Valid Meeting";
-                }else {
+                } else {
                     meeting = "Invalid Meeting";
                 }
-                String forAutoIndicate = "It is a "+meeting;
+                String forAutoIndicate = "It is a " + meeting;
                 tvAutoIndicate.setText(forAutoIndicate);
             }
         });
@@ -471,14 +471,18 @@ public class AddActivity extends AppCompatActivity {
     // This is the clipboard Data
     private void clipData() {
         ClipData clipData = clipboardManager.getPrimaryClip();
-        ClipData.Item item = null;
-        item = clipData.getItemAt(0);
-        if (item == null || item.getText().length() == 0) {
-            Toast.makeText(this, "Nothing in the clipboard", Toast.LENGTH_SHORT).show();
+        ClipData.Item item;
+        if (clipData == null) {
+            Toast.makeText(this, "Nothing in the Clipboard", Toast.LENGTH_SHORT).show();
         } else {
-            etLink.setText(item.getText());
-            etLink.setTextColor(ContextCompat.getColor(AddActivity.this, R.color.color3rd));
-            Toast.makeText(AddActivity.this, "Pasted", Toast.LENGTH_LONG).show();
+            item = clipData.getItemAt(0);
+            if (item == null || item.getText().length() == 0) {
+                Toast.makeText(this, "Nothing in the clipboard", Toast.LENGTH_SHORT).show();
+            } else {
+                etLink.setText(item.getText());
+                etLink.setTextColor(ContextCompat.getColor(AddActivity.this, R.color.color3rd));
+                Toast.makeText(AddActivity.this, "Pasted", Toast.LENGTH_LONG).show();
+            }
         }
 
 
@@ -535,8 +539,7 @@ public class AddActivity extends AppCompatActivity {
             } else {
                 openValidDialog();
             }
-            saveData(name, link, meet, day, month, years, hour, minutes);
-            passIntent();
+            btnPackage(meet, meetLink);
 
         } else {
             Toast.makeText(AddActivity.this, "Please enter all fields", Toast.LENGTH_SHORT).show();

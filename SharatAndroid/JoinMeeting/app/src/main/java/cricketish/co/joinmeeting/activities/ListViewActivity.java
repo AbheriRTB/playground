@@ -166,7 +166,7 @@ public class ListViewActivity extends AppCompatActivity {
             tvFirst.setVisibility(View.VISIBLE);
             tvMeeting.setVisibility(View.GONE);
             ivLeft.setVisibility(View.GONE);
-            ivLeft.setVisibility(View.GONE);
+            ivRight.setVisibility(View.GONE);
         }
     }
 
@@ -304,7 +304,8 @@ public class ListViewActivity extends AppCompatActivity {
             OutputStreamWriter outputFile = new OutputStreamWriter(file);
             for (int i = 0; i < lists.size(); ++i) {
                 outputFile.write(lists.get(i).getName() + "," + lists.get(i).getLink() + "," + lists.get(i).getMeet() +
-                        "," + lists.get(i).getDate() + "," + lists.get(i).getMonth() + "\n");
+                        "," + lists.get(i).getDate() + "," + lists.get(i).getMonth() + "," + lists.get(i).getYear() + "," +
+                        lists.get(i).getHour() + "," + lists.get(i).getMinutes() + "\n");
             }
             outputFile.close();
 
