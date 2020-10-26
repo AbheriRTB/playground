@@ -12,7 +12,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   List <Quotes> quote = [
-    
+    Quotes(author: "Sharat", quote: '"Evoryone no one beleave anyone"'),
   ];  
   
   @override

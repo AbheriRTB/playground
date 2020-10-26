@@ -1,5 +1,5 @@
 class Quotes{
-  String Author, Quote;
+  String author, quote;
 
-  Quotes(this.Author, this.Quote);
+  Quotes({this.author, this.quote});
 }
