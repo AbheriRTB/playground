@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="9c58a9d1-2013-4e86-a3f2-f22458da7831" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../Alert/app/src/main/ic_launcher-playstore.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Alert/app/src/main/java/abheri/co/alert/AssistanceWidgetConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Alert/app/src/main/java/abheri/co/alert/ExampleAppWidgetProvider.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Alert/app/src/main/res/drawable/call.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Alert/app/src/main/res/drawable/custom_btn.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Alert/app/src/main/res/drawable/ic_launcher_foreground.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Alert/app/src/main/res/layout/activity_assistance_widget_config.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Alert/app/src/main/res/layout/widget.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Alert/app/src/main/res/values/ic_launcher_background.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Alert/app/src/main/res/xml/app_widget.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JoinMeeting/app/src/main/res/layout/activity_about.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../JoinMeeting/app/src/main/res/layout/activity_about.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JoinMeeting/app/src/main/res/layout/activity_list_view.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../JoinMeeting/app/src/main/res/layout/activity_list_view.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JoinMeeting/app/src/main/res/layout/activity_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../JoinMeeting/app/src/main/res/layout/activity_settings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JoinMeeting/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../JoinMeeting/app/src/main/res/values/strings.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectId" id="1iURGPsEa15loDpAVfTBCBKYPhW" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
+    <property name="show.migrate.to.gradle.popup" value="false" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="9c58a9d1-2013-4e86-a3f2-f22458da7831" name="Default Changelist" comment="" />
+      <created>1601960087199</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1601960087199</updated>
+    </task>
+    <servers />
+  </component>
+</project>
