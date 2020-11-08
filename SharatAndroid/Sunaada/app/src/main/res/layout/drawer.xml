@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:fontFamily="@font/vector_mono"
+        android:fontFamily="@font/vector_mono_italic"
         android:paddingEnd="30dp"
         android:text="Sunaad"
         android:textAllCaps="true"

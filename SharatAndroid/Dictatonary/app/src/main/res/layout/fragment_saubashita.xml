@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tvHead"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="94dp"
+        android:fontFamily="@font/poppins_light"
+        android:text="सुभाषित"
+        android:textSize="64sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvHeadEng"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/vector_mono_semi_bold"
+        android:text="@string/subashita"
+        android:textColor="@color/colorPrimary"
+        android:translationX="-18dp"
+        android:translationY="-24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvHead" />
+
+    <TextView
+        android:id="@+id/tvSubashitaSan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="5dp"
+        android:fontFamily="@font/poppins_light"
+        android:text="अधमा: धनमिच्छन्ति धनम् मानम् च मध्यमा:।\nत्तमा: मानमिच्छन्ति मानो हि महताम् धनम् ॥  "
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/coordinatorLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvHeadEng"
+        app:layout_constraintVertical_bias="0.25" />
+
+    <TextView
+        android:id="@+id/tvSubashitaEng"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="32dp"
+        android:fontFamily="@font/vector_mono_regular"
+        android:text="An inferior person's desire is money. An average person will desire money and respect. A great person desires respect (and not Money). Respect is superior to money."
+        android:textAlignment="center"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvSubashitaSan" />
+</androidx.constraintlayout.widget.ConstraintLayout>

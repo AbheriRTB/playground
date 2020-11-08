@@ -4,14 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".activites.MainActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?attr/colorPrimary"
@@ -23,6 +22,8 @@
             app:layout_constraintTop_toTopOf="parent"
             app:menu="@menu/home_menu"
             app:navigationIcon="@drawable/menu">
+            <include
+                android:id="@+id/toolbarMain"/>
 
             <TextView
                 android:id="@+id/custom_title"
@@ -52,7 +53,7 @@
                 android:id="@+id/navigation"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_gravity="start|left"
+                android:layout_gravity="start"
                 app:headerLayout="@layout/drawer"
                 app:menu="@menu/drawer" />
         </androidx.coordinatorlayout.widget.CoordinatorLayout>

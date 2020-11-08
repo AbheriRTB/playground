@@ -1,15 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:title="CONCERTS">
+    <item android:title="@string/home"/>
+    <item android:title="@string/concerts">
         <menu>
-            <item android:title="Artist" />
-            <item android:title="Venue" />
+            <item android:title="@string/upcoming"
+                android:id="@+id/upcoming_con"/>
+            <item android:title="@string/artists"
+                android:id="@+id/artists_con"/>
+            <item android:title="@string/by_venue"
+                android:id="@+id/venue_con"/>
+            <item android:title="@string/organizers"
+                android:id="@+id/org_con"/>
+            <item android:title="@string/event_types"
+                android:id="@+id/event_con"/>
         </menu>
     </item>
-    <item android:title="CONCERTS2">
+    <item android:title="@string/dictionary">
         <menu>
-            <item android:title="Artist2" />
-            <item android:title="Venue2" />
+            <item android:title="@string/artists"
+                android:id="@+id/artists_dict"/>
+            <item android:title="@string/venues"
+                android:id="@+id/venue_dict"/>
+            <item android:title="@string/organizers"
+                android:id="@+id/org_dict"/>
         </menu>
     </item>
 </menu>
