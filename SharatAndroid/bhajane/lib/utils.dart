@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-String Bhajane;
+String lyrics, name, code, Bhajane;
+
 
 class Shloka extends StatefulWidget {
   Shloka({bhajane shloka}){}
@@ -46,4 +47,5 @@ class _ShlokaState extends State<Shloka> {
 class bhajane {
   String lyrics, name, code;
   bhajane({this.lyrics, this.name, this.code});
+  void blabla(){}
 }

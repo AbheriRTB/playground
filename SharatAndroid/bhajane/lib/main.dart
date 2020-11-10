@@ -5,6 +5,8 @@ import 'pages/splash.dart';
 void main() {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
-    home: MyAppListView(),
+    home: MyAppSplash(),
   ));
 }
+
+// Main File to run app

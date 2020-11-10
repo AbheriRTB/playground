@@ -7,7 +7,7 @@ class MyAppBhajaneOne extends StatefulWidget {
 }
 
 class _MyAppBhajaneTwoState extends State<MyAppBhajaneTwo> {
-  bhajane shloka = bhajane(lyrics: "lyrics", name: "name", code: "#102AB");
+  bhajane shloka = bhajane(lyrics: "lyrics", name: "name", code: "#001AA");
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class MyAppBhajaneTwo extends StatefulWidget {
 }
 
 class _MyAppBhajaneThreeState extends State<MyAppBhajaneTwo> {
-  bhajane shloka = bhajane(lyrics: "lyrics", name: "name", code: "#102AB");
+  bhajane shloka = bhajane(lyrics: "lyrics", name: "name", code: "#002AA");
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +39,7 @@ class MyAppBhajaneThree extends StatefulWidget {
 }
 
 class _MyAppBhajaneOneState extends State<MyAppBhajaneThree> {
-  bhajane shloka = bhajane(lyrics: "lyrics", name: "name", code: "#102AB");
+  bhajane shloka = bhajane(lyrics: "lyrics", name: "name", code: "#003AA");
 
   @override
   Widget build(BuildContext context) {
