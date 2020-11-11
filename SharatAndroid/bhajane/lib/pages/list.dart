@@ -1,5 +1,4 @@
 import 'dart:html';
-
 import 'package:flutter/material.dart';
 
 class MyAppListView extends StatefulWidget {

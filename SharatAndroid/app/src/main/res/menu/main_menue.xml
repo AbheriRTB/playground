@@ -10,4 +10,8 @@
         android:id="@+id/aboutMenu"
         android:icon="@drawable/about"
         app:showAsAction="never"/>
+    <item android:title="Manage"
+        android:id="@+id/manageMenu"
+        android:icon="@drawable/manage"
+        app:showAsAction="ifRoom"/>
 </menu>
