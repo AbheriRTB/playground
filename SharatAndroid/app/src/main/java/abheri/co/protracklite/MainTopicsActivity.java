@@ -27,8 +27,8 @@ public class MainTopicsActivity extends AppCompatActivity {
     RecyclerView.Adapter myAdaptor;
     RecyclerView.LayoutManager layoutManager;
     FloatingActionButton fabAdd;
-
     ArrayList<Topic> topics;
+    CharSequence[] english, social, maths, science, lang;
 
 
     @Override
@@ -44,14 +44,14 @@ public class MainTopicsActivity extends AppCompatActivity {
         topics = new ArrayList<Topic>();
 
 
-        fabAdd = findViewById(R.id.fabAdd);
+        /*fabAdd = findViewById(R.id.fabAdd);
         fabAdd.setColorFilter(Color.WHITE);
         fabAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(MainTopicsActivity.this,
                         R.style.MyThemeOverlay_MaterialComponents_MaterialAlertDialog);
-                LayoutInflater inflater = MainTopicsActivity.this.getLayoutInflater();
+
                 View view = inflater.inflate(R.layout.dialog_text_input, null);
                 builder.setView(view)
                         .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
@@ -69,13 +69,49 @@ public class MainTopicsActivity extends AppCompatActivity {
                 builder.show();
             }
         });
+*/
+        english = new CharSequence[]{
+                "The Fun They Had",
+                "The Sound of Music",
+                "The Little Girl",
+                "A Truly Beautiful Mind",
+                "The Snake and The Mirror",
+                "My Childhood",
+        };
+        science = new CharSequence[]{
+                "Matter in Our Surrounding",
+                "Is Matter Around Us Pure",
+                "Atoms and Molecules",
+                "Structure of the Atom",
+                "The Fundamental of Unit of Life",
+                "Tissues",
+                "Diversity in Living Organism",
+        };
+        social = new CharSequence[]{
+                "The French Revolution",
+                "Socialism in Europe and the Russian Revolution",
+                "Nazism and the Rise of Hitler",
+                "Forest Society and Colonialism",
+                "Pastoralists in the Modern World",
+        };
+        lang = new CharSequence[]{
+                "Chapter V",
+                "Chapter VIII"
+        };
+        maths = new CharSequence[]{
+                "Chapter IX",
+                "Chapter X"
+        };
 
-        topics.add(new Topic("MS Dhoni"));
-        topics.add(new Topic("Ab de Villers"));
-        topics.add(new Topic("Virat Kohli"));
-        topics.add(new Topic("Sharatchandra"));
-
-        myAdaptor = new MainTopicAdaptor(this, topics);
+        topics.add(new Topic("English", english));
+        topics.add(new Topic("Maths", maths));
+        topics.add(new Topic("Social Science", social));
+        topics.add(new Topic("General Science", science));
+        topics.add(new Topic("II lang (Kannada)", lang));
+        topics.add(new Topic("II lang (Sanskrit)", lang));
+        topics.add(new Topic("II lang (Hindi)", lang));
+        LayoutInflater inflater = MainTopicsActivity.this.getLayoutInflater();
+        myAdaptor = new MainTopicAdaptor(this, topics, getResources().getDrawable(R.drawable.custom_dialog), inflater, recyclerView);
         recyclerView.setAdapter(myAdaptor);
 
     }

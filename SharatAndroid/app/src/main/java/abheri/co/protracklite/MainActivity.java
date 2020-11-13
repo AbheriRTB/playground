@@ -18,6 +18,10 @@ import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import abheri.co.protracklite.utils.Subject;
+import abheri.co.protracklite.utils.SubjectDataHelper;
+import abheri.co.protracklite.utils.TopicDataHelper;
+
 public class MainActivity extends AppCompatActivity {
 
     BottomAppBar appBar;
@@ -61,13 +65,14 @@ public class MainActivity extends AppCompatActivity {
         floatingActionButton = findViewById(R.id.floatingActionButton);
 
         floatingActionButton.setColorFilter(Color.WHITE);
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-            }
-        });
+        SubjectDataHelper sdh = new SubjectDataHelper(this);
+        sdh.createSubject("Maths", "Mathematics", 1);
+        sdh.getAllSubjects();
 
+        TopicDataHelper tdh = new TopicDataHelper(this);
+        tdh.createTopic(1, "Chapter I", "This is chapter I", 2);
+        tdh.getAllTopics();
 
     }
 }
