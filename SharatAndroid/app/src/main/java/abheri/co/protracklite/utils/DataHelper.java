@@ -22,6 +22,13 @@ public class DataHelper extends SQLiteOpenHelper {
     public static final String COLUMN_TDISC = "description";
 
 
+    public static final String TABLE_GOAL = "goal";
+    public static final String COLUMN_GID = "_id";
+    public static final String COLUMN_GOAL = "goal";
+    public static final String COLUMN_ENDDATE = "end_date";
+    public static final String COLUMN_GDISC = "description";
+
+
     private static final String DATABASE_NAME = "protrack.db";
 
     private static final int DATABASE_VERSION = 1;
@@ -33,6 +40,17 @@ public class DataHelper extends SQLiteOpenHelper {
             + COLUMN_SUBJECT
             + " text not null,"
             + COLUMN_SUBDISC
+            + " text not null);";
+
+
+    private static final String goal_table = "create table "
+            + TABLE_GOAL + "(" + COLUMN_GID
+            + " integer primary key, "
+            + COLUMN_GOAL
+            + " text not null,"
+            + COLUMN_ENDDATE
+            + " date not null,"
+            + COLUMN_GDISC
             + " text not null);";
 
     private static final String topic_table = "create table "
@@ -62,6 +80,7 @@ public class DataHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(subject_table);
         db.execSQL(topic_table);
+        db.execSQL(goal_table);
     }
 
     @Override
@@ -76,5 +95,10 @@ public class DataHelper extends SQLiteOpenHelper {
     public void DeleteTopicTable(SQLiteDatabase db) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_TOPIC + ";");
     }
+
+    public void DeleteGoalTable(SQLiteDatabase db) {
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_GOAL + ";");
+    }
+
 
 }

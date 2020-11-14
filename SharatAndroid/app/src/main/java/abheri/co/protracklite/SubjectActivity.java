@@ -1,47 +1,53 @@
 package abheri.co.protracklite;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.DialogInterface;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.TextView;
 
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class MainTopicsActivity extends AppCompatActivity {
+import abheri.co.protracklite.utils.SubjectAdaptor;
+import abheri.co.protracklite.utils.Subject;
+import abheri.co.protracklite.utils.SubjectDataHelper;
+import abheri.co.protracklite.utils.OldTopic;
+import abheri.co.protracklite.utils.Topic;
+import abheri.co.protracklite.utils.TopicDataHelper;
+
+public class SubjectActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
     RecyclerView.Adapter myAdaptor;
     RecyclerView.LayoutManager layoutManager;
     FloatingActionButton fabAdd;
-    ArrayList<Topic> topics;
+    ArrayList<OldTopic> oldTopics;
     CharSequence[] english, social, maths, science, lang;
+    List<Subject> list;
+    TextView tvTitle;
+    List<Subject> subjects;
+    List<Topic> topics;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_topics);
+        setContentView(R.layout.activity_subject);
 
         recyclerView = findViewById(R.id.list);
         recyclerView.setHasFixedSize(true);
+        tvTitle = findViewById(R.id.tvTitle2);
 
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        topics = new ArrayList<Topic>();
+        oldTopics = new ArrayList<OldTopic>();
+
+
 
 
         /*fabAdd = findViewById(R.id.fabAdd);
@@ -103,15 +109,20 @@ public class MainTopicsActivity extends AppCompatActivity {
                 "Chapter X"
         };
 
-        topics.add(new Topic("English", english));
-        topics.add(new Topic("Maths", maths));
-        topics.add(new Topic("Social Science", social));
-        topics.add(new Topic("General Science", science));
-        topics.add(new Topic("II lang (Kannada)", lang));
-        topics.add(new Topic("II lang (Sanskrit)", lang));
-        topics.add(new Topic("II lang (Hindi)", lang));
-        LayoutInflater inflater = MainTopicsActivity.this.getLayoutInflater();
-        myAdaptor = new MainTopicAdaptor(this, topics, getResources().getDrawable(R.drawable.custom_dialog), inflater, recyclerView);
+        SubjectDataHelper sdh = new SubjectDataHelper(this);
+
+        subjects = sdh.getAllSubjects();
+        TopicDataHelper tdh = new TopicDataHelper(this);
+        topics = tdh.getAllTopics();
+
+        for (int i = 0; i < subjects.size(); i++){
+            List<Topic> lt;
+            lt = tdh.getTopicsBySubject(subjects.get(i).getId());
+            subjects.get(i).setTopics(lt);
+        }
+
+        LayoutInflater inflater = SubjectActivity.this.getLayoutInflater();
+        myAdaptor = new SubjectAdaptor(this, subjects, getResources().getDrawable(R.drawable.custom_dialog), inflater, recyclerView);
         recyclerView.setAdapter(myAdaptor);
 
     }

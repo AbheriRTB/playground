@@ -1,10 +1,10 @@
 package abheri.co.protracklite.utils;
 
-public class TopicData {
+public class Topic {
     private long id, topicID;
     private String Name, Description;
 
-    public TopicData() {
+    public Topic() {
 
     }
 
@@ -40,7 +40,7 @@ public class TopicData {
         Description = description;
     }
 
-    public TopicData(long id, long topicID, String name, String description) {
+    public Topic(long id, long topicID, String name, String description) {
         this.id = id;
         this.topicID = topicID;
         Name = name;

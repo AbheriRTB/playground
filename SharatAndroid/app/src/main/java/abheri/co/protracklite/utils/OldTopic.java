@@ -1,10 +1,10 @@
-package abheri.co.protracklite;
+package abheri.co.protracklite.utils;
 
-public class Topic {
+public class OldTopic {
     private String Title;
     private CharSequence[] Portions;
 
-    public Topic(String title, CharSequence[] portions) {
+    public OldTopic(String title, CharSequence[] portions) {
         Title = title;
         Portions = portions;
     }

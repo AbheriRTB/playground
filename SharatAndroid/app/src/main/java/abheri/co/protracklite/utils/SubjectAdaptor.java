@@ -1,15 +1,11 @@
-package abheri.co.protracklite;
+package abheri.co.protracklite.utils;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,11 +13,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import abheri.co.protracklite.R;
 
 
-public class MainTopicAdaptor extends RecyclerView.Adapter<MainTopicAdaptor.ViewHolder> {
+public class SubjectAdaptor extends RecyclerView.Adapter<SubjectAdaptor.ViewHolder> {
 
-    private ArrayList<Topic> topic;
+    private List<Subject> subjects;
     MaterialAlertDialogBuilder dialogBuilder;
     Drawable backgroundDialog;
     LayoutInflater inflater;
@@ -29,9 +28,9 @@ public class MainTopicAdaptor extends RecyclerView.Adapter<MainTopicAdaptor.View
     RecyclerView recyclerView;
 
 
-    public MainTopicAdaptor(Context context, ArrayList<Topic> list, Drawable backgroundForDialog, LayoutInflater inflaterForDialog,
-                            RecyclerView recyclerViewForDialog) {
-        topic = list;
+    public SubjectAdaptor(Context context, List<Subject> list, Drawable backgroundForDialog, LayoutInflater inflaterForDialog,
+                          RecyclerView recyclerViewForDialog) {
+        subjects = list;
         dialogBuilder = new MaterialAlertDialogBuilder(context);
         backgroundDialog = backgroundForDialog;
         inflater = inflaterForDialog;
@@ -53,14 +52,7 @@ public class MainTopicAdaptor extends RecyclerView.Adapter<MainTopicAdaptor.View
 
                     final int i = recyclerView.getChildLayoutPosition(v);
                     dialogBuilder.setTitle("Portions")
-                            // TODO: Remove the comment after finishing addPage
-                            /*.setMultiChoiceItems(chapters, bool, new DialogInterface.OnMultiChoiceClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-
-                        }
-                    })*/
-                            .setItems(topic.get(i).getPortions(), null)
+                            .setItems(getTopicTitles(subjects.get(i)), null)
                             .setPositiveButton("Ok", null)
                             .setBackground(backgroundDialog)
                             .show();
@@ -72,20 +64,29 @@ public class MainTopicAdaptor extends RecyclerView.Adapter<MainTopicAdaptor.View
 
     @NonNull
     @Override
-    public MainTopicAdaptor.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public SubjectAdaptor.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.listview, parent, false);
         return new ViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MainTopicAdaptor.ViewHolder holder, int i) {
-        holder.itemView.setTag(topic.get(i));
-        holder.tvTitle.setText(topic.get(i).getTitle());
+    public void onBindViewHolder(@NonNull SubjectAdaptor.ViewHolder holder, int i) {
+        holder.itemView.setTag(subjects.get(i));
+        holder.tvTitle.setText(subjects.get(i).getName());
     }
 
     @Override
     public int getItemCount() {
-        return topic.size();
+        return subjects.size();
+    }
+
+    private CharSequence[] getTopicTitles(Subject subject) {
+        ArrayList<String> csl = new ArrayList<String>();
+        List<Topic> lt = subject.getTopics();
+        for (int i = 0; i < lt.size(); ++i ){
+            csl.add(lt.get(i).getName());   
+        }
+        return(CharSequence[]) csl.toArray();
     }
 }

@@ -82,10 +82,10 @@ public class SubjectDataHelper {
         return subjects;
     }
 
-    public List<Subject> getAllSubjects(long topic_id) {
+    public List<Subject> getSubjects(long subject_id) {
         List<Subject> subjects = new ArrayList<Subject>();
 
-        String query = "SELECT * FROM " + DataHelper.TABLE_SUBJECT + " WHERE " + DataHelper.COLUMN_SID + "=" + topic_id + ";";
+        String query = "SELECT * FROM " + DataHelper.TABLE_SUBJECT + " WHERE " + DataHelper.COLUMN_SID + "=" + subject_id + ";";
 
         Cursor cursor = database.rawQuery(query, null);
 

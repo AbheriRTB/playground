@@ -1,25 +1,24 @@
 package abheri.co.protracklite;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
 
 import com.google.android.material.bottomappbar.BottomAppBar;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.List;
+
+import abheri.co.protracklite.utils.Goal;
+import abheri.co.protracklite.utils.GoalDataHelper;
 import abheri.co.protracklite.utils.Subject;
 import abheri.co.protracklite.utils.SubjectDataHelper;
+import abheri.co.protracklite.utils.Topic;
 import abheri.co.protracklite.utils.TopicDataHelper;
 
 public class MainActivity extends AppCompatActivity {
@@ -47,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
             // action with ID action_settings was selected
             case R.id.manageMenu:
-                Intent intent = new Intent(MainActivity.this, MainTopicsActivity.class);
+                Intent intent = new Intent(MainActivity.this, SubjectActivity.class);
                 startActivity(intent);
                 break;
         }
@@ -67,12 +66,33 @@ public class MainActivity extends AppCompatActivity {
         floatingActionButton.setColorFilter(Color.WHITE);
 
         SubjectDataHelper sdh = new SubjectDataHelper(this);
-        sdh.createSubject("Maths", "Mathematics", 1);
-        sdh.getAllSubjects();
-
         TopicDataHelper tdh = new TopicDataHelper(this);
-        tdh.createTopic(1, "Chapter I", "This is chapter I", 2);
-        tdh.getAllTopics();
+        GoalDataHelper gdh = new GoalDataHelper(this);
+
+
+        List<Subject> ls = sdh.getAllSubjects();
+        List<Topic> ts = tdh.getAllTopics();
+        List<Goal> gs = gdh.getAllGoals();
+        if(ls.size() <= 0) {
+            sdh.createSubject("English", "English Subject", 1);
+            sdh.createSubject("II lang (Kannada)", "Kannada", 2);
+            sdh.createSubject("II lang (Hindi)", "Hindi", 3);
+            sdh.createSubject("II lang (Sanskrit)", "Sanskrit", 4);
+            sdh.createSubject("Social", "Social Science", 5);
+            sdh.createSubject("Science", "General Science", 6);
+            sdh.createSubject("Maths", "Mathematics", 7);
+        }
+
+
+
+        if(ls.size() <= 0) {
+            tdh.createTopic(1, "Chapter I", "This is chapter I", 2);
+            tdh.getAllTopics();
+        }
+
+        if(ls.size() <= 0) {
+        gdh.createGoal("Mid-Term Exams","There will be mid term exams this month", "1/12/2020", 1);
+        gdh.getAllGoals();}
 
     }
 }
