@@ -49,13 +49,19 @@ public class SubjectAdaptor extends RecyclerView.Adapter<SubjectAdaptor.ViewHold
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
                     final int i = recyclerView.getChildLayoutPosition(v);
-                    dialogBuilder.setTitle("Portions")
-                            .setItems(getTopicTitles(subjects.get(i)), null)
-                            .setPositiveButton("Ok", null)
-                            .setBackground(backgroundDialog)
-                            .show();
+                    CharSequence[] cs = getTopicTitles(subjects.get(i));
+                    if (cs==null){
+                        cs = new CharSequence[] {
+                                "No Topics defined"
+                        };
+                    }
+
+                        dialogBuilder.setTitle("Portions")
+                                .setItems(cs, null)
+                                .setPositiveButton("Ok", null)
+                                .setBackground(backgroundDialog)
+                                .show();
                 }
             });
 
@@ -81,12 +87,19 @@ public class SubjectAdaptor extends RecyclerView.Adapter<SubjectAdaptor.ViewHold
         return subjects.size();
     }
 
-    private CharSequence[] getTopicTitles(Subject subject) {
+
+
+   private CharSequence[] getTopicTitles(Subject subject) {
         ArrayList<String> csl = new ArrayList<String>();
+       CharSequence[] cs = null;
         List<Topic> lt = subject.getTopics();
-        for (int i = 0; i < lt.size(); ++i ){
-            csl.add(lt.get(i).getName());   
+        if (lt!= null && lt.size() >0){
+            for(int i=0; i<lt.size(); ++i){
+                csl.add(lt.get(i).getName());
+            }
+            cs = csl.toArray(new CharSequence[lt.size()]);
         }
-        return(CharSequence[]) csl.toArray();
+
+        return cs;
     }
 }

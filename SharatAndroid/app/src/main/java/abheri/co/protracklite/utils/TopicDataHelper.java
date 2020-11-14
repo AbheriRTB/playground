@@ -81,7 +81,7 @@ public class TopicDataHelper {
     public List<Topic> getTopicsBySubject(long subject_id) {
         List<Topic> topics = new ArrayList<Topic>();
 
-        String query = "SELECT * FROM " + DataHelper.TABLE_TOPIC + " WHERE " + DataHelper.COLUMN_SID + "=" + subject_id + ";";
+        String query = "SELECT * FROM " + DataHelper.TABLE_TOPIC + " WHERE " + DataHelper.SUBJECT_ID + "=" + subject_id + ";";
 
         Cursor cursor = database.rawQuery(query, null);
 

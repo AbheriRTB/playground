@@ -84,13 +84,17 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-
-        if(ls.size() <= 0) {
+        if(ts.size() <= 0) {
             tdh.createTopic(1, "Chapter I", "This is chapter I", 2);
+            tdh.createTopic(2, "Chapter II", "This is chapter II", 2);
+            tdh.createTopic(3, "Chapter III", "This is chapter III", 2);
+            tdh.createTopic(4, "Chapter IV", "This is chapter IV", 2);
+            tdh.createTopic(5, "Chapter V", "This is chapter V", 2);
+            tdh.createTopic(6, "Chapter I", "This is chapter V", 4);
             tdh.getAllTopics();
         }
 
-        if(ls.size() <= 0) {
+        if(gs.size() <= 0) {
         gdh.createGoal("Mid-Term Exams","There will be mid term exams this month", "1/12/2020", 1);
         gdh.getAllGoals();}
 
