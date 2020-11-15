@@ -75,22 +75,38 @@ public class MainActivity extends AppCompatActivity {
         List<Goal> gs = gdh.getAllGoals();
         if(ls.size() <= 0) {
             sdh.createSubject("English", "English Subject", 1);
-            sdh.createSubject("II lang (Kannada)", "Kannada", 2);
-            sdh.createSubject("II lang (Hindi)", "Hindi", 3);
+            sdh.createSubject("II lang (Hindi)", "Hindi", 2);
+            sdh.createSubject("II lang (Kannada)", "Kannada", 3);
             sdh.createSubject("II lang (Sanskrit)", "Sanskrit", 4);
-            sdh.createSubject("Social", "Social Science", 5);
-            sdh.createSubject("Science", "General Science", 6);
-            sdh.createSubject("Maths", "Mathematics", 7);
-        }
+            sdh.createSubject("Maths", "Mathematics", 6);
+            sdh.createSubject("Science", "General Science", 7);
+            sdh.createSubject("Social", "Social Science", 8); }
 
 
         if(ts.size() <= 0) {
-            tdh.createTopic(1, "Chapter I", "This is chapter I", 2);
-            tdh.createTopic(2, "Chapter II", "This is chapter II", 2);
-            tdh.createTopic(3, "Chapter III", "This is chapter III", 2);
-            tdh.createTopic(4, "Chapter IV", "This is chapter IV", 2);
-            tdh.createTopic(5, "Chapter V", "This is chapter V", 2);
-            tdh.createTopic(6, "Chapter I", "This is chapter V", 4);
+
+            // English Portions
+            tdh.createTopic(1, "The Fun They Had", "This is chapter I", 1);
+            tdh.createTopic(2, "The Road Not Taken", "This is poem I", 1);
+            tdh.createTopic(3, "The Sound of Music", "This is chapter II", 1);
+            tdh.createTopic(4, "Wind", "This is poem II", 1);
+            tdh.createTopic(5, "The Little Girl", "This is chapter III", 1);
+            tdh.createTopic(6, "Rain on the Roof", "This is poem III", 1);
+            tdh.createTopic(7, "A Truly Beautiful Mind", "This is chapter IV", 1);
+            tdh.createTopic(8, "The Lake Isle of Innisfree", "This is poem IV", 1);
+            tdh.createTopic(9, "The Snake and the Mirror", "This is chapter V", 1);
+            tdh.createTopic(10, "A Legend of the Northland", "This is poem V", 1);
+            tdh.createTopic(11, "My Childhood", "This is chapter VI", 1);
+            tdh.createTopic(12, "No Men Are Foreign", "This is poem VI", 1);
+            tdh.createTopic(13, "Packing", "This is chapter VII", 1);
+            tdh.createTopic(14, "The Duck and the Kangaroo", "This is poem VII", 1);
+            tdh.createTopic(15, "Reach for the Top", "This is chapter VIII", 1);
+            tdh.createTopic(16, "On Killing a Tree", "This is poem VIII", 1);
+            tdh.createTopic(17, "The Bond of Love", "This is chapter IX", 1);
+            tdh.createTopic(18, "The Snake Trying", "This is poem IX", 1);
+            tdh.createTopic(19, "Kathmandu", "This is chapter X", 1);
+            tdh.createTopic(20, "A Slumber Did My Spirit Seal", "This is poem X", 1);
+            tdh.createTopic(21, "If I Were You", "This is chapter XI", 1);
             tdh.getAllTopics();
         }
 
