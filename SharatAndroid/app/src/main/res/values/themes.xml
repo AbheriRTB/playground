@@ -17,12 +17,23 @@
     <!-- Alert Dialog -->
     <style name="MyThemeOverlay.MaterialComponents.MaterialAlertDialog" parent="@style/ThemeOverlay.MaterialComponents.MaterialAlertDialog">
         <item name="buttonBarPositiveButtonStyle">@style/PositiveButtonStyle</item>
-        <item name="buttonBarNegativeButtonStyle">@style/Widget.MaterialComponents.Button.TextButton.Dialog</item>
+        <item name="buttonBarNegativeButtonStyle">
+            @style/Widget.MaterialComponents.Button.TextButton.Dialog
+        </item>
     </style>
 
     <style name="PositiveButtonStyle" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
         <item name="android:textColor">@color/white</item>
         <item name="backgroundTint">@color/colorPrimaryAccent</item>
     </style>
+
+    <style name="Theme.ProtrackLite.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.ProtrackLite.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.ProtrackLite.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>

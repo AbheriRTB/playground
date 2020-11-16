@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -26,6 +27,7 @@ public class SubjectAdaptor extends RecyclerView.Adapter<SubjectAdaptor.ViewHold
     LayoutInflater inflater;
     Context thisContext;
     RecyclerView recyclerView;
+    Button btn;
 
 
     public SubjectAdaptor(Context context, List<Subject> list, Drawable backgroundForDialog, LayoutInflater inflaterForDialog,
@@ -58,7 +60,7 @@ public class SubjectAdaptor extends RecyclerView.Adapter<SubjectAdaptor.ViewHold
                     }
 
                         dialogBuilder.setTitle("Portions")
-                                .setItems(cs, null)
+                                .setItems(cs,null)
                                 .setPositiveButton("Ok", null)
                                 .setBackground(backgroundDialog)
                                 .show();
