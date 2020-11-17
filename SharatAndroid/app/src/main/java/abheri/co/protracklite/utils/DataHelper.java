@@ -28,6 +28,11 @@ public class DataHelper extends SQLiteOpenHelper {
     public static final String COLUMN_ENDDATE = "end_date";
     public static final String COLUMN_GDISC = "description";
 
+    public static final String TABLE_TOPIC_DATA_MAP = "topic_data_map";
+    public static final String COLUMN_TDMID = "topic_map_id";
+    public static final String TOPIC_ID = "topic_id";
+    public static final String GOAL_ID = "goal_id";
+
 
     private static final String DATABASE_NAME = "protrack.db";
 
@@ -67,6 +72,22 @@ public class DataHelper extends SQLiteOpenHelper {
             + TABLE_SUBJECT
             + "(" + COLUMN_SID + "));";
 
+    private static final String topic_data_map_table = "create table "
+            + TABLE_TOPIC_DATA_MAP + "("+ COLUMN_TDMID
+            + " integer primary key, "
+            + GOAL_ID
+            + " integer,"
+            + " foreign key( "
+            + GOAL_ID + ") references "
+            + TABLE_GOAL
+            + "(" + COLUMN_GID + "),"
+            + TOPIC_ID
+            + " integer not null,"
+            + " foreign key( "
+            + TOPIC_ID + ") references "
+            + TABLE_TOPIC
+            + "(" + COLUMN_TID + "));";
+
 
     private Context dbContext;
 
@@ -81,6 +102,7 @@ public class DataHelper extends SQLiteOpenHelper {
         db.execSQL(subject_table);
         db.execSQL(topic_table);
         db.execSQL(goal_table);
+        db.execSQL(topic_data_map_table);
     }
 
     @Override
@@ -98,6 +120,10 @@ public class DataHelper extends SQLiteOpenHelper {
 
     public void DeleteGoalTable(SQLiteDatabase db) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_GOAL + ";");
+    }
+
+    public void DeleteTopicDataMapTable(SQLiteDatabase db) {
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_TOPIC_DATA_MAP + ";");
     }
 
 

@@ -20,6 +20,7 @@ import abheri.co.protracklite.utils.Subject;
 import abheri.co.protracklite.utils.SubjectDataHelper;
 import abheri.co.protracklite.utils.Topic;
 import abheri.co.protracklite.utils.TopicDataHelper;
+import abheri.co.protracklite.utils.TopicMapDataHelper;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -132,6 +133,10 @@ public class MainActivity extends AppCompatActivity {
             gdh.createGoal("Mid-Term Exams", "There will be mid term exams this month", "1/12/2020", 1);
             gdh.getAllGoals();
         }
+
+        TopicMapDataHelper tmdh = new TopicMapDataHelper(this);
+        tmdh.createTopicDataMap(1,2,1);
+        tmdh.getAllTopicDataMaps();
 
     }
 }
