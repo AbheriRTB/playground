@@ -23,7 +23,7 @@ class _MyAppListViewState extends State<MyAppListView> {
           Divider(
             indent: 20,
             endIndent: 20,
-          )
+          ),
         ],
       ),
     );
