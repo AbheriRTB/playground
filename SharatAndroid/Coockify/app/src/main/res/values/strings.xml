@@ -1,8 +1,0 @@
-<resources>
-    <string name="app_name">Coockify</string>
-    <string name="settings">Settings</string>
-    <string name="measurement">Measurement : KG</string>
-    <string name="max_6">Max 6</string>
-    <string name="_6">6</string>
-    <string name="number_of_items">Number of Items</string>
-</resources>
