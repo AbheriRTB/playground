@@ -8,20 +8,26 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   @override
+  Map data = {};
+
+  @override
   void initState() {
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: AnnotatedRegion(
-        value: SystemUiOverlayStyle.dark,
+    data = ModalRoute.of(context).settings.arguments;
+    print(data);
+
+    return Material(
+      child: Container(
         child: SafeArea(
-          child: Column(
-            children: <Widget>[
-              Center(
-                child: RaisedButton.icon(
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(0, 120.0, 0, 0),
+            child: Column(
+              children: <Widget>[
+                RaisedButton.icon(
                   onPressed: () {
                     Navigator.pushNamed(context, '/location');
                   },
@@ -33,8 +39,26 @@ class _HomeState extends State<Home> {
                   color: Colors.amber,
                   textColor: Colors.white,
                 ),
-              )
-            ],
+                SizedBox(height: 20.0),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      data['location'],
+                      style: TextStyle(
+                        fontSize: 28.0,
+                        letterSpacing: 2.0,
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 20.0),
+                Text(data['time'],
+                    style: TextStyle(
+                      fontSize: 66.0,
+                    )),
+              ],
+            ),
           ),
         ),
       ),
