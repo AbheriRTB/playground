@@ -9,14 +9,6 @@ class BhjanePage extends StatefulWidget {
 class _BhjanePageState extends State<BhjanePage> {
   String lyrics, txt;
   Map data = {};
-  fetchFileData() async {
-    String responceText;
-    responceText = await rootBundle.loadString("lib/bhajanes/${data['txt']}");
-
-    setState(() {
-      lyrics = responceText;
-    });
-  }
 
   @override
   void initState() {
@@ -26,7 +18,53 @@ class _BhjanePageState extends State<BhjanePage> {
   @override
   Widget build(BuildContext context) {
     data = ModalRoute.of(context).settings.arguments;
-    fetchFileData();
+    return Page1(data: data);
+  }
+}
+
+class Page1 extends StatefulWidget {
+  const Page1({
+    Key key,
+    @required this.data,
+  }) : super(key: key);
+
+  final Map data;
+
+  @override
+  _Page1State createState() => _Page1State();
+}
+
+class _Page1State extends State<Page1> {
+  @override
+  String lyrics;
+  Widget build(BuildContext context) {
+    fetchFileData(String text) async {
+      String responceText;
+      responceText = await rootBundle.loadString("lib/bhajanes/$text}");
+
+      setState(() {
+        lyrics = responceText;
+      });
+    }
+
+    fetchFileData("lib/bhajanes/page1");
+
+    return Bhajane(data: widget.data, lyrics: lyrics);
+  }
+}
+
+class Bhajane extends StatelessWidget {
+  const Bhajane({
+    Key key,
+    @required this.data,
+    @required this.lyrics,
+  }) : super(key: key);
+
+  final Map data;
+  final String lyrics;
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         mini: true,

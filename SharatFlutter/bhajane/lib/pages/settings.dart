@@ -14,7 +14,7 @@ class _SettingsPageState extends State<SettingsPage> {
           children: [
             Switch(
               value: true,
-              onChanged: true,
+              onChanged: null,
             ),
           ],
         ),
