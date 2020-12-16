@@ -91,7 +91,7 @@ class _RegisterPageState extends State<RegisterPage> {
         ),
       ),
       bottomNavigationBar: new BottomAppBar(
-        color: Colors.indigo,
+        color: Colors.red,
         // Menu
         child: Padding(
           padding: const EdgeInsets.all(6.0),

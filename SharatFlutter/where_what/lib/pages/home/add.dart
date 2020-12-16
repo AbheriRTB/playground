@@ -23,10 +23,22 @@ class _AddPageState extends State<AddPage> {
     final _formKey = GlobalKey<FormState>();
     return Scaffold(
       bottomNavigationBar: BottomAppBar(
-        child: SizedBox(
-          height: 36,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            IconButton(
+              onPressed: () async {
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context) => ListPage()));
+              },
+              icon: Icon(
+                Icons.arrow_back,
+                color: Colors.red[100],
+              ),
+            ),
+          ],
         ),
-        color: Colors.indigo,
+        color: Colors.red,
       ),
       floatingActionButton: FloatingActionButton.extended(
         icon: Icon(Icons.add),
@@ -46,7 +58,7 @@ class _AddPageState extends State<AddPage> {
             child: Column(
               children: [
                 Text(
-                  "New Item",
+                  "NEW ITEM",
                   style: TextStyle(
                       fontSize: 54,
                       color: Colors.grey[600],

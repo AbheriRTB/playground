@@ -60,6 +60,11 @@ class AuthService {
     }
   }
 
+  // get UID
+  Future<String> getUID() async {
+    return (await _auth.currentUser()).uid;
+  }
+
   Future addData(String where, String what, String date) async {
     await DatabaseService(uid: (await _auth.currentUser()).uid)
         .addWhere(where, what, date);
@@ -73,10 +78,5 @@ class AuthService {
       print(error.toString());
       return null;
     }
-  }
-
-  // get UID
-  Future<String> getUID() async {
-    return uid; //(await _auth.currentUser()).uid;
   }
 }

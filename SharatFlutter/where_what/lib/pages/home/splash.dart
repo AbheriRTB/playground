@@ -11,12 +11,12 @@ class _SplashPageState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
     void splash() async => await Future.delayed(Duration(seconds: 2), () {
-          Navigator.push(
+          Navigator.pushReplacement(
               context, MaterialPageRoute(builder: (context) => Wrapper()));
         });
     splash();
     return Container(
-      color: Colors.indigo,
+      color: Colors.red,
       child: AnnotatedRegion(
         value: SystemUiOverlayStyle.light,
         child: Center(
@@ -26,13 +26,13 @@ class _SplashPageState extends State<SplashPage> {
               Icon(
                 Icons.accessibility_new,
                 size: 64,
-                color: Colors.indigo[200],
+                color: Colors.red[200],
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(100, 60, 100, 0),
                 child: LinearProgressIndicator(
                   backgroundColor: Colors.transparent,
-                  valueColor: AlwaysStoppedAnimation<Color>(Colors.indigo[400]),
+                  valueColor: AlwaysStoppedAnimation<Color>(Colors.red[400]),
                 ),
               )
             ],

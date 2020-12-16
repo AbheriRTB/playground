@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:where_what/models/user.dart';
 import 'package:where_what/pages/home/splash.dart';
-import 'package:where_what/pages/wrapper.dart';
 import 'package:where_what/services/auth.dart';
 import 'package:provider/provider.dart';
 
@@ -31,8 +30,8 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         home: SplashPage(),
-        theme: ThemeData(
-            primaryColor: Colors.indigo, accentColor: Colors.indigoAccent),
+        theme:
+            ThemeData(primaryColor: Colors.red, accentColor: Colors.redAccent),
       ),
     );
   }

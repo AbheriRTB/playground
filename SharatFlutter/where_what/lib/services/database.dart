@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:where_what/models/what.dart';
 
 class DatabaseService {
   final String uid;
+
   DatabaseService({this.uid});
 
   // collection reference
@@ -23,8 +25,20 @@ class DatabaseService {
     });
   }
 
+  List<What> _whatListFromSnapshot(QuerySnapshot snapshot) {
+    return snapshot.documents.map((doc) {
+      //print(doc.data);
+      return What(
+          what: doc.data['what'] ?? '',
+          where: doc.data['where'] ?? '',
+          date: doc.data['sugars'] ?? '');
+    }).toList();
+  }
+
   // Get Users Stream
-  Stream<QuerySnapshot> get users {
-    return usersCollection.snapshots();
+  Stream<List<What>> get users {
+    final CollectionReference usersNewCollection =
+        Firestore.instance.collection('users').document(uid).collection('data');
+    return usersNewCollection.snapshots().map(_whatListFromSnapshot);
   }
 }
