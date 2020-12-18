@@ -1,9 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:where_what/models/user.dart';
 import 'package:where_what/services/database.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
   String uid;
 
   // create user obj based on firebase user
@@ -58,6 +60,22 @@ class AuthService {
       print(error.toString());
       return null;
     }
+  }
+
+  // SignIn with Google
+  Future signInWithGoogle() async {
+    final GoogleSignInAccount account = await _googleSignIn.signIn();
+    final GoogleSignInAuthentication _googleAuth = await account.authentication;
+    final AuthCredential credential = GoogleAuthProvider.getCredential(
+      idToken: _googleAuth.idToken,
+      accessToken: _googleAuth.accessToken,
+    );
+    return (await _auth.signInWithCredential(credential)).user.uid;
+  }
+
+  // Forgot Password
+  Future sendPasswordResetEmail(String email) async {
+    return _auth.sendPasswordResetEmail(email: email);
   }
 
   // get UID

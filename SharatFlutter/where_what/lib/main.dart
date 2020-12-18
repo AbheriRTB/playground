@@ -7,18 +7,7 @@ import 'package:provider/provider.dart';
 void main() {
   runApp(MaterialApp(
     home: MyApp(),
-    //initialRoute: "/",
     debugShowCheckedModeBanner: false,
-    /*routes: {
-      "/": (context) => SplashPage(),
-      "/wrapper": (context) => Wrapper(),
-      "/add": (context) => AddPage(),
-      "/list": (context) => ListPage(),
-      "/sign_in": (context) => SignInPage(),
-    },
-    theme: ThemeData(
-        primaryColor: Colors.indigo, accentColor: Colors.indigoAccent),
-  ));*/
   ));
 }
 
