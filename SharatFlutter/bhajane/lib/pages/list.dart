@@ -1,4 +1,5 @@
-import 'package:bhajane/helpers/data.dart';
+import 'package:bhajane/models/bhajane.dart';
+import 'package:bhajane/pages/lyrics.dart';
 import 'package:flutter/material.dart';
 
 class ListPage extends StatefulWidget {
@@ -7,62 +8,51 @@ class ListPage extends StatefulWidget {
 }
 
 class _ListPageState extends State<ListPage> {
-  List<Data> listData = [
-    Data(1, "ಗಣೇಶ ಶರಣಂ", "Ganesha Sharanam", "page1.txt"),
-    Data(2, "ಮುದಕರಾತ್ತ ಮೋದಕಂ", "Mudakaratta Modakam", "page2.txt"),
+  List<Bhajane> bhajans = [
+    Bhajane('Mudakaratta Modakam', 'bhajane-1.txt',
+        kannada: 'ಮುದಾಕರಾತ್ತ ಮೋದಕಂ'),
+    Bhajane('Bhaja Govindam', 'bhajane-2.txt', kannada: 'ಭಜ ಗೋವಿಂದಂ'),
+    Bhajane('Lingashtakam', 'bhajane-3.txt', kannada: 'Lingashtakam'),
+    Bhajane('Ganesha Sharanam', 'bhajane-4.txt', kannada: 'ಗಣೇಶ  ಶರಣಂ'),
+    Bhajane('Namasmarane', 'bhajane-5.txt', kannada: 'ನಾಮಸ್ಮರಣೋ'),
+    Bhajane('Veera Maruthi', 'bhajane-6.txt', kannada: 'ವೀರ  ಮಾರುತೀ'),
+    Bhajane('Kodhanda Rama', 'bhajane-7.txt', kannada: 'ಕೋದಂಡರಾಂ'),
+    Bhajane('Prema mudita', 'bhajane-8.txt', kannada: 'ಪ್ರೇಮ ಮುದಿತ'),
+    Bhajane('Ambiga', 'bhajane-9.txt', kannada: 'ಅಂಬಿಗ'),
+    Bhajane('Shuddhabhrma', 'bhajane-10.txt', kannada: 'ಶುದ್ಧಬ್ರಹ್ಮಪರಾತ್ಪರ'),
+    Bhajane('Ramalali', 'bhajane-11.txt', kannada: 'ರಾಮಲಾಲಿ'),
+    Bhajane('Om mangalam', 'bhajane-12.txt', kannada: 'ಓಂ  ಮಂಗಳಂ'),
   ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.green,
-        title: Text("Bhajane"),
-        leading: Icon(Icons.music_note),
-        centerTitle: false,
-        actions: [
-          IconButton(
-              icon: Icon(
-                Icons.settings,
-                color: Colors.white,
-              ),
-              onPressed: () {
-                Navigator.pushNamed(context, '/settings');
-              })
-        ],
+        backgroundColor: Colors.brown[700],
       ),
-      body: ListView.builder(
-          itemCount: listData.length,
-          itemBuilder: (context, index) {
-            return Column(
-              children: [
-                ListTile(
-                  leading: CircleAvatar(
-                    backgroundColor: Colors.orange[300],
-                    child: Icon(
-                      Icons.book,
-                      size: 16,
-                      color: Colors.white,
-                    ),
+      body: Padding(
+          padding: const EdgeInsets.all(0.0),
+          child: ListView.builder(
+            itemCount: bhajans.length,
+            itemBuilder: (context, index) {
+              return Column(
+                children: [
+                  ListTile(
+                    title: Text(bhajans[index].name),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => LyricsPage(bhajans, index)),
+                      );
+                    },
                   ),
-                  title: Text(listData[index].name),
-                  subtitle: Text(listData[index].discription),
-                  onTap: () {
-                    Navigator.pushNamed(context, '/bhajane', arguments: {
-                      'index': listData[index].index,
-                      'name': listData[index].name,
-                      'txt': listData[index].txt,
-                    });
-                  },
-                ),
-                Divider(
-                  height: 0,
-                  indent: 14,
-                  endIndent: 14,
-                )
-              ],
-            );
-          }),
+                  Divider(
+                    height: 0,
+                  )
+                ],
+              );
+            },
+          )),
     );
   }
 }

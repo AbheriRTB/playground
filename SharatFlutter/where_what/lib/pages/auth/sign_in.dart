@@ -83,6 +83,8 @@ class _SignInPageState extends State<SignInPage> {
                             context: context,
                             builder: (BuildContext context) {
                               return AlertDialog(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8)),
                                 title: Text(
                                   "Forgot Password",
                                   style: TextStyle(
@@ -102,14 +104,14 @@ class _SignInPageState extends State<SignInPage> {
                                 ),
                                 actions: [
                                   FlatButton(
-                                    textColor: Color(0xFF6200EE),
+                                    textColor: Colors.red,
                                     onPressed: () {
                                       Navigator.pop(context);
                                     },
                                     child: Text('CANCEL'),
                                   ),
                                   FlatButton(
-                                    textColor: Color(0xFF6200EE),
+                                    textColor: Colors.red,
                                     onPressed: () async {
                                       if (_formKeyPass.currentState
                                           .validate()) {
@@ -178,6 +180,41 @@ class _SignInPageState extends State<SignInPage> {
                           ),
                           Text(
                             'SIGN IN WITH GOOGLE',
+                            style: TextStyle(
+                                color: Colors.grey[600],
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      ),
+                    ),
+                    RaisedButton(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8)),
+                      onPressed: () async {
+                        try {
+                          //dynamic result = await _auth.signInWithGoogle();
+                        } catch (e) {
+                          setState(() {
+                            loading = false;
+                            error =
+                                "There was a problem signing in! Try again later";
+                          });
+                        }
+                      },
+                      color: Colors.white,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.supervised_user_circle,
+                            size: 22,
+                            color: Colors.amber,
+                          ),
+                          SizedBox(
+                            width: 16,
+                          ),
+                          Text(
+                            'SIGN IN AS GUEST',
                             style: TextStyle(
                                 color: Colors.grey[600],
                                 fontWeight: FontWeight.bold),

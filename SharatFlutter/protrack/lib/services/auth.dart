@@ -1,9 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:protrack/models/user.dart';
-import 'package:protrack/services/database.dart';
+
+import 'database.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
+  String uid;
 
   // create user obj based on firebase user
   User _userFromFirebaseUser(FirebaseUser user) {
@@ -18,10 +22,12 @@ class AuthService {
   }
 
   // sign in anon
-  Future signInAnon() async {
+  Future signInAnon(String name) async {
     try {
       AuthResult result = await _auth.signInAnonymously();
       FirebaseUser user = result.user;
+      await DatabaseService(uid: user.uid).updateUserData(name, "NO EMAIL");
+      uid = user.uid;
       return _userFromFirebaseUser(user);
     } catch (e) {
       print(e.toString());
@@ -35,6 +41,7 @@ class AuthService {
       AuthResult result = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
       FirebaseUser user = result.user;
+      uid = user.uid;
       return user;
     } catch (error) {
       print(error.toString());
@@ -50,11 +57,35 @@ class AuthService {
           email: email, password: password);
       FirebaseUser user = result.user;
       await DatabaseService(uid: user.uid).updateUserData(name, email);
+      uid = user.uid;
       return _userFromFirebaseUser(user);
     } catch (error) {
       print(error.toString());
       return null;
     }
+  }
+
+  // SignIn with Google
+  Future signInWithGoogle() async {
+    final GoogleSignInAccount account = await _googleSignIn.signIn();
+    final GoogleSignInAuthentication _googleAuth = await account.authentication;
+    final AuthCredential credential = GoogleAuthProvider.getCredential(
+      idToken: _googleAuth.idToken,
+      accessToken: _googleAuth.accessToken,
+    );
+    await DatabaseService(uid: account.id)
+        .updateUserData(account.displayName, account.email);
+    return (await _auth.signInWithCredential(credential)).user.uid;
+  }
+
+  // Forgot Password
+  Future sendPasswordResetEmail(String email) async {
+    return _auth.sendPasswordResetEmail(email: email);
+  }
+
+  // get UID
+  Future<String> getUID() async {
+    return (await _auth.currentUser()).uid;
   }
 
   // sign out

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:where_what/models/what.dart';
 import 'package:where_what/services/auth.dart';
 import 'package:where_what/services/database.dart';
@@ -64,15 +65,17 @@ class _WhereListState extends State<WhereList> {
 
   void _onButtonPressed() {
     showModalBottomSheet(
+        isScrollControlled: true,
         context: context,
         builder: (context) {
           return Container(
-            height: 320,
             color: Color(0xFF737373),
             child: Padding(
               padding: const EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 0.0),
               child: Container(
-                child: _buildBottomNavigationMenu(),
+                child: Padding(
+                    padding: MediaQuery.of(context).viewInsets,
+                    child: _buildBottomNavigationMenu()),
                 decoration: BoxDecoration(
                   color: Theme.of(context).canvasColor,
                   borderRadius: BorderRadius.only(
@@ -93,6 +96,7 @@ class _WhereListState extends State<WhereList> {
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             Text(
               'UPDATE $object LOCATION',
@@ -107,6 +111,7 @@ class _WhereListState extends State<WhereList> {
               decoration: textInputDecoration("Enter new where"),
               validator: (val) =>
                   val.isEmpty ? 'Please enter a location' : null,
+
               onChanged: (val) {
                 setState(() {
                   whereEdited = val;

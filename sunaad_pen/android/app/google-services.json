@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "410707287532",
+    "project_id": "sunaad-pen",
+    "storage_bucket": "sunaad-pen.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:410707287532:android:e3373ab20c94d619e4b4c9",
+        "android_client_info": {
+          "package_name": "com.abheri.sunaad_pen"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "410707287532-uuivosjqmmc7t71ne156ji3di1vplh06.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.abheri.sunaad_pen",
+            "certificate_hash": "3d3918e7e412e36cf084c1913801fa531ffa53aa"
+          }
+        },
+        {
+          "client_id": "410707287532-bn98r2vgqi6cb1jp0gfbuk7slko348uj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAWRooRZGcMDRFMeowmspiGn23J-3sGpnw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "410707287532-bn98r2vgqi6cb1jp0gfbuk7slko348uj.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "410707287532-pdro5cuc2v2c378m95qm7c8fblgkkml4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.abheri.sunaadPen"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

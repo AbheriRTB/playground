@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:protrack/pages/space/add.dart';
-import 'package:protrack/pages/space/dashboard.dart';
-import 'package:protrack/pages/space/goal.dart';
 import 'package:protrack/pages/wrapper.dart';
 import 'package:protrack/services/auth.dart';
 import 'package:provider/provider.dart';

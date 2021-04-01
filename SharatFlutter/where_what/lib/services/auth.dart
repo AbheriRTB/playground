@@ -21,10 +21,12 @@ class AuthService {
   }
 
   // sign in anon
-  Future signInAnon() async {
+  Future signInAnon(String name) async {
     try {
       AuthResult result = await _auth.signInAnonymously();
       FirebaseUser user = result.user;
+      await DatabaseService(uid: user.uid).updateUserData(name, "NO EMAIL");
+      uid = user.uid;
       return _userFromFirebaseUser(user);
     } catch (e) {
       print(e.toString());
@@ -70,6 +72,8 @@ class AuthService {
       idToken: _googleAuth.idToken,
       accessToken: _googleAuth.accessToken,
     );
+    await DatabaseService(uid: account.id)
+        .updateUserData(account.displayName, account.email);
     return (await _auth.signInWithCredential(credential)).user.uid;
   }
 

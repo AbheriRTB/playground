@@ -12,7 +12,7 @@ class DatabaseService {
       Firestore.instance.collection('users');
 
   Future<void> updateUserData(String name, String mail) async {
-    return await usersCollection.document(uid).collection("user info").add({
+    usersCollection.document(uid).collection("user info").add({
       'name': name,
       'mail': mail,
     });
