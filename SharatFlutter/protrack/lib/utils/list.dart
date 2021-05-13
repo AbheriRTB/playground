@@ -7,8 +7,7 @@ class CustomList extends StatelessWidget {
   CustomList.goal({this.goal, this.prog}) {
     index = 1;
   }
-  CustomList.subject(
-      {@required this.goal, @required this.prog, @required this.discription}) {
+  CustomList.subject({this.goal, this.prog, this.discription}) {
     index = 2;
   }
 

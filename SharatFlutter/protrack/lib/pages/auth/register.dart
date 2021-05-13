@@ -29,7 +29,7 @@ class _RegisterPageState extends State<RegisterPage> {
     return loading
         ? Loading()
         : Scaffold(
-            resizeToAvoidBottomPadding: false,
+            //resizeToAvoidBottomPadding: false,
             body: SingleChildScrollView(
               child: Container(
                 padding: EdgeInsets.symmetric(vertical: 80.0, horizontal: 16.0),

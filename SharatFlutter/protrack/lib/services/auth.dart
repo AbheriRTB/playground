@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:protrack/models/user.dart';
@@ -10,22 +11,31 @@ class AuthService {
   String uid;
 
   // create user obj based on firebase user
-  User _userFromFirebaseUser(FirebaseUser user) {
-    return user != null ? User(uid: user.uid) : null;
+  Users _userFromFirebaseUser(User user) {
+    return user != null
+        ? Users(
+            uid: user.uid,
+            displayName: user.displayName,
+            email: user.email,
+            posts: '',
+            username: '',
+          )
+        : null;
   }
 
   // auth change user stream
-  Stream<User> get user {
-    return _auth.onAuthStateChanged
+  Stream<Users> get user {
+    return _auth
+        .authStateChanges()
         //.map((FirebaseUser user) => _userFromFirebaseUser(user));
         .map(_userFromFirebaseUser);
   }
 
-  // sign in anon
+  // SignIn anon
   Future signInAnon(String name) async {
     try {
-      AuthResult result = await _auth.signInAnonymously();
-      FirebaseUser user = result.user;
+      UserCredential result = await _auth.signInAnonymously();
+      User user = result.user;
       await DatabaseService(uid: user.uid).updateUserData(name, "NO EMAIL");
       uid = user.uid;
       return _userFromFirebaseUser(user);
@@ -35,12 +45,12 @@ class AuthService {
     }
   }
 
-  // sign in with email and password
+  // SignIn with email and password
   Future signInWithEmailAndPassword(String email, String password) async {
     try {
-      AuthResult result = await _auth.signInWithEmailAndPassword(
+      UserCredential result = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
-      FirebaseUser user = result.user;
+      User user = result.user;
       uid = user.uid;
       return user;
     } catch (error) {
@@ -49,13 +59,13 @@ class AuthService {
     }
   }
 
-  // register with email and password
+  // Register with email and password
   Future registerWithEmailAndPassword(
       String email, String password, String name) async {
     try {
-      AuthResult result = await _auth.createUserWithEmailAndPassword(
+      UserCredential result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
-      FirebaseUser user = result.user;
+      User user = result.user;
       await DatabaseService(uid: user.uid).updateUserData(name, email);
       uid = user.uid;
       return _userFromFirebaseUser(user);
@@ -69,13 +79,22 @@ class AuthService {
   Future signInWithGoogle() async {
     final GoogleSignInAccount account = await _googleSignIn.signIn();
     final GoogleSignInAuthentication _googleAuth = await account.authentication;
-    final AuthCredential credential = GoogleAuthProvider.getCredential(
+
+    final AuthCredential credential = GoogleAuthProvider.credential(
       idToken: _googleAuth.idToken,
       accessToken: _googleAuth.accessToken,
     );
-    await DatabaseService(uid: account.id)
-        .updateUserData(account.displayName, account.email);
-    return (await _auth.signInWithCredential(credential)).user.uid;
+    final DocumentSnapshot doc = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(account.id)
+        .get();
+    if (!doc.exists) {
+      await DatabaseService(uid: account.id).updateUserData(
+        account.displayName,
+        account.email,
+      );
+      return (await _auth.signInWithCredential(credential)).user.uid;
+    }
   }
 
   // Forgot Password
@@ -85,10 +104,10 @@ class AuthService {
 
   // get UID
   Future<String> getUID() async {
-    return (await _auth.currentUser()).uid;
+    return (_auth.currentUser).uid;
   }
 
-  // sign out
+  // SignOut
   Future signOut() async {
     try {
       return await _auth.signOut();

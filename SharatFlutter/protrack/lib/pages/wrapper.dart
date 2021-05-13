@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:protrack/models/user.dart';
 import 'package:protrack/pages/auth/authenticate.dart';
-import 'package:protrack/pages/space/dashboard.dart';
+import 'package:protrack/pages/home/dashboard.dart';
 import 'package:provider/provider.dart';
 
 class Wrapper extends StatefulWidget {
@@ -12,7 +12,7 @@ class Wrapper extends StatefulWidget {
 class _WrapperState extends State<Wrapper> {
   @override
   Widget build(BuildContext context) {
-    final user = Provider.of<User>(context);
+    final user = Provider.of<Users>(context);
     print(user);
 
     // return either the Home or Authenticate widget
