@@ -77,8 +77,8 @@ class _RegisterPageState extends State<RegisterPage> {
                     labelText: "Enter Password",
                     suffixIcon: IconButton(
                       icon: Icon(_showPass
-                          ? Icons.remove_red_eye
-                          : Icons.visibility_off),
+                          ? Icons.visibility_off
+                          : Icons.remove_red_eye),
                       onPressed: () {
                         setState(() {
                           _showPass = !_showPass;
@@ -110,7 +110,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       borderRadius: BorderRadius.circular(8)),
                   onPressed: () async {
                     try {
-                      dynamic result = await _auth.signInWithGoogle();
+                      await _auth.signInWithGoogle();
                     } catch (e) {
                       setState(() {
                         loading = false;
@@ -144,7 +144,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       borderRadius: BorderRadius.circular(8)),
                   onPressed: () async {
                     try {
-                      dynamic result = await _auth.signInAnon("");
+                      await _auth.signInAnon("");
                     } catch (e) {
                       setState(() {
                         loading = false;

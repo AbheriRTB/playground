@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:protrack/models/user.dart';
 import 'package:protrack/pages/auth/authenticate.dart';
-import 'package:protrack/pages/home/dashboard.dart';
+import 'package:protrack/pages/views/dashboard.dart';
 import 'package:provider/provider.dart';
 
 class Wrapper extends StatefulWidget {

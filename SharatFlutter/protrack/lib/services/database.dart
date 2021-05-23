@@ -10,8 +10,6 @@ class DatabaseService {
   // collection reference
   final CollectionReference usersCollection =
       FirebaseFirestore.instance.collection('users');
-  final CollectionReference postCollection =
-      FirebaseFirestore.instance.collection('posts');
 
   Future<void> updateUserData(
     String displayName,
@@ -21,24 +19,29 @@ class DatabaseService {
       'id': uid,
       'displayName': displayName,
       'email': email,
-      'username': '',
-      'bio': '',
       'posts': 0,
       'timsStamp': timeStamp,
     });
   }
 
-  Future<void> createPost(String dishName, String recipie, int durationTime,
+  Future<void> createGoal(String goalName, String discription, int endDate,
       String durationUnit) async {
-    postCollection.doc(uid).collection('userPosts').doc().set({
-      'userId': uid,
-      'dishName': dishName,
-      'recipie': recipie,
-      'duration.time': durationTime,
-      'duration.unit': durationUnit,
-      'postID': '',
-      'likes': [],
-      'timsStamp': timeStamp,
+    usersCollection.doc(uid).collection('goal').doc().set({
+      'goalName': goalName,
+      'discription': discription,
+      'endDate': endDate,
+    });
+  }
+
+  Future<void> createSubject(
+    String subjectName,
+    String discription,
+    int id,
+  ) async {
+    usersCollection.doc(uid).collection('subjects').doc().set({
+      'subjectName': subjectName,
+      'discription': discription,
+      'id': id,
     });
   }
 }

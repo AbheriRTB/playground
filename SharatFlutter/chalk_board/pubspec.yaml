@@ -35,10 +35,12 @@ dev_dependencies:
   firebase_auth: ^1.0.1
   cloud_firestore: ^1.0.1
   provider: ^5.0.0
-  google_sign_in: ^4.0.1
+  google_sign_in: ^5.0.1
   firebase_core: ^1.0.1
   google_fonts: ^2.0.0
   shared_preferences: ^2.0.5
+  page_transition: ^1.1.7+6
+  animations: ^2.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

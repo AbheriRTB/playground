@@ -64,8 +64,8 @@ class _LogInPageState extends State<LogInPage> {
                   labelText: "Enter Password",
                   suffixIcon: IconButton(
                     icon: Icon(_showPass
-                        ? Icons.remove_red_eye
-                        : Icons.visibility_off),
+                        ? Icons.visibility_off
+                        : Icons.remove_red_eye),
                     onPressed: () {
                       setState(() {
                         _showPass = !_showPass;

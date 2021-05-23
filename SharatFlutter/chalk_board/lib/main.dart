@@ -4,6 +4,7 @@ import 'package:chalk_board/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,8 +24,14 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         home: Wrapper(),
         theme: ThemeData(
-          primaryColor: Colors.lime[700],
-          accentColor: Colors.red[400],
+          primaryColor: Colors.grey[700],
+          accentColor: Colors.amber[400],
+          pageTransitionsTheme: PageTransitionsTheme(
+            builders: {
+              TargetPlatform.android: CupertinoPageTransitionsBuilder(),
+            },
+          ),
+          fontFamily: GoogleFonts.manrope().fontFamily,
         ),
       ),
     );

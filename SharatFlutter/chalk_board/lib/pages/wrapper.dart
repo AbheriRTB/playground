@@ -1,6 +1,7 @@
 import 'package:chalk_board/models/user.dart';
 import 'package:chalk_board/pages/auth/authenticate.dart';
-import 'package:chalk_board/pages/home/home.dart';
+import 'package:chalk_board/pages/public/example.dart';
+import 'package:chalk_board/pages/public/home.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
