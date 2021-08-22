@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 
 class CustomList extends StatelessWidget {
-  String goal, totalProg, discription;
+  String goal, totalProg, discription, subject, desc;
   int prog, index;
+  Function onTap;
 
   CustomList.goal({this.goal, this.prog}) {
     index = 1;
   }
-  CustomList.subject({this.goal, this.prog, this.discription}) {
+  CustomList.subject({
+    this.subject,
+    this.desc,
+    this.onTap,
+  }) {
     index = 2;
   }
 
@@ -61,20 +66,23 @@ class CustomList extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsets.fromLTRB(16, 0, 0, 0),
-          child: Text(
-            goal,
-            style: TextStyle(fontSize: 18, color: Colors.grey[600]),
+        Container(
+          width: double.infinity,
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(16, 0, 0, 8),
+            child: Text(
+              subject,
+              style: TextStyle(fontSize: 18, color: Colors.grey[600]),
+            ),
           ),
         ),
-        Padding(
+        /*Padding(
           padding: const EdgeInsets.fromLTRB(16, 0, 0, 0),
           child: Text(
-            goal,
+            desc,
             style: TextStyle(fontSize: 14, color: Colors.grey[600]),
           ),
-        ),
+        ),*/
         Divider(
           indent: 16,
           endIndent: 16,

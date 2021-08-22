@@ -58,6 +58,7 @@ class _ListPageState extends State<ListPage> {
             value: SystemUiOverlayStyle.dark,
             child: SafeArea(
               child: Column(
+                mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [

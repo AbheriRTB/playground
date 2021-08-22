@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:protrack/pages/views/add.dart';
+import 'package:protrack/pages/views/addGoal.dart';
+import 'package:protrack/pages/views/addSubject.dart';
+import 'package:protrack/pages/views/addTopic.dart';
 import 'package:protrack/pages/views/goal.dart';
+import 'package:protrack/pages/views/subjects.dart';
 import 'package:protrack/services/auth.dart';
 import 'package:protrack/utils/user_lists.dart';
+import 'package:protrack/utils/widgets/recents.dart';
 
 class DashBoard extends StatefulWidget {
   @override
@@ -37,7 +41,10 @@ class _DashBoardState extends State<DashBoard> {
                   style: TextStyle(color: Colors.grey[600]),
                 ),
               ),
-              UserLists(),
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: RecentContainer(),
+              ),
             ],
           ),
         ),
@@ -52,21 +59,63 @@ class _DashBoardState extends State<DashBoard> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                IconButton(
-                  onPressed: () async {
-                    String uid = await AuthService().getUID();
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => AddPage()));
-                    /*await DatabaseService(uid: uid).createGoal(
-                        "goalName", "discription", 10, "durationUnit");*/
-                  },
+                PopupMenuButton(
                   icon: Icon(
                     Icons.add,
                     color: Colors.white,
                   ),
+                  onSelected: (result) {
+                    if (result == 0) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => AddGoalPage()),
+                      );
+                    }
+                    if (result == 1) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => AddSubjectPage()),
+                      );
+                    }
+                    if (result == 2) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => AddTopicPage()),
+                      );
+                    }
+                  },
+                  itemBuilder: (BuildContext context) => <PopupMenuEntry>[
+                    const PopupMenuItem(
+                      value: 0,
+                      child: ListTile(
+                        leading: Icon(Icons.flag),
+                        title: Text('Add Goal'),
+                      ),
+                    ),
+                    const PopupMenuItem(
+                      value: 1,
+                      child: ListTile(
+                        leading: Icon(Icons.anchor),
+                        title: Text('Add Subject'),
+                      ),
+                    ),
+                    const PopupMenuItem(
+                      value: 2,
+                      child: ListTile(
+                        leading: Icon(Icons.article),
+                        title: Text('Add Topic'),
+                      ),
+                    ),
+                  ],
                 ),
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => SubjectListPage()));
+                  },
                   icon: Icon(
                     Icons.handyman_rounded,
                     color: Colors.white,

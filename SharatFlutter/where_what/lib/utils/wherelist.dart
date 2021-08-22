@@ -106,18 +106,22 @@ class _WhereListState extends State<WhereList> {
                   fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 20.0),
-            TextFormField(
-              initialValue: whereStr,
-              decoration: textInputDecoration("Enter new where"),
-              validator: (val) =>
-                  val.isEmpty ? 'Please enter a location' : null,
+            Padding(
+              padding: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).viewInsets.bottom),
+              child: TextFormField(
+                initialValue: whereStr,
+                decoration: textInputDecoration("Enter new where"),
+                validator: (val) =>
+                    val.isEmpty ? 'Please enter a location' : null,
 
-              onChanged: (val) {
-                setState(() {
-                  whereEdited = val;
-                });
-              },
-              //controller: myWhereController,
+                onChanged: (val) {
+                  setState(() {
+                    whereEdited = val;
+                  });
+                },
+                //controller: myWhereController,
+              ),
             ),
             SizedBox(height: 24.0),
             FlatButton(

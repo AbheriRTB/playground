@@ -36,12 +36,28 @@ class DatabaseService {
   Future<void> createSubject(
     String subjectName,
     String discription,
-    int id,
   ) async {
-    usersCollection.doc(uid).collection('subjects').doc().set({
+    await usersCollection.doc(uid).collection('subjects').add({
       'subjectName': subjectName,
       'discription': discription,
-      'id': id,
+    });
+  }
+
+  Future<void> createTopic(
+    String topicName,
+    String discription,
+    String subject,
+    String subID,
+  ) async {
+    await usersCollection
+        .doc(uid)
+        .collection('subjects')
+        .doc(subID)
+        .collection('topics')
+        .add({
+      'subjectName': topicName,
+      'discription': discription,
+      'subject': subject,
     });
   }
 }

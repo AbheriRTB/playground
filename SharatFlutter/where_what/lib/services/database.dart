@@ -9,10 +9,10 @@ class DatabaseService {
 
   // collection reference
   final CollectionReference usersCollection =
-      Firestore.instance.collection('users');
+      FirebaseFirestore.instance.collection('users');
 
   Future<void> updateUserData(String name, String mail) async {
-    usersCollection.document(uid).collection("user info").add({
+    usersCollection.doc(uid).collection("user info").add({
       'name': name,
       'mail': mail,
     });
@@ -20,24 +20,20 @@ class DatabaseService {
 
   Future<void> addWhere(String what, String where, String date) async {
     DocumentReference docRef =
-        await usersCollection.document(uid).collection("data").document();
-    docRef.setData({
-      'what': what,
-      'where': where,
-      'date': date,
-      'docID': docRef.documentID
-    });
+        await usersCollection.doc(uid).collection("data").doc();
+    docRef
+        .set({'what': what, 'where': where, 'date': date, 'docID': docRef.id});
     return docRef;
   }
 
   List<What> _whatListFromSnapshot(QuerySnapshot snapshot) {
-    return snapshot.documents.map((doc) {
+    return snapshot.docs.map((doc) {
       //print(doc.data);
       return What(
-          what: doc.data['what'] ?? '',
-          where: doc.data['where'] ?? '',
-          date: doc.data['date'] ?? '',
-          docID: doc.documentID ?? '');
+          what: doc['what'] ?? '',
+          where: doc['where'] ?? '',
+          date: doc['date'] ?? '',
+          docID: doc.id ?? '');
     }).toList();
   }
 
@@ -48,8 +44,8 @@ class DatabaseService {
       String docID,
       String uid}) async {
     DocumentReference docRef =
-        await usersCollection.document(uid).collection("data").document(docID);
-    docRef.setData({
+        await usersCollection.doc(uid).collection("data").doc(docID);
+    docRef.set({
       'what': what,
       'where': where,
       'date': date,
@@ -59,33 +55,35 @@ class DatabaseService {
 
   What _userDataFromSnapshot(DocumentSnapshot snapshot) {
     return What(
-        what: snapshot.data['what'] ?? '',
-        where: snapshot.data['where'] ?? '',
-        date: snapshot.data['date'] ?? '',
-        docID: snapshot.documentID ?? '');
+        what: snapshot['what'] ?? '',
+        where: snapshot['where'] ?? '',
+        date: snapshot['date'] ?? '',
+        docID: snapshot.id ?? '');
   }
 
   Future<void> deleteWhere(String docID, String uid) async {
     return await usersCollection
-        .document(uid)
+        .doc(uid)
         .collection("data")
-        .document(docID)
+        .doc(docID)
         .delete();
   }
 
   // Get Users Stream
   Stream<List<What>> get users {
-    final CollectionReference usersNewCollection =
-        Firestore.instance.collection('users').document(uid).collection('data');
+    final CollectionReference usersNewCollection = FirebaseFirestore.instance
+        .collection('users')
+        .doc(uid)
+        .collection('data');
     return usersNewCollection.snapshots().map(_whatListFromSnapshot);
   }
 
   Stream<What> get userData {
-    final DocumentReference usersNewCollection = Firestore.instance
+    final DocumentReference usersNewCollection = FirebaseFirestore.instance
         .collection('users')
-        .document(uid)
+        .doc(uid)
         .collection('data')
-        .document(docID);
+        .doc(docID);
     return usersNewCollection.snapshots().map(_userDataFromSnapshot);
   }
 }

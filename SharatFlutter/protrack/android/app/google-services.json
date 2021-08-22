@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "403828143958",
+    "project_id": "where-what",
+    "storage_bucket": "where-what.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:403828143958:android:317f2793a007a2614908f7",
+        "android_client_info": {
+          "package_name": "com.abheri.where_what"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "403828143958-2i5qnshg4e63fudkvaa5chv2qk9jv2sj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.abheri.where_what",
+            "certificate_hash": "3d3918e7e412e36cf084c1913801fa531ffa53aa"
+          }
+        },
+        {
+          "client_id": "403828143958-ersbt7rsmlah20q0onpb60rn5mvb2vi2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAT6A8b8uPcMc223WiVTW202MF6zZAt3b0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "403828143958-ersbt7rsmlah20q0onpb60rn5mvb2vi2.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "403828143958-90mqj0u18fm4taplfqkchm4934jlk7tr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.abheri.whereWhat"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
