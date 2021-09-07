@@ -9,9 +9,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:csv/csv.dart';
-import 'package:chalk_and_duster/pages/api/api_firebase.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:path/path.dart';
 
 class CreateUsersPage extends StatefulWidget {
   const CreateUsersPage({Key? key}) : super(key: key);
@@ -37,7 +35,6 @@ class _CreateUsersPageState extends State<CreateUsersPage> {
   String email = '';
   String name = '';
   String password = '';
-  bool _showPass = true;
 
   String? progBar = 'UPLOAD';
   double? progress;

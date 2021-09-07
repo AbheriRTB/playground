@@ -4,7 +4,6 @@ import 'package:chalk_and_duster/pages/home/pages_add_group.dart';
 import 'package:chalk_and_duster/services/auth.dart';
 import 'package:chalk_and_duster/services/database.dart';
 import 'package:chalk_and_duster/widgets/list_tile.dart';
-import 'package:chalk_and_duster/widgets/widget_path_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -70,7 +69,9 @@ class _ClassesPageState extends State<ClassesPage> {
                           ),
                         ),
                         IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            _auth.signOut();
+                          },
                           icon: Icon(
                             Icons.search,
                             color: accentDark,
@@ -141,7 +142,9 @@ class GroupsListView extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                             builder: (context) => GroupMessagesPage(
-                              id: snapshot.data!.docs[index].id,
+                              grupId: snapshot.data!.docs[index].id,
+                              orgId: user.orgId!,
+                              userData: user,
                             ),
                           ));
                     },

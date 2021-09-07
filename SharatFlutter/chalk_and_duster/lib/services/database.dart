@@ -1,3 +1,4 @@
+import 'package:chalk_and_duster/models/message.dart';
 import 'package:chalk_and_duster/models/user.dart';
 import 'package:chalk_and_duster/services/auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -65,6 +66,23 @@ class DatabaseService {
     });
   }
 
+  Future createMessage(
+    String message,
+  ) async {
+    await orgsCollection
+        .doc(orgId)
+        .collection('groups')
+        .doc(grupId)
+        .collection('messages')
+        .doc(timeStamp.toString())
+        .set({
+      'message': message,
+      'uidFrom': uid,
+      'groupId': grupId,
+      'timeStamp': timeStamp,
+    });
+  }
+
   // User Data from Snapshot
   UsersData _userDataFromSnapshot(DocumentSnapshot snapshot) {
     return UsersData(
@@ -76,6 +94,18 @@ class DatabaseService {
       isAdmin: snapshot['isAdmin'],
       isTeacher: snapshot['isTeacher'],
     );
+  } // User Data from Snapshot
+
+  List<Messages> _messagesFromSnapshot(QuerySnapshot snapshot) {
+    return snapshot.docs.map((doc) {
+      //print(doc.data);
+      return Messages(
+        uidFrom: doc['uidFrom'] ?? '',
+        groupId: doc['groupId'] ?? '',
+        message: doc['message'] ?? '',
+        timeStamp: timeStamp,
+      );
+    }).toList();
   }
 
   // get user data
@@ -97,12 +127,14 @@ class DatabaseService {
         .snapshots();
   }
 
-  Stream<QuerySnapshot> get msgs {
+  Stream<List<Messages>> get msgs {
     return orgsCollection
         .doc(orgId)
         .collection('groups')
         .doc(grupId)
         .collection('messages')
-        .snapshots();
+        .orderBy('timeStamp', descending: true)
+        .snapshots()
+        .map(_messagesFromSnapshot);
   }
 }

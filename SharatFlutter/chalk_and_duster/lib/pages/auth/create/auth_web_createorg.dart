@@ -1,9 +1,6 @@
-import 'dart:convert';
-import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:chalk_and_duster/widgets/text_field.dart';
-import 'package:csv/csv.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -24,13 +21,11 @@ class _CreateOrgPageState extends State<CreateOrgPage> {
 
   final myController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-  final _formKeyPass = GlobalKey<FormState>();
   String error = '';
 
 // text field state
   String email = '';
   String password = '';
-  bool _showPass = true;
   bool loading = false;
 
   UploadTask? task;

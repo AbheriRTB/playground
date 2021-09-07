@@ -50,7 +50,8 @@ class _AddGroupDetailsState extends State<AddGroupDetails> {
                 onChanged: (val) {
                   setState(() => name = val.trim());
                 },
-                decoration: textInputDecoration("Enter Mobile No."),
+                decoration: textInputDecoration("Enter Group Name"),
+                maxLength: 15,
                 keyboardType: TextInputType.phone,
               ),
             ),
@@ -76,6 +77,7 @@ class _AddGroupDetailsState extends State<AddGroupDetails> {
           await DatabaseService()
               .createGrup(name!, uploadList, widget._userList[1]['orgId']);
           print("object");
+          Navigator.pop(context);
         },
         backgroundColor: secondary,
       ),
