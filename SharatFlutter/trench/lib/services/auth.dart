@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:trench/models/model_user.dart';
+import 'package:trench/services/database.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -58,10 +59,6 @@ class AuthService {
     String email,
     String password,
     String name,
-    String orgId,
-    String mobileNo,
-    bool isAdmin,
-    bool isTeacher,
   ) async {
     try {
       UserCredential result = await _auth.createUserWithEmailAndPassword(
@@ -69,9 +66,11 @@ class AuthService {
         password: password,
       );
       User? user = result.user;
-      //DatabaseService(uid: user!.uid)
-      //  .updateUserData(name, email, orgId, mobileNo, isAdmin, isTeacher)
-      //.then((value) => null);
+      DatabaseService(uid: user!.uid).updateUserData(UsersData(
+        displayName: name,
+        email: email,
+        uid: user.uid,
+      ));
       print('object1');
       return _userFromFirebaseUser(user);
     } catch (error) {

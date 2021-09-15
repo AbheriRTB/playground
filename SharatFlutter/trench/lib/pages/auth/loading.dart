@@ -7,21 +7,15 @@ class Loading extends StatefulWidget {
 }
 
 class _LoadingState extends State<Loading> {
-  Color primary = Color(0xff303242);
-  Color secondary = Color(0xff394359);
-  Color accentDark = Color(0xffE0C097);
-  Color accent = Color(0xffB85C38);
-
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: primary,
-      child: AnnotatedRegion(
+    return Scaffold(
+      body: AnnotatedRegion(
         value: SystemUiOverlayStyle.light,
         child: Center(
-          child: CircularProgressIndicator(
-            backgroundColor: Colors.transparent,
-            valueColor: AlwaysStoppedAnimation<Color?>(accent),
+          child: Text(
+            'Loading...',
+            style: TextStyle(color: Colors.grey),
           ),
         ),
       ),

@@ -32,6 +32,7 @@ dependencies:
   responsive_builder: ^0.4.1
   firebase_storage: ^10.0.3
   file_picker: ^4.0.0
+  cupertino_rounded_corners: ^2.0.1
 
   cupertino_icons: ^1.0.2
 
@@ -60,10 +61,13 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
+  fonts:
+    - family: Imposter
+      fonts:
+        - asset: lib/assets/fonts/the_impostor.ttf
+    - family: Pixellari
+      fonts:
+        - asset: lib/assets/fonts/pixellari.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

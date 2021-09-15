@@ -3,6 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:trench/models/model_user.dart';
 import 'package:trench/pages/auth/authenticate.dart';
 import 'package:trench/pages/home/home.dart';
+import 'package:trench/pages/home/page_main.dart';
+import 'package:trench/pages/page_landing.dart';
 
 class Wrapper extends StatefulWidget {
   @override
@@ -16,7 +18,7 @@ class _WrapperState extends State<Wrapper> {
 
     // return either the Home or Authenticate widget
     if (user == null) {
-      return Authenticate();
+      return LandingPage();
     } else {
       return Home();
     }
