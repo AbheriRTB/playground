@@ -1,31 +1,34 @@
+import 'package:chalk_and_duster/models/model_user.dart';
 import 'package:chalk_and_duster/pages/home/page_classes.dart';
+import 'package:chalk_and_duster/services/auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class NavBar extends StatefulWidget {
-  const NavBar({Key? key}) : super(key: key);
+  NavBar({
+    Key? key,
+  }) : super(key: key);
 
   @override
   _NavBarState createState() => _NavBarState();
 }
 
 class _NavBarState extends State<NavBar> {
-  Color primary = Color(0xff303242);
-  Color secondary = Color(0xff394359);
-  Color accentDark = Color(0xffE0C097);
-  Color accent = Color(0xffB85C38);
-
   int _selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
+    //UsersData usersData = Provider.of<UsersData>(context);
+
     return Scaffold(
       body: showPage(),
-      backgroundColor: primary,
+      //backgroundColor: primary,
       bottomNavigationBar: BottomNavigationBar(
+        elevation: 1,
         type: BottomNavigationBarType.fixed,
-        backgroundColor: secondary,
-        selectedItemColor: accentDark,
-        unselectedItemColor: accentDark.withOpacity(.60),
+        backgroundColor: Colors.white,
+        selectedItemColor: Colors.green,
+        unselectedItemColor: Colors.green.withOpacity(.60),
         selectedFontSize: 14,
         unselectedFontSize: 12,
         currentIndex: _selectedIndex,
@@ -37,16 +40,16 @@ class _NavBarState extends State<NavBar> {
           ),
           BottomNavigationBarItem(
             label: 'Direct',
-            icon: Icon(Icons.person),
+            icon: Icon(Icons.groups),
           ),
-          BottomNavigationBarItem(
+          /*BottomNavigationBarItem(
             label: 'Works',
             icon: Icon(Icons.work),
           ),
           BottomNavigationBarItem(
             label: 'Sheduled',
             icon: Icon(Icons.videocam),
-          ),
+          ),*/
         ],
       ),
     );

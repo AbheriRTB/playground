@@ -1,235 +1,339 @@
-import 'package:chalk_and_duster/models/message.dart';
-import 'package:chalk_and_duster/models/user.dart';
+import 'package:chalk_and_duster/models/model_%20group.dart';
+import 'package:chalk_and_duster/models/model_message.dart';
+import 'package:chalk_and_duster/models/model_user.dart';
+import 'package:chalk_and_duster/pages/home/classes/dialog_schedule.dart';
 import 'package:chalk_and_duster/services/database.dart';
+import 'package:chalk_and_duster/widgets/widget_message.dart';
+
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class GroupMessagesPage extends StatefulWidget {
-  GroupMessagesPage(
-      {Key? key,
-      required this.grupId,
-      required this.orgId,
-      required this.userData})
-      : super(key: key);
+  GroupMessagesPage({
+    Key? key,
+    required this.grups,
+    required this.userData,
+  }) : super(key: key);
 
-  String grupId;
-  String orgId;
   UsersData userData;
+  Groups grups;
 
   @override
   _GroupMessagesPageState createState() => _GroupMessagesPageState();
 }
 
 class _GroupMessagesPageState extends State<GroupMessagesPage> {
-  TextEditingController controller = TextEditingController();
-  ScrollController scrollController = ScrollController();
-
   String? message;
 
-  Color primary = Color(0xff303242);
-
-  Color secondary = Color(0xff394359);
-
-  Color accentDark = Color(0xffE0C097);
-
-  Color accent = Color(0xffB85C38);
+  List? readUsersList;
 
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<List<Messages>>(
-        stream: DatabaseService(
-          grupId: widget.grupId,
-          orgId: widget.orgId,
-        ).msgs,
-        builder: (context, snapshot) {
-          final data = snapshot.data;
-          if (!snapshot.hasData) {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-          Users user = Provider.of<Users>(context);
-          // if (!snapshot.hasData) {
-          //   return Center(
-          //     child: CircularProgressIndicator(),
-          //   );
-          // }
-          return Scaffold(
-            backgroundColor: primary,
+      stream: DatabaseService(
+        grupId: widget.grups.grupId,
+        orgId: widget.userData.orgId,
+      ).messagesData,
+      builder: (context, snapshot) {
+        List<Messages> data = snapshot.data!;
+
+        if (!snapshot.hasData) {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        } else if (snapshot.hasError) {
+          return Center(
+            child: CircularProgressIndicator(
+              color: Colors.red,
+            ),
+          );
+        }
+        return DefaultTabController(
+          length: 4,
+          child: Scaffold(
             appBar: AppBar(
-              //backgroundColor: secondary,
-              title: Text('Bye'),
+              bottomOpacity: 0.6,
+              bottom: TabBar(
+                indicator: UnderlineTabIndicator(
+                  borderSide: BorderSide(
+                    width: 2.0,
+                    color: Colors.green[600]!,
+                  ),
+                  insets: EdgeInsets.symmetric(
+                    horizontal: 34.0,
+                  ),
+                ),
+                tabs: [
+                  Tab(
+                    child: Text(
+                      'Chat',
+                      style: TextStyle(
+                        color: Colors.green[600],
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16.0,
+                      ),
+                    ),
+                  ),
+                  Tab(
+                    child: Text(
+                      'Files',
+                      style: TextStyle(
+                        color: Colors.green[600],
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16.0,
+                      ),
+                    ),
+                  ),
+                  Tab(
+                    child: Text(
+                      'Classes',
+                      style: TextStyle(
+                        color: Colors.green[600],
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16.0,
+                      ),
+                    ),
+                  ),
+                  Tab(
+                    child: Text(
+                      'Tasks',
+                      style: TextStyle(
+                        color: Colors.green[600],
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16.0,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              title: InkWell(
+                onTap: () {},
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Text(
+                          widget.grups.grupName!,
+                          style: TextStyle(
+                            color: Colors.grey[800],
+                          ),
+                        ),
+                        Icon(
+                          Icons.arrow_right,
+                          color: Colors.grey[600],
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Text(
+                      '${widget.grups.grupUsers!.length} members',
+                      style: TextStyle(
+                        color: Colors.grey[500],
+                        fontSize: 12,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              centerTitle: false,
               leading: IconButton(
                 icon: Icon(
                   Icons.arrow_back,
-                  color: accent,
+                  color: Colors.grey[600],
                 ),
                 onPressed: () {
                   Navigator.pop(context);
                 },
               ),
             ),
-            body: Column(
+            body: TabBarView(
               children: [
-                Expanded(
-                  child: ListView.builder(
-                    controller: scrollController,
-                    reverse: true,
-                    itemCount: data!.length,
-                    itemBuilder: (context, index) {
-                      return MessageWidget(
-                        msgs: data,
-                        index: index,
-                      );
-                    },
+                ChatsPageWidget(
+                  data: data,
+                  grups: widget.grups,
+                  userData: widget.userData,
+                ),
+                Icon(Icons.directions_transit),
+                Scaffold(
+                  floatingActionButton:
+                      widget.userData.isAdmin! || widget.userData.isTeacher!
+                          ? FloatingActionButton.extended(
+                              label: Text(
+                                'Schedule'.toUpperCase(),
+                                style: TextStyle(color: Colors.green),
+                              ),
+                              icon: Icon(
+                                Icons.video_call,
+                                color: Colors.green,
+                              ),
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => ScheduleDialog(),
+                                      fullscreenDialog: true,
+                                    ));
+                              },
+                              backgroundColor: Colors.white,
+                            )
+                          : Container(),
+                  floatingActionButtonLocation:
+                      FloatingActionButtonLocation.endFloat,
+                ),
+                Center(
+                  child: Text(
+                    'COMMING SOON',
+                    style: TextStyle(
+                        color: Colors.green[600], fontStyle: FontStyle.italic),
                   ),
                 ),
-                widget.userData.isAdmin! || widget.userData.isTeacher!
-                    ? Container(
-                        color: secondary,
-                        child: SafeArea(
-                          child: Padding(
-                            padding: const EdgeInsets.only(
-                                left: 16.0, right: 16.0, top: 8.0),
-                            child: Row(
-                              children: [
-                                Expanded(
-                                  child: TextField(
-                                    controller: controller,
-                                    onChanged: (val) {
-                                      setState(() => message = val.trim());
-                                    },
-                                    decoration: InputDecoration(
-                                      filled: true,
-                                      fillColor: primary,
-                                      hintText: ' Type your message',
-                                      hintStyle: TextStyle(
-                                          color: accentDark.withOpacity(0.5)),
-                                      border: OutlineInputBorder(
-                                        borderSide: BorderSide(width: 0),
-                                        gapPadding: 10,
-                                        borderRadius: BorderRadius.circular(32),
-                                      ),
-                                      focusedBorder: OutlineInputBorder(
-                                        gapPadding: 0,
-                                        borderSide: BorderSide(
-                                            color: Colors.transparent),
-                                        borderRadius: BorderRadius.circular(32),
-                                      ),
-                                      enabledBorder: OutlineInputBorder(
-                                        gapPadding: 0,
-                                        borderSide: BorderSide(
-                                            color: Colors.transparent),
-                                        borderRadius: BorderRadius.circular(32),
-                                      ),
-                                    ),
-                                    keyboardType: TextInputType.phone,
-                                    maxLines: null,
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 16.0,
-                                ),
-                                CircleAvatar(
-                                  backgroundColor: primary,
-                                  minRadius: 12,
-                                  child: IconButton(
-                                    onPressed: () {
-                                      message!.trim() != ''
-                                          ? createMessage(
-                                              widget.orgId,
-                                              user.uid!,
-                                              widget.grupId,
-                                              message!)
-                                          : print('null');
-                                      controller.clear();
-                                    },
-                                    icon: Icon(
-                                      Icons.send_rounded,
-                                      color: accent,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      )
-                    : Container(),
               ],
             ),
-          );
-        });
-  }
-
-  createMessage(
-    String orgID,
-    String uid,
-    String grupId,
-    String message,
-  ) {
-    DatabaseService(
-      grupId: grupId,
-      orgId: orgID,
-      uid: uid,
-    ).createMessage(message);
+          ),
+        );
+      },
+      initialData: [],
+    );
   }
 }
 
-class MessageWidget extends StatelessWidget {
-  Color primary = Color(0xff303242);
-  Color secondary = Color(0xff394359);
-  Color accentDark = Color(0xffE0C097);
-  Color accent = Color(0xffB85C38);
-
-  MessageWidget({
+class ChatsPageWidget extends StatefulWidget {
+  ChatsPageWidget({
     Key? key,
-    required this.msgs,
-    required this.index,
+    required this.data,
+    required this.grups,
+    required this.userData,
   }) : super(key: key);
 
-  final List<Messages> msgs;
-  final int index;
-  bool? isMe = false;
+  List<Messages> data;
+  Groups grups;
+  UsersData userData;
+
+  @override
+  State<ChatsPageWidget> createState() => _ChatsPageWidgetState();
+}
+
+class _ChatsPageWidgetState extends State<ChatsPageWidget> {
+  TextEditingController controller = TextEditingController();
+
+  ScrollController scrollController = ScrollController();
+
+  String? message;
 
   @override
   Widget build(BuildContext context) {
-    final users = Provider.of<Users?>(context);
-    if (msgs[index].uidFrom == users!.uid) {
-      isMe = true;
-    }
-    return StreamBuilder<UsersData>(
-        stream: DatabaseService(uid: msgs[index].uidFrom).userData,
-        builder: (context, snapshot) {
-          return Align(
-            alignment: isMe! ? Alignment.centerRight : Alignment.centerLeft,
-            child: Padding(
-              padding:
-                  EdgeInsets.fromLTRB(isMe! ? 120 : 8, 8, isMe! ? 8 : 120, 8),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: Container(
-                    color: isMe! ? accent : secondary,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            snapshot.data!.displayName!,
-                            style: TextStyle(
-                                fontSize: 16.0, fontWeight: FontWeight.bold),
-                          ),
-                          Text(
-                            msgs[index].message!,
-                            style: TextStyle(fontSize: 18.0),
-                          ),
-                        ],
+    return Column(
+      children: [
+        Expanded(
+          child: ListView.builder(
+            controller: scrollController,
+            reverse: true,
+            itemCount: widget.data.length,
+            itemBuilder: (context, index) {
+              return MessageWidget(
+                msgs: widget.data,
+                index: index,
+                grups: widget.grups,
+                userData: widget.userData,
+              );
+            },
+          ),
+        ),
+        widget.userData.isAdmin! || widget.userData.isTeacher!
+            ? Container(
+                //color: secondary,
+                child: SafeArea(
+                  child: Column(
+                    children: [
+                      Divider(
+                        color: Colors.grey,
                       ),
-                    )),
-              ),
-            ),
-          );
-        });
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            left: 16.0, right: 16.0, top: 0.0),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: TextField(
+                                controller: controller,
+                                onChanged: (val) {
+                                  setState(() => message = val.trim());
+                                },
+                                decoration: InputDecoration(
+                                  filled: false,
+                                  hintText: 'Type your message',
+                                  hintStyle: TextStyle(fontSize: 18.0),
+                                  focusedBorder: UnderlineInputBorder(
+                                    borderSide:
+                                        BorderSide(color: Colors.transparent),
+                                    borderRadius: BorderRadius.circular(32),
+                                  ),
+                                  enabledBorder: UnderlineInputBorder(
+                                    borderSide:
+                                        BorderSide(color: Colors.transparent),
+                                  ),
+                                ),
+                                //keyboardType: TextInputType.phone,
+                                autocorrect: true,
+                                maxLines: null,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 16.0,
+                            ),
+                          ],
+                        ),
+                      ),
+                      Row(
+                        children: [
+                          IconButton(
+                              onPressed: () {},
+                              icon: Icon(
+                                Icons.image_outlined,
+                                color: Colors.grey[800],
+                              )),
+                          IconButton(
+                              onPressed: () {},
+                              icon: Icon(
+                                Icons.photo_camera_outlined,
+                                color: Colors.grey[800],
+                              )),
+                          IconButton(
+                              onPressed: () {},
+                              icon: Icon(
+                                Icons.movie_creation_outlined,
+                                color: Colors.grey[800],
+                              )),
+                          IconButton(
+                              onPressed: () {},
+                              icon: Icon(
+                                Icons.link_outlined,
+                                color: Colors.grey[800],
+                              )),
+                          Expanded(child: Container()),
+                          IconButton(
+                              onPressed: () async {
+                                controller.clear();
+                                await DatabaseService(
+                                  orgId: widget.userData.orgId,
+                                  grupId: widget.grups.grupId,
+                                  uid: widget.userData.uid,
+                                ).updateMessageData(Messages(content: message));
+                              },
+                              icon: Icon(
+                                Icons.send_sharp,
+                                color: Colors.grey[700],
+                              )),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+              )
+            : Container(),
+      ],
+    );
   }
 }

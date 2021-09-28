@@ -1,32 +1,40 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Messages {
+  final String? msgId;
+  final String? content;
   final String? uidFrom;
-
-  final String? message;
   final String? groupId;
+  final List? readUsers;
   final DateTime? timeStamp;
 
   Messages({
-    this.message,
+    this.msgId,
+    this.content,
     this.uidFrom,
     this.groupId,
+    this.readUsers,
     this.timeStamp,
   });
 
   factory Messages.fromDocument(DocumentSnapshot doc) {
     return Messages(
+      msgId: doc['msgId'],
+      content: doc['content'],
       uidFrom: doc['uidFrom'],
-      message: doc['message'],
       groupId: doc['groupId'],
-      timeStamp: doc['timeStamp'],
+      readUsers: doc['readUsers'],
+      timeStamp: doc['timeStamp'].toDate(),
     );
   }
+
   factory Messages.initialData() {
     return Messages(
+      msgId: '',
+      content: '',
       uidFrom: '',
-      message: '',
       groupId: '',
+      readUsers: [],
       timeStamp: DateTime.now(),
     );
   }

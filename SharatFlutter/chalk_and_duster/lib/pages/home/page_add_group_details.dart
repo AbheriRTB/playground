@@ -1,5 +1,7 @@
+import 'dart:math';
+
+import 'package:chalk_and_duster/models/model_%20group.dart';
 import 'package:chalk_and_duster/services/database.dart';
-import 'package:chalk_and_duster/widgets/text_field.dart';
 import 'package:flutter/material.dart';
 
 class AddGroupDetails extends StatefulWidget {
@@ -24,6 +26,9 @@ class _AddGroupDetailsState extends State<AddGroupDetails> {
 
   @override
   Widget build(BuildContext context) {
+    Color color = Colors.primaries[Random().nextInt(Colors.primaries.length)];
+    String colorString = color.toString();
+
     print(widget._userList);
     return Scaffold(
       backgroundColor: primary,
@@ -50,7 +55,7 @@ class _AddGroupDetailsState extends State<AddGroupDetails> {
                 onChanged: (val) {
                   setState(() => name = val.trim());
                 },
-                decoration: textInputDecoration("Enter Group Name"),
+                //decoration: textInputDecoration("Enter Group Name"),
                 maxLength: 15,
                 keyboardType: TextInputType.phone,
               ),
@@ -72,11 +77,15 @@ class _AddGroupDetailsState extends State<AddGroupDetails> {
         ),
         onPressed: () async {
           widget._userList.forEach((element) {
-            uploadList.add(element['id']);
+            uploadList.add(element['uid']);
           });
-          await DatabaseService()
-              .createGrup(name!, uploadList, widget._userList[1]['orgId']);
-          print("object");
+          await DatabaseService(
+            orgId: widget._userList[1]['orgId'],
+          ).updateGroupData(Groups(
+            grupName: name!,
+            grupUsers: uploadList,
+            photoColor: colorString,
+          ));
           Navigator.pop(context);
         },
         backgroundColor: secondary,

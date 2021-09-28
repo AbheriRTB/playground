@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:chalk_and_duster/models/model_%20organization.dart';
+import 'package:chalk_and_duster/models/model_user.dart';
 import 'package:chalk_and_duster/pages/auth/loading.dart';
 import 'package:chalk_and_duster/services/auth.dart';
 import 'package:chalk_and_duster/services/database.dart';
@@ -198,7 +200,6 @@ class _CreateUsersPageState extends State<CreateUsersPage> {
 
   createUsers(List<List<dynamic>>? users) async {
     users!.forEach((element) async {
-      print(element[0].toString());
       setState(() => loading = true);
       bool isAdmin = false, isTeacher = false;
 
@@ -206,13 +207,17 @@ class _CreateUsersPageState extends State<CreateUsersPage> {
       if (element[6] == 'TRUE') isTeacher = true;
 
       dynamic result = await _auth.registerWithEmailAndPassword(
-          element[2],
-          element[3],
-          element[0],
-          id!,
-          element[4].toString(),
-          isAdmin,
-          isTeacher);
+        UsersData(
+          displayName: element[0],
+          email: element[2],
+          orgId: id!,
+          isAdmin: isAdmin,
+          isTeacher: isTeacher,
+          mobileNo: element[4].toString(),
+        ),
+        element[3],
+      );
+
       if (result == null) {
         setState(() {
           loading = false;
@@ -221,7 +226,11 @@ class _CreateUsersPageState extends State<CreateUsersPage> {
       }
     });
 
-    DatabaseService().createOrg(name, email, id!);
+    DatabaseService().updateOrganizationData(Organizations(
+      orgName: name,
+      orgEmail: email,
+      orgId: id,
+    ));
   }
 
   static Future<bool> checkExist(String docID) async {

@@ -1,111 +1,102 @@
-import 'package:chalk_and_duster/models/message.dart';
-import 'package:chalk_and_duster/models/user.dart';
-import 'package:chalk_and_duster/services/auth.dart';
+import 'package:chalk_and_duster/models/model_%20group.dart';
+import 'package:chalk_and_duster/models/model_%20organization.dart';
+import 'package:chalk_and_duster/models/model_message.dart';
+import 'package:chalk_and_duster/models/model_user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 class DatabaseService {
   final String? uid, orgId, grupId;
-  String? docID, postID;
 
   DatabaseService({this.uid, this.orgId, this.grupId});
   final DateTime timeStamp = DateTime.now();
 
+  // Orgs Reference
   final CollectionReference orgsCollection =
       FirebaseFirestore.instance.collection('orgnizers');
-  // collection reference
+
+  // Users Reference
   final CollectionReference usersCollection =
       FirebaseFirestore.instance.collection('users');
 
   Future<void> updateUserData(
-    String displayName,
-    String email,
-    String orgId,
-    String mobileNo,
-    bool isAdmin,
-    bool isTeacher,
+    UsersData usersData,
   ) async {
-    print('object2');
-
     await usersCollection.doc(uid).set({
-      'id': uid,
-      'displayName': displayName,
-      'email': email,
+      'uid': uid,
+      'displayName': usersData.displayName,
+      'email': usersData.email,
+      'photoUrl': usersData.photoUrl,
+      'orgId': usersData.orgId,
+      'mobileNo': usersData.mobileNo,
+      'isAdmin': usersData.isAdmin,
+      'isTeacher': usersData.isTeacher,
       'timsStamp': timeStamp,
-      'orgId': orgId,
-      'mobileNo': mobileNo,
-      'isAdmin': isAdmin,
-      'isTeacher': isTeacher,
     });
-    print('object3');
   }
 
-  Future<void> createOrg(
-    String orgName,
-    String orgEmail,
-    String orgID,
+  Future<void> updateOrganizationData(
+    Organizations organization,
   ) async {
-    final result = await orgsCollection.doc(orgID).set({
-      'orgName': orgName,
-      'orgEmail': orgEmail,
-      'orgID': orgID,
+    await orgsCollection.doc(organization.orgId).set({
+      'orgId': organization.orgId,
+      'orgName': organization.orgName,
+      'orgEmail': organization.orgEmail,
       'timeStamp': timeStamp,
     });
   }
 
-  Future<void> createGrup(
-    String grupName,
-    List users,
-    String orgID,
+  Future<void> updateGroupData(
+    Groups group,
   ) async {
-    final result =
-        await orgsCollection.doc(orgID).collection('groups').doc().set({
-      'groupName': grupName,
-      'users': users,
+    var randomDoc = orgsCollection.doc(orgId).collection('groups').doc().id;
+
+    await orgsCollection.doc(orgId).collection('groups').doc(randomDoc).set({
+      'grupName': group.grupName,
+      'grupId': randomDoc,
+      'grupUsers': group.grupUsers,
+      'photoColor': group.photoColor,
       'timeStamp': timeStamp,
     });
   }
 
-  Future createMessage(
-    String message,
+  Future updateMessageData(
+    Messages message,
+  ) async {
+    var randomDoc = orgsCollection
+        .doc(orgId)
+        .collection('groups')
+        .doc(timeStamp.toString())
+        .id;
+
+    await orgsCollection
+        .doc(orgId)
+        .collection('groups')
+        .doc(grupId)
+        .collection('messages')
+        .doc(randomDoc)
+        .set({
+      'msgId': randomDoc,
+      'content': message.content,
+      'uidFrom': uid,
+      'groupId': grupId,
+      'readUsers': [uid],
+      'timeStamp': timeStamp,
+    });
+  }
+
+  Future readMessage(
+    List readUser,
+    String msgId,
   ) async {
     await orgsCollection
         .doc(orgId)
         .collection('groups')
         .doc(grupId)
         .collection('messages')
-        .doc(timeStamp.toString())
-        .set({
-      'message': message,
-      'uidFrom': uid,
-      'groupId': grupId,
-      'timeStamp': timeStamp,
+        .doc(msgId)
+        .update({
+      'readUsers': readUser,
     });
-  }
-
-  // User Data from Snapshot
-  UsersData _userDataFromSnapshot(DocumentSnapshot snapshot) {
-    return UsersData(
-      uid: uid,
-      displayName: snapshot['displayName'],
-      email: snapshot['email'],
-      orgId: snapshot['orgId'],
-      mobileNo: snapshot['mobileNo'],
-      isAdmin: snapshot['isAdmin'],
-      isTeacher: snapshot['isTeacher'],
-    );
-  } // User Data from Snapshot
-
-  List<Messages> _messagesFromSnapshot(QuerySnapshot snapshot) {
-    return snapshot.docs.map((doc) {
-      //print(doc.data);
-      return Messages(
-        uidFrom: doc['uidFrom'] ?? '',
-        groupId: doc['groupId'] ?? '',
-        message: doc['message'] ?? '',
-        timeStamp: timeStamp,
-      );
-    }).toList();
   }
 
   // get user data
@@ -115,19 +106,45 @@ class DatabaseService {
 
   // Get User Doc Stream
   Stream<UsersData> get userData {
-    return usersCollection.doc(uid).snapshots().map(_userDataFromSnapshot);
+    return usersCollection
+        .doc(uid)
+        .snapshots()
+        .map(_userDataFromSnapshot)
+        .handleError((onError) {
+      print(onError);
+    });
   }
 
-  // Get User Doc Stream
-  Stream<QuerySnapshot> get grupData {
+  // Get Organizations Doc Stream
+  Stream<Organizations> get orgsData {
+    return orgsCollection.doc(orgId).snapshots().map(_orgsDataFromSnapshot);
+  }
+
+  // Get Group Doc Stream
+  Stream<Groups> get groupData {
     return orgsCollection
         .doc(orgId)
         .collection('groups')
-        .where('users', arrayContains: uid)
-        .snapshots();
+        .doc(grupId)
+        .snapshots()
+        .map(_groupDataFromSnapshot);
   }
 
-  Stream<List<Messages>> get msgs {
+  // Get Groups List Doc Stream
+  Stream<List<Groups>> get groupsList {
+    return orgsCollection
+        .doc(orgId!)
+        .collection('groups')
+        .where('grupUsers', arrayContains: uid!)
+        .snapshots()
+        .map(_groupsListFromSnapshot)
+        .handleError((onError) {
+      print(onError);
+    });
+  }
+
+  // Get Messages Doc Stream
+  Stream<List<Messages>> get messagesData {
     return orgsCollection
         .doc(orgId)
         .collection('groups')
@@ -135,6 +152,38 @@ class DatabaseService {
         .collection('messages')
         .orderBy('timeStamp', descending: true)
         .snapshots()
-        .map(_messagesFromSnapshot);
+        .map(_messagesFromSnapshot)
+        .handleError((onError) {
+      print(onError);
+    });
+  }
+
+  // User Data from Snapshot
+  UsersData _userDataFromSnapshot(DocumentSnapshot doc) {
+    return UsersData.fromDocument(doc);
+  }
+
+  // Organizations Data from Snapshot
+  Organizations _orgsDataFromSnapshot(DocumentSnapshot snapshot) {
+    return Organizations.fromDocument(snapshot);
+  }
+
+  // Groups Data from Snapshot
+  Groups _groupDataFromSnapshot(DocumentSnapshot snapshot) {
+    return Groups.fromDocument(snapshot);
+  }
+
+  // List Groups Data from Snapshot
+  List<Groups> _groupsListFromSnapshot(QuerySnapshot snapshot) {
+    return snapshot.docs.map((doc) {
+      return Groups.fromDocument(doc);
+    }).toList();
+  }
+
+  // Messages Data from Snapshot
+  List<Messages> _messagesFromSnapshot(QuerySnapshot snapshot) {
+    return snapshot.docs.map((doc) {
+      return Messages.fromDocument(doc);
+    }).toList();
   }
 }

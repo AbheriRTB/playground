@@ -1,8 +1,7 @@
-import 'package:chalk_and_duster/models/user.dart';
+import 'package:chalk_and_duster/models/model_user.dart';
 import 'package:chalk_and_duster/pages/home/page_add_group_details.dart';
 import 'package:chalk_and_duster/services/database.dart';
-import 'package:chalk_and_duster/widgets/list_tile.dart';
-import 'package:chalk_and_duster/widgets/text_field.dart';
+import 'package:chalk_and_duster/widgets/widget_list.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -164,8 +163,8 @@ class _AddGroupPageState extends State<AddGroupPage> {
                             onTap: () {
                               bool contains = false;
                               for (int i = 0; i < _selectedList.length; ++i) {
-                                if (_selectedList[i]['id'] ==
-                                    _resultsList[index]['id']) {
+                                if (_selectedList[i]['uid'] ==
+                                    _resultsList[index]['uid']) {
                                   contains = true;
                                   break;
                                 }
