@@ -52,17 +52,22 @@ class AuthService {
         password: password,
       );
       User? user = result.user;
-      DatabaseService(uid: user!.uid)
-          .updateUserData(UsersData(
-            displayName: usersData.displayName,
-            email: usersData.email,
-            orgId: usersData.orgId,
-            mobileNo: usersData.mobileNo,
-            photoUrl: usersData.photoUrl,
-            isAdmin: usersData.isAdmin,
-            isTeacher: usersData.isTeacher,
-          ))
-          .then((value) => null);
+      await DatabaseService()
+          .updateUserData(
+        UsersData(
+          uid: user!.uid,
+          displayName: usersData.displayName,
+          email: usersData.email,
+          orgId: usersData.orgId,
+          mobileNo: usersData.mobileNo,
+          photoUrl: usersData.photoUrl,
+          isAdmin: usersData.isAdmin,
+          isTeacher: usersData.isTeacher,
+        ),
+      )
+          .onError((error, stackTrace) {
+        print('Error : $error $stackTrace');
+      });
       return _userFromFirebaseUser(user);
     } catch (error) {
       print(error.toString());

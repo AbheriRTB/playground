@@ -9,10 +9,10 @@ class BacgroundPaint extends CustomPainter {
 
     Path mainBackground = Path();
     mainBackground.addRect(Rect.fromLTRB(0, 0, width, height));
-    paint.color = Colors.grey[200]!.withOpacity(0.3);
+    paint.color = Colors.grey[900]!.withOpacity(0.2);
 
     final heightLine = height ~/ 20; // your Horizontal line
-    final widthLine = (width ~/ 10); // your Vertical line
+    final widthLine = (width ~/ 20); // your Vertical line
 
     for (int i = 1; i < height; i++) {
       if (i % heightLine == 0) {

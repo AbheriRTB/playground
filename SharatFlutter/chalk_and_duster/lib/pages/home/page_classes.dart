@@ -27,6 +27,7 @@ class _ClassesPageState extends State<ClassesPage> {
   @override
   Widget build(BuildContext context) {
     UsersData user = Provider.of<UsersData>(context);
+    print(user.uid);
     return StreamProvider<List<Groups>>.value(
       value: DatabaseService(
         orgId: user.orgId,
@@ -195,7 +196,7 @@ class GroupsListView extends StatelessWidget {
             })
         : Center(
             child: CircularProgressIndicator(
-            color: Colors.grey[200],
+            color: Color(0xff90D44B),
           ));
   }
 }

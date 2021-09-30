@@ -21,8 +21,9 @@ class DatabaseService {
   Future<void> updateUserData(
     UsersData usersData,
   ) async {
-    await usersCollection.doc(uid).set({
-      'uid': uid,
+    print('creating ${usersData.uid}');
+    final result = await usersCollection.doc(usersData.uid).set({
+      'uid': usersData.uid,
       'displayName': usersData.displayName,
       'email': usersData.email,
       'photoUrl': usersData.photoUrl,
@@ -31,7 +32,7 @@ class DatabaseService {
       'isAdmin': usersData.isAdmin,
       'isTeacher': usersData.isTeacher,
       'timsStamp': timeStamp,
-    });
+    }).onError((error, stackTrace) => print);
   }
 
   Future<void> updateOrganizationData(

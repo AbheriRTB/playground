@@ -18,6 +18,9 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
+  Color scaffoldColor = Color(0xff1A1A1A);
+  Color accent = Color(0xff90D44B);
+
   @override
   Widget build(BuildContext context) {
     return StreamProvider<Users?>.value(
@@ -32,23 +35,65 @@ class MyApp extends StatelessWidget {
               child: Wrapper()),
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
-            textTheme: GoogleFonts.rubikTextTheme(),
+            textTheme: GoogleFonts.robotoTextTheme(),
             primaryColor: Colors.white,
-            scaffoldBackgroundColor: Colors.white,
+            scaffoldBackgroundColor: scaffoldColor,
             inputDecorationTheme: InputDecorationTheme(
               focusColor: Colors.grey[400],
-              focusedBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: Colors.green),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.transparent),
+                borderRadius: BorderRadius.all(
+                  Radius.circular(10),
+                ),
               ),
-              enabledBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: Colors.grey[400]!),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: Colors.transparent,
+                ),
+                borderRadius: BorderRadius.all(
+                  Radius.circular(10),
+                ),
+              ),
+              disabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: Colors.transparent,
+                ),
+                borderRadius: BorderRadius.all(
+                  Radius.circular(10),
+                ),
               ),
               labelStyle: TextStyle(
-                color: Colors.grey[500],
+                color: Colors.grey[800],
                 fontSize: 16.0,
               ),
+              filled: true,
+              fillColor: Colors.grey[900]!.withOpacity(0.5),
             ),
-            appBarTheme: AppBarTheme(color: Colors.white, centerTitle: false),
+            appBarTheme: AppBarTheme(
+              color: Colors.white,
+              centerTitle: false,
+            ),
+            textButtonTheme: TextButtonThemeData(
+              style: ButtonStyle(
+                overlayColor: MaterialStateProperty.all(Colors.grey[900]),
+              ),
+            ),
+            outlinedButtonTheme: OutlinedButtonThemeData(
+              style: ButtonStyle(
+                overlayColor: MaterialStateProperty.all(accent),
+                backgroundColor: MaterialStateProperty.all(Colors.grey[900]),
+              ),
+            ),
+            elevatedButtonTheme: ElevatedButtonThemeData(
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(accent),
+                overlayColor: MaterialStateProperty.all(Colors.grey[900]),
+                shadowColor: MaterialStateProperty.all(Colors.black),
+              ),
+            ),
+            floatingActionButtonTheme: FloatingActionButtonThemeData(
+              backgroundColor: accent,
+            ),
           ),
         ));
   }

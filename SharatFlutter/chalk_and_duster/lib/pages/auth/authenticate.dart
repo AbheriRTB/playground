@@ -1,4 +1,4 @@
-import 'package:chalk_and_duster/pages/auth/auth_sign_in.dart';
+import 'package:chalk_and_duster/pages/auth/page_sign_in.dart';
 import 'package:flutter/material.dart';
 
 class Authenticate extends StatefulWidget {

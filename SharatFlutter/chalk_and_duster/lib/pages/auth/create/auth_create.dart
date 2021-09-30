@@ -54,11 +54,10 @@ class _CreateUsersPageState extends State<CreateUsersPage> {
     return loading
         ? Loading()
         : Scaffold(
-            backgroundColor: primary,
             //resizeToAvoidBottomPadding: false,
             body: SingleChildScrollView(
               child: Container(
-                padding: EdgeInsets.symmetric(vertical: 80.0, horizontal: 16.0),
+                padding: EdgeInsets.symmetric(vertical: 60.0, horizontal: 16.0),
                 child: Form(
                   key: _formKey,
                   child: Column(
@@ -66,10 +65,12 @@ class _CreateUsersPageState extends State<CreateUsersPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        'REGISTER ORG',
+                        'REGISTER',
                         style: TextStyle(
-                          fontSize: 38.0,
-                          color: accentDark,
+                          fontSize: 60.0,
+                          fontFamily: 'Integral',
+                          fontWeight: FontWeight.bold,
+                          color: Colors.grey[800],
                         ),
                       ),
                       SizedBox(height: 20.0),
@@ -94,25 +95,9 @@ class _CreateUsersPageState extends State<CreateUsersPage> {
                         keyboardType: TextInputType.emailAddress,
                       ),
                       SizedBox(height: 20.0),
-                      TextFormField(
-                        validator: (val) =>
-                            val!.isNotEmpty ? null : 'Enter School ID',
-                        onChanged: (val) async {
-                          setState(() => id = val);
-                          await checkExist(val);
-                        },
-                        decoration: textInputDecoration(
-                          "Enter School ID",
-                          indicator: isAvailable!
-                              ? 'Username Available'
-                              : 'Username Unavailable',
-                          color: isAvailable! ? Colors.green : Colors.red,
-                          //suffix: '#$numbId'
-                        ),
-                      ),
-                      SizedBox(height: 20.0),
                       Divider(
-                        color: accent,
+                        color: Colors.grey[900],
+                        thickness: 3,
                       ),
                       Text(
                         error,
@@ -127,14 +112,13 @@ class _CreateUsersPageState extends State<CreateUsersPage> {
                               flex: 1,
                               child: Container(
                                 width: double.infinity,
-                                child: RaisedButton(
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(8)),
-                                  onPressed: () async {},
-                                  color: secondary,
+                                child: OutlinedButton(
+                                  onPressed: () async {
+                                    await chooseFile();
+                                  },
                                   child: Text(
-                                    'DOWNLOAD EXAMPLE',
-                                    style: TextStyle(color: accentDark),
+                                    'DOWNLOAD SAMPLE',
+                                    style: TextStyle(color: Colors.grey[700]),
                                   ),
                                 ),
                               ),
@@ -146,16 +130,13 @@ class _CreateUsersPageState extends State<CreateUsersPage> {
                               flex: 1,
                               child: Container(
                                 width: double.infinity,
-                                child: RaisedButton(
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(8)),
+                                child: OutlinedButton(
                                   onPressed: () async {
                                     await chooseFile();
                                   },
-                                  color: secondary,
                                   child: Text(
                                     '$progBar',
-                                    style: TextStyle(color: accentDark),
+                                    style: TextStyle(color: Colors.grey[700]),
                                   ),
                                 ),
                               ),
@@ -169,13 +150,19 @@ class _CreateUsersPageState extends State<CreateUsersPage> {
               ),
             ),
 
-            floatingActionButton: FloatingActionButton.extended(
-                label: Text("Register"),
-                backgroundColor: accent,
+            floatingActionButton: FloatingActionButton(
+                backgroundColor: Color(0xff90D44B),
+                child: loading
+                    ? Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child:
+                            CircularProgressIndicator(color: Colors.grey[800]))
+                    : Icon(Icons.meeting_room_sharp, color: Colors.grey[800]),
                 onPressed: () async {
-                  if (isAvailable!) {
+                  setState(() => loading = true);
+                  if (_formKey.currentState!.validate()) {
                     await createUsers(fields);
-                  } else {}
+                  }
                 }),
           );
   }
@@ -194,11 +181,15 @@ class _CreateUsersPageState extends State<CreateUsersPage> {
           .transform(utf8.decoder)
           .transform(CsvToListConverter())
           .toList();
-      setState(() {});
+      setState(() {
+        progBar = 'Selected'.toUpperCase();
+      });
     }
   }
 
   createUsers(List<List<dynamic>>? users) async {
+    var randomDoc = FirebaseFirestore.instance.collection('orgnizers').doc().id;
+
     users!.forEach((element) async {
       setState(() => loading = true);
       bool isAdmin = false, isTeacher = false;
@@ -210,7 +201,8 @@ class _CreateUsersPageState extends State<CreateUsersPage> {
         UsersData(
           displayName: element[0],
           email: element[2],
-          orgId: id!,
+          orgId: randomDoc,
+          photoUrl: '',
           isAdmin: isAdmin,
           isTeacher: isTeacher,
           mobileNo: element[4].toString(),
@@ -229,27 +221,7 @@ class _CreateUsersPageState extends State<CreateUsersPage> {
     DatabaseService().updateOrganizationData(Organizations(
       orgName: name,
       orgEmail: email,
-      orgId: id,
+      orgId: randomDoc,
     ));
-  }
-
-  static Future<bool> checkExist(String docID) async {
-    print(isAvailable);
-    try {
-      await FirebaseFirestore.instance
-          .collection('orgnizers')
-          .doc(docID)
-          .get()
-          .then((doc) {
-        isAvailable = !doc.exists;
-        print(isAvailable);
-      });
-
-      return isAvailable!;
-    } catch (e) {
-      // If any error
-      print(e);
-      return false;
-    }
   }
 }

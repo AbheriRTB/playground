@@ -17,10 +17,10 @@ class Groups {
 
   factory Groups.fromDocument(DocumentSnapshot doc) {
     return Groups(
-      grupName: doc['grupName'],
-      grupId: doc['grupId'],
-      grupUsers: doc['grupUsers'],
-      photoColor: doc['photoColor'],
+      grupName: doc['grupName'] ?? '',
+      grupId: doc['grupId'] ?? '',
+      grupUsers: doc['grupUsers'] ?? '',
+      photoColor: doc['photoColor'] ?? '',
       timeStamp: doc['timeStamp'].toDate(),
     );
   }

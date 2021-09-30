@@ -21,22 +21,21 @@ environment:
   sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
+  blobs: ^2.0.0
+  cloud_firestore: ^2.4.0
+  csv: ^5.0.0
+  cupertino_icons: ^1.0.2
+  file_picker: ^4.0.0
+  firebase_auth: ^3.0.1
+  firebase_core: ^1.4.0
+  firebase_storage: ^10.0.3
   flutter:
     sdk: flutter
-  firebase_auth: ^3.0.1
-  cloud_firestore: ^2.4.0
-  provider: ^6.0.0
-  google_sign_in: ^5.0.5
-  firebase_core: ^1.4.0
   google_fonts: ^2.1.0
-  shared_preferences: ^2.0.6
+  google_sign_in: ^5.0.5
+  provider: ^6.0.0
   responsive_builder: ^0.4.1
-  firebase_storage: ^10.0.3
-  file_picker: ^4.0.0
-  csv: ^5.0.0
-
-
-  cupertino_icons: ^1.0.2
+  shared_preferences: ^2.0.6
 
 dev_dependencies:
   flutter_test:
@@ -44,7 +43,6 @@ dev_dependencies:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
-
 # The following section is specific to Flutter.
 flutter:
 
@@ -59,10 +57,8 @@ flutter:
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
-
   # For details regarding adding assets from package dependencies, see
   # https://flutter.dev/assets-and-images/#from-packages
-
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
   # "family" key with the font family name, and a "fonts" key with a
@@ -72,9 +68,18 @@ flutter:
     - family: Courier
       fonts:
         - asset: lib/assets/fonts/Courier.dfont
-    - family: Hind
+    - family: StretchPro
       fonts:
-        - asset: lib/assets/fonts/Hind-Regular.ttf
+        - asset: lib/assets/fonts/StretchPro.otf
+    - family: DujitsuFont
+      fonts:
+        - asset: lib/assets/fonts/DujitsuFontDemo.otf
+    - family: Horizon
+      fonts:
+        - asset: lib/assets/fonts/Horizon.ttf
+    - family: Integral
+      fonts:
+        - asset: lib/assets/fonts/IntegralCFBold.otf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro
