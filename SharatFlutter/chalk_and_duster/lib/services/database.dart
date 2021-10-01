@@ -56,7 +56,22 @@ class DatabaseService {
       'grupId': randomDoc,
       'grupUsers': group.grupUsers,
       'photoColor': group.photoColor,
+      'lastMessageContent': '',
+      'lastMessageFromUid': '',
+      'lastMessageType': 0,
+      'lastMessageTimeStamp': timeStamp,
       'timeStamp': timeStamp,
+    });
+  }
+
+  Future<void> updateLastMessage(
+    Messages messages,
+  ) async {
+    await orgsCollection.doc(orgId).collection('groups').doc(grupId).update({
+      'lastMessageContent': messages.content,
+      'lastMessageFromUid': uid,
+      //'lastMessageType': messages.type,
+      'lastMessageTimeStamp': timeStamp,
     });
   }
 

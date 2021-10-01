@@ -30,8 +30,8 @@ class _ClassesPageState extends State<ClassesPage> {
     print(user.uid);
     return StreamProvider<List<Groups>>.value(
       value: DatabaseService(
-        orgId: user.orgId,
-        uid: user.uid,
+        orgId: user.orgId ?? ' ',
+        uid: user.uid ?? ' ',
       ).groupsList,
       child: ClassesPageMobile(auth: _auth, user: user),
       initialData: [],
@@ -56,13 +56,23 @@ class ClassesPageMobile extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        elevation: 0,
-        title: Text(
-          user.displayName!,
-          style: TextStyle(
-            fontFamily: 'Integral',
-            fontWeight: FontWeight.bold,
+        leading: IconButton(
+          icon: Icon(
+            Icons.menu,
             color: Colors.grey[800],
+          ),
+          onPressed: () {},
+        ),
+        elevation: 0,
+        title: Padding(
+          padding: const EdgeInsets.only(bottom: 4.0),
+          child: Text(
+            'Classes',
+            style: TextStyle(
+              fontFamily: 'Integral',
+              fontWeight: FontWeight.bold,
+              color: Colors.grey[800],
+            ),
           ),
         ),
         actions: [
@@ -72,6 +82,13 @@ class ClassesPageMobile extends StatelessWidget {
             },
             icon: Icon(
               Icons.search,
+              color: Colors.grey[800],
+            ),
+          ),
+          IconButton(
+            onPressed: () {},
+            icon: Icon(
+              Icons.more_vert,
               color: Colors.grey[800],
             ),
           ),
@@ -144,13 +161,21 @@ class ClassesPageMobile extends StatelessWidget {
       ),
       floatingActionButton: user.isAdmin!
           ? FloatingActionButton.extended(
-              label: Text(
-                'New class'.toUpperCase(),
-                style: TextStyle(color: Colors.green),
+              label: Padding(
+                padding: const EdgeInsets.only(
+                  bottom: 4,
+                ),
+                child: Text(
+                  'New class'.toUpperCase(),
+                  style: TextStyle(
+                    fontFamily: 'Integral',
+                    color: Colors.grey[900],
+                  ),
+                ),
               ),
               icon: Icon(
                 Icons.add,
-                color: Colors.green,
+                color: Colors.grey[900],
               ),
               onPressed: () {
                 Navigator.push(
@@ -159,7 +184,9 @@ class ClassesPageMobile extends StatelessWidget {
                       builder: (context) => AddGroupPage(),
                     ));
               },
-              backgroundColor: Colors.white,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(16))),
+              //backgroundColor: Colors.white,
             )
           : Container(),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,

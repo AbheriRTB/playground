@@ -3,7 +3,6 @@ import 'dart:io';
 
 import 'package:chalk_and_duster/models/model_%20organization.dart';
 import 'package:chalk_and_duster/models/model_user.dart';
-import 'package:chalk_and_duster/pages/auth/loading.dart';
 import 'package:chalk_and_duster/services/auth.dart';
 import 'package:chalk_and_duster/services/database.dart';
 import 'package:chalk_and_duster/widgets/text_field.dart';
@@ -51,120 +50,116 @@ class _CreateUsersPageState extends State<CreateUsersPage> {
   UploadTask? task;
   @override
   Widget build(BuildContext context) {
-    return loading
-        ? Loading()
-        : Scaffold(
-            //resizeToAvoidBottomPadding: false,
-            body: SingleChildScrollView(
-              child: Container(
-                padding: EdgeInsets.symmetric(vertical: 60.0, horizontal: 16.0),
-                child: Form(
-                  key: _formKey,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(
-                        'REGISTER',
-                        style: TextStyle(
-                          fontSize: 60.0,
-                          fontFamily: 'Integral',
-                          fontWeight: FontWeight.bold,
-                          color: Colors.grey[800],
+    return Scaffold(
+      //resizeToAvoidBottomPadding: false,
+      body: SingleChildScrollView(
+        child: Container(
+          padding: EdgeInsets.symmetric(vertical: 60.0, horizontal: 16.0),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  'REGISTER',
+                  style: TextStyle(
+                    fontSize: 60.0,
+                    fontFamily: 'Integral',
+                    fontWeight: FontWeight.bold,
+                    color: Colors.grey[800],
+                  ),
+                ),
+                SizedBox(height: 20.0),
+                TextFormField(
+                  validator: (val) => val!.isEmpty ? 'Enter an org name' : null,
+                  onChanged: (val) {
+                    setState(() => name = val);
+                  },
+                  decoration: textInputDecoration("Enter Org Name"),
+                ),
+                SizedBox(height: 20.0),
+                TextFormField(
+                  validator: (val) =>
+                      val!.isNotEmpty ? null : 'Enter an org email',
+                  onChanged: (val) {
+                    setState(() => email = val);
+                  },
+                  decoration: textInputDecoration(
+                    "Enter Org Email",
+                  ),
+                  keyboardType: TextInputType.emailAddress,
+                ),
+                SizedBox(height: 20.0),
+                Divider(
+                  color: Colors.grey[900],
+                  thickness: 3,
+                ),
+                Text(
+                  error,
+                  style: TextStyle(fontSize: 14.0),
+                ),
+                Expanded(
+                  flex: 0,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Flexible(
+                        flex: 1,
+                        child: Container(
+                          width: double.infinity,
+                          child: OutlinedButton(
+                            onPressed: () async {
+                              await chooseFile();
+                            },
+                            child: Text(
+                              'DOWNLOAD SAMPLE',
+                              style: TextStyle(color: Colors.grey[700]),
+                            ),
+                          ),
                         ),
                       ),
-                      SizedBox(height: 20.0),
-                      TextFormField(
-                        validator: (val) =>
-                            val!.isEmpty ? 'Enter an org name' : null,
-                        onChanged: (val) {
-                          setState(() => name = val);
-                        },
-                        decoration: textInputDecoration("Enter Org Name"),
+                      SizedBox(
+                        width: 10.0,
                       ),
-                      SizedBox(height: 20.0),
-                      TextFormField(
-                        validator: (val) =>
-                            val!.isNotEmpty ? null : 'Enter an org email',
-                        onChanged: (val) {
-                          setState(() => email = val);
-                        },
-                        decoration: textInputDecoration(
-                          "Enter Org Email",
-                        ),
-                        keyboardType: TextInputType.emailAddress,
-                      ),
-                      SizedBox(height: 20.0),
-                      Divider(
-                        color: Colors.grey[900],
-                        thickness: 3,
-                      ),
-                      Text(
-                        error,
-                        style: TextStyle(fontSize: 14.0),
-                      ),
-                      Expanded(
-                        flex: 0,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Flexible(
-                              flex: 1,
-                              child: Container(
-                                width: double.infinity,
-                                child: OutlinedButton(
-                                  onPressed: () async {
-                                    await chooseFile();
-                                  },
-                                  child: Text(
-                                    'DOWNLOAD SAMPLE',
-                                    style: TextStyle(color: Colors.grey[700]),
-                                  ),
-                                ),
-                              ),
+                      Flexible(
+                        flex: 1,
+                        child: Container(
+                          width: double.infinity,
+                          child: OutlinedButton(
+                            onPressed: () async {
+                              await chooseFile();
+                            },
+                            child: Text(
+                              '$progBar',
+                              style: TextStyle(color: Colors.grey[700]),
                             ),
-                            SizedBox(
-                              width: 10.0,
-                            ),
-                            Flexible(
-                              flex: 1,
-                              child: Container(
-                                width: double.infinity,
-                                child: OutlinedButton(
-                                  onPressed: () async {
-                                    await chooseFile();
-                                  },
-                                  child: Text(
-                                    '$progBar',
-                                    style: TextStyle(color: Colors.grey[700]),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
+                          ),
                         ),
                       ),
                     ],
                   ),
                 ),
-              ),
+              ],
             ),
+          ),
+        ),
+      ),
 
-            floatingActionButton: FloatingActionButton(
-                backgroundColor: Color(0xff90D44B),
-                child: loading
-                    ? Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child:
-                            CircularProgressIndicator(color: Colors.grey[800]))
-                    : Icon(Icons.meeting_room_sharp, color: Colors.grey[800]),
-                onPressed: () async {
-                  setState(() => loading = true);
-                  if (_formKey.currentState!.validate()) {
-                    await createUsers(fields);
-                  }
-                }),
-          );
+      floatingActionButton: FloatingActionButton(
+          backgroundColor: Color(0xff90D44B),
+          child: loading
+              ? Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: CircularProgressIndicator(color: Colors.grey[800]))
+              : Icon(Icons.meeting_room_sharp, color: Colors.grey[800]),
+          onPressed: () async {
+            setState(() => loading = true);
+            if (_formKey.currentState!.validate()) {
+              await createUsers(fields);
+            }
+          }),
+    );
   }
 
   Future chooseFile() async {

@@ -22,11 +22,11 @@ class _NavBarState extends State<NavBar> {
 
     return Scaffold(
       body: showPage(),
-      //backgroundColor: primary,
+      /* //backgroundColor: primary,
       bottomNavigationBar: BottomNavigationBar(
         elevation: 1,
         type: BottomNavigationBarType.fixed,
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.grey[900],
         selectedItemColor: Colors.green,
         unselectedItemColor: Colors.green.withOpacity(.60),
         selectedFontSize: 14,
@@ -51,7 +51,7 @@ class _NavBarState extends State<NavBar> {
             icon: Icon(Icons.videocam),
           ),*/
         ],
-      ),
+      ),*/
     );
   }
 

@@ -36,7 +36,7 @@ class CustomList extends StatelessWidget {
   Widget build(BuildContext context) {
     switch (index) {
       case 1:
-        return customList3();
+        return customList1();
       case 2:
         return customList2();
     }

@@ -321,6 +321,11 @@ class _ChatsPageWidgetState extends State<ChatsPageWidget> {
                                   grupId: widget.grups.grupId,
                                   uid: widget.userData.uid,
                                 ).updateMessageData(Messages(content: message));
+                                await DatabaseService(
+                                  orgId: widget.userData.orgId,
+                                  grupId: widget.grups.grupId,
+                                  uid: widget.userData.uid,
+                                ).updateLastMessage(Messages(content: message));
                               },
                               icon: Icon(
                                 Icons.send_sharp,

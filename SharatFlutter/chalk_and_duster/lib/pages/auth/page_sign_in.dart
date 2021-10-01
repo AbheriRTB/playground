@@ -2,13 +2,8 @@ import 'package:chalk_and_duster/pages/auth/create/auth_create.dart';
 import 'package:chalk_and_duster/services/auth.dart';
 import 'package:chalk_and_duster/widgets/text_field.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
-
-import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 
 import 'package:responsive_builder/responsive_builder.dart';
-import 'loading.dart';
 
 class SignInPage extends StatefulWidget {
   @override
@@ -22,13 +17,10 @@ class _SignInPageState extends State<SignInPage> {
   bool loading = false;
   @override
   Widget build(BuildContext context) {
-    return loading
-        ? Loading()
-        : ResponsiveBuilder(
-            breakpoints:
-                ScreenBreakpoints(desktop: 600, tablet: 200, watch: 100),
-            builder: (context, sizingInfo) =>
-                sizingInfo.isDesktop ? LoginDesktopPage() : LoginMobilePage());
+    return ResponsiveBuilder(
+        breakpoints: ScreenBreakpoints(desktop: 600, tablet: 200, watch: 100),
+        builder: (context, sizingInfo) =>
+            sizingInfo.isDesktop ? LoginDesktopPage() : LoginMobilePage());
   }
 }
 
@@ -67,6 +59,20 @@ class _LoginDesktopPageState extends State<LoginDesktopPage> {
 
     return Scaffold(
       body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment(-0.4, -0.8),
+            stops: [0.0, 0.5, 0.5, 1],
+            colors: [
+              Colors.transparent,
+              Colors.transparent,
+              Colors.grey[900]!.withOpacity(0.8),
+              Colors.grey[900]!.withOpacity(0.8),
+            ],
+            tileMode: TileMode.repeated,
+          ),
+        ),
         child: Padding(
           padding: EdgeInsets.symmetric(
               horizontal: width! / 4, vertical: hight! / 12),
@@ -78,7 +84,7 @@ class _LoginDesktopPageState extends State<LoginDesktopPage> {
                     borderRadius: BorderRadius.all(
                       Radius.circular(22),
                     ),
-                    color: Colors.black12,
+                    color: Colors.black26,
                   ),
                   padding: EdgeInsets.only(
                       top: 15.0, right: 24.0, left: 24.0, bottom: 24.0),
