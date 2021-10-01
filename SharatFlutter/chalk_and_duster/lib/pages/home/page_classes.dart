@@ -33,109 +33,136 @@ class _ClassesPageState extends State<ClassesPage> {
         orgId: user.orgId,
         uid: user.uid,
       ).groupsList,
-      child: Scaffold(
-        body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(4.0),
-                  child: Card(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                    ),
-                    elevation: 2,
-                    shadowColor: Colors.grey[200],
-                    color: Colors.white,
-                    child: Padding(
-                      padding: const EdgeInsets.all(4.0),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          IconButton(
-                            onPressed: () {
-                              _auth.signOut();
-                            },
-                            icon: Icon(
-                              Icons.menu,
-                              color: Colors.black87.withOpacity(0.6),
-                            ),
-                          ),
-                          Text(
-                            'Search in spaces',
-                            style: TextStyle(
-                              color: Colors.black54,
-                              fontSize: 18.0,
-                            ),
-                          ),
-                          Expanded(
-                            child: Container(),
-                          ),
-                          CircleAvatar(
-                            maxRadius: 14.0,
-                            foregroundImage: user.photoUrl!.isNotEmpty
-                                ? NetworkImage(user.photoUrl!)
-                                : NetworkImage(
-                                    'https://upload.wikimedia.org/wikipedia/commons/8/89/HD_transparent_picture.png'),
-                            backgroundColor: Colors.grey[100],
-                            child: Text(user.displayName![0],
-                                style: TextStyle(
-                                    fontSize: 12.0, color: Colors.grey[600])),
-                          ),
-                          SizedBox(
-                            width: 12,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Text(
-                    'Classes'.toUpperCase(),
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold, color: Colors.black54),
-                  ),
-                ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: GroupsListView(
-                      usersData: user,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-        floatingActionButton: user.isAdmin!
-            ? FloatingActionButton.extended(
-                label: Text(
-                  'New class'.toUpperCase(),
-                  style: TextStyle(color: Colors.green),
-                ),
-                icon: Icon(
-                  Icons.add,
-                  color: Colors.green,
-                ),
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => AddGroupPage(),
-                      ));
-                },
-                backgroundColor: Colors.white,
-              )
-            : Container(),
-        floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-      ),
+      child: ClassesPageMobile(auth: _auth, user: user),
       initialData: [],
       catchError: null,
+    );
+  }
+}
+
+class ClassesPageMobile extends StatelessWidget {
+  const ClassesPageMobile({
+    Key? key,
+    required AuthService auth,
+    required this.user,
+  })  : _auth = auth,
+        super(key: key);
+
+  final AuthService _auth;
+  final UsersData user;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        title: Text(
+          user.displayName!,
+          style: TextStyle(
+            fontFamily: 'Integral',
+            fontWeight: FontWeight.bold,
+            color: Colors.grey[800],
+          ),
+        ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              AuthService().signOut();
+            },
+            icon: Icon(
+              Icons.search,
+              color: Colors.grey[800],
+            ),
+          ),
+        ],
+      ),
+      body: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            /*Padding(
+              padding: const EdgeInsets.all(4.0),
+              child: Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                ),
+                elevation: 2,
+                shadowColor: Colors.grey[200],
+                color: Colors.white,
+                child: Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      IconButton(
+                        onPressed: () {
+                          _auth.signOut();
+                        },
+                        icon: Icon(
+                          Icons.menu,
+                          color: Colors.black87.withOpacity(0.6),
+                        ),
+                      ),
+                      Text(
+                        'Search in spaces',
+                        style: TextStyle(
+                          color: Colors.black54,
+                          fontSize: 18.0,
+                        ),
+                      ),
+                      Expanded(
+                        child: Container(),
+                      ),
+                      CircleAvatar(
+                        maxRadius: 14.0,
+                        foregroundImage: user.photoUrl!.isNotEmpty
+                            ? NetworkImage(user.photoUrl!)
+                            : NetworkImage(
+                                'https://upload.wikimedia.org/wikipedia/commons/8/89/HD_transparent_picture.png'),
+                        backgroundColor: Colors.grey[100],
+                        child: Text(user.displayName![0],
+                            style: TextStyle(
+                                fontSize: 12.0, color: Colors.grey[600])),
+                      ),
+                      SizedBox(
+                        width: 12,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),*/
+
+            Expanded(
+              child: GroupsListView(
+                usersData: user,
+              ),
+            ),
+          ],
+        ),
+      ),
+      floatingActionButton: user.isAdmin!
+          ? FloatingActionButton.extended(
+              label: Text(
+                'New class'.toUpperCase(),
+                style: TextStyle(color: Colors.green),
+              ),
+              icon: Icon(
+                Icons.add,
+                color: Colors.green,
+              ),
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => AddGroupPage(),
+                    ));
+              },
+              backgroundColor: Colors.white,
+            )
+          : Container(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }
 }

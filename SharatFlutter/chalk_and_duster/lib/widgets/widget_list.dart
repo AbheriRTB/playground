@@ -36,7 +36,7 @@ class CustomList extends StatelessWidget {
   Widget build(BuildContext context) {
     switch (index) {
       case 1:
-        return customList1();
+        return customList3();
       case 2:
         return customList2();
     }
@@ -103,6 +103,49 @@ class CustomList extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+
+  Widget customList3() {
+    String colorString = color!;
+    String valueString =
+        colorString.split('(0x')[1].split(')')[0]; // kind of hacky..
+    int value = int.parse(valueString, radix: 16);
+    Color otherColor = Color(value);
+
+    return Container(
+      color: Colors.grey[900],
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            height: 24.0,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Row(
+              children: [
+                Text(
+                  name!,
+                  style: TextStyle(
+                    fontSize: 36.0,
+                    fontFamily: 'Integral',
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                ),
+                Expanded(child: Container()),
+                IconButton(
+                    onPressed: () {},
+                    icon: Icon(
+                      Icons.arrow_forward,
+                      size: 36,
+                    ))
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 
