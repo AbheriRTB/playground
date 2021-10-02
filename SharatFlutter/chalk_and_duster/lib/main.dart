@@ -1,4 +1,5 @@
 import 'package:chalk_and_duster/models/model_user.dart';
+import 'package:chalk_and_duster/pages/home/page_splash.dart';
 import 'package:chalk_and_duster/services/auth.dart';
 import 'package:chalk_and_duster/wrapper.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -24,77 +25,78 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamProvider<Users?>.value(
-        value: AuthService().user,
-        initialData: null,
-        child: MaterialApp(
-          home: AnnotatedRegion<SystemUiOverlayStyle>(
-              value: SystemUiOverlayStyle.dark.copyWith(
-                systemNavigationBarColor: Colors.white,
-                statusBarColor: Colors.white,
-              ),
-              child: Wrapper()),
-          debugShowCheckedModeBanner: false,
-          theme: ThemeData(
-            textTheme: GoogleFonts.robotoTextTheme(),
-            primaryColor: Colors.white,
-            scaffoldBackgroundColor: scaffoldColor,
-            inputDecorationTheme: InputDecorationTheme(
-              focusColor: Colors.grey[400],
-              focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.transparent),
-                borderRadius: BorderRadius.all(
-                  Radius.circular(10),
+      value: AuthService().user,
+      initialData: null,
+      child: MaterialApp(
+        home: AnnotatedRegion<SystemUiOverlayStyle>(
+            value: SystemUiOverlayStyle.dark.copyWith(
+                // systemNavigationBarColor: Colors.white,
+                // statusBarColor: Colors.white,
                 ),
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: Colors.transparent,
-                ),
-                borderRadius: BorderRadius.all(
-                  Radius.circular(10),
-                ),
-              ),
-              disabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: Colors.transparent,
-                ),
-                borderRadius: BorderRadius.all(
-                  Radius.circular(10),
-                ),
-              ),
-              labelStyle: TextStyle(
-                color: Colors.grey[800],
-                fontSize: 16.0,
-              ),
-              filled: true,
-              fillColor: Colors.grey[900]!.withOpacity(0.5),
-            ),
-            appBarTheme: AppBarTheme(
-              color: Colors.white,
-              centerTitle: false,
-            ),
-            textButtonTheme: TextButtonThemeData(
-              style: ButtonStyle(
-                overlayColor: MaterialStateProperty.all(Colors.grey[900]),
+            child: Wrapper()),
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          textTheme: GoogleFonts.robotoTextTheme(),
+          primaryColor: Colors.white,
+          scaffoldBackgroundColor: scaffoldColor,
+          inputDecorationTheme: InputDecorationTheme(
+            focusColor: Colors.grey[400],
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.transparent),
+              borderRadius: BorderRadius.all(
+                Radius.circular(10),
               ),
             ),
-            outlinedButtonTheme: OutlinedButtonThemeData(
-              style: ButtonStyle(
-                overlayColor: MaterialStateProperty.all(accent),
-                backgroundColor: MaterialStateProperty.all(Colors.grey[900]),
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: Colors.transparent,
+              ),
+              borderRadius: BorderRadius.all(
+                Radius.circular(10),
               ),
             ),
-            elevatedButtonTheme: ElevatedButtonThemeData(
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(accent),
-                overlayColor: MaterialStateProperty.all(Colors.grey[900]),
-                shadowColor: MaterialStateProperty.all(Colors.black),
+            disabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: Colors.transparent,
+              ),
+              borderRadius: BorderRadius.all(
+                Radius.circular(10),
               ),
             ),
-            floatingActionButtonTheme: FloatingActionButtonThemeData(
-              backgroundColor: accent,
+            labelStyle: TextStyle(
+              color: Colors.grey[800],
+              fontSize: 16.0,
+            ),
+            filled: true,
+            fillColor: Colors.grey[900]!.withOpacity(0.5),
+          ),
+          appBarTheme: AppBarTheme(
+            color: Colors.white,
+            centerTitle: false,
+          ),
+          textButtonTheme: TextButtonThemeData(
+            style: ButtonStyle(
+              overlayColor: MaterialStateProperty.all(Colors.grey[900]),
             ),
           ),
-        ));
+          outlinedButtonTheme: OutlinedButtonThemeData(
+            style: ButtonStyle(
+              overlayColor: MaterialStateProperty.all(accent),
+              backgroundColor: MaterialStateProperty.all(Colors.grey[900]),
+            ),
+          ),
+          elevatedButtonTheme: ElevatedButtonThemeData(
+            style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all(accent),
+              overlayColor: MaterialStateProperty.all(Colors.grey[900]),
+              shadowColor: MaterialStateProperty.all(Colors.black),
+            ),
+          ),
+          floatingActionButtonTheme: FloatingActionButtonThemeData(
+            backgroundColor: accent,
+          ),
+        ),
+      ),
+    );
   }
 }

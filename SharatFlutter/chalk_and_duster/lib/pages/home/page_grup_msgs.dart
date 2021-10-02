@@ -51,12 +51,14 @@ class _GroupMessagesPageState extends State<GroupMessagesPage> {
           length: 4,
           child: Scaffold(
             appBar: AppBar(
+              backgroundColor: Colors.grey[900]!.withOpacity(0.2),
+              elevation: 0,
               bottomOpacity: 0.6,
               bottom: TabBar(
                 indicator: UnderlineTabIndicator(
                   borderSide: BorderSide(
                     width: 2.0,
-                    color: Colors.green[600]!,
+                    color: Color(0xff90D44B),
                   ),
                   insets: EdgeInsets.symmetric(
                     horizontal: 34.0,
@@ -67,7 +69,7 @@ class _GroupMessagesPageState extends State<GroupMessagesPage> {
                     child: Text(
                       'Chat',
                       style: TextStyle(
-                        color: Colors.green[600],
+                        color: Color(0xff90D44B).withOpacity(0.7),
                         fontWeight: FontWeight.bold,
                         fontSize: 16.0,
                       ),
@@ -77,7 +79,7 @@ class _GroupMessagesPageState extends State<GroupMessagesPage> {
                     child: Text(
                       'Files',
                       style: TextStyle(
-                        color: Colors.green[600],
+                        color: Color(0xff90D44B).withOpacity(0.7),
                         fontWeight: FontWeight.bold,
                         fontSize: 16.0,
                       ),
@@ -87,7 +89,7 @@ class _GroupMessagesPageState extends State<GroupMessagesPage> {
                     child: Text(
                       'Classes',
                       style: TextStyle(
-                        color: Colors.green[600],
+                        color: Color(0xff90D44B).withOpacity(0.7),
                         fontWeight: FontWeight.bold,
                         fontSize: 16.0,
                       ),
@@ -97,7 +99,7 @@ class _GroupMessagesPageState extends State<GroupMessagesPage> {
                     child: Text(
                       'Tasks',
                       style: TextStyle(
-                        color: Colors.green[600],
+                        color: Color(0xff90D44B).withOpacity(0.7),
                         fontWeight: FontWeight.bold,
                         fontSize: 16.0,
                       ),
@@ -112,11 +114,19 @@ class _GroupMessagesPageState extends State<GroupMessagesPage> {
                   children: [
                     Row(
                       children: [
-                        Text(
-                          widget.grups.grupName!,
-                          style: TextStyle(
-                            color: Colors.grey[800],
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 4.0),
+                          child: Text(
+                            widget.grups.grupName!,
+                            style: TextStyle(
+                              fontFamily: 'Integral',
+                              fontWeight: FontWeight.bold,
+                              color: Colors.grey[700],
+                            ),
                           ),
+                        ),
+                        SizedBox(
+                          width: 8,
                         ),
                         Icon(
                           Icons.arrow_right,
@@ -130,8 +140,10 @@ class _GroupMessagesPageState extends State<GroupMessagesPage> {
                     Text(
                       '${widget.grups.grupUsers!.length} members',
                       style: TextStyle(
-                        color: Colors.grey[500],
+                        color: Colors.grey[700],
                         fontSize: 12,
+                        fontStyle: FontStyle.italic,
+                        fontWeight: FontWeight.w700,
                       ),
                     ),
                   ],
@@ -248,7 +260,8 @@ class _ChatsPageWidgetState extends State<ChatsPageWidget> {
                   child: Column(
                     children: [
                       Divider(
-                        color: Colors.grey,
+                        color: Colors.grey[900],
+                        thickness: 3,
                       ),
                       Padding(
                         padding: const EdgeInsets.only(
@@ -261,14 +274,16 @@ class _ChatsPageWidgetState extends State<ChatsPageWidget> {
                                 onChanged: (val) {
                                   setState(() => message = val.trim());
                                 },
+                                style: TextStyle(
+                                    fontSize: 18.0, color: Colors.grey[600]),
                                 decoration: InputDecoration(
                                   filled: false,
                                   hintText: 'Type your message',
-                                  hintStyle: TextStyle(fontSize: 18.0),
+                                  hintStyle: TextStyle(
+                                      fontSize: 18.0, color: Colors.grey[600]),
                                   focusedBorder: UnderlineInputBorder(
                                     borderSide:
                                         BorderSide(color: Colors.transparent),
-                                    borderRadius: BorderRadius.circular(32),
                                   ),
                                   enabledBorder: UnderlineInputBorder(
                                     borderSide:
@@ -277,6 +292,7 @@ class _ChatsPageWidgetState extends State<ChatsPageWidget> {
                                 ),
                                 //keyboardType: TextInputType.phone,
                                 autocorrect: true,
+
                                 maxLines: null,
                               ),
                             ),

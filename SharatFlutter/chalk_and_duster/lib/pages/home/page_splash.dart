@@ -1,9 +1,7 @@
 import 'package:chalk_and_duster/models/model_user.dart';
-import 'package:chalk_and_duster/nav_bar.dart';
-import 'package:chalk_and_duster/services/database.dart';
-import 'package:flutter/material.dart';
 
-import 'package:provider/provider.dart';
+import 'package:chalk_and_duster/wrapper.dart';
+import 'package:flutter/material.dart';
 
 class SplashPage extends StatefulWidget {
   @override
@@ -18,7 +16,7 @@ class _SplashPageState extends State<SplashPage> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => NavBar(),
+            builder: (context) => Wrapper(),
           ),
         );
       });

@@ -59,14 +59,14 @@ class UsersData {
   }
   factory UsersData.initialData() {
     return UsersData(
-      uid: '',
-      displayName: '',
-      email: '',
-      mobileNo: '',
-      orgId: '',
+      uid: ' ',
+      displayName: ' ',
+      email: ' ',
+      mobileNo: ' ',
+      orgId: ' ',
       isAdmin: false,
       isTeacher: false,
-      photoUrl: '',
+      photoUrl: ' ',
     );
   }
 }

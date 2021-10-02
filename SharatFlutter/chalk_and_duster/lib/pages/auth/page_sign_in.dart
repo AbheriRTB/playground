@@ -223,7 +223,7 @@ class _LoginDesktopPageState extends State<LoginDesktopPage> {
                                     loading = false;
                                   });
                                   final snackBar = SnackBar(
-                                    behavior: SnackBarBehavior.floating,
+                                    behavior: SnackBarBehavior.fixed,
                                     content: Text(
                                       'Email or password is incorrect',
                                       style: TextStyle(

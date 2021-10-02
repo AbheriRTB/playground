@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:chalk_and_duster/main.dart';
+import 'package:chalk_and_duster/models/model_%20group.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -11,6 +12,7 @@ class CustomList extends StatelessWidget {
   Color accent = Color(0xffB85C38);
 
   String? name = '', desc;
+  Groups? grupData;
   int index = 1;
   final Function? onTap;
   bool? isRead = false;
@@ -18,6 +20,7 @@ class CustomList extends StatelessWidget {
 
   CustomList.listTypeOne({
     required this.onTap,
+    this.grupData,
     this.isRead,
     this.name,
     this.color,
@@ -36,7 +39,7 @@ class CustomList extends StatelessWidget {
   Widget build(BuildContext context) {
     switch (index) {
       case 1:
-        return customList1();
+        return customList3(context);
       case 2:
         return customList2();
     }
@@ -106,45 +109,80 @@ class CustomList extends StatelessWidget {
     );
   }
 
-  Widget customList3() {
+  Widget customList3(BuildContext context) {
     String colorString = color!;
     String valueString =
         colorString.split('(0x')[1].split(')')[0]; // kind of hacky..
     int value = int.parse(valueString, radix: 16);
     Color otherColor = Color(value);
 
-    return Container(
-      color: Colors.grey[900],
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(
-            height: 24.0,
-          ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Row(
+    return InkWell(
+      onTap: () => onTap!(),
+      child: Container(
+        color: Colors.grey[900]!.withOpacity(0.7),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
               children: [
-                Text(
-                  name!,
-                  style: TextStyle(
-                    fontSize: 36.0,
-                    fontFamily: 'Integral',
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
-                  ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 16.0, vertical: 4.0),
+                      child: Text(
+                        '${grupData!.grupName!}',
+                        style: TextStyle(
+                          fontSize: 26.0,
+                          fontFamily: 'Integral',
+                          fontWeight: FontWeight.bold,
+                          overflow: TextOverflow.ellipsis,
+                          color: isRead! ? Colors.grey : Colors.grey[700],
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(
+                        left: 16.0,
+                        top: 4.0,
+                        bottom: 12.0,
+                        right: 10.0,
+                      ),
+                      child: Text(
+                        '${grupData!.lastMessageContent!.isEmpty ? 'No Messages' : grupData!.lastMessageContent!}',
+                        style: TextStyle(
+                          fontSize: 16.0,
+                          overflow: TextOverflow.ellipsis,
+                          fontWeight: FontWeight.w400,
+                          fontStyle: FontStyle.italic,
+                          color: isRead! ? Colors.grey[600] : Colors.grey[700],
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
                 Expanded(child: Container()),
-                IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.arrow_forward,
-                      size: 36,
-                    ))
+                AnimatedOpacity(
+                  duration: Duration(milliseconds: 100),
+                  opacity: isRead! ? 0.5 : 0,
+                  child: CircleAvatar(
+                    backgroundColor: Color(0xff90D44B),
+                    maxRadius: 4.0,
+                  ),
+                ),
+                SizedBox(
+                  width: 16.0,
+                ),
               ],
             ),
-          ),
-        ],
+            Divider(
+              color: Colors.black12,
+              thickness: 3,
+              height: 0,
+            ),
+          ],
+        ),
       ),
     );
   }

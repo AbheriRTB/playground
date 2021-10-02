@@ -40,11 +40,11 @@ class Groups {
 
   factory Groups.initialData() {
     return Groups(
-      grupName: '',
+      grupName: ' ',
       grupUsers: [],
-      photoColor: '',
-      lastMessageContent: '',
-      lastMessageFromUid: '',
+      photoColor: ' ',
+      lastMessageContent: ' ',
+      lastMessageFromUid: ' ',
       lastMessageType: 0,
       lastMessageTimeStamp: DateTime.now(),
       timeStamp: DateTime.now(),
