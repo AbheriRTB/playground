@@ -6,6 +6,7 @@ import 'package:chalk_and_duster/services/database.dart';
 import 'package:chalk_and_duster/widgets/widget_message.dart';
 
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class GroupMessagesPage extends StatefulWidget {
   GroupMessagesPage({
@@ -232,6 +233,8 @@ class _ChatsPageWidgetState extends State<ChatsPageWidget> {
 
   ScrollController scrollController = ScrollController();
 
+  final ImagePicker _picker = ImagePicker();
+
   String? message;
 
   @override
@@ -305,7 +308,11 @@ class _ChatsPageWidgetState extends State<ChatsPageWidget> {
                       Row(
                         children: [
                           IconButton(
-                              onPressed: () {},
+                              onPressed: () async {
+                                XFile? image = await _picker.pickImage(
+                                    source: ImageSource.gallery);
+                                //print(image);
+                              },
                               icon: Icon(
                                 Icons.image_outlined,
                                 color: Colors.grey[800],
