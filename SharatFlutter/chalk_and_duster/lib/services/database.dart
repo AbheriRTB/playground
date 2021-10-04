@@ -56,10 +56,13 @@ class DatabaseService {
       'grupId': randomDoc,
       'grupUsers': group.grupUsers,
       'photoColor': group.photoColor,
-      'lastMessageContent': '',
-      'lastMessageFromUid': '',
-      'lastMessageType': 0,
-      'lastMessageTimeStamp': timeStamp,
+      'lastMessage': {
+        'content': 'No Messages Yet',
+        'uidFrom': ' ',
+        'type': 0,
+        'isImportant': false,
+        'timeStamp': timeStamp,
+      },
       'timeStamp': timeStamp,
     });
   }
@@ -68,10 +71,13 @@ class DatabaseService {
     Messages messages,
   ) async {
     await orgsCollection.doc(orgId).collection('groups').doc(grupId).update({
-      'lastMessageContent': messages.content,
-      'lastMessageFromUid': uid,
-      //'lastMessageType': messages.type,
-      'lastMessageTimeStamp': timeStamp,
+      'lastMessage': {
+        'content': messages.content,
+        'uidFrom': uid,
+        'type': messages.type,
+        'isImportant': messages.isImportant,
+        'timeStamp': timeStamp,
+      }
     });
   }
 
@@ -96,6 +102,8 @@ class DatabaseService {
       'uidFrom': uid,
       'groupId': grupId,
       'readUsers': [uid],
+      'type': message.type,
+      'isImportant': message.isImportant,
       'timeStamp': timeStamp,
     });
   }

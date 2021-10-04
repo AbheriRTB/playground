@@ -236,6 +236,8 @@ class _ChatsPageWidgetState extends State<ChatsPageWidget> {
   final ImagePicker _picker = ImagePicker();
 
   String? message;
+  int type = 0;
+  bool isImportant = false;
 
   @override
   Widget build(BuildContext context) {
@@ -311,6 +313,81 @@ class _ChatsPageWidgetState extends State<ChatsPageWidget> {
                               onPressed: () async {
                                 XFile? image = await _picker.pickImage(
                                     source: ImageSource.gallery);
+                                String imageUrl = image!.path;
+                                if (image.path.isNotEmpty) {
+                                  setState(() {
+                                    type = 1;
+                                    showDialog(
+                                        context: context,
+                                        builder: (context) {
+                                          var alertDialog = AlertDialog(
+                                            backgroundColor: Colors.grey[900],
+                                            content: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
+                                              child: Image.network(
+                                                imageUrl,
+                                              ),
+                                            ),
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(8)),
+                                            actions: [
+                                              TextButton(
+                                                onPressed: () {
+                                                  Navigator.pop(context);
+                                                },
+                                                child: Text(
+                                                  "Cancel".toUpperCase(),
+                                                  style: TextStyle(
+                                                    // fontSize: 13.0,
+                                                    color: Color(0xff90D44B)
+                                                        .withOpacity(0.5),
+                                                  ),
+                                                ),
+                                              ),
+                                              ElevatedButton(
+                                                  onPressed: () async {
+                                                    await DatabaseService(
+                                                      orgId:
+                                                          widget.userData.orgId,
+                                                      grupId:
+                                                          widget.grups.grupId,
+                                                      uid: widget.userData.uid,
+                                                    ).updateMessageData(
+                                                        Messages(
+                                                      content: image.path,
+                                                      type: 1,
+                                                      isImportant: isImportant,
+                                                    ));
+                                                    await DatabaseService(
+                                                      orgId:
+                                                          widget.userData.orgId,
+                                                      grupId:
+                                                          widget.grups.grupId,
+                                                      uid: widget.userData.uid,
+                                                    ).updateLastMessage(
+                                                        Messages(
+                                                      content: image.path,
+                                                      type: 1,
+                                                      isImportant: isImportant,
+                                                    ));
+                                                  },
+                                                  child: Text(
+                                                    'SEND',
+                                                    style: TextStyle(
+                                                      // fontSize: 13.0,
+                                                      color: Colors.grey[800],
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
+                                                  )),
+                                            ],
+                                          );
+                                          return alertDialog;
+                                        });
+                                  });
+                                }
                                 //print(image);
                               },
                               icon: Icon(
@@ -318,22 +395,186 @@ class _ChatsPageWidgetState extends State<ChatsPageWidget> {
                                 color: Colors.grey[800],
                               )),
                           IconButton(
-                              onPressed: () {},
+                              onPressed: () async {
+                                XFile? image = await _picker.pickImage(
+                                    source: ImageSource.camera);
+                                String imageUrl = image!.path;
+                                if (image.path.isNotEmpty) {
+                                  setState(() {
+                                    type = 1;
+                                    showDialog(
+                                        context: context,
+                                        builder: (context) {
+                                          var alertDialog = AlertDialog(
+                                            backgroundColor: Colors.grey[900],
+                                            content: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
+                                              child: Image.network(
+                                                imageUrl,
+                                              ),
+                                            ),
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(8)),
+                                            actions: [
+                                              TextButton(
+                                                onPressed: () {
+                                                  Navigator.pop(context);
+                                                },
+                                                child: Text(
+                                                  "Cancel".toUpperCase(),
+                                                  style: TextStyle(
+                                                    // fontSize: 13.0,
+                                                    color: Color(0xff90D44B)
+                                                        .withOpacity(0.5),
+                                                  ),
+                                                ),
+                                              ),
+                                              ElevatedButton(
+                                                  onPressed: () async {
+                                                    await DatabaseService(
+                                                      orgId:
+                                                          widget.userData.orgId,
+                                                      grupId:
+                                                          widget.grups.grupId,
+                                                      uid: widget.userData.uid,
+                                                    ).updateMessageData(
+                                                        Messages(
+                                                      content: image.path,
+                                                      type: 1,
+                                                      isImportant: isImportant,
+                                                    ));
+                                                    await DatabaseService(
+                                                      orgId:
+                                                          widget.userData.orgId,
+                                                      grupId:
+                                                          widget.grups.grupId,
+                                                      uid: widget.userData.uid,
+                                                    ).updateLastMessage(
+                                                        Messages(
+                                                      content: image.path,
+                                                      type: 1,
+                                                      isImportant: isImportant,
+                                                    ));
+                                                  },
+                                                  child: Text(
+                                                    'SEND',
+                                                    style: TextStyle(
+                                                      // fontSize: 13.0,
+                                                      color: Colors.grey[800],
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
+                                                  )),
+                                            ],
+                                          );
+                                          return alertDialog;
+                                        });
+                                  });
+                                }
+                              },
                               icon: Icon(
                                 Icons.photo_camera_outlined,
                                 color: Colors.grey[800],
                               )),
                           IconButton(
-                              onPressed: () {},
+                              onPressed: () async {
+                                XFile? image = await _picker.pickVideo(
+                                    source: ImageSource.gallery);
+                                String imageUrl = image!.path;
+                                if (image.path.isNotEmpty) {
+                                  setState(() {
+                                    type = 1;
+                                    showDialog(
+                                        context: context,
+                                        builder: (context) {
+                                          var alertDialog = AlertDialog(
+                                            backgroundColor: Colors.grey[900],
+                                            content: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
+                                              child: Image.network(
+                                                imageUrl,
+                                              ),
+                                            ),
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(8)),
+                                            actions: [
+                                              TextButton(
+                                                onPressed: () {
+                                                  Navigator.pop(context);
+                                                },
+                                                child: Text(
+                                                  "Cancel".toUpperCase(),
+                                                  style: TextStyle(
+                                                    // fontSize: 13.0,
+                                                    color: Color(0xff90D44B)
+                                                        .withOpacity(0.5),
+                                                  ),
+                                                ),
+                                              ),
+                                              ElevatedButton(
+                                                  onPressed: () async {
+                                                    await DatabaseService(
+                                                      orgId:
+                                                          widget.userData.orgId,
+                                                      grupId:
+                                                          widget.grups.grupId,
+                                                      uid: widget.userData.uid,
+                                                    ).updateMessageData(
+                                                        Messages(
+                                                      content: image.path,
+                                                      type: 1,
+                                                      isImportant: isImportant,
+                                                    ));
+                                                    await DatabaseService(
+                                                      orgId:
+                                                          widget.userData.orgId,
+                                                      grupId:
+                                                          widget.grups.grupId,
+                                                      uid: widget.userData.uid,
+                                                    ).updateLastMessage(
+                                                        Messages(
+                                                      content: image.path,
+                                                      type: 1,
+                                                      isImportant: isImportant,
+                                                    ));
+                                                  },
+                                                  child: Text(
+                                                    'SEND',
+                                                    style: TextStyle(
+                                                      // fontSize: 13.0,
+                                                      color: Colors.grey[800],
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
+                                                  )),
+                                            ],
+                                          );
+                                          return alertDialog;
+                                        });
+                                  });
+                                }
+                              },
                               icon: Icon(
                                 Icons.movie_creation_outlined,
                                 color: Colors.grey[800],
                               )),
                           IconButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                setState(() {
+                                  isImportant = !isImportant;
+                                });
+                              },
                               icon: Icon(
-                                Icons.link_outlined,
-                                color: Colors.grey[800],
+                                isImportant
+                                    ? Icons.label_important
+                                    : Icons.label_important_outline,
+                                color: isImportant
+                                    ? Colors.indigo[500]
+                                    : Colors.grey[800],
                               )),
                           Expanded(child: Container()),
                           IconButton(
@@ -343,12 +584,23 @@ class _ChatsPageWidgetState extends State<ChatsPageWidget> {
                                   orgId: widget.userData.orgId,
                                   grupId: widget.grups.grupId,
                                   uid: widget.userData.uid,
-                                ).updateMessageData(Messages(content: message));
+                                ).updateMessageData(Messages(
+                                  content: message,
+                                  type: type,
+                                  isImportant: isImportant,
+                                ));
                                 await DatabaseService(
                                   orgId: widget.userData.orgId,
                                   grupId: widget.grups.grupId,
                                   uid: widget.userData.uid,
-                                ).updateLastMessage(Messages(content: message));
+                                ).updateLastMessage(Messages(
+                                  content: message,
+                                  type: type,
+                                  isImportant: isImportant,
+                                ));
+                                setState(() {
+                                  isImportant = false;
+                                });
                               },
                               icon: Icon(
                                 Icons.send_sharp,

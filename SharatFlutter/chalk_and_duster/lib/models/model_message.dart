@@ -6,6 +6,8 @@ class Messages {
   final String? uidFrom;
   final String? groupId;
   final List? readUsers;
+  final int? type;
+  final bool? isImportant;
   final DateTime? timeStamp;
 
   Messages({
@@ -14,6 +16,8 @@ class Messages {
     this.uidFrom,
     this.groupId,
     this.readUsers,
+    this.type,
+    this.isImportant,
     this.timeStamp,
   });
 
@@ -24,6 +28,8 @@ class Messages {
       uidFrom: doc['uidFrom'],
       groupId: doc['groupId'],
       readUsers: doc['readUsers'],
+      type: doc['type'],
+      isImportant: doc['isImportant'],
       timeStamp: doc['timeStamp'].toDate(),
     );
   }
@@ -35,6 +41,8 @@ class Messages {
       uidFrom: '',
       groupId: '',
       readUsers: [],
+      type: 0,
+      isImportant: false,
       timeStamp: DateTime.now(),
     );
   }

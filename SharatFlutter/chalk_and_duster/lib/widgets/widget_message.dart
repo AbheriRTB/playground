@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:chalk_and_duster/models/model_%20group.dart';
 import 'package:chalk_and_duster/models/model_message.dart';
 import 'package:chalk_and_duster/models/model_user.dart';
@@ -164,6 +165,47 @@ class NewMessage extends StatelessWidget {
                       SizedBox(
                         width: 12.0,
                       ),
+                      Visibility(
+                        visible: msgs[index].isImportant!,
+                        child: AnimatedOpacity(
+                          opacity: !msgs[index].isImportant! ? 0 : 1,
+                          duration: Duration(seconds: 1),
+                          child: Padding(
+                            padding: const EdgeInsets.only(bottom: 4.0),
+                            child: AnimatedTextKit(
+                              animatedTexts: [
+                                ScaleAnimatedText(
+                                  'IMPORTANT',
+                                  scalingFactor: 1,
+                                  duration: Duration(seconds: 5),
+                                  textStyle: TextStyle(
+                                    fontSize: 12.0,
+                                    fontFamily: 'Integral',
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.red[900],
+                                  ),
+                                ),
+                                ScaleAnimatedText(
+                                  'IMPORTANT',
+                                  scalingFactor: 1,
+                                  duration: Duration(seconds: 5),
+                                  textStyle: TextStyle(
+                                    fontSize: 12.0,
+                                    fontFamily: 'Integral',
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.red[900],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      Visibility(
+                          visible: msgs[index].isImportant!,
+                          child: SizedBox(
+                            width: 8.0,
+                          )),
                       AnimatedOpacity(
                         opacity: !hasRead ? 0 : 1,
                         duration: Duration(seconds: 1),
@@ -184,14 +226,28 @@ class NewMessage extends StatelessWidget {
                   ),
                   Container(
                     width: MediaQuery.of(context).size.width - 100,
-                    child: Linkable(
-                      text: msgs[index].content!,
-                      style: TextStyle(
-                        fontSize: 18.0,
-                      ),
-                      textColor: Colors.grey[400],
-                      linkColor: Colors.indigo[400],
-                    ),
+                    child: msgs[index].type == 0
+                        ? Linkable(
+                            text: msgs[index].content!,
+                            style: TextStyle(
+                              fontSize: 18.0,
+                            ),
+                            textColor: Colors.grey[400],
+                            linkColor: Colors.indigo[400],
+                          )
+                        : Padding(
+                            padding: const EdgeInsets.only(top: 8.0),
+                            child: Align(
+                              alignment: Alignment.topLeft,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(12),
+                                child: Image.network(
+                                  msgs[index].content!,
+                                  scale: 2,
+                                ),
+                              ),
+                            ),
+                          ),
                   ),
                 ],
               ),

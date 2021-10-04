@@ -150,7 +150,7 @@ class CustomList extends StatelessWidget {
                         right: 10.0,
                       ),
                       child: Text(
-                        '${grupData!.lastMessageContent!.isEmpty ? 'No Messages' : grupData!.lastMessageContent!}',
+                        '${grupData!.lastMessage!['content']}',
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
                           fontSize: 16.0,

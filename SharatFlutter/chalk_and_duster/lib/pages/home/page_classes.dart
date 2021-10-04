@@ -249,7 +249,13 @@ class ClassesPageMobile extends StatelessWidget {
                 Icons.add,
                 color: Colors.grey[900],
               ),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => AddGroupPage(),
+                    ));
+              },
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(16))),
               //backgroundColor: Colors.white,
@@ -274,8 +280,8 @@ class GroupsListView extends StatelessWidget {
   Widget build(BuildContext context) {
     final groups = Provider.of<List<Groups>>(context);
     groups.sort((a, b) {
-      var adate = a.lastMessageTimeStamp!;
-      var bdate = b.lastMessageTimeStamp!;
+      var adate = a.lastMessage!['timeStamp'];
+      var bdate = b.lastMessage!['timeStamp'];
       return -adate.compareTo(bdate);
     });
 

@@ -1,5 +1,4 @@
 import 'package:chalk_and_duster/models/model_user.dart';
-import 'package:chalk_and_duster/pages/home/page_splash.dart';
 import 'package:chalk_and_duster/services/auth.dart';
 import 'package:chalk_and_duster/wrapper.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -29,10 +28,10 @@ class MyApp extends StatelessWidget {
       initialData: null,
       child: MaterialApp(
         home: AnnotatedRegion<SystemUiOverlayStyle>(
-            value: SystemUiOverlayStyle.dark.copyWith(
-                // systemNavigationBarColor: Colors.white,
-                // statusBarColor: Colors.white,
-                ),
+            value: SystemUiOverlayStyle.light.copyWith(
+              systemNavigationBarColor: Colors.grey[900],
+              statusBarColor: Colors.grey[900]!.withOpacity(0.5),
+            ),
             child: Wrapper()),
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
