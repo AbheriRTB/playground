@@ -25,6 +25,7 @@ dependencies:
   csv: ^5.0.0
   cupertino_icons: ^1.0.2
   animations: ^2.0.1
+  animated_text_kit: ^4.2.1
 
   file_picker: ^4.0.0
   image_picker: ^0.8.4+2
