@@ -70,7 +70,8 @@ class MyApp extends StatelessWidget {
             fillColor: Colors.grey[900]!.withOpacity(0.5),
           ),
           appBarTheme: AppBarTheme(
-            color: Colors.white,
+            backgroundColor: Colors.grey[900]!.withOpacity(0.2),
+            elevation: 0,
             centerTitle: false,
           ),
           textButtonTheme: TextButtonThemeData(

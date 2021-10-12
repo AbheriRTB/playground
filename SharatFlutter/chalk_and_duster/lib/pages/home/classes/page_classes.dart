@@ -2,8 +2,8 @@ import 'package:animations/animations.dart';
 import 'package:chalk_and_duster/models/model_%20group.dart';
 import 'package:chalk_and_duster/models/model_message.dart';
 import 'package:chalk_and_duster/models/model_user.dart';
-import 'package:chalk_and_duster/pages/home/page_grup_msgs.dart';
-import 'package:chalk_and_duster/pages/home/pages_add_group.dart';
+import 'package:chalk_and_duster/pages/home/classes/page_class_msgs.dart';
+import 'package:chalk_and_duster/pages/home/classes/page_create_class.dart';
 import 'package:chalk_and_duster/services/auth.dart';
 import 'package:chalk_and_duster/services/database.dart';
 import 'package:chalk_and_duster/widgets/widget_list.dart';
@@ -28,7 +28,7 @@ class _ClassesPageState extends State<ClassesPage> {
   @override
   Widget build(BuildContext context) {
     UsersData user = Provider.of<UsersData>(context);
-    print(user.uid);
+
     return StreamProvider<List<Groups>>.value(
       value: DatabaseService(
         orgId: user.orgId ?? ' ',
@@ -89,20 +89,28 @@ class ClassesPageMobile extends StatelessWidget {
             highlightColor: Colors.grey[900]!.withOpacity(0.5),
           ),
           PopupMenuButton(
+            initialValue: ' ',
             icon: Icon(
               Icons.more_vert,
               color: Colors.grey[800],
             ),
             color: Colors.grey[900],
-            itemBuilder: (BuildContext context) => <PopupMenuEntry>[
-              PopupMenuItem(
-                onTap: () {
+            onSelected: (selected) {
+              switch (selected) {
+                case ' ':
+                  break;
+                case "/grup":
                   Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) => AddGroupPage(),
                       ));
-                },
+                  break;
+              }
+            },
+            itemBuilder: (BuildContext context) => <PopupMenuEntry>[
+              PopupMenuItem(
+                value: '/grup',
                 child: ListTile(
                   leading: Icon(
                     Icons.add,
@@ -249,16 +257,8 @@ class ClassesPageMobile extends StatelessWidget {
                 Icons.add,
                 color: Colors.grey[900],
               ),
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => AddGroupPage(),
-                    ));
-              },
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(16))),
-              //backgroundColor: Colors.white,
+              onPressed: () {},
+              elevation: 2,
             )
           : Container(),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
@@ -302,8 +302,13 @@ class GroupsListView extends StatelessWidget {
             ),
           )
         : Center(
-            child: CircularProgressIndicator(
-            color: Color(0xff90D44B),
+            child: Text(
+            'No Groups Yet'.toUpperCase(),
+            style: TextStyle(
+              backgroundColor: Colors.grey[900],
+              fontFamily: 'Integral',
+              color: Colors.grey[800],
+            ),
           ));
   }
 
@@ -330,11 +335,10 @@ class GroupsListView extends StatelessWidget {
           }
 
           return CustomList.listTypeOne(
-            name: groups[index].grupName ?? '',
+            name: groups[index].grupName ?? ' ',
             isRead: isRead,
             grupData: groups[index],
             onTap: onTap,
-            color: groups[index].photoColor,
           );
         });
   }

@@ -5,7 +5,7 @@ import 'package:chalk_and_duster/models/model_%20organization.dart';
 import 'package:chalk_and_duster/models/model_user.dart';
 import 'package:chalk_and_duster/services/auth.dart';
 import 'package:chalk_and_duster/services/database.dart';
-import 'package:chalk_and_duster/widgets/text_field.dart';
+import 'package:chalk_and_duster/widgets/widget_text_field.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';

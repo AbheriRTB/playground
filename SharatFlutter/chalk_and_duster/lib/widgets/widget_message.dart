@@ -111,10 +111,10 @@ class NewMessage extends StatelessWidget {
             children: [
               CircleAvatar(
                 maxRadius: 14.0,
-                foregroundImage: data.photoUrl!.isNotEmpty
+                /*   foregroundImage: data.photoUrl!.isNotEmpty
                     ? NetworkImage(data.photoUrl!)
                     : NetworkImage(
-                        'https://upload.wikimedia.org/wikipedia/commons/8/89/HD_transparent_picture.png'),
+                        'https://upload.wikimedia.org/wikipedia/commons/8/89/HD_transparent_picture.png'),*/
                 backgroundColor: Colors.grey[900],
                 child: Padding(
                   padding: const EdgeInsets.only(bottom: 4.0),
@@ -288,10 +288,10 @@ class NewMessageOld extends StatelessWidget {
                 opacity: 0,
                 child: CircleAvatar(
                   maxRadius: 14.0,
-                  foregroundImage: data.photoUrl!.isNotEmpty
+                  /* foregroundImage: data.photoUrl != null
                       ? NetworkImage(data.photoUrl!)
                       : NetworkImage(
-                          'https://upload.wikimedia.org/wikipedia/commons/8/89/HD_transparent_picture.png'),
+                          'https://upload.wikimedia.org/wikipedia/commons/8/89/HD_transparent_picture.png'),*/
                   backgroundColor: Colors.grey[900],
                   child: Padding(
                     padding: const EdgeInsets.only(bottom: 4.0),

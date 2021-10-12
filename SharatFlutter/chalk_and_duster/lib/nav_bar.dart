@@ -1,6 +1,4 @@
-import 'package:chalk_and_duster/models/model_user.dart';
-import 'package:chalk_and_duster/pages/home/page_classes.dart';
-import 'package:chalk_and_duster/services/auth.dart';
+import 'package:chalk_and_duster/pages/home/classes/page_classes.dart';
 import 'package:flutter/material.dart';
 
 class NavBar extends StatefulWidget {

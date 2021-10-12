@@ -55,7 +55,6 @@ class DatabaseService {
       'grupName': group.grupName,
       'grupId': randomDoc,
       'grupUsers': group.grupUsers,
-      'photoColor': group.photoColor,
       'lastMessage': {
         'content': 'No Messages Yet',
         'uidFrom': ' ',

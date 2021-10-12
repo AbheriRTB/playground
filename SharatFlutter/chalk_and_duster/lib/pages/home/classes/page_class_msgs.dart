@@ -1,7 +1,8 @@
 import 'package:chalk_and_duster/models/model_%20group.dart';
 import 'package:chalk_and_duster/models/model_message.dart';
 import 'package:chalk_and_duster/models/model_user.dart';
-import 'package:chalk_and_duster/pages/home/classes/dialog_schedule.dart';
+import 'package:chalk_and_duster/pages/home/classes/page_class_details.dart';
+import 'package:chalk_and_duster/widgets/dialog_schedule.dart';
 import 'package:chalk_and_duster/services/database.dart';
 import 'package:chalk_and_duster/widgets/widget_message.dart';
 
@@ -49,17 +50,15 @@ class _GroupMessagesPageState extends State<GroupMessagesPage> {
           );
         }
         return DefaultTabController(
-          length: 4,
+          length: 2,
           child: Scaffold(
             appBar: AppBar(
-              backgroundColor: Colors.grey[900]!.withOpacity(0.2),
-              elevation: 0,
               bottomOpacity: 0.6,
               bottom: TabBar(
                 indicator: UnderlineTabIndicator(
                   borderSide: BorderSide(
                     width: 2.0,
-                    color: Color(0xff90D44B),
+                    color: Color(0xff90D44B).withOpacity(0.5),
                   ),
                   insets: EdgeInsets.symmetric(
                     horizontal: 34.0,
@@ -76,7 +75,7 @@ class _GroupMessagesPageState extends State<GroupMessagesPage> {
                       ),
                     ),
                   ),
-                  Tab(
+                  /* Tab(
                     child: Text(
                       'Files',
                       style: TextStyle(
@@ -95,7 +94,7 @@ class _GroupMessagesPageState extends State<GroupMessagesPage> {
                         fontSize: 16.0,
                       ),
                     ),
-                  ),
+                  ),*/
                   Tab(
                     child: Text(
                       'Tasks',
@@ -109,7 +108,17 @@ class _GroupMessagesPageState extends State<GroupMessagesPage> {
                 ],
               ),
               title: InkWell(
-                onTap: () {},
+                splashColor: Colors.grey[900]!.withOpacity(0.5),
+                highlightColor: Colors.grey[900]!.withOpacity(0.5),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ClassDetailsPage(
+                          group: widget.grups,
+                        ),
+                      ));
+                },
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -168,7 +177,7 @@ class _GroupMessagesPageState extends State<GroupMessagesPage> {
                   grups: widget.grups,
                   userData: widget.userData,
                 ),
-                Icon(Icons.directions_transit),
+                /*Icon(Icons.directions_transit),
                 Scaffold(
                   floatingActionButton:
                       widget.userData.isAdmin! || widget.userData.isTeacher!
@@ -194,12 +203,15 @@ class _GroupMessagesPageState extends State<GroupMessagesPage> {
                           : Container(),
                   floatingActionButtonLocation:
                       FloatingActionButtonLocation.endFloat,
-                ),
+                ),*/
                 Center(
                   child: Text(
                     'COMMING SOON',
                     style: TextStyle(
-                        color: Colors.green[600], fontStyle: FontStyle.italic),
+                        backgroundColor: Colors.grey[900],
+                        fontFamily: 'Integral',
+                        color: Colors.grey[800],
+                        fontStyle: FontStyle.italic),
                   ),
                 ),
               ],
@@ -232,6 +244,8 @@ class _ChatsPageWidgetState extends State<ChatsPageWidget> {
   TextEditingController controller = TextEditingController();
 
   ScrollController scrollController = ScrollController();
+  final _key = GlobalKey<FormState>();
+  FocusNode _focusNode = FocusNode();
 
   final ImagePicker _picker = ImagePicker();
 
@@ -241,75 +255,83 @@ class _ChatsPageWidgetState extends State<ChatsPageWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Expanded(
-          child: ListView.builder(
-            controller: scrollController,
-            reverse: true,
-            itemCount: widget.data.length,
-            itemBuilder: (context, index) {
-              return MessageWidget(
-                msgs: widget.data,
-                index: index,
-                grups: widget.grups,
-                userData: widget.userData,
-              );
-            },
+    return Form(
+      key: _key,
+      child: Column(
+        children: [
+          Expanded(
+            child: ListView.builder(
+              controller: scrollController,
+              reverse: true,
+              itemCount: widget.data.length,
+              itemBuilder: (context, index) {
+                return MessageWidget(
+                  msgs: widget.data,
+                  index: index,
+                  grups: widget.grups,
+                  userData: widget.userData,
+                );
+              },
+            ),
           ),
-        ),
-        widget.userData.isAdmin! || widget.userData.isTeacher!
-            ? Container(
-                //color: secondary,
-                child: SafeArea(
-                  child: Column(
-                    children: [
-                      Divider(
-                        color: Colors.grey[900],
-                        thickness: 3,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            left: 16.0, right: 16.0, top: 0.0),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: TextField(
-                                controller: controller,
-                                onChanged: (val) {
-                                  setState(() => message = val.trim());
-                                },
-                                style: TextStyle(
-                                    fontSize: 18.0, color: Colors.grey[600]),
-                                decoration: InputDecoration(
-                                  filled: false,
-                                  hintText: 'Type your message',
-                                  hintStyle: TextStyle(
-                                      fontSize: 18.0, color: Colors.grey[600]),
-                                  focusedBorder: UnderlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: Colors.transparent),
-                                  ),
-                                  enabledBorder: UnderlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: Colors.transparent),
-                                  ),
-                                ),
-                                //keyboardType: TextInputType.phone,
-                                autocorrect: true,
-
-                                maxLines: null,
-                              ),
-                            ),
-                            SizedBox(
-                              width: 16.0,
-                            ),
-                          ],
+          widget.userData.isAdmin! || widget.userData.isTeacher!
+              ? Container(
+                  //color: secondary,
+                  child: SafeArea(
+                    child: Column(
+                      children: [
+                        Divider(
+                          color: Colors.grey[900],
+                          thickness: 3,
                         ),
-                      ),
-                      Row(
-                        children: [
-                          IconButton(
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              left: 16.0, right: 16.0, top: 0.0),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: TextFormField(
+                                  validator: (value) => value!.isNotEmpty
+                                      ? null
+                                      : 'Enter School Email',
+                                  controller: controller,
+                                  onChanged: (val) {
+                                    setState(() => message = val.trim());
+                                  },
+                                  style: TextStyle(
+                                      fontSize: 18.0, color: Colors.grey[600]),
+                                  cursorColor: Colors.indigo, cursorWidth: 3,
+                                  focusNode: _focusNode,
+                                  decoration: InputDecoration(
+                                    filled: false,
+                                    hintText: 'Type your message',
+                                    hintStyle: TextStyle(
+                                      fontSize: 18.0,
+                                      color: Colors.grey[600],
+                                    ),
+                                    focusedBorder: UnderlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: Colors.transparent),
+                                    ),
+                                    enabledBorder: UnderlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: Colors.transparent),
+                                    ),
+                                  ),
+                                  //keyboardType: TextInputType.phone,
+                                  autocorrect: true,
+                                  maxLines: null,
+                                ),
+                              ),
+                              SizedBox(
+                                width: 16.0,
+                              ),
+                            ],
+                          ),
+                        ),
+                        Row(
+                          children: [
+                            IconButton(
                               onPressed: () async {
                                 XFile? image = await _picker.pickImage(
                                     source: ImageSource.gallery);
@@ -393,8 +415,12 @@ class _ChatsPageWidgetState extends State<ChatsPageWidget> {
                               icon: Icon(
                                 Icons.image_outlined,
                                 color: Colors.grey[800],
-                              )),
-                          IconButton(
+                              ),
+                              splashColor: Colors.grey[800]!.withOpacity(0.5),
+                              highlightColor:
+                                  Colors.grey[800]!.withOpacity(0.5),
+                            ),
+                            IconButton(
                               onPressed: () async {
                                 XFile? image = await _picker.pickImage(
                                     source: ImageSource.camera);
@@ -477,8 +503,12 @@ class _ChatsPageWidgetState extends State<ChatsPageWidget> {
                               icon: Icon(
                                 Icons.photo_camera_outlined,
                                 color: Colors.grey[800],
-                              )),
-                          IconButton(
+                              ),
+                              splashColor: Colors.grey[800]!.withOpacity(0.5),
+                              highlightColor:
+                                  Colors.grey[800]!.withOpacity(0.5),
+                            ),
+                            IconButton(
                               onPressed: () async {
                                 XFile? image = await _picker.pickVideo(
                                     source: ImageSource.gallery);
@@ -561,8 +591,12 @@ class _ChatsPageWidgetState extends State<ChatsPageWidget> {
                               icon: Icon(
                                 Icons.movie_creation_outlined,
                                 color: Colors.grey[800],
-                              )),
-                          IconButton(
+                              ),
+                              splashColor: Colors.grey[800]!.withOpacity(0.5),
+                              highlightColor:
+                                  Colors.grey[800]!.withOpacity(0.5),
+                            ),
+                            IconButton(
                               onPressed: () {
                                 setState(() {
                                   isImportant = !isImportant;
@@ -575,45 +609,58 @@ class _ChatsPageWidgetState extends State<ChatsPageWidget> {
                                 color: isImportant
                                     ? Colors.indigo[500]
                                     : Colors.grey[800],
-                              )),
-                          Expanded(child: Container()),
-                          IconButton(
+                              ),
+                              splashColor: Colors.grey[800]!.withOpacity(0.5),
+                              highlightColor:
+                                  Colors.grey[800]!.withOpacity(0.5),
+                            ),
+                            Expanded(child: Container()),
+                            IconButton(
                               onPressed: () async {
-                                controller.clear();
-                                await DatabaseService(
-                                  orgId: widget.userData.orgId,
-                                  grupId: widget.grups.grupId,
-                                  uid: widget.userData.uid,
-                                ).updateMessageData(Messages(
-                                  content: message,
-                                  type: type,
-                                  isImportant: isImportant,
-                                ));
-                                await DatabaseService(
-                                  orgId: widget.userData.orgId,
-                                  grupId: widget.grups.grupId,
-                                  uid: widget.userData.uid,
-                                ).updateLastMessage(Messages(
-                                  content: message,
-                                  type: type,
-                                  isImportant: isImportant,
-                                ));
-                                setState(() {
-                                  isImportant = false;
-                                });
+                                if (_key.currentState!.validate()) {
+                                  controller.clear();
+                                  await DatabaseService(
+                                    orgId: widget.userData.orgId,
+                                    grupId: widget.grups.grupId,
+                                    uid: widget.userData.uid,
+                                  ).updateMessageData(Messages(
+                                    content: message,
+                                    type: type,
+                                    isImportant: isImportant,
+                                  ));
+                                  await DatabaseService(
+                                    orgId: widget.userData.orgId,
+                                    grupId: widget.grups.grupId,
+                                    uid: widget.userData.uid,
+                                  ).updateLastMessage(Messages(
+                                    content: message,
+                                    type: type,
+                                    isImportant: isImportant,
+                                  ));
+                                  setState(() {
+                                    isImportant = false;
+                                  });
+
+                                  _focusNode.unfocus();
+                                }
                               },
                               icon: Icon(
                                 Icons.send_sharp,
                                 color: Colors.grey[700],
-                              )),
-                        ],
-                      )
-                    ],
+                              ),
+                              splashColor: Colors.grey[800]!.withOpacity(0.5),
+                              highlightColor:
+                                  Colors.grey[800]!.withOpacity(0.5),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
                   ),
-                ),
-              )
-            : Container(),
-      ],
+                )
+              : Container(),
+        ],
+      ),
     );
   }
 }

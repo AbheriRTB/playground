@@ -1,6 +1,6 @@
 import 'package:chalk_and_duster/pages/auth/create/auth_create.dart';
 import 'package:chalk_and_duster/services/auth.dart';
-import 'package:chalk_and_duster/widgets/text_field.dart';
+import 'package:chalk_and_duster/widgets/widget_text_field.dart';
 import 'package:flutter/material.dart';
 
 import 'package:responsive_builder/responsive_builder.dart';

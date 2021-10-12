@@ -5,7 +5,6 @@ class Groups {
   final String? grupName;
   final String? grupId;
   final List? grupUsers;
-  final String? photoColor;
   final Map? lastMessage;
   final DateTime? timeStamp;
 
@@ -13,7 +12,6 @@ class Groups {
     this.grupName,
     this.grupId,
     this.grupUsers,
-    this.photoColor,
     this.lastMessage,
     this.timeStamp,
   });
@@ -23,7 +21,6 @@ class Groups {
       grupName: doc['grupName'] ?? '',
       grupId: doc['grupId'] ?? '',
       grupUsers: doc['grupUsers'] ?? '',
-      photoColor: doc['photoColor'] ?? '',
       lastMessage: doc['lastMessage'] ?? '',
       timeStamp: doc['timeStamp'].toDate(),
     );
@@ -33,7 +30,6 @@ class Groups {
     return Groups(
       grupName: ' ',
       grupUsers: [],
-      photoColor: ' ',
       lastMessage: {},
       timeStamp: DateTime.now(),
     );
