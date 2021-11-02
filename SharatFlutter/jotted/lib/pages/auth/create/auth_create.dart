@@ -226,7 +226,7 @@ class _CreateUsersPageState extends State<CreateUsersPage> {
   }
 
   createUsers(List<List<dynamic>>? users) async {
-    var randomDoc = FirebaseFirestore.instance.collection('orgnizers').doc().id;
+    /*var randomDoc = FirebaseFirestore.instance.collection('orgnizers').doc().id;
 
     users!.forEach((element) async {
       setState(() => loading = true);
@@ -256,7 +256,7 @@ class _CreateUsersPageState extends State<CreateUsersPage> {
       }
     });
 
-    /* DatabaseService().updateOrganizationData(Organizations(
+     DatabaseService().updateOrganizationData(Organizations(
       orgName: name,
       orgEmail: email,
       orgId: randomDoc,

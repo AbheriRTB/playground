@@ -56,6 +56,8 @@ class _AddGroupPageState extends State<AddGroupPage> {
   @override
   Widget build(BuildContext context) {
     final users = Provider.of<Users?>(context);
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+
     return StreamBuilder<UsersData>(
         stream: DatabaseService(uid: users!.uid).userData,
         builder: (context, snapshot) {
@@ -66,115 +68,81 @@ class _AddGroupPageState extends State<AddGroupPage> {
 
           return Scaffold(
             appBar: AppBar(
+              title: const Padding(
+                padding: EdgeInsets.only(bottom: 4.0),
+                child: Text(
+                  'Select Users',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              centerTitle: false,
               leading: IconButton(
-                icon: Icon(
+                icon: const Icon(
                   Icons.arrow_back,
-                  color: Colors.grey[600],
                 ),
                 onPressed: () {
                   Navigator.pop(context);
                 },
               ),
-              title: Padding(
-                padding: const EdgeInsets.only(bottom: 4.0),
-                child: Text(
-                  'Select Users',
-                  style: TextStyle(
-                    fontFamily: 'Integral',
-                    fontWeight: FontWeight.bold,
-                    color: Colors.grey[700],
-                  ),
-                ),
-              ),
             ),
-            body: Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment(0.4, -0.8),
-                  stops: [0.0, 0.5, 0.5, 1],
-                  colors: [
-                    Colors.transparent,
-                    Colors.transparent,
-                    Colors.grey[900]!.withOpacity(0.2),
-                    Colors.grey[900]!.withOpacity(0.2),
-                  ],
-                  tileMode: TileMode.repeated,
-                ),
-              ),
-              child: Form(
-                key: _formKey,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      /* Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 8.0, vertical: 0.0),
-                        child: TextField(
-                          controller: _searchController,
-                          // onChanged: _onSearchChanged(),
-                          decoration: textInputDecoration("Search"),
-                          keyboardType: TextInputType.name,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 16.0,
-                      ),*/
-                      Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child: TextFormField(
-                          controller: controller,
-                          validator: (val) =>
-                              val!.isNotEmpty ? null : 'Enter Group Name',
-                          onChanged: (val) {
-                            setState(() => message = val.trim());
-                          },
-                          cursorColor: Color(0xff90D44B),
-                          style: TextStyle(
-                              fontSize: 18.0, color: Colors.grey[600]),
-                          decoration: InputDecoration(
-                            icon: Icon(Icons.group, color: Colors.grey[800]),
-                            filled: false,
-                            hintText: 'Group Name'.toUpperCase(),
-                            hintStyle: TextStyle(
-                                fontSize: 18.0, color: Colors.grey[700]),
-                            focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: Colors.grey[900]!, width: 3),
-                            ),
-                            enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.transparent),
-                            ),
+            body: Form(
+              key: _formKey,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: TextFormField(
+                        controller: controller,
+                        validator: (val) =>
+                            val!.isNotEmpty ? null : 'Enter Group Name',
+                        onChanged: (val) {
+                          setState(() => message = val.trim());
+                        },
+
+                        style: const TextStyle(fontSize: 18.0),
+                        decoration: InputDecoration(
+                          icon: const Icon(
+                            Icons.group,
                           ),
-                          //keyboardType: TextInputType.phone,
-                          autocorrect: true,
+                          filled: false,
+                          hintText: 'Group Name'.toUpperCase(),
                         ),
+                        //keyboardType: TextInputType.phone,
+                        autocorrect: true,
                       ),
-                      _selectedList.length > 0
-                          ? Divider(
-                              color: Colors.grey[900],
-                              thickness: 3,
-                            )
-                          : Container(),
-                      _selectedList.length > 0
-                          ? Expanded(
-                              flex: 2,
-                              child: ListView.builder(
-                                scrollDirection: Axis.horizontal,
-                                itemCount: _selectedList.length,
-                                itemBuilder: (BuildContext context, int index) {
-                                  return Padding(
-                                    padding: const EdgeInsets.all(4.0),
-                                    child: Stack(
-                                      alignment: Alignment.topRight,
-                                      children: [
-                                        AspectRatio(
-                                          aspectRatio: 1,
-                                          child: Container(
-                                            color: Colors.grey[900]!
-                                                .withOpacity(0.7),
+                    ),
+                    _selectedList.isNotEmpty
+                        ? const Divider(thickness: 1)
+                        : Container(),
+                    _selectedList.isNotEmpty
+                        ? Expanded(
+                            flex: 2,
+                            child: ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: _selectedList.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                return Padding(
+                                  padding: const EdgeInsets.all(4.0),
+                                  child: Stack(
+                                    alignment: Alignment.topRight,
+                                    children: [
+                                      AspectRatio(
+                                        aspectRatio: 1,
+                                        child: Material(
+                                          clipBehavior:
+                                              Clip.antiAliasWithSaveLayer,
+                                          borderRadius:
+                                              BorderRadius.circular(16),
+                                          color: colorScheme.surface,
+                                          child: InkWell(
+                                            onTap: () {
+                                              _selectedList.removeAt(index);
+                                            },
                                             child: Center(
                                               child: Text(
                                                 _selectedList[index]
@@ -183,141 +151,117 @@ class _AddGroupPageState extends State<AddGroupPage> {
                                                     .toUpperCase(),
                                                 style: TextStyle(
                                                   fontSize: 22.0,
-                                                  fontFamily: 'Integral',
-                                                  color: Colors.grey[700],
+                                                  color: colorScheme.onSurface,
                                                 ),
                                               ),
                                             ),
                                           ),
                                         ),
-                                        InkWell(
-                                          onTap: () {
-                                            _selectedList.removeAt(index);
-                                          },
-                                          child: AspectRatio(
-                                            aspectRatio: 1,
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.end,
-                                              children: [
-                                                Container(
-                                                  color: Colors.grey[800],
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            2.0),
-                                                    child: Icon(
-                                                      Icons.close,
-                                                      size: 12,
-                                                      color: Colors.black,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
+                                      ),
+                                      AspectRatio(
+                                        aspectRatio: 1,
+                                        child: Align(
+                                          alignment: Alignment.topRight,
+                                          child: Material(
+                                            borderRadius:
+                                                BorderRadius.circular(46),
+                                            color: colorScheme.error
+                                                .withOpacity(0.8),
+                                            child: const Padding(
+                                              padding: EdgeInsets.all(2.0),
+                                              child: Icon(
+                                                Icons.close,
+                                                size: 12,
+                                                color: Colors.transparent,
+                                              ),
                                             ),
                                           ),
-                                        )
-                                      ],
-                                    ),
-                                  );
-                                },
-                              ),
-                            )
-                          : Container(),
-                      SizedBox(
-                        height: 8.0,
-                      ),
-                      Divider(
-                        color: Colors.grey[900],
-                        thickness: 3,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child: TextField(
-                          controller: _searchController,
-                          onChanged: _onSearchChanged(),
-                          cursorColor: Color(0xff90D44B),
-                          style: TextStyle(
-                              fontSize: 18.0, color: Colors.grey[600]),
-                          decoration: InputDecoration(
-                            icon: Icon(
-                              Icons.search,
-                              color: Colors.grey[800],
-                              size: 22,
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                );
+                              },
                             ),
-                            filled: false,
-                            hintText: 'Search Users'.toUpperCase(),
-                            hintStyle: TextStyle(
-                                fontSize: 16.0, color: Colors.grey[800]),
-                            focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: Colors.grey[900]!, width: 3),
-                            ),
-                            enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.transparent),
-                            ),
+                          )
+                        : Container(),
+                    const Divider(
+                      thickness: 1,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: TextField(
+                        controller: _searchController,
+                        onChanged: _onSearchChanged(),
+                        style: const TextStyle(fontSize: 18.0),
+                        decoration: InputDecoration(
+                          icon: const Icon(
+                            Icons.search,
+                            size: 22,
                           ),
-                          //keyboardType: TextInputType.phone,
-                          autocorrect: true,
+                          filled: false,
+                          hintText: 'Search Users'.toUpperCase(),
+                          hintStyle: const TextStyle(
+                            fontSize: 16.0,
+                          ),
                         ),
+                        //keyboardType: TextInputType.phone,
+                        autocorrect: true,
                       ),
-                      SizedBox(
-                        height: 8.0,
-                      ),
-                      Expanded(
-                        flex: 15,
-                        child: ListView.builder(
-                            itemCount: _resultsList.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              if (_resultsList[index]['isAdmin'] &&
-                                  _resultsList[index]['isTeacher']) {
-                                desc = 'Admin & Teacher';
-                              } else if (_resultsList[index]['isAdmin']) {
-                                desc = 'Admin';
-                              } else if (_resultsList[index]['isTeacher']) {
-                                desc = 'Teacher';
-                              } else {
-                                desc = 'Student';
-                              }
-                              return CustomList.listTypeTwo(
-                                onTap: () {
-                                  bool contains = false;
-                                  for (int i = 0;
-                                      i < _selectedList.length;
-                                      ++i) {
-                                    if (_selectedList[i]['uid'] ==
-                                        _resultsList[index]['uid']) {
-                                      contains = true;
-                                      break;
-                                    }
+                    ),
+                    const SizedBox(
+                      height: 8.0,
+                    ),
+                    Expanded(
+                      flex: 15,
+                      child: ListView.builder(
+                          itemCount: _resultsList.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            if (_resultsList[index]['isAdmin'] &&
+                                _resultsList[index]['isTeacher']) {
+                              desc = 'Admin & Teacher';
+                            } else if (_resultsList[index]['isAdmin']) {
+                              desc = 'Admin';
+                            } else if (_resultsList[index]['isTeacher']) {
+                              desc = 'Teacher';
+                            } else {
+                              desc = 'Student';
+                            }
+                            return CustomList.listTypeTwo(
+                              onTap: () {
+                                bool contains = false;
+                                for (int i = 0; i < _selectedList.length; ++i) {
+                                  if (_selectedList[i]['uid'] ==
+                                      _resultsList[index]['uid']) {
+                                    contains = true;
+                                    break;
                                   }
-                                  if (!contains)
-                                    _selectedList.add(_resultsList[index]);
-                                },
-                                name: _resultsList[index]['displayName'],
-                                desc: desc,
-                              );
-                            }),
-                      )
-                    ],
-                  ),
+                                }
+                                if (!contains)
+                                  _selectedList.add(_resultsList[index]);
+                              },
+                              name: _resultsList[index]['displayName'],
+                              desc: desc,
+                            );
+                          }),
+                    )
+                  ],
                 ),
               ),
             ),
             floatingActionButton: FloatingActionButton.extended(
-              icon: Icon(Icons.add, size: 20, color: Colors.grey[900]),
+              icon: const Icon(
+                Icons.add,
+                size: 20,
+              ),
               label: Text(
                 'Create'.toUpperCase(),
-                style: TextStyle(
-                  fontFamily: 'Integral',
-                  color: Colors.grey[900],
-                ),
               ),
               onPressed: () async {
                 if (_formKey.currentState!.validate()) {
-                  _selectedList.forEach((element) {
+                  for (var element in _selectedList) {
                     uploadList.add(element['uid']);
-                  });
+                  }
                   await DatabaseService(
                     orgId: _selectedList[1]['orgId'],
                   ).updateGroupData(Groups(

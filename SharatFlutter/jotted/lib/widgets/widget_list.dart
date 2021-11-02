@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:google_fonts/google_fonts.dart';
 import 'package:jotted/models/model_group.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -40,7 +41,7 @@ class CustomList extends StatelessWidget {
       case 1:
         return customList3(context);
       case 2:
-        return customList4();
+        return customList4(context);
     }
     return Container();
   }
@@ -255,14 +256,18 @@ class CustomList extends StatelessWidget {
     );
   }
 
-  Widget customList4() {
+  Widget customList4(BuildContext context) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        InkWell(
-          onTap: () => onTap!(),
-          child: Container(
-            color: Colors.grey[900]!.withOpacity(0.4),
+        Material(
+          clipBehavior: Clip.antiAliasWithSaveLayer,
+          borderRadius: BorderRadius.circular(12),
+          color: const Color(0xffE4F0D7).withOpacity(0),
+          child: InkWell(
+            onTap: () => onTap!(),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -271,22 +276,25 @@ class CustomList extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        const SizedBox(
+                          height: 8,
+                        ),
                         Padding(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 16.0, vertical: 4.0),
                           child: Text(
-                            '${name!}',
+                            name!,
                             style: TextStyle(
                               fontSize: 26.0,
-                              fontFamily: 'Integral',
+                              fontFamily: GoogleFonts.lekton().fontFamily,
                               fontWeight: FontWeight.bold,
                               overflow: TextOverflow.ellipsis,
-                              color: Colors.grey[700],
+                              color: colorScheme.onSurface,
                             ),
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.only(
+                          padding: const EdgeInsets.only(
                             left: 16.0,
                             top: 4.0,
                             bottom: 12.0,
@@ -297,35 +305,30 @@ class CustomList extends StatelessWidget {
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                               fontSize: 16.0,
-                              fontWeight: FontWeight.w700,
-                              color: Colors.grey[800],
+                              fontFamily: GoogleFonts.lekton().fontFamily,
+                              fontWeight: FontWeight.bold,
+                              overflow: TextOverflow.ellipsis,
+                              color: Colors.grey[700],
                             ),
                           ),
                         ),
                       ],
                     ),
                     Expanded(child: Container()),
-                    AnimatedOpacity(
-                      duration: Duration(milliseconds: 100),
-                      opacity: isRead! ? 0.5 : 0,
-                      child: CircleAvatar(
-                        backgroundColor: Color(0xff90D44B),
-                        maxRadius: 4.0,
-                      ),
-                    ),
-                    SizedBox(
-                      width: 16.0,
-                    ),
                   ],
-                ),
-                Divider(
-                  color: Colors.black12,
-                  thickness: 3,
-                  height: 0,
                 ),
               ],
             ),
           ),
+        ),
+        const Divider(
+          height: 0,
+          endIndent: 6,
+          indent: 6,
+          thickness: 0.8,
+        ),
+        const SizedBox(
+          height: 6,
         ),
       ],
     );

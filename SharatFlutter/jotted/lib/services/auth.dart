@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+import 'package:jotted/models/model_organization.dart';
 import 'package:jotted/models/model_user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -44,6 +46,7 @@ class AuthService {
   // Register with email and password
   Future registerWithEmailAndPassword(
     UsersData usersData,
+    Organizations organizations,
     String password,
   ) async {
     try {
@@ -52,6 +55,8 @@ class AuthService {
         password: password,
       );
       User? user = result.user;
+      List list = organizations.orgUsers!;
+
       await DatabaseService()
           .updateUserData(
         UsersData(
@@ -70,11 +75,15 @@ class AuthService {
         ),
       )
           .onError((error, stackTrace) {
-        print('Error : $error $stackTrace');
+        debugPrint('Error : $error $stackTrace');
       });
+
+      list.add(user.uid);
+      await DatabaseService(orgId: organizations.orgId).updateOrgUserList(list);
+
       return _userFromFirebaseUser(user);
     } catch (error) {
-      print(error.toString());
+      debugPrint(error.toString());
       return null;
     }
   }

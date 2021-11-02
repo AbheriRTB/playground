@@ -10,6 +10,7 @@ class Organizations {
   final String? orgBranch;
   final String? orgEmail;
   final Map? configurations;
+  final List? orgUsers;
   final DateTime? timeStamp;
 
   Organizations({
@@ -22,6 +23,7 @@ class Organizations {
     this.orgName,
     this.orgEmail,
     this.configurations,
+    this.orgUsers,
     this.timeStamp,
   });
 
@@ -36,6 +38,7 @@ class Organizations {
       orgContact: doc['orgContact'],
       orgCountry: doc['orgCountry'],
       configurations: doc['configure'],
+      orgUsers: doc['orgUsers'],
       timeStamp: doc['timeStamp'].toDate(),
     );
   }
@@ -51,6 +54,7 @@ class Organizations {
       orgContact: ' ',
       orgCountry: ' ',
       configurations: {},
+      orgUsers: [],
       timeStamp: DateTime.now(),
     );
   }
