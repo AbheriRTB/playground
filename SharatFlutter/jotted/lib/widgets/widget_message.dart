@@ -249,40 +249,95 @@ class NewMessage extends StatelessWidget {
                     ),
                   ],
                 ),
-                msgs[index].type == 0
-                    ? SizedBox(
-                        width: !web
-                            ? MediaQuery.of(context).size.width - 100
-                            : MediaQuery.of(context).size.width / 3,
-                        child: Linkable(
-                          text: msgs[index].content!,
-                          style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 21,
-                            fontFamily: GoogleFonts.lekton().fontFamily,
-                          ),
-                          linkColor: colorScheme.primaryVariant,
-                        ),
-                      )
-                    : Padding(
-                        padding: const EdgeInsets.only(top: 8.0),
-                        child: Align(
-                          alignment: Alignment.topLeft,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(12),
-                            child: Image.network(
-                              msgs[index].content!,
-                              scale: 2,
-                            ),
-                          ),
-                        ),
-                      ),
+                Content(context),
               ],
             ),
           ],
         ),
       ),
     );
+  }
+
+  Widget Content(BuildContext context) {
+    ColorScheme colorScheme = Theme.of(context).colorScheme;
+
+    switch (msgs[index].type) {
+      case 0:
+        return SizedBox(
+          width: !web
+              ? MediaQuery.of(context).size.width - 100
+              : MediaQuery.of(context).size.width / 3,
+          child: Linkable(
+            text: msgs[index].content!,
+            style: TextStyle(
+              fontWeight: FontWeight.w600,
+              fontSize: 21,
+              fontFamily: GoogleFonts.lekton().fontFamily,
+            ),
+            linkColor: colorScheme.primaryVariant,
+          ),
+        );
+
+      case 1:
+        return Padding(
+          padding: const EdgeInsets.only(top: 8.0),
+          child: Align(
+            alignment: Alignment.topLeft,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+              child: Image.network(
+                msgs[index].content!,
+                fit: BoxFit.fitWidth,
+                width: MediaQuery.of(context).size.width / 2,
+                loadingBuilder: (context, _, prog) {
+                  return prog == null
+                      ? _
+                      : Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: CircularProgressIndicator(
+                            value: prog.expectedTotalBytes != null
+                                ? prog.cumulativeBytesLoaded /
+                                    prog.expectedTotalBytes!
+                                : null,
+                          ),
+                        );
+                },
+              ),
+            ),
+          ),
+        );
+      case 2:
+        return Padding(
+          padding: const EdgeInsets.only(top: 8.0),
+          child: Align(
+            alignment: Alignment.topLeft,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+              child: Image.network(
+                msgs[index].content!,
+                fit: BoxFit.fitWidth,
+                width: MediaQuery.of(context).size.width / 2,
+              ),
+            ),
+          ),
+        );
+
+      default:
+        return SizedBox(
+          width: !web
+              ? MediaQuery.of(context).size.width - 100
+              : MediaQuery.of(context).size.width / 3,
+          child: Linkable(
+            text: msgs[index].content!,
+            style: TextStyle(
+              fontWeight: FontWeight.w600,
+              fontSize: 21,
+              fontFamily: GoogleFonts.lekton().fontFamily,
+            ),
+            linkColor: colorScheme.primaryVariant,
+          ),
+        );
+    }
   }
 }
 

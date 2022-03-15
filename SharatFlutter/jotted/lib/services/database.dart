@@ -1,4 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:jotted/models/model_configure.dart';
+import 'package:jotted/models/model_files.dart';
 import 'package:jotted/models/model_group.dart';
 import 'package:jotted/models/model_organization.dart';
 import 'package:jotted/models/model_message.dart';
@@ -23,7 +25,6 @@ class DatabaseService {
   Future<void> updateUserData(
     UsersData usersData,
   ) async {
-    print('creating ${usersData.uid}');
     final result = await usersCollection.doc(usersData.uid).set({
       'uid': usersData.uid,
       'displayName': usersData.displayName,
@@ -38,6 +39,17 @@ class DatabaseService {
       'dob': usersData.dob,
       'guardianName': usersData.guardianName,
       'timsStamp': timeStamp,
+    }).onError((error, stackTrace) => print);
+  }
+
+  Future<void> approveUserData(
+    bool isTeacher,
+    bool isAdmin,
+  ) async {
+    final result = await usersCollection.doc(uid).update({
+      'isAdmin': isAdmin,
+      'isTeacher': isTeacher,
+      'approved': true,
     }).onError((error, stackTrace) => print);
   }
 
@@ -64,8 +76,13 @@ class DatabaseService {
         'userApproval': configure.userApproval,
         'userName': configure.userName,
       },
+      'orgUsers': [],
       'timeStamp': timeStamp,
     });
+  }
+
+  Future<void> updateOrgUserList(List list) async {
+    await orgsCollection.doc(orgId).update({'orgUsers': list});
   }
 
   Future<void> updateGroupData(
@@ -125,6 +142,31 @@ class DatabaseService {
       'readUsers': [uid],
       'type': message.type,
       'isImportant': message.isImportant,
+      'timeStamp': timeStamp,
+    });
+  }
+
+  Future updateFileData(
+    Files file,
+  ) async {
+    var randomDoc = orgsCollection
+        .doc(orgId)
+        .collection('groups')
+        .doc(timeStamp.toString())
+        .id;
+
+    await orgsCollection
+        .doc(orgId)
+        .collection('groups')
+        .doc(grupId)
+        .collection('files')
+        .doc(randomDoc)
+        .set({
+      'msgId': randomDoc,
+      'fileName': file.fileName,
+      'fileUrl': file.fileUrl,
+      'uidFrom': uid,
+      'groupId': grupId,
       'timeStamp': timeStamp,
     });
   }
@@ -204,10 +246,26 @@ class DatabaseService {
         .snapshots()
         .map(_messagesFromSnapshot)
         .handleError((onError) {
-      print(onError);
+      debugPrint(onError);
     });
-  } // Get Messages Doc Stream
+  }
 
+  // Get Files Doc Stream
+  Stream<List<Files>> get filesData {
+    return orgsCollection
+        .doc(orgId)
+        .collection('groups')
+        .doc(grupId)
+        .collection('files')
+        .orderBy('timeStamp', descending: true)
+        .snapshots()
+        .map(_filesFromSnapshot)
+        .handleError((onError) {
+      debugPrint(onError.toString());
+    });
+  }
+
+  // Get Messages Doc Stream
   Stream<List<Messages>> get messagesListData {
     return orgsCollection
         .doc(orgId)
@@ -242,6 +300,13 @@ class DatabaseService {
   List<Messages> _messagesFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.docs.map((doc) {
       return Messages.fromDocument(doc);
+    }).toList();
+  }
+
+  // Files Data from Snapshot
+  List<Files> _filesFromSnapshot(QuerySnapshot snapshot) {
+    return snapshot.docs.map((doc) {
+      return Files.fromDocument(doc);
     }).toList();
   }
 }

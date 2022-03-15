@@ -1,5 +1,4 @@
 import 'package:animations/animations.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
@@ -7,6 +6,8 @@ import 'package:jotted/models/model_group.dart';
 import 'package:jotted/models/model_message.dart';
 import 'package:jotted/models/model_user.dart';
 import 'package:jotted/pages/home/classes/page_class_msgs.dart';
+import 'package:jotted/pages/home/classes/page_create_class.dart';
+import 'package:jotted/pages/home/page_approval.dart';
 import 'package:jotted/services/auth.dart';
 import 'package:jotted/services/database.dart';
 import 'package:responsive_builder/responsive_builder.dart';
@@ -33,20 +34,47 @@ class _ClassesPageState extends State<ClassesPage> {
   Widget build(BuildContext context) {
     UsersData user = Provider.of<UsersData>(context);
 
-    return StreamProvider<List<Groups>>.value(
-      value: DatabaseService(
-        orgId: user.orgId ?? ' ',
-        uid: user.uid ?? ' ',
-      ).groupsList,
-      child: ResponsiveBuilder(
-        breakpoints:
-            const ScreenBreakpoints(desktop: 600, tablet: 200, watch: 100),
-        builder: (context, sizingInfo) =>
-            sizingInfo.isDesktop ? ClassesPageWeb() : ClassesPageMobile(),
-      ),
-      initialData: [],
-      catchError: null,
-    );
+    return user.approved!
+        ? StreamProvider<List<Groups>>.value(
+            value: DatabaseService(
+              orgId: user.orgId ?? ' ',
+              uid: user.uid ?? ' ',
+            ).groupsList,
+            child: ResponsiveBuilder(
+              breakpoints: const ScreenBreakpoints(
+                  desktop: 600, tablet: 200, watch: 100),
+              builder: (context, sizingInfo) =>
+                  sizingInfo.isDesktop ? ClassesPageWeb() : ClassesPageMobile(),
+            ),
+            initialData: [],
+            catchError: null,
+          )
+        : Scaffold(
+            body: Center(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Waiting for admin to aprove'.toUpperCase(),
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        fontSize: 22,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 12,
+                    ),
+                    TextButton(
+                      onPressed: () => AuthService().signOut(),
+                      child: Text('Logout'.toUpperCase()),
+                    )
+                  ],
+                ),
+              ),
+            ),
+          );
   }
 }
 
@@ -126,112 +154,6 @@ class _ClassesPageMobileState extends State<ClassesPageMobile> {
             letterSpacing: 1.5,
           ),
         ),
-        /*appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          title: Padding(
-            padding: const EdgeInsets.only(bottom: 4.0),
-            child: Text(
-              'Classes',
-              style: TextStyle(
-                fontFamily: 'Integral',
-                fontWeight: FontWeight.bold,
-                color: Colors.grey[800],
-              ),
-            ),
-          ),
-          leading: IconButton(
-            icon: Icon(
-              Icons.menu,
-              color: Colors.grey[800],
-            ),
-            splashColor: Colors.grey[900]!.withOpacity(0.5),
-            highlightColor: Colors.grey[900]!.withOpacity(0.5),
-            onPressed: () {},
-          ),
-          
-          actions: [
-            IconButton(
-              onPressed: () {},
-              icon: Icon(
-                Icons.search,
-                color: Colors.grey[800],
-              ),
-              splashColor: Colors.grey[900]!.withOpacity(0.5),
-              highlightColor: Colors.grey[900]!.withOpacity(0.5),
-            ),
-            PopupMenuButton(
-              initialValue: ' ',
-              icon: Icon(
-                Icons.more_vert,
-                color: Colors.grey[800],
-              ),
-              color: Colors.grey[900],
-              onSelected: (selected) {
-                switch (selected) {
-                  case ' ':
-                    break;
-                  case "/grup":
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => AddGroupPage(),
-                        ));
-                    break;
-                }
-              },
-              itemBuilder: (BuildContext context) => <PopupMenuEntry>[
-                const PopupMenuItem(
-                  value: '/grup',
-                  child: ListTile(
-                    leading: Icon(
-                      Icons.add,
-                      color: Colors.grey,
-                    ),
-                    title: Text(
-                      'New Group',
-                      style: TextStyle(
-                        color: Colors.grey,
-                      ),
-                    ),
-                  ),
-                ),
-                const PopupMenuItem(
-                  child: ListTile(
-                    leading: Icon(
-                      Icons.anchor,
-                      color: Colors.grey,
-                    ),
-                    title: Text(
-                      'New Note',
-                      style: TextStyle(
-                        color: Colors.grey,
-                      ),
-                    ),
-                  ),
-                ),
-                PopupMenuItem(
-                  onTap: () {
-                    AuthService().signOut();
-                  },
-                  child: const ListTile(
-                    leading: Icon(
-                      Icons.logout,
-                      color: Colors.grey,
-                    ),
-                    title: Text(
-                      'Logout',
-                      style: TextStyle(
-                        color: Colors.grey,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
-        */
         body: TabBarView(
           children: [
             Scaffold(
@@ -451,16 +373,84 @@ class _ClassesPageMobileState extends State<ClassesPageMobile> {
               body: ListView(
                 children: [
                   ListTile(
-                    onTap: () => AuthService().signOut(),
+                    onTap: () {
+                      showDialog(
+                        context: context,
+                        builder: (context1) => AlertDialog(
+                          backgroundColor: colorScheme.surface,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                          title: Center(
+                              child: Text(
+                            'SIGN OUT',
+                            style: TextStyle(
+                              fontFamily: GoogleFonts.lekton().fontFamily,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 24.0,
+                              color: colorScheme.onSurface,
+                            ),
+                          )),
+                          content: Text(
+                            'Do you really want to log out?'.toUpperCase(),
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontFamily: GoogleFonts.lekton().fontFamily,
+                              fontSize: 18.0,
+                              color: colorScheme.onSurface,
+                            ),
+                          ),
+                          actions: [
+                            TextButton(
+                              onPressed: () => Navigator.pop(context1),
+                              child: Text('Cancel'.toUpperCase()),
+                            ),
+                            ElevatedButton(
+                              onPressed: () {
+                                AuthService().signOut();
+                                Navigator.pop(context1);
+                              },
+                              child: Text('Logout'.toUpperCase()),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
                     title: const Center(
                       child: Text('LOG OUT'),
                     ),
                   ),
-                  Divider(),
-                  ListTile(
-                    onTap: () => AuthService().signOut(),
-                    title: Center(
-                      child: Text('Approvals'.toUpperCase()),
+                  const Divider(),
+                  Visibility(
+                    visible: user.isAdmin!,
+                    child: ListTile(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => AddGroupPage(),
+                          ),
+                        );
+                      },
+                      title: Center(
+                        child: Text('New Group'.toUpperCase()),
+                      ),
+                    ),
+                  ),
+                  Visibility(visible: user.isAdmin!, child: const Divider()),
+                  Visibility(
+                    visible: user.isAdmin!,
+                    child: ListTile(
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const ApprovalPage(),
+                        ),
+                      ),
+                      title: Center(
+                        child: Text('Approvals'.toUpperCase()),
+                      ),
                     ),
                   ),
                 ],
@@ -775,7 +765,7 @@ class NewListWidget extends StatelessWidget {
 }
 
 class ListCardWidget extends StatelessWidget {
-  ListCardWidget({
+  const ListCardWidget({
     Key? key,
     required this.groups,
     required this.index,
@@ -814,22 +804,16 @@ class ListCardWidget extends StatelessWidget {
     }
 
     return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 8.0,
+      padding: const EdgeInsets.all(
+        12.0,
       ),
-      child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(18.0),
-        ),
-        elevation: 2,
-        shadowColor: colorScheme.surface.withOpacity(0.2),
-        color: const Color(0xffE4F0D7)
-            .withOpacity(0.5), //colorScheme.surface.withOpacity(0.3),
+      child: Material(
+        borderRadius: BorderRadius.circular(16.0),
+        elevation: 1,
+        color: const Color(0xffE4F0D7),
+        clipBehavior: Clip.antiAliasWithSaveLayer,
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(
-            16.0,
-            16.0,
-            16.0,
+          padding: const EdgeInsets.all(
             16.0,
           ),
           child: Column(
@@ -848,17 +832,45 @@ class ListCardWidget extends StatelessWidget {
               const SizedBox(
                 height: 8.0,
               ),
-              Text(
-                groups[index].lastMessage!['content'],
-                maxLines: 2,
-                style: TextStyle(
-                  fontWeight: FontWeight.w900,
-                  fontSize: 21,
-                  color: isRead ? Colors.black : Colors.grey[800],
-                  fontFamily: GoogleFonts.lekton().fontFamily,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
+              groups[index].lastMessage!['type'] == 0
+                  ? Text(
+                      groups[index].lastMessage!['content'],
+                      maxLines: 2,
+                      style: TextStyle(
+                        fontWeight: FontWeight.w900,
+                        fontSize: 21,
+                        color: isRead ? Colors.black : Colors.grey[800],
+                        fontFamily: GoogleFonts.lekton().fontFamily,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    )
+                  : Row(
+                      children: [
+                        Icon(
+                          groups[index].lastMessage!['type'] == 2
+                              ? Icons.video_camera_back_outlined
+                              : Icons.image_outlined,
+                          color: isRead ? Colors.black : Colors.grey[600],
+                        ),
+                        const SizedBox(
+                          width: 8,
+                        ),
+                        Text(
+                          groups[index].lastMessage!['type'] == 2
+                              ? 'Video was shared.'
+                              : 'Image was shared.',
+                          maxLines: 2,
+                          style: TextStyle(
+                            fontWeight: FontWeight.w900,
+                            fontSize: 21,
+                            color: isRead ? Colors.black : Colors.grey[600],
+                            //fontStyle: FontStyle.italic,
+                            fontFamily: GoogleFonts.lekton().fontFamily,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ],
+                    ),
               const SizedBox(
                 height: 8.0,
               ),

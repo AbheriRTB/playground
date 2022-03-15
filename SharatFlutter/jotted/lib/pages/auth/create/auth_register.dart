@@ -7,6 +7,7 @@ import 'package:jotted/models/model_user.dart';
 import 'package:jotted/services/auth.dart';
 import 'package:jotted/services/database.dart';
 import 'package:jotted/widgets/widget_text_field.dart';
+import 'package:provider/provider.dart';
 
 class RegisterPage extends StatefulWidget {
   RegisterPage({Key? key, required this.orgID}) : super(key: key);
@@ -41,6 +42,14 @@ class _RegisterPageState extends State<RegisterPage> {
             stream: DatabaseService(orgId: widget.orgID).orgsData,
             initialData: Organizations.initialData(),
             builder: (context, snapshot) {
+              if (!snapshot.hasData) {
+                return const CircularProgressIndicator();
+              }
+              if (snapshot.hasError) {
+                debugPrint(snapshot.error.toString());
+                return const CircularProgressIndicator();
+              }
+
               organizations = snapshot.data!;
 
               return Form(
@@ -233,6 +242,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         orgId: organizations!.orgId,
                         approved: isFirst ? true : false,
                       ),
+                      organizations!,
                       password!)
                   : null;
             }
