@@ -1,0 +1,315 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/Sharat/Documents/Workspace/github/playground/SharatFlutter/HelloWorld/app/src/main/AndroidManifest.xml:2:1-25:12
+INJECTED from /Users/Sharat/Documents/Workspace/github/playground/SharatFlutter/HelloWorld/app/src/main/AndroidManifest.xml:2:1-25:12
+INJECTED from /Users/Sharat/Documents/Workspace/github/playground/SharatFlutter/HelloWorld/app/src/main/AndroidManifest.xml:2:1-25:12
+INJECTED from /Users/Sharat/Documents/Workspace/github/playground/SharatFlutter/HelloWorld/app/src/main/AndroidManifest.xml:2:1-25:12
+MERGED from [androidx.compose.ui:ui-tooling:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/6fc628fd101b7f8217683574672f07c2/transformed/jetified-ui-tooling-1.0.1/AndroidManifest.xml:17:1-30:12
+MERGED from [androidx.compose.material:material:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/7cec54e7360a42b99ac5655c26f72bfc/transformed/jetified-material-1.0.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.activity:activity-compose:1.3.1] /Users/Sharat/.gradle/caches/transforms-3/c07a9cb31f163a1d37bbd4866c099413/transformed/jetified-activity-compose-1.3.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.compose.ui:ui-tooling-data:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/05239098448783f3de80e73c463b833a/transformed/jetified-ui-tooling-data-1.0.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.compose.material:material-ripple:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/e89def0490d6ddc3c6b41b36d7171532/transformed/jetified-material-ripple-1.0.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.compose.foundation:foundation:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/7efc8e1611792e6c4bc6eceb21a85a06/transformed/jetified-foundation-1.0.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.compose.animation:animation:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/163617104e44060dde5b2125d6653e5b/transformed/jetified-animation-1.0.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.compose.animation:animation-core:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/614e74cf3946711961a7d859016cdefb/transformed/jetified-animation-core-1.0.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.compose.material:material-icons-core:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/1681d34ef21ea6a44cb1a09bfb244838/transformed/jetified-material-icons-core-1.0.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.compose.foundation:foundation-layout:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/b7391da634700d9394353fc9b3a4cf7f/transformed/jetified-foundation-layout-1.0.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.compose.ui:ui:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/8147937dc057b16a4ec5bded66806fe7/transformed/jetified-ui-1.0.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.activity:activity-ktx:1.3.1] /Users/Sharat/.gradle/caches/transforms-3/597835bf54069c4baace566824ddeb02/transformed/jetified-activity-ktx-1.3.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.lifecycle:lifecycle-runtime-ktx:2.3.1] /Users/Sharat/.gradle/caches/transforms-3/c698be810df9e8916f6aedf1a0c3d11c/transformed/jetified-lifecycle-runtime-ktx-2.3.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.compose.ui:ui-tooling-preview:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/cf9c57faff6ea1dae01cab7127e3a0b7/transformed/jetified-ui-tooling-preview-1.0.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.compose.ui:ui-text:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/75f043e6c767c803747efa4e476d16cd/transformed/jetified-ui-text-1.0.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.compose.runtime:runtime-saveable:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/408ffac2bc5ed7d30ee28f243f04eec8/transformed/jetified-runtime-saveable-1.0.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.compose.ui:ui-graphics:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/796dd915fe0c1e2e23d79bd9c498bed1/transformed/jetified-ui-graphics-1.0.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.compose.ui:ui-unit:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/94510e6cbc7e32d9f502b41c2373ab24/transformed/jetified-ui-unit-1.0.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.compose.ui:ui-geometry:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/835888dbf8cfa558671cb03037f9ab8f/transformed/jetified-ui-geometry-1.0.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.compose.runtime:runtime:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/ad4616630db447b2bcb88bed5b94f654/transformed/jetified-runtime-1.0.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1] /Users/Sharat/.gradle/caches/transforms-3/f90836ee62c7d1fceb8bdb76a186a2f8/transformed/jetified-lifecycle-viewmodel-ktx-2.3.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.core:core-ktx:1.3.2] /Users/Sharat/.gradle/caches/transforms-3/dfed1b73a466ccacddd46d6ba20f4113/transformed/jetified-core-ktx-1.3.2/AndroidManifest.xml:2:1-9:12
+MERGED from [com.google.android.material:material:1.4.0] /Users/Sharat/.gradle/caches/transforms-3/796b95f9565494deb0f013d98e8e8120/transformed/material-1.4.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] /Users/Sharat/.gradle/caches/transforms-3/d7bb446e76e4dff3c19288481c2c7ac2/transformed/constraintlayout-2.0.1/AndroidManifest.xml:2:1-11:12
+MERGED from [androidx.appcompat:appcompat:1.3.1] /Users/Sharat/.gradle/caches/transforms-3/fce6b24804477936a62a6e75ec7ca42c/transformed/appcompat-1.3.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.compose.ui:ui-util:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/870836f89a166ea412dc95e50e858352/transformed/jetified-ui-util-1.0.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.savedstate:savedstate-ktx:1.1.0] /Users/Sharat/.gradle/caches/transforms-3/634e7adc4c2e4fa907818828f82ebe2c/transformed/jetified-savedstate-ktx-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.viewpager2:viewpager2:1.0.0] /Users/Sharat/.gradle/caches/transforms-3/ea101ae4a93ea63d9ab46854f6db0ad6/transformed/jetified-viewpager2-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.fragment:fragment:1.3.6] /Users/Sharat/.gradle/caches/transforms-3/ae074c78012913ef00e35728ee475a38/transformed/fragment-1.3.6/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.appcompat:appcompat-resources:1.3.1] /Users/Sharat/.gradle/caches/transforms-3/9e8571bdb1823a59a47d898273e29a26/transformed/jetified-appcompat-resources-1.3.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /Users/Sharat/.gradle/caches/transforms-3/a703550be9a873b19cac5c29c59f7d09/transformed/drawerlayout-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /Users/Sharat/.gradle/caches/transforms-3/72d89dbc336cb52a2fbdf62e1f378bec/transformed/coordinatorlayout-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] /Users/Sharat/.gradle/caches/transforms-3/88959077d1b2aad159069675c708e73f/transformed/dynamicanimation-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.transition:transition:1.2.0] /Users/Sharat/.gradle/caches/transforms-3/993f6a86927deea643b133460447e13a/transformed/transition-1.2.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /Users/Sharat/.gradle/caches/transforms-3/f1ac99153cf6dc50ae5ac5f68dcb87fd/transformed/vectordrawable-animated-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /Users/Sharat/.gradle/caches/transforms-3/d850702c38ca0cad04a22d53d67cd7a4/transformed/vectordrawable-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.autofill:autofill:1.0.0] /Users/Sharat/.gradle/caches/transforms-3/60befea40c23e8ada46c312b61da5142/transformed/jetified-autofill-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/Sharat/.gradle/caches/transforms-3/2c29dc99082897de8ab91c5276cf5840/transformed/viewpager-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/Sharat/.gradle/caches/transforms-3/7533d21cc8e023ccda795e97af04a017/transformed/legacy-support-core-utils-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.loader:loader:1.0.0] /Users/Sharat/.gradle/caches/transforms-3/21955e5a8592ee9a4875979fe5ceeef0/transformed/loader-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.recyclerview:recyclerview:1.1.0] /Users/Sharat/.gradle/caches/transforms-3/7cf2545d87f6cd73d3265abc76b9287f/transformed/recyclerview-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.customview:customview:1.0.0] /Users/Sharat/.gradle/caches/transforms-3/c940caa9b85b0411c7c6f8b19ce41de6/transformed/customview-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.activity:activity:1.3.1] /Users/Sharat/.gradle/caches/transforms-3/8eb1659531e6cff4774dbce6ee9bfe67/transformed/jetified-activity-1.3.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.core:core:1.5.0] /Users/Sharat/.gradle/caches/transforms-3/1f08880656141bc4f915f27fbc24ca6e/transformed/core-1.5.0/AndroidManifest.xml:17:1-26:12
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/Sharat/.gradle/caches/transforms-3/c227ab68edc6eac5f69afd488c089864/transformed/cursoradapter-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.3.1] /Users/Sharat/.gradle/caches/transforms-3/f1a437b34a782e838f3f7b51f4c276c4/transformed/jetified-lifecycle-viewmodel-savedstate-2.3.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.savedstate:savedstate:1.1.0] /Users/Sharat/.gradle/caches/transforms-3/4b4a1d03ba0c700e2f4e71844d5fc14c/transformed/jetified-savedstate-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.3.1] /Users/Sharat/.gradle/caches/transforms-3/5c8daff24a4a6ed89fa4b13cb8f7a0ff/transformed/lifecycle-runtime-2.3.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.3.1] /Users/Sharat/.gradle/caches/transforms-3/b517b0eb0f1365e0cafaf287eb4d2029/transformed/lifecycle-viewmodel-2.3.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.cardview:cardview:1.0.0] /Users/Sharat/.gradle/caches/transforms-3/0eb790eede02794007ed79f406c80d55/transformed/cardview-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.profileinstaller:profileinstaller:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/feb1576d40345287968f7c444f99feb0/transformed/jetified-profileinstaller-1.0.1/AndroidManifest.xml:17:1-48:12
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/Sharat/.gradle/caches/transforms-3/ec181178dfbd0be4e73e4c4dff5a5974/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:17:1-27:12
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /Users/Sharat/.gradle/caches/transforms-3/19caae6bda4366866e7f1beb8e0f5319/transformed/lifecycle-livedata-2.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.3.1] /Users/Sharat/.gradle/caches/transforms-3/47d3a24b9cc65f1e028ece0b38a7496d/transformed/lifecycle-livedata-core-2.3.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.arch.core:core-runtime:2.1.0] /Users/Sharat/.gradle/caches/transforms-3/73019947b41ccf3c3c0dee18c6e2b1d2/transformed/core-runtime-2.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.startup:startup-runtime:1.0.0] /Users/Sharat/.gradle/caches/transforms-3/4a00cd6934c9999373ea04f838af82c4/transformed/jetified-startup-runtime-1.0.0/AndroidManifest.xml:17:1-33:12
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/Sharat/.gradle/caches/transforms-3/c014a87502e2e975656b1078f0398972/transformed/interpolator-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/Sharat/.gradle/caches/transforms-3/b9ee7c32735cb0bf5964b41335d84873/transformed/documentfile-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/Sharat/.gradle/caches/transforms-3/4511294bca588332f4cb3dfa39601883/transformed/localbroadcastmanager-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.print:print:1.0.0] /Users/Sharat/.gradle/caches/transforms-3/07a19b05245379de69822054d287bd9e/transformed/print-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.tracing:tracing:1.0.0] /Users/Sharat/.gradle/caches/transforms-3/65d058b1e189d3fa95f2d0b06898cada/transformed/jetified-tracing-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.annotation:annotation-experimental:1.0.0] /Users/Sharat/.gradle/caches/transforms-3/996fa98cbbf7cca8e2e72a2481110178/transformed/jetified-annotation-experimental-1.0.0/AndroidManifest.xml:17:1-24:12
+INJECTED from /Users/Sharat/Documents/Workspace/github/playground/SharatFlutter/HelloWorld/app/src/main/AndroidManifest.xml:2:1-25:12
+INJECTED from /Users/Sharat/Documents/Workspace/github/playground/SharatFlutter/HelloWorld/app/src/main/AndroidManifest.xml:2:1-25:12
+INJECTED from /Users/Sharat/Documents/Workspace/github/playground/SharatFlutter/HelloWorld/app/src/main/AndroidManifest.xml:2:1-25:12
+	package
+		ADDED from /Users/Sharat/Documents/Workspace/github/playground/SharatFlutter/HelloWorld/app/src/main/AndroidManifest.xml:3:5-35
+		INJECTED from /Users/Sharat/Documents/Workspace/github/playground/SharatFlutter/HelloWorld/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/Sharat/Documents/Workspace/github/playground/SharatFlutter/HelloWorld/app/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /Users/Sharat/Documents/Workspace/github/playground/SharatFlutter/HelloWorld/app/src/main/AndroidManifest.xml
+		ADDED from /Users/Sharat/Documents/Workspace/github/playground/SharatFlutter/HelloWorld/app/src/main/AndroidManifest.xml:2:1-25:12
+		INJECTED from /Users/Sharat/Documents/Workspace/github/playground/SharatFlutter/HelloWorld/app/src/main/AndroidManifest.xml
+	android:versionCode
+		INJECTED from /Users/Sharat/Documents/Workspace/github/playground/SharatFlutter/HelloWorld/app/src/main/AndroidManifest.xml
+		ADDED from /Users/Sharat/Documents/Workspace/github/playground/SharatFlutter/HelloWorld/app/src/main/AndroidManifest.xml:2:1-25:12
+		INJECTED from /Users/Sharat/Documents/Workspace/github/playground/SharatFlutter/HelloWorld/app/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/Sharat/Documents/Workspace/github/playground/SharatFlutter/HelloWorld/app/src/main/AndroidManifest.xml:2:11-69
+application
+ADDED from /Users/Sharat/Documents/Workspace/github/playground/SharatFlutter/HelloWorld/app/src/main/AndroidManifest.xml:5:5-23:19
+MERGED from [androidx.compose.ui:ui-tooling:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/6fc628fd101b7f8217683574672f07c2/transformed/jetified-ui-tooling-1.0.1/AndroidManifest.xml:24:5-28:19
+MERGED from [androidx.compose.ui:ui-tooling:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/6fc628fd101b7f8217683574672f07c2/transformed/jetified-ui-tooling-1.0.1/AndroidManifest.xml:24:5-28:19
+MERGED from [com.google.android.material:material:1.4.0] /Users/Sharat/.gradle/caches/transforms-3/796b95f9565494deb0f013d98e8e8120/transformed/material-1.4.0/AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.material:material:1.4.0] /Users/Sharat/.gradle/caches/transforms-3/796b95f9565494deb0f013d98e8e8120/transformed/material-1.4.0/AndroidManifest.xml:22:5-20
+MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] /Users/Sharat/.gradle/caches/transforms-3/d7bb446e76e4dff3c19288481c2c7ac2/transformed/constraintlayout-2.0.1/AndroidManifest.xml:9:5-20
+MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] /Users/Sharat/.gradle/caches/transforms-3/d7bb446e76e4dff3c19288481c2c7ac2/transformed/constraintlayout-2.0.1/AndroidManifest.xml:9:5-20
+MERGED from [androidx.core:core:1.5.0] /Users/Sharat/.gradle/caches/transforms-3/1f08880656141bc4f915f27fbc24ca6e/transformed/core-1.5.0/AndroidManifest.xml:24:5-89
+MERGED from [androidx.core:core:1.5.0] /Users/Sharat/.gradle/caches/transforms-3/1f08880656141bc4f915f27fbc24ca6e/transformed/core-1.5.0/AndroidManifest.xml:24:5-89
+MERGED from [androidx.profileinstaller:profileinstaller:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/feb1576d40345287968f7c444f99feb0/transformed/jetified-profileinstaller-1.0.1/AndroidManifest.xml:25:5-46:19
+MERGED from [androidx.profileinstaller:profileinstaller:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/feb1576d40345287968f7c444f99feb0/transformed/jetified-profileinstaller-1.0.1/AndroidManifest.xml:25:5-46:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/Sharat/.gradle/caches/transforms-3/ec181178dfbd0be4e73e4c4dff5a5974/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/Sharat/.gradle/caches/transforms-3/ec181178dfbd0be4e73e4c4dff5a5974/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.startup:startup-runtime:1.0.0] /Users/Sharat/.gradle/caches/transforms-3/4a00cd6934c9999373ea04f838af82c4/transformed/jetified-startup-runtime-1.0.0/AndroidManifest.xml:25:5-31:19
+MERGED from [androidx.startup:startup-runtime:1.0.0] /Users/Sharat/.gradle/caches/transforms-3/4a00cd6934c9999373ea04f838af82c4/transformed/jetified-startup-runtime-1.0.0/AndroidManifest.xml:25:5-31:19
+	android:appComponentFactory
+		ADDED from [androidx.core:core:1.5.0] /Users/Sharat/.gradle/caches/transforms-3/1f08880656141bc4f915f27fbc24ca6e/transformed/core-1.5.0/AndroidManifest.xml:24:18-86
+	android:supportsRtl
+		ADDED from /Users/Sharat/Documents/Workspace/github/playground/SharatFlutter/HelloWorld/app/src/main/AndroidManifest.xml:10:9-35
+	android:label
+		ADDED from /Users/Sharat/Documents/Workspace/github/playground/SharatFlutter/HelloWorld/app/src/main/AndroidManifest.xml:8:9-41
+	android:roundIcon
+		ADDED from /Users/Sharat/Documents/Workspace/github/playground/SharatFlutter/HelloWorld/app/src/main/AndroidManifest.xml:9:9-54
+	android:icon
+		ADDED from /Users/Sharat/Documents/Workspace/github/playground/SharatFlutter/HelloWorld/app/src/main/AndroidManifest.xml:7:9-43
+	android:allowBackup
+		ADDED from /Users/Sharat/Documents/Workspace/github/playground/SharatFlutter/HelloWorld/app/src/main/AndroidManifest.xml:6:9-35
+	android:theme
+		ADDED from /Users/Sharat/Documents/Workspace/github/playground/SharatFlutter/HelloWorld/app/src/main/AndroidManifest.xml:11:9-48
+activity#abheri.co.helloworld.MainActivity
+ADDED from /Users/Sharat/Documents/Workspace/github/playground/SharatFlutter/HelloWorld/app/src/main/AndroidManifest.xml:12:9-22:20
+	android:label
+		ADDED from /Users/Sharat/Documents/Workspace/github/playground/SharatFlutter/HelloWorld/app/src/main/AndroidManifest.xml:15:13-45
+	android:exported
+		ADDED from /Users/Sharat/Documents/Workspace/github/playground/SharatFlutter/HelloWorld/app/src/main/AndroidManifest.xml:14:13-36
+	android:theme
+		ADDED from /Users/Sharat/Documents/Workspace/github/playground/SharatFlutter/HelloWorld/app/src/main/AndroidManifest.xml:16:13-64
+	android:name
+		ADDED from /Users/Sharat/Documents/Workspace/github/playground/SharatFlutter/HelloWorld/app/src/main/AndroidManifest.xml:13:13-41
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from /Users/Sharat/Documents/Workspace/github/playground/SharatFlutter/HelloWorld/app/src/main/AndroidManifest.xml:17:13-21:29
+action#android.intent.action.MAIN
+ADDED from /Users/Sharat/Documents/Workspace/github/playground/SharatFlutter/HelloWorld/app/src/main/AndroidManifest.xml:18:17-69
+	android:name
+		ADDED from /Users/Sharat/Documents/Workspace/github/playground/SharatFlutter/HelloWorld/app/src/main/AndroidManifest.xml:18:25-66
+category#android.intent.category.LAUNCHER
+ADDED from /Users/Sharat/Documents/Workspace/github/playground/SharatFlutter/HelloWorld/app/src/main/AndroidManifest.xml:20:17-77
+	android:name
+		ADDED from /Users/Sharat/Documents/Workspace/github/playground/SharatFlutter/HelloWorld/app/src/main/AndroidManifest.xml:20:27-74
+uses-sdk
+INJECTED from /Users/Sharat/Documents/Workspace/github/playground/SharatFlutter/HelloWorld/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/Sharat/Documents/Workspace/github/playground/SharatFlutter/HelloWorld/app/src/main/AndroidManifest.xml
+INJECTED from /Users/Sharat/Documents/Workspace/github/playground/SharatFlutter/HelloWorld/app/src/main/AndroidManifest.xml
+MERGED from [androidx.compose.ui:ui-tooling:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/6fc628fd101b7f8217683574672f07c2/transformed/jetified-ui-tooling-1.0.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.ui:ui-tooling:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/6fc628fd101b7f8217683574672f07c2/transformed/jetified-ui-tooling-1.0.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.material:material:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/7cec54e7360a42b99ac5655c26f72bfc/transformed/jetified-material-1.0.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.material:material:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/7cec54e7360a42b99ac5655c26f72bfc/transformed/jetified-material-1.0.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.activity:activity-compose:1.3.1] /Users/Sharat/.gradle/caches/transforms-3/c07a9cb31f163a1d37bbd4866c099413/transformed/jetified-activity-compose-1.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.activity:activity-compose:1.3.1] /Users/Sharat/.gradle/caches/transforms-3/c07a9cb31f163a1d37bbd4866c099413/transformed/jetified-activity-compose-1.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.ui:ui-tooling-data:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/05239098448783f3de80e73c463b833a/transformed/jetified-ui-tooling-data-1.0.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.ui:ui-tooling-data:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/05239098448783f3de80e73c463b833a/transformed/jetified-ui-tooling-data-1.0.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.material:material-ripple:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/e89def0490d6ddc3c6b41b36d7171532/transformed/jetified-material-ripple-1.0.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.material:material-ripple:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/e89def0490d6ddc3c6b41b36d7171532/transformed/jetified-material-ripple-1.0.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.foundation:foundation:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/7efc8e1611792e6c4bc6eceb21a85a06/transformed/jetified-foundation-1.0.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.foundation:foundation:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/7efc8e1611792e6c4bc6eceb21a85a06/transformed/jetified-foundation-1.0.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.animation:animation:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/163617104e44060dde5b2125d6653e5b/transformed/jetified-animation-1.0.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.animation:animation:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/163617104e44060dde5b2125d6653e5b/transformed/jetified-animation-1.0.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.animation:animation-core:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/614e74cf3946711961a7d859016cdefb/transformed/jetified-animation-core-1.0.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.animation:animation-core:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/614e74cf3946711961a7d859016cdefb/transformed/jetified-animation-core-1.0.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.material:material-icons-core:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/1681d34ef21ea6a44cb1a09bfb244838/transformed/jetified-material-icons-core-1.0.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.material:material-icons-core:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/1681d34ef21ea6a44cb1a09bfb244838/transformed/jetified-material-icons-core-1.0.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.foundation:foundation-layout:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/b7391da634700d9394353fc9b3a4cf7f/transformed/jetified-foundation-layout-1.0.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.foundation:foundation-layout:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/b7391da634700d9394353fc9b3a4cf7f/transformed/jetified-foundation-layout-1.0.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.ui:ui:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/8147937dc057b16a4ec5bded66806fe7/transformed/jetified-ui-1.0.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.ui:ui:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/8147937dc057b16a4ec5bded66806fe7/transformed/jetified-ui-1.0.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.activity:activity-ktx:1.3.1] /Users/Sharat/.gradle/caches/transforms-3/597835bf54069c4baace566824ddeb02/transformed/jetified-activity-ktx-1.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.activity:activity-ktx:1.3.1] /Users/Sharat/.gradle/caches/transforms-3/597835bf54069c4baace566824ddeb02/transformed/jetified-activity-ktx-1.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-runtime-ktx:2.3.1] /Users/Sharat/.gradle/caches/transforms-3/c698be810df9e8916f6aedf1a0c3d11c/transformed/jetified-lifecycle-runtime-ktx-2.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-runtime-ktx:2.3.1] /Users/Sharat/.gradle/caches/transforms-3/c698be810df9e8916f6aedf1a0c3d11c/transformed/jetified-lifecycle-runtime-ktx-2.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.ui:ui-tooling-preview:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/cf9c57faff6ea1dae01cab7127e3a0b7/transformed/jetified-ui-tooling-preview-1.0.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.ui:ui-tooling-preview:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/cf9c57faff6ea1dae01cab7127e3a0b7/transformed/jetified-ui-tooling-preview-1.0.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.ui:ui-text:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/75f043e6c767c803747efa4e476d16cd/transformed/jetified-ui-text-1.0.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.ui:ui-text:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/75f043e6c767c803747efa4e476d16cd/transformed/jetified-ui-text-1.0.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.runtime:runtime-saveable:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/408ffac2bc5ed7d30ee28f243f04eec8/transformed/jetified-runtime-saveable-1.0.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.runtime:runtime-saveable:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/408ffac2bc5ed7d30ee28f243f04eec8/transformed/jetified-runtime-saveable-1.0.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.ui:ui-graphics:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/796dd915fe0c1e2e23d79bd9c498bed1/transformed/jetified-ui-graphics-1.0.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.ui:ui-graphics:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/796dd915fe0c1e2e23d79bd9c498bed1/transformed/jetified-ui-graphics-1.0.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.ui:ui-unit:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/94510e6cbc7e32d9f502b41c2373ab24/transformed/jetified-ui-unit-1.0.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.ui:ui-unit:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/94510e6cbc7e32d9f502b41c2373ab24/transformed/jetified-ui-unit-1.0.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.ui:ui-geometry:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/835888dbf8cfa558671cb03037f9ab8f/transformed/jetified-ui-geometry-1.0.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.ui:ui-geometry:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/835888dbf8cfa558671cb03037f9ab8f/transformed/jetified-ui-geometry-1.0.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.runtime:runtime:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/ad4616630db447b2bcb88bed5b94f654/transformed/jetified-runtime-1.0.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.runtime:runtime:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/ad4616630db447b2bcb88bed5b94f654/transformed/jetified-runtime-1.0.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1] /Users/Sharat/.gradle/caches/transforms-3/f90836ee62c7d1fceb8bdb76a186a2f8/transformed/jetified-lifecycle-viewmodel-ktx-2.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1] /Users/Sharat/.gradle/caches/transforms-3/f90836ee62c7d1fceb8bdb76a186a2f8/transformed/jetified-lifecycle-viewmodel-ktx-2.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.core:core-ktx:1.3.2] /Users/Sharat/.gradle/caches/transforms-3/dfed1b73a466ccacddd46d6ba20f4113/transformed/jetified-core-ktx-1.3.2/AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.core:core-ktx:1.3.2] /Users/Sharat/.gradle/caches/transforms-3/dfed1b73a466ccacddd46d6ba20f4113/transformed/jetified-core-ktx-1.3.2/AndroidManifest.xml:5:5-7:41
+MERGED from [com.google.android.material:material:1.4.0] /Users/Sharat/.gradle/caches/transforms-3/796b95f9565494deb0f013d98e8e8120/transformed/material-1.4.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.material:material:1.4.0] /Users/Sharat/.gradle/caches/transforms-3/796b95f9565494deb0f013d98e8e8120/transformed/material-1.4.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] /Users/Sharat/.gradle/caches/transforms-3/d7bb446e76e4dff3c19288481c2c7ac2/transformed/constraintlayout-2.0.1/AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] /Users/Sharat/.gradle/caches/transforms-3/d7bb446e76e4dff3c19288481c2c7ac2/transformed/constraintlayout-2.0.1/AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.appcompat:appcompat:1.3.1] /Users/Sharat/.gradle/caches/transforms-3/fce6b24804477936a62a6e75ec7ca42c/transformed/appcompat-1.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.appcompat:appcompat:1.3.1] /Users/Sharat/.gradle/caches/transforms-3/fce6b24804477936a62a6e75ec7ca42c/transformed/appcompat-1.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.ui:ui-util:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/870836f89a166ea412dc95e50e858352/transformed/jetified-ui-util-1.0.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.ui:ui-util:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/870836f89a166ea412dc95e50e858352/transformed/jetified-ui-util-1.0.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.savedstate:savedstate-ktx:1.1.0] /Users/Sharat/.gradle/caches/transforms-3/634e7adc4c2e4fa907818828f82ebe2c/transformed/jetified-savedstate-ktx-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.savedstate:savedstate-ktx:1.1.0] /Users/Sharat/.gradle/caches/transforms-3/634e7adc4c2e4fa907818828f82ebe2c/transformed/jetified-savedstate-ktx-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.viewpager2:viewpager2:1.0.0] /Users/Sharat/.gradle/caches/transforms-3/ea101ae4a93ea63d9ab46854f6db0ad6/transformed/jetified-viewpager2-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.viewpager2:viewpager2:1.0.0] /Users/Sharat/.gradle/caches/transforms-3/ea101ae4a93ea63d9ab46854f6db0ad6/transformed/jetified-viewpager2-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.fragment:fragment:1.3.6] /Users/Sharat/.gradle/caches/transforms-3/ae074c78012913ef00e35728ee475a38/transformed/fragment-1.3.6/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.fragment:fragment:1.3.6] /Users/Sharat/.gradle/caches/transforms-3/ae074c78012913ef00e35728ee475a38/transformed/fragment-1.3.6/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.appcompat:appcompat-resources:1.3.1] /Users/Sharat/.gradle/caches/transforms-3/9e8571bdb1823a59a47d898273e29a26/transformed/jetified-appcompat-resources-1.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.appcompat:appcompat-resources:1.3.1] /Users/Sharat/.gradle/caches/transforms-3/9e8571bdb1823a59a47d898273e29a26/transformed/jetified-appcompat-resources-1.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /Users/Sharat/.gradle/caches/transforms-3/a703550be9a873b19cac5c29c59f7d09/transformed/drawerlayout-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /Users/Sharat/.gradle/caches/transforms-3/a703550be9a873b19cac5c29c59f7d09/transformed/drawerlayout-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /Users/Sharat/.gradle/caches/transforms-3/72d89dbc336cb52a2fbdf62e1f378bec/transformed/coordinatorlayout-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /Users/Sharat/.gradle/caches/transforms-3/72d89dbc336cb52a2fbdf62e1f378bec/transformed/coordinatorlayout-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] /Users/Sharat/.gradle/caches/transforms-3/88959077d1b2aad159069675c708e73f/transformed/dynamicanimation-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] /Users/Sharat/.gradle/caches/transforms-3/88959077d1b2aad159069675c708e73f/transformed/dynamicanimation-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.transition:transition:1.2.0] /Users/Sharat/.gradle/caches/transforms-3/993f6a86927deea643b133460447e13a/transformed/transition-1.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.transition:transition:1.2.0] /Users/Sharat/.gradle/caches/transforms-3/993f6a86927deea643b133460447e13a/transformed/transition-1.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /Users/Sharat/.gradle/caches/transforms-3/f1ac99153cf6dc50ae5ac5f68dcb87fd/transformed/vectordrawable-animated-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /Users/Sharat/.gradle/caches/transforms-3/f1ac99153cf6dc50ae5ac5f68dcb87fd/transformed/vectordrawable-animated-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /Users/Sharat/.gradle/caches/transforms-3/d850702c38ca0cad04a22d53d67cd7a4/transformed/vectordrawable-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /Users/Sharat/.gradle/caches/transforms-3/d850702c38ca0cad04a22d53d67cd7a4/transformed/vectordrawable-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.autofill:autofill:1.0.0] /Users/Sharat/.gradle/caches/transforms-3/60befea40c23e8ada46c312b61da5142/transformed/jetified-autofill-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.autofill:autofill:1.0.0] /Users/Sharat/.gradle/caches/transforms-3/60befea40c23e8ada46c312b61da5142/transformed/jetified-autofill-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/Sharat/.gradle/caches/transforms-3/2c29dc99082897de8ab91c5276cf5840/transformed/viewpager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/Sharat/.gradle/caches/transforms-3/2c29dc99082897de8ab91c5276cf5840/transformed/viewpager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/Sharat/.gradle/caches/transforms-3/7533d21cc8e023ccda795e97af04a017/transformed/legacy-support-core-utils-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/Sharat/.gradle/caches/transforms-3/7533d21cc8e023ccda795e97af04a017/transformed/legacy-support-core-utils-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] /Users/Sharat/.gradle/caches/transforms-3/21955e5a8592ee9a4875979fe5ceeef0/transformed/loader-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] /Users/Sharat/.gradle/caches/transforms-3/21955e5a8592ee9a4875979fe5ceeef0/transformed/loader-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.recyclerview:recyclerview:1.1.0] /Users/Sharat/.gradle/caches/transforms-3/7cf2545d87f6cd73d3265abc76b9287f/transformed/recyclerview-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.recyclerview:recyclerview:1.1.0] /Users/Sharat/.gradle/caches/transforms-3/7cf2545d87f6cd73d3265abc76b9287f/transformed/recyclerview-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.customview:customview:1.0.0] /Users/Sharat/.gradle/caches/transforms-3/c940caa9b85b0411c7c6f8b19ce41de6/transformed/customview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.0.0] /Users/Sharat/.gradle/caches/transforms-3/c940caa9b85b0411c7c6f8b19ce41de6/transformed/customview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.activity:activity:1.3.1] /Users/Sharat/.gradle/caches/transforms-3/8eb1659531e6cff4774dbce6ee9bfe67/transformed/jetified-activity-1.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.activity:activity:1.3.1] /Users/Sharat/.gradle/caches/transforms-3/8eb1659531e6cff4774dbce6ee9bfe67/transformed/jetified-activity-1.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.core:core:1.5.0] /Users/Sharat/.gradle/caches/transforms-3/1f08880656141bc4f915f27fbc24ca6e/transformed/core-1.5.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.core:core:1.5.0] /Users/Sharat/.gradle/caches/transforms-3/1f08880656141bc4f915f27fbc24ca6e/transformed/core-1.5.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/Sharat/.gradle/caches/transforms-3/c227ab68edc6eac5f69afd488c089864/transformed/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/Sharat/.gradle/caches/transforms-3/c227ab68edc6eac5f69afd488c089864/transformed/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.3.1] /Users/Sharat/.gradle/caches/transforms-3/f1a437b34a782e838f3f7b51f4c276c4/transformed/jetified-lifecycle-viewmodel-savedstate-2.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.3.1] /Users/Sharat/.gradle/caches/transforms-3/f1a437b34a782e838f3f7b51f4c276c4/transformed/jetified-lifecycle-viewmodel-savedstate-2.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.savedstate:savedstate:1.1.0] /Users/Sharat/.gradle/caches/transforms-3/4b4a1d03ba0c700e2f4e71844d5fc14c/transformed/jetified-savedstate-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.savedstate:savedstate:1.1.0] /Users/Sharat/.gradle/caches/transforms-3/4b4a1d03ba0c700e2f4e71844d5fc14c/transformed/jetified-savedstate-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.3.1] /Users/Sharat/.gradle/caches/transforms-3/5c8daff24a4a6ed89fa4b13cb8f7a0ff/transformed/lifecycle-runtime-2.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.3.1] /Users/Sharat/.gradle/caches/transforms-3/5c8daff24a4a6ed89fa4b13cb8f7a0ff/transformed/lifecycle-runtime-2.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.3.1] /Users/Sharat/.gradle/caches/transforms-3/b517b0eb0f1365e0cafaf287eb4d2029/transformed/lifecycle-viewmodel-2.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.3.1] /Users/Sharat/.gradle/caches/transforms-3/b517b0eb0f1365e0cafaf287eb4d2029/transformed/lifecycle-viewmodel-2.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.cardview:cardview:1.0.0] /Users/Sharat/.gradle/caches/transforms-3/0eb790eede02794007ed79f406c80d55/transformed/cardview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cardview:cardview:1.0.0] /Users/Sharat/.gradle/caches/transforms-3/0eb790eede02794007ed79f406c80d55/transformed/cardview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.profileinstaller:profileinstaller:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/feb1576d40345287968f7c444f99feb0/transformed/jetified-profileinstaller-1.0.1/AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.profileinstaller:profileinstaller:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/feb1576d40345287968f7c444f99feb0/transformed/jetified-profileinstaller-1.0.1/AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/Sharat/.gradle/caches/transforms-3/ec181178dfbd0be4e73e4c4dff5a5974/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/Sharat/.gradle/caches/transforms-3/ec181178dfbd0be4e73e4c4dff5a5974/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /Users/Sharat/.gradle/caches/transforms-3/19caae6bda4366866e7f1beb8e0f5319/transformed/lifecycle-livedata-2.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /Users/Sharat/.gradle/caches/transforms-3/19caae6bda4366866e7f1beb8e0f5319/transformed/lifecycle-livedata-2.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.3.1] /Users/Sharat/.gradle/caches/transforms-3/47d3a24b9cc65f1e028ece0b38a7496d/transformed/lifecycle-livedata-core-2.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.3.1] /Users/Sharat/.gradle/caches/transforms-3/47d3a24b9cc65f1e028ece0b38a7496d/transformed/lifecycle-livedata-core-2.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.arch.core:core-runtime:2.1.0] /Users/Sharat/.gradle/caches/transforms-3/73019947b41ccf3c3c0dee18c6e2b1d2/transformed/core-runtime-2.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.arch.core:core-runtime:2.1.0] /Users/Sharat/.gradle/caches/transforms-3/73019947b41ccf3c3c0dee18c6e2b1d2/transformed/core-runtime-2.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.startup:startup-runtime:1.0.0] /Users/Sharat/.gradle/caches/transforms-3/4a00cd6934c9999373ea04f838af82c4/transformed/jetified-startup-runtime-1.0.0/AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.startup:startup-runtime:1.0.0] /Users/Sharat/.gradle/caches/transforms-3/4a00cd6934c9999373ea04f838af82c4/transformed/jetified-startup-runtime-1.0.0/AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/Sharat/.gradle/caches/transforms-3/c014a87502e2e975656b1078f0398972/transformed/interpolator-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/Sharat/.gradle/caches/transforms-3/c014a87502e2e975656b1078f0398972/transformed/interpolator-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/Sharat/.gradle/caches/transforms-3/b9ee7c32735cb0bf5964b41335d84873/transformed/documentfile-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/Sharat/.gradle/caches/transforms-3/b9ee7c32735cb0bf5964b41335d84873/transformed/documentfile-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/Sharat/.gradle/caches/transforms-3/4511294bca588332f4cb3dfa39601883/transformed/localbroadcastmanager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/Sharat/.gradle/caches/transforms-3/4511294bca588332f4cb3dfa39601883/transformed/localbroadcastmanager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] /Users/Sharat/.gradle/caches/transforms-3/07a19b05245379de69822054d287bd9e/transformed/print-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] /Users/Sharat/.gradle/caches/transforms-3/07a19b05245379de69822054d287bd9e/transformed/print-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.tracing:tracing:1.0.0] /Users/Sharat/.gradle/caches/transforms-3/65d058b1e189d3fa95f2d0b06898cada/transformed/jetified-tracing-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.tracing:tracing:1.0.0] /Users/Sharat/.gradle/caches/transforms-3/65d058b1e189d3fa95f2d0b06898cada/transformed/jetified-tracing-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.annotation:annotation-experimental:1.0.0] /Users/Sharat/.gradle/caches/transforms-3/996fa98cbbf7cca8e2e72a2481110178/transformed/jetified-annotation-experimental-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.annotation:annotation-experimental:1.0.0] /Users/Sharat/.gradle/caches/transforms-3/996fa98cbbf7cca8e2e72a2481110178/transformed/jetified-annotation-experimental-1.0.0/AndroidManifest.xml:20:5-22:41
+INJECTED from /Users/Sharat/Documents/Workspace/github/playground/SharatFlutter/HelloWorld/app/src/main/AndroidManifest.xml
+INJECTED from /Users/Sharat/Documents/Workspace/github/playground/SharatFlutter/HelloWorld/app/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /Users/Sharat/Documents/Workspace/github/playground/SharatFlutter/HelloWorld/app/src/main/AndroidManifest.xml
+		ADDED from /Users/Sharat/Documents/Workspace/github/playground/SharatFlutter/HelloWorld/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/Sharat/Documents/Workspace/github/playground/SharatFlutter/HelloWorld/app/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/Sharat/Documents/Workspace/github/playground/SharatFlutter/HelloWorld/app/src/main/AndroidManifest.xml
+		ADDED from /Users/Sharat/Documents/Workspace/github/playground/SharatFlutter/HelloWorld/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/Sharat/Documents/Workspace/github/playground/SharatFlutter/HelloWorld/app/src/main/AndroidManifest.xml
+activity#androidx.compose.ui.tooling.PreviewActivity
+ADDED from [androidx.compose.ui:ui-tooling:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/6fc628fd101b7f8217683574672f07c2/transformed/jetified-ui-tooling-1.0.1/AndroidManifest.xml:25:9-27:39
+	android:exported
+		ADDED from [androidx.compose.ui:ui-tooling:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/6fc628fd101b7f8217683574672f07c2/transformed/jetified-ui-tooling-1.0.1/AndroidManifest.xml:27:13-36
+	android:name
+		ADDED from [androidx.compose.ui:ui-tooling:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/6fc628fd101b7f8217683574672f07c2/transformed/jetified-ui-tooling-1.0.1/AndroidManifest.xml:26:13-71
+provider#androidx.startup.InitializationProvider
+ADDED from [androidx.profileinstaller:profileinstaller:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/feb1576d40345287968f7c444f99feb0/transformed/jetified-profileinstaller-1.0.1/AndroidManifest.xml:26:9-34:20
+MERGED from [androidx.startup:startup-runtime:1.0.0] /Users/Sharat/.gradle/caches/transforms-3/4a00cd6934c9999373ea04f838af82c4/transformed/jetified-startup-runtime-1.0.0/AndroidManifest.xml:26:9-30:34
+MERGED from [androidx.startup:startup-runtime:1.0.0] /Users/Sharat/.gradle/caches/transforms-3/4a00cd6934c9999373ea04f838af82c4/transformed/jetified-startup-runtime-1.0.0/AndroidManifest.xml:26:9-30:34
+	tools:node
+		ADDED from [androidx.profileinstaller:profileinstaller:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/feb1576d40345287968f7c444f99feb0/transformed/jetified-profileinstaller-1.0.1/AndroidManifest.xml:30:13-31
+	android:authorities
+		ADDED from [androidx.profileinstaller:profileinstaller:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/feb1576d40345287968f7c444f99feb0/transformed/jetified-profileinstaller-1.0.1/AndroidManifest.xml:28:13-68
+	android:exported
+		ADDED from [androidx.profileinstaller:profileinstaller:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/feb1576d40345287968f7c444f99feb0/transformed/jetified-profileinstaller-1.0.1/AndroidManifest.xml:29:13-37
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/feb1576d40345287968f7c444f99feb0/transformed/jetified-profileinstaller-1.0.1/AndroidManifest.xml:27:13-67
+meta-data#androidx.profileinstaller.ProfileInstallerInitializer
+ADDED from [androidx.profileinstaller:profileinstaller:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/feb1576d40345287968f7c444f99feb0/transformed/jetified-profileinstaller-1.0.1/AndroidManifest.xml:31:13-33:52
+	android:value
+		ADDED from [androidx.profileinstaller:profileinstaller:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/feb1576d40345287968f7c444f99feb0/transformed/jetified-profileinstaller-1.0.1/AndroidManifest.xml:33:17-49
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/feb1576d40345287968f7c444f99feb0/transformed/jetified-profileinstaller-1.0.1/AndroidManifest.xml:32:17-85
+receiver#androidx.profileinstaller.ProfileInstallReceiver
+ADDED from [androidx.profileinstaller:profileinstaller:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/feb1576d40345287968f7c444f99feb0/transformed/jetified-profileinstaller-1.0.1/AndroidManifest.xml:36:9-45:20
+	android:enabled
+		ADDED from [androidx.profileinstaller:profileinstaller:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/feb1576d40345287968f7c444f99feb0/transformed/jetified-profileinstaller-1.0.1/AndroidManifest.xml:39:13-35
+	android:exported
+		ADDED from [androidx.profileinstaller:profileinstaller:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/feb1576d40345287968f7c444f99feb0/transformed/jetified-profileinstaller-1.0.1/AndroidManifest.xml:40:13-36
+	android:permission
+		ADDED from [androidx.profileinstaller:profileinstaller:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/feb1576d40345287968f7c444f99feb0/transformed/jetified-profileinstaller-1.0.1/AndroidManifest.xml:41:13-57
+	android:directBootAware
+		ADDED from [androidx.profileinstaller:profileinstaller:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/feb1576d40345287968f7c444f99feb0/transformed/jetified-profileinstaller-1.0.1/AndroidManifest.xml:38:13-44
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/feb1576d40345287968f7c444f99feb0/transformed/jetified-profileinstaller-1.0.1/AndroidManifest.xml:37:13-76
+intent-filter#action:name:androidx.profileinstaller.action.INSTALL_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/feb1576d40345287968f7c444f99feb0/transformed/jetified-profileinstaller-1.0.1/AndroidManifest.xml:42:13-44:29
+action#androidx.profileinstaller.action.INSTALL_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/feb1576d40345287968f7c444f99feb0/transformed/jetified-profileinstaller-1.0.1/AndroidManifest.xml:43:17-91
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.0.1] /Users/Sharat/.gradle/caches/transforms-3/feb1576d40345287968f7c444f99feb0/transformed/jetified-profileinstaller-1.0.1/AndroidManifest.xml:43:25-88

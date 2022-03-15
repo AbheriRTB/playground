@@ -1,0 +1,2 @@
+abheri/co/helloworld/BuildConfig.java
+ abheri.co.helloworld.BuildConfig
